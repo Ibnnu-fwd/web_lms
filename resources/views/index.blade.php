@@ -17,18 +17,10 @@
             }
 
             @media (max-width: 640px) {
-                @keyframes slideToLeftMobile {
-                    0% {
-                        transform: translateX(0);
-                    }
 
-                    100% {
-                        transform: translateX(-100%);
-                    }
-                }
-
+                /* Remove the animation property inside the media query for mobile mode */
                 .logo-container {
-                    animation: slideToLeftMobile 40s linear infinite;
+                    animation: none;
                 }
             }
         </style>
@@ -42,9 +34,8 @@
                     <div class="relative items-center gap-12 m-auto lg:inline-flex md:order-first">
                         <div class="max-w-xl text-center lg:text-left">
                             <div>
-                                <p class="text-2xl tracking-tight text-black sm:text-4xl ">
-                                    Discover The Best <br>
-                                    Way To Learn
+                                <p class="text-4xl md:text-5xl tracking-tight text-black font-bold">
+                                    Discover The Best Way To Learn
                                 </p>
                                 <p class="max-w-xl mt-4 text-base tracking-tight text-gray-600">
                                     Mulai belajar dengan mudah dan cepat dengan materi yang disajikan secara lengkap
@@ -52,14 +43,14 @@
                             </div>
                             <div
                                 class="flex flex-col items-center justify-center gap-3 mt-10 lg:flex-row lg:justify-start">
-                                <a href="{{route('register')}}"
+                                <a href="{{ route('register') }}"
                                     class="items-center justify-center w-full px-6 py-2.5  text-center text-white duration-200 bg-primary border-2 border-primary rounded-md inline-flex hover:bg-transparent hover:border-red hover:text-danger focus:outline-none lg:w-auto focus-visible:outline-red text-sm focus-visible:ring-red">
                                     Daftar Sekarang
                                 </a>
                             </div>
                         </div>
                     </div>
-                    <div class="order-first block w-full lg:mt-0">
+                    <div class="order-first hidden md:inline-block w-full lg:mt-0">
                         <img class="object-cover object-center max-h-72 w-full mx-auto bg-gray-300 border lg:ml-auto"
                             alt="hero"
                             src="https://d33wubrfki0l68.cloudfront.net/2ef8f651607bb32a3fc3a21d71dfe37fe89e2c26/c954d/images/placeholders/square1.svg">
@@ -139,7 +130,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="order-first block w-full mt-12 aspect-square lg:mt-0">
+                <div class="order-first hidden md:inline-block w-full mt-12 aspect-square lg:mt-0">
                     <img class="object-cover object-center w-full mx-auto bg-gray-300 border lg:ml-auto" alt="hero"
                         src="https://d33wubrfki0l68.cloudfront.net/2ef8f651607bb32a3fc3a21d71dfe37fe89e2c26/bc4e8/images/placeholders/square2.svg">
                 </div>

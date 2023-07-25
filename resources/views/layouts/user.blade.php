@@ -60,7 +60,7 @@
                     Tentang Kami
                 </a>
                 <a class="px-2 py-2 text-sm font-medium text-gray-500 lg:px-6 md:px-3 hover:text-red-600 {{ request()->routeIs('order-flow') ? 'text-red-600' : '' }}"
-                    href="{{route('order-flow')}}">
+                    href="{{ route('order-flow') }}">
                     Alur Pemesanan
                 </a>
 
@@ -155,11 +155,11 @@
                 <div class="inline-flex items-center gap-2 list-none lg:ml-auto">
                     <button onclick="window.location.href='{{ route('login') }}'"
                         class="block px-4 py-2 mt-2 text-sm text-gray-500 md:mt-0 hover:text-red-600 focus:outline-none focus:shadow-outline">
-                        Sign in
+                        Masuk
                     </button>
                     <button onclick="window.location.href='{{ route('register') }}'"
-                        class="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white bg-black rounded-md group focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 hover:bg-gray-700 active:bg-gray-800 active:text-white focus-visible:outline-black">
-                        Sign up
+                        class="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white bg-dark rounded-md group focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 hover:bg-slate-700 active:bg-slate-800 active:text-white focus-visible:outline-black">
+                        Daftar
                     </button>
                 </div>
             </nav>
@@ -173,49 +173,54 @@
 
     <footer class="bg-gray-50" aria-labelledby="footer-heading">
         <h2 id="footer-heading" class="sr-only">Footer</h2>
-        <div class="px-4 py-12 mx-auto max-w-6xl sm:px-6 lg:px-0">
+        <div class="px-5 py-12 mx-auto max-w-7xl lg:py-16 md:px-12 lg:px-20">
             <div class="xl:grid xl:grid-cols-3 xl:gap-8">
-                <div class="text-white xl:col-span-1">
+                <div class="xl:col-span-1">
                     <a href="/"
-                        class="text-lg font-bold tracking-tighter text-black transition duration-500 ease-in-out transform tracking-relaxed lg:pr-8">
-                        <img class="h-8" src="{{ asset('images/favicon.png') }}" alt="logo" />
+                        class="text-lg font-bold tracking-tighter transition duration-500 ease-in-out transform text-black tracking-relaxed lg:pr-8">
+                        <img src="{{ asset('images/favicon.png') }}" class="w-8 h-8" alt="logo">
                     </a>
+                    <p class="w-1/2 mt-2 text-sm text-gray-500">
+                        The smartest way to learn
+                    </p>
                 </div>
                 <div class="grid grid-cols-2 gap-8 mt-12 xl:mt-0 xl:col-span-2">
                     <div class="md:grid md:grid-cols-2 md:gap-8">
                         <div>
-                            <h3 class="font-semibold leading-6 text-black uppercase">
-                                Navigation
+                            <h3 class="font-semibold leading-6 uppercase text-black">
+                                Solutions
                             </h3>
-                            <ul role="list" class="mt-4 space-y-2">
+                            <ul role="list" class="mt-4 space-y-3">
+                                <li>
+                                    <a href="#" class="text-sm text-gray-500 hover:text-red-600">
+                                        Marketing
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-sm text-gray-500 hover:text-red-600">
+                                        Analytics
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-sm text-gray-500 hover:text-red-600">
+                                        Commerce
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-sm text-gray-500 hover:text-red-600">
+                                        Insights
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mt-12 md:mt-0">
+                            <h3 class="font-semibold leading-6 uppercase text-black">
+                                Support
+                            </h3>
+                            <ul role="list" class="mt-4 space-y-4">
                                 <li>
                                     <a href="#" class="text-sm text-gray-500 hover:text-red-600">
                                         Pricing
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-sm text-gray-500 hover:text-red-600">
-                                        All UI Kits
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-sm text-gray-500 hover:text-red-600">
-                                        Custom pages
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-sm text-gray-500 hover:text-red-600">
-                                        Next.js
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-sm text-gray-500 hover:text-red-600">
-                                        Gatsby
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-sm text-gray-500 hover:text-red-600">
-                                        Remix
                                     </a>
                                 </li>
                                 <li>
@@ -225,111 +230,70 @@
                                 </li>
                                 <li>
                                     <a href="#" class="text-sm text-gray-500 hover:text-red-600">
-                                        Svelte
+                                        Guides
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#" class="text-sm text-gray-500 hover:text-red-600">
-                                        About
+                                        API Status
                                     </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="mt-12 md:mt-0">
-                            <h3 class="font-semibold leading-6 text-black uppercase">
-                                UI/UX &amp; Dev
-                            </h3>
-                            <ul role="list" class="mt-4 space-y-2">
-                                <li>
-                                    <a href="https://www.wickedbackgrounds.com/"
-                                        class="text-sm text-gray-500 hover:text-red-600">
-                                        Wicked Backgrounds
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="https://www.colorsandfonts.com/"
-                                        class="text-sm text-gray-500 hover:text-red-600">
-                                        Colors &amp; Fonts
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://www.serendipitytheme.com/"
-                                        class="text-sm text-gray-500 hover:text-red-600">
-                                        Serendipity</a>
-                                </li>
-                                <li>
-                                    <a href="https://www.brutalist.one/"
-                                        class="text-sm text-gray-500 hover:text-red-600">
-                                        Brutalist One</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                    <div class="md:grid md:grid-cols-2 md:gap-8">
-                        <div>
-                            <h3 class="font-semibold leading-6 text-black uppercase">
-                                Legal
-                            </h3>
-                            <ul role="list" class="mt-4 space-y-2">
-                                <li>
-                                    <a href="#" class="text-sm text-gray-500 hover:text-red-600">
-                                        Changelog
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-sm text-gray-500 hover:text-red-600">
-                                        FAQ
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-sm text-gray-500 hover:text-red-600">
-                                        Refund
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-sm text-gray-500 hover:text-red-600">
-                                        License
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-sm text-gray-500 hover:text-red-600">
-                                        Privacy Policy
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-sm text-gray-500 hover:text-red-600">
-                                        Terms
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="mt-12 md:mt-0">
-                            <h3 class="font-semibold leading-6 text-black uppercase">
-                                Socials
-                            </h3>
-                            <ul role="list" class="mt-4 space-y-2">
-                                <li>
-                                    <a href="#" class="text-sm text-gray-500 hover:text-red-600">
-                                        Twitter
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-sm text-gray-500 hover:text-red-600">
-                                        Dribbble
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-sm text-gray-500 hover:text-red-600">
-                                        Indie Hackers
-                                    </a>
-                                </li>
-                            </ul>
+                    <div class="hidden lg:justify-end md:grid md:grid-cols-1">
+                        <div class="w-full mt-12 md:mt-0">
+                            <div class="mt-8 lg:justify-end xl:mt-0">
+                                <h3 class="font-semibold leading-6 uppercase text-black">
+                                    Hubungi Kami
+                                </h3>
+                                <p class="mt-4 text-sm font-light text-gray-500 lg:ml-auto">
+                                    Jl. Mastrip, Krajan Timur, Sumbersari, Kec. Sumbersari, Kabupaten Jember, Jawa Timur
+                                    68121
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="px-5 py-12 mx-auto border-t max-w-7xl sm:px-6 md:flex md:items-center md:justify-between lg:px-20">
+            {{-- <div class="flex justify-center mb-8 space-x-6 md:order-last md:mb-0">
+                <span class="inline-flex justify-center w-full gap-3 lg:ml-auto md:justify-start md:w-auto">
+                    <a class="w-6 h-6 transition fill-black hover:text-red-500">
+                        <span class="sr-only"> github</span>
+                        <ion-icon class="w-5 h-5 md hydrated" name="logo-github" role="img"
+                            aria-label="logo github"></ion-icon>
+
+                    </a>
+                    <a class="w-6 h-6 transition fill-black hover:text-red-500">
+                        <span class="sr-only"> twitter</span>
+                        <ion-icon class="w-5 h-5 md hydrated" name="logo-twitter" role="img"
+                            aria-label="logo twitter"></ion-icon>
+                    </a>
+                    <a class="w-6 h-6 transition fill-black hover:text-red-500">
+                        <span class="sr-only">Instagram</span>
+                        <ion-icon class="w-5 h-5 md hydrated" name="logo-instagram" role="img"
+                            aria-label="logo instagram"></ion-icon>
+                    </a>
+                    <a class="w-6 h-6 transition fill-black hover:text-red-500">
+                        <span class="sr-only">Linkedin</span>
+                        <ion-icon class="w-5 h-5 md hydrated" name="logo-linkedin" role="img"
+                            aria-label="logo linkedin"></ion-icon>
+                    </a>
+                </span>
+            </div> --}}
+            <div class="mt-8 md:mt-0 md:order-1">
+                <span class="mt-2 text-sm font-light text-gray-500">
+                    Copyright © {{ date('Y') }}
+                    <a href="#" class="mx-2 text-wickedred hover:text-gray-500" rel="noopener noreferrer">
+                        | Interect merupakan merek dagang dari PT.
+                        Indonesia Virtual Education
+                    </a>
+                </span>
+            </div>
+        </div>
+
     </footer>
 
 

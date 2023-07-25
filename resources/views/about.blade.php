@@ -18,7 +18,7 @@
             }
         </style>
     @endpush
-    <section class="relative items-center w-full px-5 mx-auto md:px-12 lg:px-0 max-w-6xl py-8 ">
+    <section class="relative items-center w-full px-5 mx-auto md:px-12 lg:px-0 max-w-6xl py-12 ">
         <section class="background-radial-gradient mb-12 rounded-md">
             <div class="px-6 py-12 text-center md:px-12 lg:text-left">
                 <div class="container mx-auto">
@@ -29,7 +29,7 @@
                                 About<span class="text-primary ms-2">us</span>
                             </h1>
                             <p class="text-lg text-[hsl(218,81%,95%)]">
-                                kami berkomitmen untuk membantu Anda mencapai potensi penuh Anda dengan menyediakan
+                                Kami berkomitmen untuk membantu Anda mencapai potensi penuh Anda dengan menyediakan
                                 akses ke kursus online berkualitas dari para ahli di berbagai bidang. Berbekal teknologi
                                 terkini dan keahlian para instruktur terbaik, kami hadir untuk mengubah cara Anda
                                 belajar dan mengembangkan keterampilan.
@@ -61,7 +61,7 @@
                             <li class="w-full">
                                 <!-- event handler set state to 'tab1' and add conditional :class for active state -->
                                 <a @click.prevent="tab = 'tab1'" href="#"
-                                    class="inline-block text-lg font-light w-full px-6 py-2 border-b-2 border-transparent bg-white text-primary border-primary"
+                                    class="inline-block text-xl font-light w-full px-6 py-2 border-b-2 border-transparent bg-white text-primary border-primary"
                                     :class="{ ' bg-white text-primary  border-primary': tab === 'tab1' }">
                                     Visi & Misi
                                 </a>
@@ -98,36 +98,68 @@
                                                 class="flex h-full items-center rounded-lg p-6 text-center lg:pl-12 lg:text-left">
                                                 <div class="lg:pl-12">
 
-                                                    <h2 class="mb-6 text-3xl font-semibold text-gray-600">Visi</h2>
+                                                    <h2 class="mb-6 text-2xl font-semibold text-gray-600">Visi</h2>
                                                     <p class="mb-6 text-lg text-gray-500 font-light text-justify">
                                                         Menjadi lembaga pendidikan terdepan dalam memberikan kesempatan
                                                         bagi setiap individu untuk belajar dengan mudah dan terjangkau,
                                                         tanpa batasan geografis.
                                                     </p>
-                                                    <h2 class="mb-6 text-3xl font-semibold text-gray-600">
+                                                    <h2 class="mb-6 text-2xl font-semibold text-gray-600">
                                                         Misi
                                                     </h2>
                                                     <ul
-                                                        class="list-disc list-outside mb-6 pb-2 lg:pb-0 text-lg text-gray-500 font-light text-justify">
+                                                        class="list-outside mb-6 pb-2 lg:pb-0 text-lg text-gray-500 font-light text-justify">
                                                         <li class="mb-2">
-                                                            Memungkinkan setiap individu untuk belajar
-                                                            dengan
-                                                            mudah dan terjangkau, tanpa batasan geografis.</li>
+                                                            <div class="flex items-start space-x-3">
+                                                                <ion-icon class="text-red-500 md hydrated mr-2"
+                                                                    name="checkmark-circle" role="img"
+                                                                    size="large">
+                                                                </ion-icon>
+                                                                <p>Memungkinkan setiap individu untuk belajar
+                                                                    dengan
+                                                                    mudah dan terjangkau, tanpa batasan geografis.</p>
+                                                            </div>
+                                                        </li>
 
-                                                        <li>Menyajikan pengalaman belajar yang luar biasa
-                                                            dengan
-                                                            fokus pada kualitas konten dan materi pembelajaran.</li>
-
-                                                        <li> Percaya bahwa
-                                                            pendidikan
-                                                            adalah kunci untuk menciptakan perubahan positif dalam hidup
-                                                            dan
-                                                            masyarakat.</li>
-
-                                                        <li>Mengutamakan antarmuka pengguna yang intuitif dan
-                                                            navigasi yang sederhana untuk memberikan pengalaman belajar
-                                                            yang
-                                                            lancar.</li>
+                                                        <li class="mb-2">
+                                                            <div class="flex items-start space-x-3">
+                                                                <ion-icon class="text-red-500 md hydrated mr-2"
+                                                                    name="checkmark-circle" role="img"
+                                                                    size="large">
+                                                                </ion-icon>
+                                                                <p>Menyajikan pengalaman belajar yang luar biasa
+                                                                    dengan
+                                                                    fokus pada kualitas konten dan materi pembelajaran.
+                                                                </p>
+                                                            </div>
+                                                        </li>
+                                                        <li class="mb-2">
+                                                            <div class="flex items-start space-x-3">
+                                                                <ion-icon class="text-red-500 md hydrated mr-2"
+                                                                    name="checkmark-circle" role="img"
+                                                                    size="large">
+                                                                </ion-icon>
+                                                                <p>Percaya bahwa
+                                                                    pendidikan
+                                                                    adalah kunci untuk menciptakan perubahan positif
+                                                                    dalam hidup
+                                                                    dan
+                                                                    masyarakat.</p>
+                                                            </div>
+                                                        </li>
+                                                        <li class="mb-2">
+                                                            <div class="flex items-start space-x-3">
+                                                                <ion-icon class="text-red-500 md hydrated mr-2"
+                                                                    name="checkmark-circle" role="img"
+                                                                    size="large">
+                                                                </ion-icon>
+                                                                <p>Mengutamakan antarmuka pengguna yang intuitif dan
+                                                                    navigasi yang sederhana untuk memberikan pengalaman
+                                                                    belajar
+                                                                    yang
+                                                                    lancar.</p>
+                                                            </div>
+                                                        </li>
                                                     </ul>
 
 
@@ -187,8 +219,8 @@
                                                 <div class="shrink-0">
                                                     <div class="rounded-md p-4 shadow-lg bg-primary">
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                                            class="h-6 w-6 text-white">
+                                                            viewBox="0 0 24 24" stroke-width="2"
+                                                            stroke="currentColor" class="h-6 w-6 text-white">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                                 d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
                                                         </svg>

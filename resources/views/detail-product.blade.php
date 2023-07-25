@@ -21,40 +21,20 @@
                     <div class="mb-3 flex flex-wrap items-center">
                         <p class="font-medium mr-2 my-auto">Teknologi:</p>
                         <span
-                            class="inline-block px-2 py-1 my-2 text-xs 2xl:text-sm font-medium text-turquoise-800 border border-gray-200 rounded-lg mr-2">VS
-                            Code</span>
+                            class="inline-block px-2 py-1 my-2 text-xs 2xl:text-sm
+                            font-medium text-turquoise-800 border border-gray-200 rounded-lg mr-2">
+                            VS Code
+                        </span>
                         <span
-                            class="inline-block px-2 py-1 my-2 text-xs 2xl:text-sm font-medium text-turquoise-800 border border-gray-200 rounded-lg mr-2">Chrome</span>
+                            class="inline-block px-2 py-1 my-2 text-xs 2xl:text-sm
+                            font-medium text-turquoise-800 border border-gray-200 rounded-lg mr-2">
+                            Chrome
+                        </span>
                         <span
-                            class="inline-block px-2 py-1 my-2 text-xs 2xl:text-sm font-medium text-turquoise-800 border border-gray-200 rounded-lg mr-2">Tailwind</span>
-                        <span
-                            class="inline-block px-2 py-1 my-2 text-xs 2xl:text-sm font-medium text-turquoise-800 border border-gray-200 rounded-lg mr-2">VS
-                            Code</span>
-                        <span
-                            class="inline-block px-2 py-1 my-2 text-xs 2xl:text-sm font-medium text-turquoise-800 border border-gray-200 rounded-lg mr-2">Chrome</span>
-                        <span
-                            class="inline-block px-2 py-1 my-2 text-xs 2xl:text-sm font-medium text-turquoise-800 border border-gray-200 rounded-lg mr-2">Tailwind</span>
-                        <span
-                            class="inline-block px-2 py-1 my-2 text-xs 2xl:text-sm font-medium text-turquoise-800 border border-gray-200 rounded-lg mr-2">VS
-                            Code</span>
-                        <span
-                            class="inline-block px-2 py-1 my-2 text-xs 2xl:text-sm font-medium text-turquoise-800 border border-gray-200 rounded-lg mr-2">Chrome</span>
-                        <span
-                            class="inline-block px-2 py-1 my-2 text-xs 2xl:text-sm font-medium text-turquoise-800 border border-gray-200 rounded-lg mr-2">Tailwind</span>
-                        <span
-                            class="inline-block px-2 py-1 my-2 text-xs 2xl:text-sm font-medium text-turquoise-800 border border-gray-200 rounded-lg mr-2">VS
-                            Code</span>
-                        <span
-                            class="inline-block px-2 py-1 my-2 text-xs 2xl:text-sm font-medium text-turquoise-800 border border-gray-200 rounded-lg mr-2">Chrome</span>
-                        <span
-                            class="inline-block px-2 py-1 my-2 text-xs 2xl:text-sm font-medium text-turquoise-800 border border-gray-200 rounded-lg mr-2">Tailwind</span>
-                        <span
-                            class="inline-block px-2 py-1 my-2 text-xs 2xl:text-sm font-medium text-turquoise-800 border border-gray-200 rounded-lg mr-2">VS
-                            Code</span>
-                        <span
-                            class="inline-block px-2 py-1 my-2 text-xs 2xl:text-sm font-medium text-turquoise-800 border border-gray-200 rounded-lg mr-2">Chrome</span>
-                        <span
-                            class="inline-block px-2 py-1 my-2 text-xs 2xl:text-sm font-medium text-turquoise-800 border border-gray-200 rounded-lg mr-2">Tailwind</span>
+                            class="inline-block px-2 py-1 my-2 text-xs 2xl:text-sm
+                            font-medium text-turquoise-800 border border-gray-200 rounded-lg mr-2">
+                            Tailwind
+                        </span>
                     </div>
 
                     <div class="flex mb-4 items-center">
@@ -65,7 +45,7 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                         <span class="text-gray-500">47.527</span>
-                        <p class="m-0 ml-2 text-gray-700">Siswa Terdaftar</p>
+                        <p class="m-0 ml-2 text-gray-700">Pengguna Terdaftar</p>
                     </div>
                     <span class="font-light text-gray-600">Pelajari dasar bahasa pemrograman, functional programming,
                         object-oriented programming (OOP), serta concurrency dengan menggunakan Kotlin.</span>
@@ -73,7 +53,14 @@
                 <div class="col-span-3">
                     <div class="card border-none shadow-lg bg-white rounded-lg mt-5 hidden md:block p-4 z-10">
                         <div class="card-body">
-                            <x-button type="button" title="Belajar Sekarang" />
+                            @auth
+                                <x-button type="button" title="Belajar Sekarang" />
+                            @endauth
+
+                            @guest
+                                <x-button type="button" title="Silahkan login" class="bg-dark hover:bg-slate-900"
+                                    onclick="location.href='{{ route('login') }}'" />
+                            @endguest
                             <hr class="my-4">
                             <p class="text-gray-400 text-xs">
                                 Belajar sekarang dan dapatkan ilmu baru yang bermanfaat untuk karir dan masa depanmu.
@@ -211,8 +198,14 @@
     <!-- Bottom Navigation for Mobile -->
     <section class="fixed bottom-0 left-0 right-0 z-10 bg-white shadow-md md:hidden py-3">
         <div class="grid grid-cols-2 gap-x-2 px-5 py-3">
-                <x-button type="button" title="Informasi Kelas" class="bg-gray-400" font="font-light" />
+            <x-button type="button" title="Informasi Kelas" class="bg-gray-400" font="font-light" />
+            @auth
                 <x-button type="button" title="Belajar Sekarang" />
+            @endauth
+
+            @guest
+                <x-button type="button" title="Silahkan login" onclick="location.href='{{ route('login') }}'" />
+            @endguest
         </div>
     </section>
 

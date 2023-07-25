@@ -25,6 +25,18 @@
             .card-item:hover img {
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             }
+
+            @keyframes flickerAnimation {
+
+                0%,
+                100% {
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 8px 24px rgba(0, 0, 0, 0.15);
+                }
+
+                50% {
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 8px 24px rgba(0, 0, 0, 0.1);
+                }
+            }
         </style>
     @endpush
 
@@ -62,11 +74,10 @@
     <section>
         <!-- Jumbotron -->
         <div class="relative overflow-hidden mt-12 md:mt-0 bg-cover bg-no-repeat w-full sm:rounded-md hover:shadow-lg px-5 py-24 mx-auto max-w-6xl md:px-32 lg:px-8"
-            style="
-        background-position: 50%;
-        background-image: url('https://images.unsplash.com/photo-1592478411213-6153e4ebc07d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8dnJ8ZW58MHwwfDB8fHwy&auto=format&fit=crop&w=500&q=60');
-        height: 300px;
-      ">
+            style="background-position: 50%;
+            background-image: url('https://images.unsplash.com/photo-1592478411213-6153e4ebc07d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8dnJ8ZW58MHwwfDB8fHwy&auto=format&fit=crop&w=500&q=60');
+            height: 300px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 8px 24px rgba(0, 0, 0, 0.15);">
             <div
                 class="absolute top-0 right-0 bottom-0 left-0 h-full w-full overflow-hidden bg-[hsla(0,0%,0%,0.75)] bg-fixed">
                 <div class="flex h-full items-center">
@@ -115,7 +126,7 @@
             <div class="grid gap-x-5 gap-y-12 grid-cols-2 md:grid-cols-6">
                 @for ($i = 1; $i <= 12; $i++)
                     <figure id="card-item">
-                        <img class="w-48 h-36 object-cover rounded-sm"
+                        <img class="w-48 h-36 object-cover rounded-md"
                             src="https://d33wubrfki0l68.cloudfront.net/2ef8f651607bb32a3fc3a21d71dfe37fe89e2c26/c954d/images/placeholders/square1.svg"
                             alt="">
                         <p class="mt-2 text-xs font-light leading-6 text-gray-400 uppercase">
@@ -136,7 +147,7 @@
                             </p>
                         </div>
                         <p class="text-md mt-2 font-light leading-6 text-primary">
-                            IDR 12.000.000
+                            IDR 12.000.000 <small class="text-gray-400">/bulan</small>
                         </p>
 
                     </figure>
