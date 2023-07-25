@@ -46,8 +46,9 @@
             </div>
             <nav :class="{ 'flex': open, 'hidden': !open }"
                 class="flex-col items-center flex-grow hidden md:pb-0 md:flex md:justify-end md:flex-row">
-                <a class="px-2 py-2 text-sm font-medium text-gray-500 lg:px-6 md:px-3 hover:text-red-600 lg:ml-auto"
-                    href="#">
+                <a class="px-2 py-2 text-sm font-medium text-gray-500 lg:px-6 md:px-3 hover:text-red-600 lg:ml-auto
+                {{ request()->routeIs('about') ? 'text-red-600' : '' }}"
+                    href="{{ route('about') }}">
                     About
                 </a>
                 <a class="px-2 py-2 text-sm font-medium text-gray-500 lg:px-6 md:px-3 hover:text-red-600"

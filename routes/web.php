@@ -34,4 +34,7 @@ Route::get('/product', fn () => view('product'))->name('product');
 // detail product
 Route::get('/product/{id}', fn ($id) => view('detail-product', ['id' => $id]))->name('detail-product');
 
+// about
+Route::get('/about', fn () => view('about'))->name('about');
+
 require __DIR__ . '/auth.php';
