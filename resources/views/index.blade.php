@@ -175,7 +175,7 @@
 
     <!-- Why choose us -->
     <section>
-        <div class="items-center w-full px-5 bg-gray-50 py-24 mx-auto md:px-12 lg:px-16 max-w-7xl">
+        <div class="items-center w-full px-5 bg-white py-24 mx-auto md:px-12 lg:px-16 max-w-7xl">
             <div class="md:text-center">
                 <div class="">
                     <p class="text-lg md:text-2xl text-black">

@@ -142,7 +142,7 @@
                     </figure>
                 @endfor
             </div>
-            </div>
+        </a>
     </section>
 
 
