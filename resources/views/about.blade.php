@@ -108,7 +108,7 @@
                                                         Misi
                                                     </h2>
                                                     <ul
-                                                        class="list-disc list-inside mb-6 pb-2 lg:pb-0 text-lg text-gray-500 font-light text-justify">
+                                                        class="list-disc list-outside mb-6 pb-2 lg:pb-0 text-lg text-gray-500 font-light text-justify">
                                                         <li class="mb-2">
                                                             Memungkinkan setiap individu untuk belajar
                                                             dengan

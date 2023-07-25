@@ -47,23 +47,20 @@
             <nav :class="{ 'flex': open, 'hidden': !open }"
                 class="flex-col items-center flex-grow hidden md:pb-0 md:flex md:justify-end md:flex-row">
                 <a class="px-2 py-2 text-sm font-medium text-gray-500 lg:px-6 md:px-3 hover:text-red-600 lg:ml-auto
-                {{ request()->routeIs('about') ? 'text-red-600' : '' }}"
+                {{ request()->routeIs('/') ? 'text-red-600' : '' }}"
+                    href="{{ route('/') }}">
+                    Materi
+                </a>
+                <a class="px-2 py-2 text-sm font-medium text-gray-500 lg:px-6 md:px-3 hover:text-red-600 {{ request()->routeIs('about') ? 'text-red-600' : '' }}"
                     href="{{ route('about') }}">
-                    About
+                    Tentang Kami
                 </a>
-                <a class="px-2 py-2 text-sm font-medium text-gray-500 lg:px-6 md:px-3 hover:text-red-600"
-                    href="#">
-                    Contact
+                <a class="px-2 py-2 text-sm font-medium text-gray-500 lg:px-6 md:px-3 hover:text-red-600 {{ request()->routeIs('order-flow') ? 'text-red-600' : '' }}"
+                    href="{{route('order-flow')}}">
+                    Alur Pemesanan
                 </a>
-                <a class="px-2 py-2 text-sm font-medium text-gray-500 lg:px-6 md:px-3 hover:text-red-600"
-                    href="#">
-                    Documentation
-                </a>
-                <a class="px-2 py-2 text-sm font-medium text-gray-500 lg:px-6 md:px-3 hover:text-red-600 {{ request()->routeIs('product') ? 'text-red-600' : '' }}"
-                    href="{{ route('product') }}">
-                    Product
-                </a>
-                <div @click.away="open = false" class="relative" x-data="{ open: false }">
+
+                {{-- <div @click.away="open = false" class="relative" x-data="{ open: false }">
                     <button @click="open = !open"
                         class="flex flex-row items-center w-full px-4 py-2 mt-2 text-sm text-left text-gray-500 md:w-auto md:inline md:mt-0 hover:text-red-600 focus:outline-none focus:shadow-outline">
                         <span>
@@ -149,7 +146,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="inline-flex items-center gap-2 list-none lg:ml-auto">
                     <button onclick="window.location.href='{{ route('login') }}'"
