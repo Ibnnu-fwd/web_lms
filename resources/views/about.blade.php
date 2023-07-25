@@ -97,21 +97,40 @@
                                             <div
                                                 class="flex h-full items-center rounded-lg p-6 text-center lg:pl-12 lg:text-left">
                                                 <div class="lg:pl-12">
+
+                                                    <h2 class="mb-6 text-3xl font-semibold text-gray-600">Visi</h2>
+                                                    <p class="mb-6 text-lg text-gray-500 font-light text-justify">
+                                                        Menjadi lembaga pendidikan terdepan dalam memberikan kesempatan
+                                                        bagi setiap individu untuk belajar dengan mudah dan terjangkau,
+                                                        tanpa batasan geografis.
+                                                    </p>
                                                     <h2 class="mb-6 text-3xl font-semibold text-gray-600">
                                                         Misi
                                                     </h2>
-                                                    <p
-                                                        class="mb-6 pb-2 lg:pb-0 text-lg text-gray-500 font-light text-justify">
-                                                        Misi kami adalah memungkinkan setiap individu, di manapun
-                                                        berada,
-                                                        untuk belajar dengan mudah dan terjangkau. Kami percaya
-                                                        bahwa pendidikan adalah kunci
-                                                        untuk menciptakan perubahan positif dalam hidup dan
-                                                        masyarakat. Oleh karena itu, kami
-                                                        berkomitmen untuk memberikan pengalaman belajar yang luar
-                                                        biasa dengan fokus pada
-                                                        kualitas, aksesibilitas, dan kemudahan.
-                                                    </p>
+                                                    <ul
+                                                        class="list-disc list-inside mb-6 pb-2 lg:pb-0 text-lg text-gray-500 font-light text-justify">
+                                                        <li class="mb-2">
+                                                            Memungkinkan setiap individu untuk belajar
+                                                            dengan
+                                                            mudah dan terjangkau, tanpa batasan geografis.</li>
+
+                                                        <li>Menyajikan pengalaman belajar yang luar biasa
+                                                            dengan
+                                                            fokus pada kualitas konten dan materi pembelajaran.</li>
+
+                                                        <li> Percaya bahwa
+                                                            pendidikan
+                                                            adalah kunci untuk menciptakan perubahan positif dalam hidup
+                                                            dan
+                                                            masyarakat.</li>
+
+                                                        <li>Mengutamakan antarmuka pengguna yang intuitif dan
+                                                            navigasi yang sederhana untuk memberikan pengalaman belajar
+                                                            yang
+                                                            lancar.</li>
+                                                    </ul>
+
+
                                                 </div>
                                             </div>
                                         </div>
