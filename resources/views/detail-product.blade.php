@@ -70,23 +70,26 @@
                     <span class="font-light text-gray-600">Pelajari dasar bahasa pemrograman, functional programming,
                         object-oriented programming (OOP), serta concurrency dengan menggunakan Kotlin.</span>
                 </div>
-                {{-- <div class="col-span-3">
+                <div class="col-span-3">
                     <div class="card border-none shadow-md rounded-lg mt-5 hidden md:block p-4 z-10">
                         <div class="card-body">
                             <x-button type="button" title="Belajar Sekarang" />
                             <hr class="my-4">
-                            <a href="#"
+                            <p class="text-gray-400 text-xs">
+                                Belajar sekarang dan dapatkan ilmu baru yang bermanfaat untuk karir dan masa depanmu.
+                            </p>
+                            {{-- <a href="#"
                                 class='flex w-full mb-2 justify-center rounded-md bg-gray-200 px-3 py-1.5 text-sm leading-6 text-black font-medium shadow-sm hover:bg-gray-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-200'>
                                 Informasi kelas
                             </a>
                             <a href="#"
                                 class='flex w-full justify-center rounded-md bg-gray-200 px-3 py-1.5 text-sm leading-6 text-black font-medium shadow-sm hover:bg-gray-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-200'>
                                 Lihat silabus
-                            </a>
+                            </a> --}}
                         </div>
                     </div>
 
-                </div> --}}
+                </div>
             </div>
         </section>
     </section>

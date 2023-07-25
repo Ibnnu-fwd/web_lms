@@ -49,6 +49,10 @@
                 <a class="px-2 py-2 text-sm font-medium text-gray-500 lg:px-6 md:px-3 hover:text-red-600 lg:ml-auto
                 {{ request()->routeIs('/') ? 'text-red-600' : '' }}"
                     href="{{ route('/') }}">
+                    Beranda
+                </a>
+                <a class="px-2 py-2 text-sm font-medium text-gray-500 lg:px-6 md:px-3 hover:text-red-600 {{ request()->routeIs('product') ? 'text-red-600' : '' }}"
+                    href="{{ route('product') }}">
                     Materi
                 </a>
                 <a class="px-2 py-2 text-sm font-medium text-gray-500 lg:px-6 md:px-3 hover:text-red-600 {{ request()->routeIs('about') ? 'text-red-600' : '' }}"
