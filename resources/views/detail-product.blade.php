@@ -71,7 +71,7 @@
                         object-oriented programming (OOP), serta concurrency dengan menggunakan Kotlin.</span>
                 </div>
                 <div class="col-span-3">
-                    <div class="card border-none shadow-md rounded-lg mt-5 hidden md:block p-4 z-10">
+                    <div class="card border-none shadow-lg bg-white rounded-lg mt-5 hidden md:block p-4 z-10">
                         <div class="card-body">
                             <x-button type="button" title="Belajar Sekarang" />
                             <hr class="my-4">
@@ -175,9 +175,8 @@
                     </li>
                     <li>
                         <div class="flex items-center space-x-2.5">
-                            <svg class="flex-shrink-0 w-3.5 h-3.5 text-success"
-                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 16 12">
+                            <svg class="flex-shrink-0 w-3.5 h-3.5 text-success" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                     stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5" />
                             </svg>
@@ -206,6 +205,14 @@
                         alt="">
                 </div>
             </main>
+        </div>
+    </section>
+
+    <!-- Bottom Navigation for Mobile -->
+    <section class="fixed bottom-0 left-0 right-0 z-10 bg-white shadow-md md:hidden py-3">
+        <div class="grid grid-cols-2 gap-x-2 px-5 py-3">
+                <x-button type="button" title="Informasi Kelas" class="bg-gray-400" font="font-light" />
+                <x-button type="button" title="Belajar Sekarang" />
         </div>
     </section>
 
