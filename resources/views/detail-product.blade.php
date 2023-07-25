@@ -178,18 +178,9 @@
             <main>
                 <h2 class="text-xl font-semibold text-gray-700">Sneek Peek</h2>
                 <div class="grid grid-cols-4 gap-4 mt-4">
-                    <img src=""
+                    <img src="{{ asset('images/no_image.jpg') }}"
                         class="bg-gray-50 rounded-md hover:shadow-sm hover:ring-1 hover:ring-primary h-20 object-cover"
-                        alt="">
-                    <img src=""
-                        class="bg-gray-50 rounded-md hover:shadow-sm hover:ring-1 hover:ring-primary h-20 object-cover"
-                        alt="">
-                    <img src=""
-                        class="bg-gray-50 rounded-md hover:shadow-sm hover:ring-1 hover:ring-primary h-20 object-cover"
-                        alt="">
-                    <img src=""
-                        class="bg-gray-50 rounded-md hover:shadow-sm hover:ring-1 hover:ring-primary h-20 object-cover"
-                        alt="">
+                        alt="sneek peek image">
                 </div>
             </main>
         </div>
@@ -198,15 +189,45 @@
     <!-- Bottom Navigation for Mobile -->
     <section class="fixed bottom-0 left-0 right-0 z-10 bg-white shadow-md md:hidden py-3">
         <div class="grid grid-cols-2 gap-x-2 px-5 py-3">
-            <x-button type="button" title="Informasi Kelas" class="bg-gray-400" font="font-light" />
+            <x-button type="button" title="Informasi Kelas" class="bg-gray-400 hover:bg-gray-500"
+                font="font-light" />
             @auth
                 <x-button type="button" title="Belajar Sekarang" />
             @endauth
 
+            <x-button type="button" title="Belajar Sekarang" />
             @guest
-                <x-button type="button" title="Silahkan login" onclick="location.href='{{ route('login') }}'" />
+                {{-- <x-button type="button" title="Silahkan login" class="bg-dark hover:bg-slate-700"
+                    onclick="location.href='{{ route('login') }}'" /> --}}
             @endguest
         </div>
     </section>
+
+    <!-- Modal -->
+    <div id="modal"
+        class="fixed top-0 left-0 z-50 w-screen h-screen flex items-center justify-center bg-black bg-opacity-50 hidden">
+        <div class="max-w-2xl p-4 mx-auto md:w-96 md:h-auto bg-white rounded-md">
+            <img id="modal-image" class="w-full h-80" src="" alt="Image">
+            <p id="modal-caption" class="block mt-2 font-medium text-gray-500"></p>
+        </div>
+    </div>
+
+
+    @push('js-internal')
+        <script>
+            $(function() {
+                $('img').click(function(e) {
+                    e.preventDefault();
+                    $('#modal').removeClass('hidden');
+                    $('#modal-image').attr('src', $(this).attr('src'));
+                    $('#modal-caption').text($(this).attr('alt'));
+
+                    $('#modal').click(function() {
+                        $(this).addClass('hidden');
+                    });
+                });
+            });
+        </script>
+    @endpush
 
 </x-user-layout>

@@ -56,8 +56,7 @@
             <div class="items-center w-full px-5 mx-auto md:px-12 lg:px-0 max-w-6xl py-8 ">
                 <div class="justify-center w-full max-auto">
                     <div x-data="{ tab: 'tab1' }">
-                        <ul
-                            class="flex justify-between mx-auto overflow-hidden text-sm text-center text-black border-y py-6">
+                        <ul class="grid grid-cols-3 w-full text-sm text-center text-black border-y py-6">
                             <li class="w-full">
                                 <!-- event handler set state to 'tab1' and add conditional :class for active state -->
                                 <a @click.prevent="tab = 'tab1'" href="#"
@@ -111,9 +110,9 @@
                                                         class="list-outside mb-6 pb-2 lg:pb-0 text-lg text-gray-500 font-light text-justify">
                                                         <li class="mb-2">
                                                             <div class="flex items-start space-x-3">
-                                                                <ion-icon class="text-red-500 md hydrated mr-2"
-                                                                    name="checkmark-circle" role="img"
-                                                                    size="large">
+                                                                <ion-icon
+                                                                    class="text-red-500 hydrated w-12 h-12 md:w-8 md:h-8 mr-2"
+                                                                    name="checkmark-circle" role="img">
                                                                 </ion-icon>
                                                                 <p>Memungkinkan setiap individu untuk belajar
                                                                     dengan
@@ -123,9 +122,9 @@
 
                                                         <li class="mb-2">
                                                             <div class="flex items-start space-x-3">
-                                                                <ion-icon class="text-red-500 md hydrated mr-2"
-                                                                    name="checkmark-circle" role="img"
-                                                                    size="large">
+                                                                <ion-icon
+                                                                    class="text-red-500 hydrated w-12 h-12 md:w-8 md:h-8 mr-2"
+                                                                    name="checkmark-circle" role="img">
                                                                 </ion-icon>
                                                                 <p>Menyajikan pengalaman belajar yang luar biasa
                                                                     dengan
@@ -135,9 +134,9 @@
                                                         </li>
                                                         <li class="mb-2">
                                                             <div class="flex items-start space-x-3">
-                                                                <ion-icon class="text-red-500 md hydrated mr-2"
-                                                                    name="checkmark-circle" role="img"
-                                                                    size="large">
+                                                                <ion-icon
+                                                                    class="text-red-500 hydrated w-12 h-12 md:w-8 md:h-8 mr-2"
+                                                                    name="checkmark-circle" role="img">
                                                                 </ion-icon>
                                                                 <p>Percaya bahwa
                                                                     pendidikan
@@ -149,9 +148,9 @@
                                                         </li>
                                                         <li class="mb-2">
                                                             <div class="flex items-start space-x-3">
-                                                                <ion-icon class="text-red-500 md hydrated mr-2"
-                                                                    name="checkmark-circle" role="img"
-                                                                    size="large">
+                                                                <ion-icon
+                                                                    class="text-red-500 hydrated w-12 h-12 md:w-8 md:h-8 mr-2"
+                                                                    name="checkmark-circle" role="img">
                                                                 </ion-icon>
                                                                 <p>Mengutamakan antarmuka pengguna yang intuitif dan
                                                                     navigasi yang sederhana untuk memberikan pengalaman
@@ -273,8 +272,8 @@
                                                     <img class="mx-auto mb-6 rounded-lg shadow-lg dark:shadow-black/20 w-[150px]"
                                                         src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(9).jpg"
                                                         alt="avatar" />
-                                                    <h5 class="mb-4 text-lg text-black font-bold">Alan Turing</h5>
-                                                    <p class="mb-6 font-light text-lg text-gray-500">Frontend Developer
+                                                    <h5 class="mt-4 mb-2 text-lg text-black font-bold">Alan Turing</h5>
+                                                    <p class="font-light text-lg text-gray-500">Frontend Developer
                                                     </p>
                                                 </div>
                                             @endfor
