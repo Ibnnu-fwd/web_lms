@@ -26,7 +26,7 @@
                         <div class="mt-12 lg:mt-0">
                             <h1
                                 class="mb-6 text-5xl font-bold tracking-tight text-[hsl(218,81%,95%)] md:text-6xl xl:text-7xl">
-                                About<span class="text-primary ms-2">us</span>
+                                Tentang<span class="text-primary ms-2">kami</span>
                             </h1>
                             <p class="text-lg text-[hsl(218,81%,95%)]">
                                 Kami berkomitmen untuk membantu Anda mencapai potensi penuh Anda dengan menyediakan
