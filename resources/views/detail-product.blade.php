@@ -81,6 +81,66 @@
         </section>
     </section>
 
+    <section class="pb-8 pt-6 border-1 border-y">
+        <h2 class="px-3 md:px-0 md:max-w-6xl mx-auto text-xl font-semibold text-gray-700">Apa yang akan kamu dapatkan?
+        </h2>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mx-auto px-3 md:px-0 md:max-w-6xl mt-8">
+            <div class="border border-1 rounded-md h-30 flex flex-col lg:flex-row items-start p-4">
+                <div class="mr-3 mb-2 lg:mb-0">
+                    <ion-icon class="w-8 h-8 text-red-500 md hydrated mr-1 hidden md:inline-block" name="ribbon"
+                        role="img">
+                    </ion-icon>
+                </div>
+                <div>
+                    <p class="font-bold mb-1">Sertifikat</p>
+                    <p class="text-gray-400 text-md">Dapatkan sertifikat standar industri setelah menyelesaikan
+                        kelas
+                        ini.</p>
+                </div>
+            </div>
+            <div class="border border-1 rounded-md h-30 flex flex-col lg:flex-row items-start p-4">
+                <div class="mr-3 mb-2 lg:mb-0">
+                    <ion-icon class="w-8 h-8 text-red-500 md hydrated mr-1 hidden md:inline-block" name="ribbon"
+                        role="img">
+                    </ion-icon>
+                </div>
+                <div>
+                    <p class="font-bold mb-1">Sertifikat</p>
+                    <p class="text-gray-400 text-md">Dapatkan sertifikat standar industri setelah menyelesaikan
+                        kelas
+                        ini.</p>
+                </div>
+            </div>
+            <div class="border border-1 rounded-md h-30 flex flex-col lg:flex-row items-start p-4">
+                <div class="mr-3 mb-2 lg:mb-0">
+                    <ion-icon class="w-8 h-8 text-red-500 md hydrated mr-1 hidden md:inline-block" name="ribbon"
+                        role="img">
+                    </ion-icon>
+                </div>
+                <div>
+                    <p class="font-bold mb-1">Sertifikat</p>
+                    <p class="text-gray-400 text-md">Dapatkan sertifikat standar industri setelah menyelesaikan
+                        kelas
+                        ini.</p>
+                </div>
+            </div>
+            <div class="border border-1 rounded-md h-30 flex flex-col lg:flex-row items-start p-4">
+                <div class="mr-3 mb-2 lg:mb-0">
+                    <ion-icon class="w-8 h-8 text-red-500 md hydrated mr-1 hidden md:inline-block" name="ribbon"
+                        role="img">
+                    </ion-icon>
+                </div>
+                <div>
+                    <p class="font-bold mb-1">Sertifikat</p>
+                    <p class="text-gray-400 text-md">Dapatkan sertifikat standar industri setelah menyelesaikan
+                        kelas
+                        ini.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Detail Course -->
     <section class="w-full px-5 md:px-0 mx-auto py-10 mb-10 md:max-w-6xl">
         <div class="grid md:grid-cols-2 gap-x-8 gap-y-8">
@@ -178,9 +238,12 @@
             <main>
                 <h2 class="text-xl font-semibold text-gray-700">Sneek Peek</h2>
                 <div class="grid grid-cols-4 gap-4 mt-4">
-                    <img src="{{ asset('images/no_image.jpg') }}"
-                        class="bg-gray-50 rounded-md hover:shadow-sm hover:ring-1 hover:ring-primary h-20 object-cover"
-                        alt="sneek peek image">
+                    <img src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dmlydHVhbCUyMHJlYWxpdHl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=600&q=60"
+                        class="bg-gray-50 rounded-md hover:shadow-sm hover:ring-1 hover:ring-primary w-32 h-20 object-cover"
+                        alt="sneek peek image 1">
+                    <img src="https://images.unsplash.com/photo-1576633587382-13ddf37b1fc1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dmlydHVhbCUyMHJlYWxpdHl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=600&q=60"
+                        class="bg-gray-50 rounded-md hover:shadow-sm hover:ring-1 hover:ring-primary w-32 h-20 object-cover"
+                        alt="sneek peek image 2">
                 </div>
             </main>
         </div>
@@ -205,29 +268,10 @@
 
     <!-- Modal -->
     <div id="modal"
-        class="fixed top-0 left-0 z-50 w-screen h-screen flex items-center justify-center bg-black bg-opacity-50 hidden">
+        class="fixed top-0 left-0 z-50 w-screen h-screen flex items-center justify-center bg-black bg-opacity-50 hidden p-6">
         <div class="max-w-2xl p-4 mx-auto md:w-96 md:h-auto bg-white rounded-md">
-            <img id="modal-image" class="w-full h-80" src="" alt="Image">
+            <img id="modal-image" class="w-full h-80 object-cover object-center" src="" alt="Image">
             <p id="modal-caption" class="block mt-2 font-medium text-gray-500"></p>
         </div>
     </div>
-
-
-    @push('js-internal')
-        <script>
-            $(function() {
-                $('img').click(function(e) {
-                    e.preventDefault();
-                    $('#modal').removeClass('hidden');
-                    $('#modal-image').attr('src', $(this).attr('src'));
-                    $('#modal-caption').text($(this).attr('alt'));
-
-                    $('#modal').click(function() {
-                        $(this).addClass('hidden');
-                    });
-                });
-            });
-        </script>
-    @endpush
-
 </x-user-layout>

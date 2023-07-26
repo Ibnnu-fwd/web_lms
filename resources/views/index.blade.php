@@ -64,7 +64,7 @@
     <section>
         <div class="relative items-center w-full bg-gray-50 px-5 py-12 mx-auto md:px-12 lg:px-16 max-w-7xl">
             <div class="mx-auto">
-                <div class="grid grid-cols-2 gap-0.5 md:grid-cols-6 logo-container">
+                <div class="grid grid-cols-2 gap-0.5 md:grid-cols-6">
                     <div class="flex justify-center col-span-1 px-8">
                         <img class="max-h-12"
                             src="https://d33wubrfki0l68.cloudfront.net/2a4d2cdd794587314ad2034778712608ac32e37c/79f3b/images/logos/8.svg"
