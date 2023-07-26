@@ -304,22 +304,7 @@
         integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <script>
-        $(function() {
-            $('img').attr('loading', 'lazy');
-            // Image Preview Modal
-            $('img').click(function(e) {
-                e.preventDefault();
-                $('#modal').removeClass('hidden');
-                $('#modal-image').attr('src', $(this).attr('src'));
-                $('#modal-caption').text($(this).attr('alt'));
-
-                $('#modal').click(function() {
-                    $(this).addClass('hidden');
-                });
-            });
-        });
-    </script>
+    <script src="{{asset('assets/js/modal-image-minified.js')}}"></script>
 
     @stack('js-internal')
 
