@@ -18,22 +18,38 @@
 
 <body class="font-sans antialiased">
     <div class="min-h-screen bg-gray-100">
-        @include('layouts.navigation')
-
-        <!-- Page Heading -->
-        @if (isset($header))
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
-        @endif
-
         <!-- Page Content -->
         <main>
-            {{ $slot }}
+            <div class="flex h-screen overflow-hidden bg-white">
+                @include('admin.layout.sidebar')
+                {{-- burger button --}}
+                {{-- end burger button --}}
+                <div class="flex flex-col flex-1 w-0 overflow-hidden">
+                    <main class="relative flex-1 overflow-y-auto focus:outline-none">
+                        <div class="py-6">
+                            <div class="px-4 mx-auto 2xl:max-w-9xl sm:px-6 md:px-8">
+                                {{$slot}}
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </div>
+
         </main>
     </div>
+    <script>
+        function toggleSidebar() {
+            const sidebarContainer = document.getElementById("sidebar-container");
+            sidebarContainer.classList.toggle("hidden"); // Toggle the "hidden" class to show/hide the sidebar
+        }
+
+
+        // Attach the toggleSidebar function to the "nav-toggle" button
+        const navToggle = document.getElementById("nav-toggle");
+        navToggle.addEventListener("click", toggleSidebar);
+    </script>
+
+    @stack('js-internal')
 </body>
 
 </html>

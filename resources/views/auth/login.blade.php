@@ -11,7 +11,8 @@
         </div>
 
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form class="space-y-6" action="#" method="POST">
+            <form class="space-y-6" action="{{ route('login') }}" method="POST">
+                @csrf
                 <x-input id="email" label="Email" name="email" type="email" required />
                 <x-input id="password" label="Kata sandi" name="password" type="password" required />
                 <x-button title="Masuk" />
@@ -26,4 +27,24 @@
             </p>
         </div>
     </div>
+
+    @push('js-internal')
+        <script>
+            @if (Session::has('success'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: '{{ Session::get('success') }}',
+                })
+            @endif
+
+            @if (Session::has('error'))
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal',
+                    text: '{{ Session::get('error') }}',
+                })
+            @endif
+        </script>
+    @endpush
 </x-guest-layout>

@@ -14,6 +14,25 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
+
+    const ROLE_ADMIN       = 1;
+    const ROLE_VERIFICATOR = 2;
+    const ROLE_INSTITUTION = 3;
+    const ROLE_USER        = 4;
+
+    const ROLE_ADMIN_LABEL       = 'Admin';
+    const ROLE_VERIFICATOR_LABEL = 'Verifikator';
+    const ROLE_INSTITUTION_LABEL = 'Institusi';
+    const ROLE_USER_LABEL        = 'Personal';
+
+    const STATUS_PENDING  = 0;
+    const STATUS_ACTIVE   = 1;
+    const STATUS_INACTIVE = 2;
+
+    const STATUS_PENDING_LABEL  = 'Pending';
+    const STATUS_ACTIVE_LABEL   = 'Aktif';
+    const STATUS_INACTIVE_LABEL = 'Tidak Aktif';
+
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [
@@ -22,6 +41,7 @@ class User extends Authenticatable
         'password',
         'gender',
         'birthday',
+        'avatar',
         'phone',
         'job',
         'institution',
@@ -62,5 +82,45 @@ class User extends Authenticatable
     public function userCourseAccessLogs()
     {
         return $this->hasMany(UserCourseAccessLog::class);
+    }
+
+    // Custom Function
+    public function getRoleLabel()
+    {
+        switch ($this->role) {
+            case self::ROLE_ADMIN:
+                return self::ROLE_ADMIN_LABEL;
+                break;
+            case self::ROLE_VERIFICATOR:
+                return self::ROLE_VERIFICATOR_LABEL;
+                break;
+            case self::ROLE_INSTITUTION:
+                return self::ROLE_INSTITUTION_LABEL;
+                break;
+            case self::ROLE_USER:
+                return self::ROLE_USER_LABEL;
+                break;
+            default:
+                return 'Unknown';
+                break;
+        }
+    }
+
+    public function getStatusLabel()
+    {
+        switch ($this->status) {
+            case self::STATUS_PENDING:
+                return self::STATUS_PENDING_LABEL;
+                break;
+            case self::STATUS_ACTIVE:
+                return self::STATUS_ACTIVE_LABEL;
+                break;
+            case self::STATUS_INACTIVE:
+                return self::STATUS_INACTIVE_LABEL;
+                break;
+            default:
+                return 'Unknown';
+                break;
+        }
     }
 }

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->enum('gender', ['L', 'P']);
             $table->date('birthday');
+            $table->longText('avatar')->nullable();
             $table->string('phone')->nullable();
             $table->string('job')->nullable();
             $table->string('institution')->nullable();
