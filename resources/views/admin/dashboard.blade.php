@@ -46,7 +46,7 @@
                                     </p>
                                     <ul>
                                         <li>
-                                            <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-sm text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-blue-500"
+                                            <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-sm text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
                                                 href="#">
                                                 <ion-icon class="w-4 h-4 md hydrated" name="aperture-outline"
                                                     role="img" aria-label="aperture outline"></ion-icon>
@@ -56,7 +56,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-sm text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-blue-500"
+                                            <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-sm text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
                                                 href="#">
                                                 <ion-icon class="w-4 h-4 md hydrated" name="trending-up-outline"
                                                     role="img" aria-label="trending up outline"></ion-icon>
@@ -73,9 +73,9 @@
                                         <li>
                                             <div x-data="{ open: false }">
                                                 <button
-                                                    class="inline-flex items-center justify-between w-full px-4 py-2 mt-1 text-sm text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-blue-500 group"
+                                                    class="inline-flex items-center justify-between w-full px-4 py-2 mt-1 text-sm text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary group"
                                                     @click="open = ! open">
-                                                    <span class="inline-flex items-center text-base font-light">
+                                                    <span class="inline-flex items-center text-md font-light">
                                                         <ion-icon class="w-4 h-4 md hydrated" name="home-outline"
                                                             role="img" aria-label="home outline"></ion-icon>
                                                         <span class="ml-4">
@@ -95,7 +95,7 @@
                                                     <ul>
                                                         <li>
                                                             <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
+                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-primary group hover:bg-gray-50">
                                                                 <span class="inline-flex items-center w-full">
                                                                     <ion-icon class="w-4 h-4 md hydrated"
                                                                         name="document-outline" role="img"
@@ -108,623 +108,13 @@
                                                         </li>
                                                         <li>
                                                             <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
+                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-primary group hover:bg-gray-50">
                                                                 <span class="inline-flex items-center w-full">
                                                                     <ion-icon class="w-4 h-4 md hydrated"
                                                                         name="mail-outline" role="img"
                                                                         aria-label="mail outline"></ion-icon>
                                                                     <span class="ml-4">
                                                                         Email
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div x-data="{ open: false }">
-                                                <button
-                                                    class="inline-flex items-center justify-between w-full px-4 py-2 mt-1 text-sm text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-blue-500 group"
-                                                    @click="open = ! open">
-                                                    <span class="inline-flex items-center text-base font-light">
-                                                        <ion-icon class="w-4 h-4 md hydrated" name="pie-chart-outline"
-                                                            role="img" aria-label="pie chart outline"></ion-icon>
-                                                        <span class="ml-4">
-                                                            Dashboard
-                                                        </span>
-                                                    </span>
-                                                    <svg fill="currentColor" viewBox="0 0 20 20"
-                                                        :class="{ 'rotate-180': open, 'rotate-0': !open }"
-                                                        class="inline w-5 h-5 ml-auto transition-transform duration-200 transform group-hover:text-accent rotate-0">
-                                                        <path fill-rule="evenodd"
-                                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                            clip-rule="evenodd"></path>
-                                                    </svg>
-                                                </button>
-                                                <div class="p-2 pl-6 -px-px" x-show="open"
-                                                    @click.outside="open = false" style="display: none;">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="flower-outline" role="img"
-                                                                        aria-label="flower outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Overview
-                                                                    </span>
-                                                                    <span
-                                                                        class="inline-flex ml-auto items-center rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-medium text-blue-500">
-                                                                        25
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="notifications-outline" role="img"
-                                                                        aria-label="notifications outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Notifications
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="analytics-outline" role="img"
-                                                                        aria-label="analytics outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Analytics
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="document-outline" role="img"
-                                                                        aria-label="document outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Saved reports
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="calendar-outline" role="img"
-                                                                        aria-label="calendar outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Scheduled reports
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="bookmark-outline" role="img"
-                                                                        aria-label="bookmark outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Saved reports
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="settings-outline" role="img"
-                                                                        aria-label="settings outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Notifications
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div x-data="{ open: false }">
-                                                <button
-                                                    class="inline-flex items-center justify-between w-full px-4 py-2 mt-1 text-sm text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-blue-500 group"
-                                                    @click="open = ! open">
-                                                    <span class="inline-flex items-center text-base font-light">
-                                                        <ion-icon class="w-4 h-4 md hydrated" name="albums-outline"
-                                                            role="img" aria-label="albums outline"></ion-icon>
-                                                        <span class="ml-4">
-                                                            Projects
-                                                        </span>
-                                                    </span>
-                                                    <svg fill="currentColor" viewBox="0 0 20 20"
-                                                        :class="{ 'rotate-180': open, 'rotate-0': !open }"
-                                                        class="inline w-5 h-5 ml-auto transition-transform duration-200 transform group-hover:text-accent rotate-0">
-                                                        <path fill-rule="evenodd"
-                                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                            clip-rule="evenodd"></path>
-                                                    </svg>
-                                                </button>
-                                                <div class="p-2 pl-6 -px-px" x-show="open"
-                                                    @click.outside="open = false" style="display: none;">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="flower-outline" role="img"
-                                                                        aria-label="flower outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Overview
-                                                                    </span>
-                                                                    <span
-                                                                        class="inline-flex ml-auto items-center rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-medium text-blue-500">
-                                                                        25
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="notifications-outline" role="img"
-                                                                        aria-label="notifications outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Notifications
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="analytics-outline" role="img"
-                                                                        aria-label="analytics outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Analytics
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="document-outline" role="img"
-                                                                        aria-label="document outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Saved reports
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="calendar-outline" role="img"
-                                                                        aria-label="calendar outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Scheduled reports
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="bookmark-outline" role="img"
-                                                                        aria-label="bookmark outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Saved reports
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="settings-outline" role="img"
-                                                                        aria-label="settings outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Notifications
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div x-data="{ open: false }">
-                                                <button
-                                                    class="inline-flex items-center justify-between w-full px-4 py-2 mt-1 text-sm text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-blue-500 group"
-                                                    @click="open = ! open">
-                                                    <span class="inline-flex items-center text-base font-light">
-                                                        <ion-icon class="w-4 h-4 md hydrated" name="add-outline"
-                                                            role="img" aria-label="add outline"></ion-icon>
-                                                        <span class="ml-4">
-                                                            Tasks
-                                                        </span>
-                                                    </span>
-                                                    <svg fill="currentColor" viewBox="0 0 20 20"
-                                                        :class="{ 'rotate-180': open, 'rotate-0': !open }"
-                                                        class="inline w-5 h-5 ml-auto transition-transform duration-200 transform group-hover:text-accent rotate-0">
-                                                        <path fill-rule="evenodd"
-                                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                            clip-rule="evenodd"></path>
-                                                    </svg>
-                                                </button>
-                                                <div class="p-2 pl-6 -px-px" x-show="open"
-                                                    @click.outside="open = false" style="display: none;">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="flower-outline" role="img"
-                                                                        aria-label="flower outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Overview
-                                                                    </span>
-                                                                    <span
-                                                                        class="inline-flex ml-auto items-center rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-medium text-blue-500">
-                                                                        25
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="notifications-outline" role="img"
-                                                                        aria-label="notifications outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Notifications
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="analytics-outline" role="img"
-                                                                        aria-label="analytics outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Analytics
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="document-outline" role="img"
-                                                                        aria-label="document outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Saved reports
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="calendar-outline" role="img"
-                                                                        aria-label="calendar outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Scheduled reports
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="bookmark-outline" role="img"
-                                                                        aria-label="bookmark outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Saved reports
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="settings-outline" role="img"
-                                                                        aria-label="settings outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Notifications
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div x-data="{ open: false }">
-                                                <button
-                                                    class="inline-flex items-center justify-between w-full px-4 py-2 mt-1 text-sm text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-blue-500 group"
-                                                    @click="open = ! open">
-                                                    <span class="inline-flex items-center text-base font-light">
-                                                        <ion-icon class="w-4 h-4 md hydrated" name="newspaper-outline"
-                                                            role="img" aria-label="newspaper outline"></ion-icon>
-                                                        <span class="ml-4">
-                                                            Reporting
-                                                        </span>
-                                                    </span>
-                                                    <svg fill="currentColor" viewBox="0 0 20 20"
-                                                        :class="{ 'rotate-180': open, 'rotate-0': !open }"
-                                                        class="inline w-5 h-5 ml-auto transition-transform duration-200 transform group-hover:text-accent rotate-0">
-                                                        <path fill-rule="evenodd"
-                                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                            clip-rule="evenodd"></path>
-                                                    </svg>
-                                                </button>
-                                                <div class="p-2 pl-6 -px-px" x-show="open"
-                                                    @click.outside="open = false" style="display: none;">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="flower-outline" role="img"
-                                                                        aria-label="flower outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Overview
-                                                                    </span>
-                                                                    <span
-                                                                        class="inline-flex ml-auto items-center rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-medium text-blue-500">
-                                                                        25
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="notifications-outline" role="img"
-                                                                        aria-label="notifications outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Notifications
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="analytics-outline" role="img"
-                                                                        aria-label="analytics outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Analytics
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="document-outline" role="img"
-                                                                        aria-label="document outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Saved reports
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="calendar-outline" role="img"
-                                                                        aria-label="calendar outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Scheduled reports
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="bookmark-outline" role="img"
-                                                                        aria-label="bookmark outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Saved reports
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="settings-outline" role="img"
-                                                                        aria-label="settings outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Notifications
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div x-data="{ open: false }">
-                                                <button
-                                                    class="inline-flex items-center justify-between w-full px-4 py-2 mt-1 text-sm text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-blue-500 group"
-                                                    @click="open = ! open">
-                                                    <span class="inline-flex items-center text-base font-light">
-                                                        <ion-icon class="w-4 h-4 md hydrated" name="people-outline"
-                                                            role="img" aria-label="people outline"></ion-icon>
-                                                        <span class="ml-4">
-                                                            Users
-                                                        </span>
-                                                    </span>
-                                                    <svg fill="currentColor" viewBox="0 0 20 20"
-                                                        :class="{ 'rotate-180': open, 'rotate-0': !open }"
-                                                        class="inline w-5 h-5 ml-auto transition-transform duration-200 transform group-hover:text-accent rotate-0">
-                                                        <path fill-rule="evenodd"
-                                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                            clip-rule="evenodd"></path>
-                                                    </svg>
-                                                </button>
-                                                <div class="p-2 pl-6 -px-px" x-show="open"
-                                                    @click.outside="open = false" style="display: none;">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="flower-outline" role="img"
-                                                                        aria-label="flower outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Overview
-                                                                    </span>
-                                                                    <span
-                                                                        class="inline-flex ml-auto items-center rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-medium text-blue-500">
-                                                                        25
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="notifications-outline" role="img"
-                                                                        aria-label="notifications outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Notifications
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="analytics-outline" role="img"
-                                                                        aria-label="analytics outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Analytics
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="document-outline" role="img"
-                                                                        aria-label="document outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Saved reports
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="calendar-outline" role="img"
-                                                                        aria-label="calendar outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Scheduled reports
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="bookmark-outline" role="img"
-                                                                        aria-label="bookmark outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Saved reports
-                                                                    </span>
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" title="#"
-                                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-blue-500 group hover:bg-gray-50">
-                                                                <span class="inline-flex items-center w-full">
-                                                                    <ion-icon class="w-4 h-4 md hydrated"
-                                                                        name="settings-outline" role="img"
-                                                                        aria-label="settings outline"></ion-icon>
-                                                                    <span class="ml-4">
-                                                                        Notifications
                                                                     </span>
                                                                 </span>
                                                             </a>
@@ -740,7 +130,7 @@
                                 <div @click.away="open = false" class="relative inline-flex items-center w-full"
                                     x-data="{ open: false }">
                                     <button @click="open = !open"
-                                        class="inline-flex items-center justify-between w-full px-4 py-3 text-lg font-medium text-center text-white transition duration-500 ease-in-out transform rounded-xl hover:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                        class="inline-flex items-center justify-between w-full px-4 py-3 text-lg font-medium text-center text-white transition duration-500 ease-in-out transform rounded-xl hover:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
                                         <span>
                                             <span class="flex-shrink-0 block group">
                                                 <div class="flex items-center">
@@ -751,11 +141,11 @@
                                                     </div>
                                                     <div class="ml-3 text-left">
                                                         <p
-                                                            class="text-sm font-medium text-gray-500 group-hover:text-blue-500">
+                                                            class="text-sm font-medium text-gray-500 group-hover:text-primary">
                                                             Mike Vega
                                                         </p>
                                                         <p
-                                                            class="text-xs font-medium text-gray-500 group-hover:text-blue-500">
+                                                            class="text-xs font-medium text-gray-500 group-hover:text-primary">
                                                             Pro user
                                                         </p>
                                                     </div>
@@ -783,7 +173,7 @@
                                             class="px-2 py-2 bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                                             <ul>
                                                 <li>
-                                                    <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-sm text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-blue-500"
+                                                    <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-sm text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
                                                         href="#">
                                                         <ion-icon class="w-4 h-4 md hydrated" name="body-outline"
                                                             role="img" aria-label="body outline"></ion-icon>
@@ -793,7 +183,7 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-sm text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-blue-500"
+                                                    <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-sm text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
                                                         href="#">
                                                         <ion-icon class="w-4 h-4 md hydrated"
                                                             name="person-circle-outline" role="img"
