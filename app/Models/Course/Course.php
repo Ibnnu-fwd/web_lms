@@ -76,6 +76,16 @@ class Course extends Model
         return $this->hasOne(DetailTransaction::class, 'course_id');
     }
 
+    public function courseChapter()
+    {
+        return $this->hasMany(CourseChapter::class, 'course_id');
+    }
+
+    public function userCourseAccessLogs()
+    {
+        return $this->hasMany(UserCourseAccessLog::class, 'course_id');
+    }
+
     // Custom function
     public function getRequestStatusText()
     {
