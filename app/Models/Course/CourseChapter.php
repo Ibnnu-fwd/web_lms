@@ -12,7 +12,8 @@ class CourseChapter extends Model
     public $table = 'course_chapters';
     protected $fillable = [
         'course_id',
-        'title'
+        'title',
+        'description'
     ];
 
     public function course()
