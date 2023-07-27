@@ -25,9 +25,9 @@
                     <div class="flex flex-col w-64">
                         <div class="flex flex-col flex-grow pt-5 overflow-y-auto bg-white border-r">
                             <div class="flex flex-col flex-shrink-0 px-4">
-                                <a class="text-lg font-semibold tracking-tighter text-black focus:outline-none focus:ring "
+                                <a class="text-lg mx-auto font-semibold tracking-tighter text-black focus:outline-none focus:ring "
                                     href="/">
-                                    <img src="../images/logo.png" alt=""> </a>
+                                    <img src="../images/logo.png" class="w-40 h-full max-auto" alt=""> </a>
                                 <button class="hidden rounded-lg focus:outline-none focus:shadow-outline">
                                     <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
                                         <path fill-rule="evenodd"
