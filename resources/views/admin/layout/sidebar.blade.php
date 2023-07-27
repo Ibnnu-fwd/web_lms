@@ -3,7 +3,7 @@
         <div class="flex flex-col flex-grow pt-5 overflow-y-auto bg-white border-r">
             <div class="flex flex-col flex-shrink-0 px-4">
                 <a class="text-lg mx-auto font-semibold tracking-tighter text-black focus:outline-none focus:ring "
-                    href="/">
+                    href="" onclick="event.preventDefault();">
                     <img src="../images/logo.png" class="w-40 h-full max-auto" alt=""> </a>
                 <button class="hidden rounded-lg focus:outline-none focus:shadow-outline">
                     <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
@@ -18,22 +18,16 @@
             </div>
             <div class="flex flex-col flex-grow px-4 mt-5">
                 <nav class="flex-1 space-y-1 bg-white">
-                    <p class="px-4 pt-4 text-xs font-semibold text-gray-400 uppercase">
+                    <p class="px-4 pt-4 text-sm font-semibold text-gray-400 uppercase">
                         Analytics
                     </p>
                     <ul>
                         <li>
-                            <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-sm text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
-                                href="#">
-                                <ion-icon class="w-4 h-4 md hydrated" name="aperture-outline" role="img"
-                                    aria-label="aperture outline"></ion-icon>
-                                <span class="ml-4">
-                                    Dashboard
-                                </span>
-                            </a>
+                            <x-sidebar-link route="{{ route('dashboard') }}" icon="home" title="Dashboard"
+                                active="{{ request()->routeIs('dashboard') }}" />
                         </li>
                         <li>
-                            <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-sm text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
+                            <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-md text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
                                 href="#">
                                 <ion-icon class="w-4 h-4 md hydrated" name="trending-up-outline" role="img"
                                     aria-label="trending up outline"></ion-icon>
@@ -43,14 +37,14 @@
                             </a>
                         </li>
                     </ul>
-                    <p class="px-4 pt-4 text-xs font-semibold text-gray-400 uppercase">
+                    <p class="px-4 pt-4 text-sm font-semibold text-gray-400 uppercase">
                         Customization
                     </p>
                     <ul>
                         <li>
                             <div x-data="{ open: false }">
                                 <button
-                                    class="inline-flex items-center justify-between w-full px-4 py-2 mt-1 text-sm text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary group"
+                                    class="inline-flex items-center justify-between w-full px-4 py-2 mt-1 text-md text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary group"
                                     @click="open = ! open">
                                     <span class="inline-flex items-center text-md font-light">
                                         <ion-icon class="w-4 h-4 md hydrated" name="home-outline" role="img"
@@ -72,7 +66,7 @@
                                     <ul>
                                         <li>
                                             <a href="#" title="#"
-                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-primary group hover:bg-gray-50">
+                                                class="inline-flex items-center w-full p-2 pl-3 text-md font-light text-gray-500 rounded-lg hover:text-primary group hover:bg-gray-50">
                                                 <span class="inline-flex items-center w-full">
                                                     <ion-icon class="w-4 h-4 md hydrated" name="document-outline"
                                                         role="img" aria-label="document outline"></ion-icon>
@@ -84,7 +78,7 @@
                                         </li>
                                         <li>
                                             <a href="#" title="#"
-                                                class="inline-flex items-center w-full p-2 pl-3 text-sm font-light text-gray-500 rounded-lg hover:text-primary group hover:bg-gray-50">
+                                                class="inline-flex items-center w-full p-2 pl-3 text-md font-light text-gray-500 rounded-lg hover:text-primary group hover:bg-gray-50">
                                                 <span class="inline-flex items-center w-full">
                                                     <ion-icon class="w-4 h-4 md hydrated" name="mail-outline"
                                                         role="img" aria-label="mail outline"></ion-icon>
@@ -99,15 +93,19 @@
                             </div>
                         </li>
                     </ul>
-                    <p class="px-4 pt-4 text-xs font-semibold text-gray-400 uppercase">
+                    <p class="px-4 pt-4 text-sm font-semibold text-gray-400 uppercase">
                         Autentikasi
                     </p>
                     <ul>
+                        <x-sidebar-link route="{{ route('admin.account.index') }}" icon="person-outline" title="Akun"
+                            active="{{ request()->routeIs('admin.account.index') }}" />
+
+                        <!-- Log out -->
                         <li>
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
                                 <button
-                                    class="inline-flex items-center w-full px-4 py-2 mt-1 text-sm text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary">
+                                    class="inline-flex items-center w-full px-4 py-2 mt-1 text-md text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary">
                                     <ion-icon class="w-4 h-4 md hydrated" name="aperture-outline" role="img"
                                         aria-label="aperture outline"></ion-icon>
                                     <span class="ml-4">
@@ -133,10 +131,11 @@
                                             alt="">
                                     </div>
                                     <div class="ml-3 text-left">
-                                        <p class="text-sm font-medium text-gray-500 group-hover:text-primary">
+                                        <p
+                                            class="text-sm line-clamp-1 font-medium text-gray-500 group-hover:text-primary">
                                             {{ ucwords(auth()->user()->fullname) }}
                                         </p>
-                                        <p class="text-xs font-medium text-gray-500 group-hover:text-primary">
+                                        <p class="text-sm font-medium text-gray-500 group-hover:text-primary">
                                             {{ auth()->user()->getRoleLabel() }}
                                         </p>
                                     </div>
@@ -162,17 +161,17 @@
                         <div class="px-2 py-2 bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                             <ul>
                                 <li>
-                                    <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-sm text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
-                                        href="#">
+                                    <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-md text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
+                                        href="{{ route('admin.account.index') }}">
                                         <ion-icon class="w-4 h-4 md hydrated" name="body-outline" role="img"
                                             aria-label="body outline"></ion-icon>
                                         <span class="ml-4">
-                                            Account
+                                            Akun
                                         </span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-sm text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
+                                    <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-md text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
                                         href="#">
                                         <ion-icon class="w-4 h-4 md hydrated" name="person-circle-outline"
                                             role="img" aria-label="person circle outline"></ion-icon>

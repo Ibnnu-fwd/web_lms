@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\AccountController;
+use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,7 +18,12 @@ Route::get('about', fn () => view('about'))->name('about');
 Route::get('order-flow', fn () => view('order-flow'))->name('order-flow');
 
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser']], function () {
-    Route::get('/', fn () => view('admin.dashboard'));
+    Route::get('/', DashboardController::class)->name('dashboard');
+
+    // Account
+    Route::group(['prefix' => 'account', 'as' => 'admin.'], function () {
+        Route::get('/', [AccountController::class, 'index'])->name('account.index');
+    });
 });
 
 require __DIR__ . '/auth.php';

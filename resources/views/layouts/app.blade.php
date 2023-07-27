@@ -28,7 +28,7 @@
                     <main class="relative flex-1 overflow-y-auto focus:outline-none">
                         <div class="py-6">
                             <div class="px-4 mx-auto 2xl:max-w-9xl sm:px-6 md:px-8">
-                                {{$slot}}
+                                {{ $slot }}
                             </div>
                         </div>
                     </main>
@@ -48,6 +48,10 @@
         const navToggle = document.getElementById("nav-toggle");
         navToggle.addEventListener("click", toggleSidebar);
     </script>
+
+    <!-- Ion Icons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
     @stack('js-internal')
 </body>
