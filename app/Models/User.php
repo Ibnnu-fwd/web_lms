@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Models\Course\UserCourseAccessLog;
 use App\Models\Transaction\RentedCourse;
 use App\Models\Transaction\Transaction;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -51,5 +52,15 @@ class User extends Authenticatable
     public function rentedCourse()
     {
         return $this->hasMany(RentedCourse::class, 'customer_id', 'id');
+    }
+
+    public function userQuizAttempts()
+    {
+        return $this->hasMany(UserQuizAttempt::class);
+    }
+
+    public function userCourseAccessLogs()
+    {
+        return $this->hasMany(UserCourseAccessLog::class);
     }
 }
