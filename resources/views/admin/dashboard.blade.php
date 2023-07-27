@@ -830,7 +830,7 @@
                 <div class="flex flex-col flex-1 w-0 overflow-hidden">
                     <main class="relative flex-1 overflow-y-auto focus:outline-none">
                         <div class="py-6">
-                            <div class="px-4 mx-auto 2xl:max-w-7xl sm:px-6 md:px-8">
+                            <div class="px-4 mx-auto 2xl:max-w-9xl sm:px-6 md:px-8">
                                 <!-- === Remove and replace with your own content... === -->
                                 <div class="py-4">
 
