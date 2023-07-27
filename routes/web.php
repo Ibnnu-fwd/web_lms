@@ -15,4 +15,8 @@ Route::get('product/{id}', fn ($id) => view('detail-product', ['id' => $id]))->n
 Route::get('about', fn () => view('about'))->name('about');
 Route::get('order-flow', fn () => view('order-flow'))->name('order-flow');
 
+Route::get('/admin', function () {
+    return view('admin.dashboard');
+})->name('admin');
+
 require __DIR__ . '/auth.php';
