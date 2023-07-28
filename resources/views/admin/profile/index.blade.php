@@ -1,6 +1,5 @@
 <x-app-layout>
     <x-breadcrumb name="profile" />
-
     <x-card-container class="w-full md:w-1/3 grid grid-cols-3 gap-4">
         <img src="{{ asset('images/no_image.jpg') }}" alt="" class="w-full h-38 object-cover rounded-lg">
 

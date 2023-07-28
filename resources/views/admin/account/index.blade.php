@@ -11,7 +11,6 @@
         <form action="" method="POST">
             @csrf
             @method('PUT')
-
             <x-input id="email" name="email" label="Email" type="email" value="{{ auth()->user()->email }}"
                 required />
             <x-input id="password" name="password" label="Password Lama" type="password" required />

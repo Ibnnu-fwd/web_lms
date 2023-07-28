@@ -12,7 +12,8 @@ class VerificatorController extends Controller
     private $verificator;
     private $user;
 
-    public function __construct(VerificatorInterface $verificator, UserInterface $user) {
+    public function __construct(VerificatorInterface $verificator, UserInterface $user)
+    {
         $this->verificator = $verificator;
         $this->user        = $user;
     }
@@ -29,5 +30,9 @@ class VerificatorController extends Controller
         return view('admin.verificator.create', [
             'users' => $this->user->getAll()
         ]);
+    }
+
+    public function store(Request $request)
+    {
     }
 }
