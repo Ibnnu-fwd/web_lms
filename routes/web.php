@@ -38,6 +38,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser']]
     // Profile
     Route::group(['prefix' => 'profile', 'as' => 'admin.'], function () {
         Route::get('/', [ProfileController::class, 'index'])->name('profile.index');
+        Route::post('update/{id}', [ProfileController::class, 'update'])->name('profile.update');
     });
 
     // Course
