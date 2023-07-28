@@ -8,10 +8,8 @@
             </h2>
 
             <x-input id="title" name="title" type="text" label="Judul" />
+            <x-select id="category_id" name="category_id" title="Kategori">
 
-            <x-select id="gender" title="Gender" name="gender">
-                <option value="L">Laki Laki</option>
-                <option value="P">Perempuan</option>
             </x-select>
 
         </div>

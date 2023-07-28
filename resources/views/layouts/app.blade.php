@@ -16,6 +16,12 @@
     <link rel="stylesheet" href="https://nightly.datatables.net/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://nightly.datatables.net/responsive/css/responsive.dataTables.min.css">
 
+    <!-- Select2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <!-- Alert -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -67,11 +73,19 @@
     <script src="https://nightly.datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="https://nightly.datatables.net/responsive/js/dataTables.responsive.min.js"></script>
 
+    <!-- Select2 -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <!-- Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+
     <script>
         // prevent double initialization of all DataTables
         if ($.fn.dataTable.isDataTable('table')) {
             return;
         }
+
+        $('select').select2();
     </script>
 
     @stack('js-internal')
