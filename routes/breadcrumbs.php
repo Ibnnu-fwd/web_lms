@@ -26,3 +26,9 @@ Breadcrumbs::for('verificator.create', function (BreadcrumbTrail $trail) {
     $trail->parent('verificator');
     $trail->push('Tambah Verifikator', route('admin.verificator.create'));
 });
+
+/* PROFILE */
+Breadcrumbs::for('profile', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Profil', route('admin.profile.index'));
+});

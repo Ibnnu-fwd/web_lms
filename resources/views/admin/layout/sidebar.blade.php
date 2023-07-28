@@ -37,6 +37,12 @@
                                 title="Akun" active="{{ request()->routeIs('admin.account.index') }}" />
                         </li>
 
+                        <!-- Profile -->
+                        <li>
+                            <x-sidebar-link route="{{ route('admin.profile.index') }}" icon="man-outline" title="Profil"
+                                active="{{ request()->routeIs('admin.profile.index') }}" />
+                        </li>
+
                         <!-- Log out -->
                         <li>
                             <form action="{{ route('logout') }}" method="POST">
