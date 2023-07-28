@@ -25,7 +25,7 @@ export default {
                 info: "#F15A59",
                 danger: "#D21312",
                 success: "#5D9C59",
-                warning: "#F7D060",
+                warning: "#FD8D14",
                 light: "#F2F2F2",
                 dark: "#070A52",
                 black: "#2E3840",

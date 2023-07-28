@@ -19,8 +19,13 @@ class CourseCategoryRepository implements CourseCategoryInterface
         return $this->courseCategory->all();
     }
 
-    public function store($data)
+    public function create($data)
     {
         return $this->courseCategory->create($data);
+    }
+
+    public function delete($id)
+    {
+        return $this->courseCategory->destroy($id);
     }
 }

@@ -5,5 +5,6 @@ namespace App\Interfaces;
 interface CourseCategoryInterface
 {
     public function getAll();
-    public function store($data);
+    public function create($data);
+    public function delete($id);
 }

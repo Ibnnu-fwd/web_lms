@@ -28,6 +28,9 @@
                     icon: 'success',
                     title: 'Berhasil',
                     text: '{{ Session::get('success') }}',
+                    showConfirmButton: false,
+                }).then((result) => {
+                    window.location.href = "{{ route('admin.course-category.index') }}"
                 })
             @endif
 

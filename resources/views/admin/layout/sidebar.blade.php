@@ -153,7 +153,7 @@
     </div>
 </div>
 {{-- burger button --}}
-<div class="m-2 items-center sm:hidden">
+<div class="m-2 items-center sm:hidden h-fit">
     <button @click="open = ! open"
         class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
         id="nav-toggle">

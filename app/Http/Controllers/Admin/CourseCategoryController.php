@@ -26,6 +26,9 @@ class CourseCategoryController extends Controller
                 ->addColumn('name', function ($data) {
                     return $data->name;
                 })
+                ->addColumn('action', function ($data) {
+                    return view('admin.course_category.column.action', compact('data'));
+                })
                 ->addIndexColumn()
                 ->make(true);
         }
@@ -49,42 +52,35 @@ class CourseCategoryController extends Controller
         ]);
 
         try {
-            $this->courseCategory->store($request->all());
-            return redirect()->route('admin.course-category.index')->with('success', 'Kategori kursus berhasil ditambahkan');
+            $this->courseCategory->create($request->all());
+            return redirect()->back()->with('success', 'Kategori kursus berhasil ditambahkan');
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', 'Kategori kursus gagal ditambahkan');
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        //
+        try {
+            $this->courseCategory->delete($id);
+            return response()->json(true);
+        } catch (\Throwable $th) {
+            return response()->json(false);
+        }
     }
 }
