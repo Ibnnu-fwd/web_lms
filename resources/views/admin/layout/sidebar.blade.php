@@ -28,7 +28,7 @@
                         <!-- Manajemen Akun -->
                         <li>
                             <x-sidebar-link route="{{ route('admin.verificator.index') }}" icon="shield-outline"
-                                title="Verifikator" active="{{ request()->routeIs('admin.verificator.index') }}" />
+                                title="Verifikator" active="{{ request()->routeIs('admin.verificator.*') }}" />
                         </li>
 
                         <!-- Account -->
