@@ -13,14 +13,36 @@ class UserTableSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            'fullname' => 'admin',
-            'email'    => 'admin@mail.com',
-            'password' => password_hash('password', PASSWORD_DEFAULT),
-            'gender'   => 'L',
-            'birthday' => date('Y-m-d'),
-            'role'     => 1,
-            'status'   => 1
-        ]);
+        $users = [
+            [
+                'fullname' => 'admin',
+                'email'    => 'admin@mail.com',
+                'password' => password_hash('password', PASSWORD_DEFAULT),
+                'gender'   => 'L',
+                'birthday' => date('Y-m-d'),
+                'role'     => 1,
+                'status'   => 1
+            ],
+            [
+                'fullname' => 'andi saputra',
+                'email'    => 'andi@mail.com',
+                'password' => password_hash('password', PASSWORD_DEFAULT),
+                'gender'   => 'L',
+                'birthday' => date('Y-m-d'),
+                'role'     => 4,
+                'status'   => 1
+            ],
+            [
+                'fullname' => 'budi santoso',
+                'email'    => 'budi@mail.com',
+                'password' => password_hash('password', PASSWORD_DEFAULT),
+                'gender' => 'L',
+                'birthday' => date('Y-m-d'),
+                'role' => 4,
+                'status' => 1
+            ]
+        ];
+
+        User::insert($users);
     }
 }

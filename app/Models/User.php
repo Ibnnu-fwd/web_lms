@@ -83,6 +83,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserCourseAccessLog::class);
     }
+    
+    // Scope
+    public function scopeActive($query)
+    {
+        return $query->where('status', self::STATUS_ACTIVE);
+    }
 
     // Custom Function
     public function getRoleLabel()

@@ -2,9 +2,9 @@
     <div class="flex flex-col w-64">
         <div class="flex flex-col flex-grow pt-5 overflow-y-auto bg-white border-r">
             <div class="flex flex-col flex-shrink-0 px-4">
-                <a class="text-lg mx-auto font-semibold tracking-tighter text-black focus:outline-none focus:ring "
+                <a class="text-lg mx-3 font-semibold tracking-tighter text-black focus:outline-none focus:ring "
                     href="" onclick="event.preventDefault();">
-                    <img src="../images/logo.png" class="w-40 h-full max-auto" alt=""> </a>
+                    <img src="{{ asset('images/logo.png') }}" class="w-32 h-full" alt=""> </a>
                 <button class="hidden rounded-lg focus:outline-none focus:shadow-outline">
                     <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
                         <path fill-rule="evenodd"
@@ -18,87 +18,24 @@
             </div>
             <div class="flex flex-col flex-grow px-4 mt-5">
                 <nav class="flex-1 space-y-1 bg-white">
-                    <p class="px-4 pt-4 text-sm font-semibold text-gray-400 uppercase">
-                        Analytics
-                    </p>
                     <ul>
+                        <!-- Dashboard -->
                         <li>
                             <x-sidebar-link route="{{ route('dashboard') }}" icon="home" title="Dashboard"
                                 active="{{ request()->routeIs('dashboard') }}" />
                         </li>
+
+                        <!-- Manajemen Akun -->
                         <li>
-                            <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-md text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
-                                href="#">
-                                <ion-icon class="w-4 h-4 md hydrated" name="trending-up-outline" role="img"
-                                    aria-label="trending up outline"></ion-icon>
-                                <span class="ml-4">
-                                    Performance
-                                </span>
-                            </a>
+                            <x-sidebar-link route="{{ route('admin.verificator.index') }}" icon="shield-outline"
+                                title="Verifikator" active="{{ request()->routeIs('admin.verificator.index') }}" />
                         </li>
-                    </ul>
-                    <p class="px-4 pt-4 text-sm font-semibold text-gray-400 uppercase">
-                        Customization
-                    </p>
-                    <ul>
+
+                        <!-- Account -->
                         <li>
-                            <div x-data="{ open: false }">
-                                <button
-                                    class="inline-flex items-center justify-between w-full px-4 py-2 mt-1 text-md text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary group"
-                                    @click="open = ! open">
-                                    <span class="inline-flex items-center text-md font-light">
-                                        <ion-icon class="w-4 h-4 md hydrated" name="home-outline" role="img"
-                                            aria-label="home outline"></ion-icon>
-                                        <span class="ml-4">
-                                            Home
-                                        </span>
-                                    </span>
-                                    <svg fill="currentColor" viewBox="0 0 20 20"
-                                        :class="{ 'rotate-180': open, 'rotate-0': !open }"
-                                        class="inline w-5 h-5 ml-auto transition-transform duration-200 transform group-hover:text-accent rotate-0">
-                                        <path fill-rule="evenodd"
-                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                            clip-rule="evenodd"></path>
-                                    </svg>
-                                </button>
-                                <div class="p-2 pl-6 -px-px" x-show="open" @click.outside="open = false"
-                                    style="display: none;">
-                                    <ul>
-                                        <li>
-                                            <a href="#" title="#"
-                                                class="inline-flex items-center w-full p-2 pl-3 text-md font-light text-gray-500 rounded-lg hover:text-primary group hover:bg-gray-50">
-                                                <span class="inline-flex items-center w-full">
-                                                    <ion-icon class="w-4 h-4 md hydrated" name="document-outline"
-                                                        role="img" aria-label="document outline"></ion-icon>
-                                                    <span class="ml-4">
-                                                        Guides
-                                                    </span>
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" title="#"
-                                                class="inline-flex items-center w-full p-2 pl-3 text-md font-light text-gray-500 rounded-lg hover:text-primary group hover:bg-gray-50">
-                                                <span class="inline-flex items-center w-full">
-                                                    <ion-icon class="w-4 h-4 md hydrated" name="mail-outline"
-                                                        role="img" aria-label="mail outline"></ion-icon>
-                                                    <span class="ml-4">
-                                                        Email
-                                                    </span>
-                                                </span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <x-sidebar-link route="{{ route('admin.account.index') }}" icon="person-outline"
+                                title="Akun" active="{{ request()->routeIs('admin.account.index') }}" />
                         </li>
-                    </ul>
-                    <p class="px-4 pt-4 text-sm font-semibold text-gray-400 uppercase">
-                        Autentikasi
-                    </p>
-                    <ul>
-                        <x-sidebar-link route="{{ route('admin.account.index') }}" icon="person-outline" title="Akun"
-                            active="{{ request()->routeIs('admin.account.index') }}" />
 
                         <!-- Log out -->
                         <li>

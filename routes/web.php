@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\VerificatorController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -23,6 +24,12 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser']]
     // Account
     Route::group(['prefix' => 'account', 'as' => 'admin.'], function () {
         Route::get('/', [AccountController::class, 'index'])->name('account.index');
+    });
+
+    // Verificator
+    Route::group(['prefix' => 'veriificator', 'as' => 'admin.'], function(){
+        Route::get('/', [VerificatorController::class, 'index'])->name('verificator.index');
+        Route::get('create', [VerificatorController::class, 'create'])->name('verificator.create');
     });
 });
 

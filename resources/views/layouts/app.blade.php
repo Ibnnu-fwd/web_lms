@@ -12,6 +12,10 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+    <!-- Datatable -->
+    <link rel="stylesheet" href="https://nightly.datatables.net/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://nightly.datatables.net/responsive/css/responsive.dataTables.min.css">
+
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -37,6 +41,7 @@
 
         </main>
     </div>
+
     <script>
         function toggleSidebar() {
             const sidebarContainer = document.getElementById("sidebar-container");
@@ -52,6 +57,22 @@
     <!-- Ion Icons -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <!-- Jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+        integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Datatable -->
+    <script src="https://nightly.datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="https://nightly.datatables.net/responsive/js/dataTables.responsive.min.js"></script>
+
+    <script>
+        // prevent double initialization of all DataTables
+        if ($.fn.dataTable.isDataTable('table')) {
+            return;
+        }
+    </script>
 
     @stack('js-internal')
 </body>

@@ -1,44 +1,24 @@
 <x-app-layout>
     <x-breadcrumb name="account" />
-    <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Profile Information') }}
+    <x-card-container class="w-full md:w-1/3">
+        <h2 class="text-lg font-medium">
+            Informasi Akun
         </h2>
-
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __("Update your account's profile information and email address.") }}
+        <p class="text-md mt-1 mb-4 text-gray-400">
+            Ubah informasi akun anda
         </p>
-    </header>
 
-    <form id="send-verification" method="post" action="{{ route('verification.send') }}">
-        @csrf
-    </form>
+        <form action="" method="POST">
+            @csrf
+            @method('PUT')
 
-    <form method="post" action="" class="mt-6 space-y-6">
-        @csrf
-        @method('patch')
-
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" required autofocus
-                autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
-        </div>
-
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" required
-                autocomplete="username" />
-            <x-input-error class="mt-2" :messages="$errors->get('email')" />
-        </div>
-
-        <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
-
-            @if (session('status') === 'profile-updated')
-                <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600">{{ __('Saved.') }}</p>
-            @endif
-        </div>
-    </form>
+            <x-input id="email" name="email" label="Email" type="email" value="{{ auth()->user()->email }}"
+                required />
+            <x-input id="password" name="password" label="Password" type="password" required />
+            <x-input id="password_confirmation" name="password_confirmation" label="Konfirmasi Password" type="password"
+                required />
+            <hr class="my-4">
+            <x-button title="Simpan Perubahan" />
+        </form>
+    </x-card-container>
 </x-app-layout>
