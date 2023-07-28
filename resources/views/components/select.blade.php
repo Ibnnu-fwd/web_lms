@@ -1,6 +1,6 @@
 @props(['title' => '', 'name', 'id'])
 
-<label for="{{ $id }}" class="block mb-2 text-md font-medium text-gray-900 dark:text-white">
+<label for="{{ $id }}" class="block mb-2 text-md text-gray-900">
     {{ $title }}
 </label>
 <select id="{{ $id }}"
