@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('institution')->nullable();
             $table->integer('role'); // 1 = admin, 2 = verificator, 3 = institution, 4 = user
             $table->integer('status'); // 0 = pending, 1 = active, 2 = inactive
+            $table->integer('is_verificator')->nullable(); // 0 = not verificator, 1 = verificator
             $table->rememberToken();
             $table->timestamps();
         });

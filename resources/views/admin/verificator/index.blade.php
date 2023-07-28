@@ -12,7 +12,6 @@
                     <th>#</th>
                     <th>Nama lengkap</th>
                     <th>Email</th>
-                    <th>Password</th>
                     <th>Bergabung sejak</th>
                     <th>Aksi</th>
                 </tr>
@@ -22,10 +21,50 @@
 
     @push('js-internal')
         <script>
+            function destroy(id, name) {
+                Swal.fire({
+                    title: 'Apakah kamu yakin?',
+                    text: `Verifikator ${name} akan dihapus!`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "{{ route('admin.verificator.destroy', ':id') }}".replace(':id', id),
+                            type: 'DELETE',
+                            data: {
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function(data) {
+                                if (data == true) {
+                                    Swal.fire({
+                                        title: 'Berhasil!',
+                                        text: `Verifikator ${name} berhasil dihapus!`,
+                                        icon: 'success',
+                                        showConfirmButton: false,
+                                    }).then((result) => {
+                                        $('#verificatorTable').DataTable().ajax.reload();
+                                    })
+                                } else {
+                                    Swal.fire({
+                                        title: 'Gagal!',
+                                        text: `Verifikator ${name} gagal dihapus!`,
+                                        icon: 'error',
+                                    })
+                                }
+                            },
+                        });
+                    }
+                })
+            }
             $(function() {
                 $('#verificatorTable').DataTable({
                     processing: true,
                     serverSide: true,
+                    autoWidth: false,
+                    responsive: true,
                     ajax: "{{ route('admin.verificator.index') }}",
                     columns: [{
                             data: 'DT_RowIndex',
@@ -38,10 +77,6 @@
                         {
                             data: 'email',
                             name: 'email'
-                        },
-                        {
-                            data: 'password',
-                            name: 'password'
                         },
                         {
                             data: 'created_at',

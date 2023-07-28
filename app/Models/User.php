@@ -47,6 +47,7 @@ class User extends Authenticatable
         'institution',
         'role',
         'status',
+        'is_verificator'
     ];
 
     protected $hidden = [
@@ -83,7 +84,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserCourseAccessLog::class);
     }
-    
+
     // Scope
     public function scopeActive($query)
     {

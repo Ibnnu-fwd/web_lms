@@ -30,9 +30,13 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser']]
     });
 
     // Verificator
-    Route::group(['prefix' => 'veriificator', 'as' => 'admin.'], function () {
+    Route::group(['prefix' => 'verificator', 'as' => 'admin.'], function () {
         Route::get('/', [VerificatorController::class, 'index'])->name('verificator.index');
         Route::get('create', [VerificatorController::class, 'create'])->name('verificator.create');
+        Route::post('store', [VerificatorController::class, 'store'])->name('verificator.store');
+        Route::get('edit/{id}', [VerificatorController::class, 'edit'])->name('verificator.edit');
+        Route::post('update/{id}', [VerificatorController::class, 'update'])->name('verificator.update');
+        Route::delete('destroy/{id}', [VerificatorController::class, 'destroy'])->name('verificator.destroy');
     });
 
     // Profile
