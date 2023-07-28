@@ -11,7 +11,7 @@
             <x-select id="category_id" name="category_id" title="Kategori">
 
             </x-select>
-
         </div>
+        <div></div>
     </x-card-container>
 </x-app-layout>

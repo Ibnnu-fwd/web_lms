@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AccountController;
+use App\Http\Controllers\Admin\CourseCategoryController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProfileController;
@@ -44,6 +45,9 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser']]
         Route::get('/', [CourseController::class, 'index'])->name('course.index');
         Route::get('create', [CourseController::class, 'create'])->name('course.create');
     });
+
+    // Course Category
+    Route::resource('course-category', CourseCategoryController::class)->except(['show'])->names('admin.course-category');
 });
 
 require __DIR__ . '/auth.php';

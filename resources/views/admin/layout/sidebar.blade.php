@@ -41,6 +41,11 @@
                             <x-sidebar-link route="{{ route('admin.course.index') }}" icon="albums-outline"
                                 title="Daftar Kursus" active="{{ request()->routeIs('admin.course.*') }}" />
                         </li>
+                        <!-- Course Category -->
+                        <li>
+                            <x-sidebar-link route="{{ route('admin.course-category.index') }}" icon="folder-outline"
+                                title="Kategori Kursus" active="{{ request()->routeIs('admin.course-category.*') }}" />
+                        </li>
                     </ul>
 
                     <p class="px-4 pt-4 text-sm font-semibold text-gray-400 uppercase">
@@ -55,8 +60,8 @@
 
                         <!-- Profile -->
                         <li>
-                            <x-sidebar-link route="{{ route('admin.profile.index') }}" icon="man-outline" title="Profil"
-                                active="{{ request()->routeIs('admin.profile.index') }}" />
+                            <x-sidebar-link route="{{ route('admin.profile.index') }}" icon="man-outline"
+                                title="Profil" active="{{ request()->routeIs('admin.profile.index') }}" />
                         </li>
 
                         <!-- Log out -->

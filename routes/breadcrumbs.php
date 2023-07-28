@@ -43,3 +43,14 @@ Breadcrumbs::for('course.create', function (BreadcrumbTrail $trail) {
     $trail->parent('course');
     $trail->push('Tambah Kursus', route('admin.course.create'));
 });
+
+/* COURSE CATEGORY */
+Breadcrumbs::for('course_category', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Kategori Kursus', route('admin.course-category.index'));
+});
+
+Breadcrumbs::for('course_category.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('course_category');
+    $trail->push('Tambah Kategori Kursus', route('admin.course-category.create'));
+});
