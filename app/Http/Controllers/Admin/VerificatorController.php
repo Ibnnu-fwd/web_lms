@@ -65,14 +65,6 @@ class VerificatorController extends Controller
         }
     }
 
-    public function edit($id)
-    {
-        $verificator = $this->verificator->getById($id);
-        return view('admin.verificator.edit', [
-            'verificator' => $verificator,
-        ]);
-    }
-
     public function destroy($id)
     {
         $this->verificator->destroy($id);
