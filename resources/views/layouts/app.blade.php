@@ -80,11 +80,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 
     <script>
-        // prevent double initialization of all DataTables
-        if ($.fn.dataTable.isDataTable('table')) {
-            return;
-        }
-
         $('select').select2();
     </script>
 
