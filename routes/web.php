@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AccountController;
+use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\VerificatorController;
@@ -36,6 +37,12 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser']]
     // Profile
     Route::group(['prefix' => 'profile', 'as' => 'admin.'], function () {
         Route::get('/', [ProfileController::class, 'index'])->name('profile.index');
+    });
+
+    // Course
+    Route::group(['prefix' => 'course', 'as' => 'admin.'], function () {
+        Route::get('/', [CourseController::class, 'index'])->name('course.index');
+        Route::get('create', [CourseController::class, 'create'])->name('course.create');
     });
 });
 

@@ -15,8 +15,8 @@
                 @csrf
                 <x-input id="email" label="Email" name="email" type="email" required />
                 <x-input id="password" label="Kata sandi" name="password" type="password" required />
-                <x-button title="Masuk" />
 
+                <x-button title="Masuk" class="w-full" />
             </form>
 
             <p class="mt-10 text-center text-sm text-gray-500">

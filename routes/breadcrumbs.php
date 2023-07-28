@@ -32,3 +32,14 @@ Breadcrumbs::for('profile', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
     $trail->push('Profil', route('admin.profile.index'));
 });
+
+/* COURSE */
+Breadcrumbs::for('course', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Kursus', route('admin.course.index'));
+});
+
+Breadcrumbs::for('course.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('course');
+    $trail->push('Tambah Kursus', route('admin.course.create'));
+});

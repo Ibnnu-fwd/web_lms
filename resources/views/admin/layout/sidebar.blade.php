@@ -30,7 +30,23 @@
                             <x-sidebar-link route="{{ route('admin.verificator.index') }}" icon="shield-outline"
                                 title="Verifikator" active="{{ request()->routeIs('admin.verificator.*') }}" />
                         </li>
+                    </ul>
 
+                    <p class="px-4 pt-4 text-sm font-semibold text-gray-400 uppercase">
+                        Kursus
+                    </p>
+                    <ul>
+                        <!-- Course -->
+                        <li>
+                            <x-sidebar-link route="{{ route('admin.course.index') }}" icon="albums-outline"
+                                title="Daftar Kursus" active="{{ request()->routeIs('admin.course.*') }}" />
+                        </li>
+                    </ul>
+
+                    <p class="px-4 pt-4 text-sm font-semibold text-gray-400 uppercase">
+                        Autentikasi
+                    </p>
+                    <ul>
                         <!-- Account -->
                         <li>
                             <x-sidebar-link route="{{ route('admin.account.index') }}" icon="person-outline"
