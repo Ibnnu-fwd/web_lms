@@ -39,17 +39,17 @@
                         <!-- Course -->
                         <li>
                             <x-sidebar-link route="{{ route('admin.course.index') }}" icon="albums-outline"
-                                title="Daftar Kursus" active="{{ request()->routeIs('admin.course.*') }}" />
+                                title="Daftar" active="{{ request()->routeIs('admin.course.*') }}" />
                         </li>
                         <!-- Course Category -->
                         <li>
                             <x-sidebar-link route="{{ route('admin.course-category.index') }}" icon="folder-outline"
-                                title="Kategori Kursus" active="{{ request()->routeIs('admin.course-category.*') }}" />
+                                title="Kategori" active="{{ request()->routeIs('admin.course-category.*') }}" />
                         </li>
                         <!-- Minumum Course -->
                         <li>
                             <x-sidebar-link route="{{ route('admin.mincourse.index') }}" icon="folder-outline"
-                                title="Minimum Kursus" active="{{ request()->routeIs('admin.mincourse*') }}" />
+                                title="Minimum Pembelian" active="{{ request()->routeIs('admin.mincourse*') }}" />
                         </li>
                     </ul>
 
