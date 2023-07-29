@@ -4,6 +4,7 @@ use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 
 /* HOME */
+
 Breadcrumbs::for('dashboard', function (BreadcrumbTrail $trail) {
     $trail->push('Dashboard', route('dashboard'));
 });
@@ -82,6 +83,8 @@ Breadcrumbs::for('course_chapter.edit', function (BreadcrumbTrail $trail, $data)
     $trail->parent('course_chapter', $data->course);
     $trail->push($data->title);
     $trail->push('Edit', route('admin.course-chapter.edit', [$data->course_id, $data->id]));
+});
+
 /* MINIMUM COURSE */
 Breadcrumbs::for('mincourse', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
