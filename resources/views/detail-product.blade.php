@@ -54,12 +54,12 @@
                     <div class="card border-none shadow-lg bg-white rounded-lg mt-5 hidden md:block p-4 z-10">
                         <div class="card-body">
                             @auth
-                                <x-button type="button" title="Belajar Sekarang"
+                                <x-button type="button" title="Belajar Sekarang" class="w-full"
                                     onclick="location.href='{{ route('admin.checkout') }}'" />
                             @endauth
 
                             @guest
-                                <x-button type="button" title="Silahkan login" class="bg-dark hover:bg-slate-900"
+                                <x-button type="button" title="Silahkan login" class="bg-dark hover:bg-slate-900 w-full"
                                     onclick="location.href='{{ route('admin.checkout') }}'" />
                             @endguest
                             <hr class="my-4">
