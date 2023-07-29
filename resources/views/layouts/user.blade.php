@@ -24,6 +24,8 @@
 
 <body class="font-sans text-sm antialiased">
 
+
+
     <!-- Navigation -->
     <div class="mx-auto bg-white max-w-6xl">
         <div x-data="{ open: false }"
@@ -152,17 +154,59 @@
                     </div>
                 </div> --}}
 
-                <div class="inline-flex items-center gap-2 list-none lg:ml-auto">
-                    <button onclick="window.location.href='{{ route('login') }}'"
-                        class="block px-4 py-2 mt-2 text-sm text-gray-500 md:mt-0 hover:text-red-600 focus:outline-none focus:shadow-outline">
-                        Masuk
-                    </button>
-                    <button onclick="window.location.href='{{ route('register') }}'"
-                        class="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white bg-dark rounded-md group focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 hover:bg-slate-700 active:bg-slate-800 active:text-white focus-visible:outline-black">
-                        Daftar
-                    </button>
-                </div>
+
+                @auth
+                    {{-- make dropdown  --}}
+                    <div class="inline-flex items-center list-none lg:ml-auto">
+                        <x-dropdown align="right" width="48">
+                            <x-slot name="trigger">
+                                <button
+                                    class="flex flex-row items-center w-full px-4 py-2 mt-2 text-base text-left text-black md:w-auto md:inline md:mt-0 hover:text-red-600 focus:outline-none focus:shadow-outline">
+                                    <span>
+                                        {{ auth()->user()->fullname }}
+                                    </span>
+                                    <svg fill="currentColor" viewBox="0 0 20 20"
+                                        :class="{ 'rotate-180': open, 'rotate-0': !open }"
+                                        class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1 rotate-0">
+                                        <path fill-rule="evenodd"
+                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                </button>
+                            </x-slot>
+
+                            <x-slot name="content">
+                                <x-dropdown-link :href="route('admin.cart')">
+                                    Chart
+                                </x-dropdown-link>
+
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+
+                                    <x-dropdown-link :href="route('logout')"
+                                        onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                        {{ __('Log Out') }}
+                                    </x-dropdown-link>
+                                </form>
+                            </x-slot>
+
+                        </x-dropdown>
+                    </div>
+                @else
+                    <div class="inline-flex items-center gap-2 list-none lg:ml-auto">
+                        <button onclick="window.location.href='{{ route('login') }}'"
+                            class="block px-4 py-2 mt-2 text-sm text-gray-500 md:mt-0 hover:text-red-600 focus:outline-none focus:shadow-outline">
+                            Masuk
+                        </button>
+                        <button onclick="window.location.href='{{ route('register') }}'"
+                            class="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white bg-dark rounded-md group focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 hover:bg-slate-700 active:bg-slate-800 active:text-white focus-visible:outline-black">
+                            Daftar
+                        </button>
+                    </div>
+                @endauth
             </nav>
+
         </div>
     </div>
 
@@ -282,6 +326,7 @@
                     </a>
                 </span>
             </div> --}}
+
             <div class="mt-8 md:mt-0 md:order-1">
                 <span class="mt-2 text-sm font-light text-gray-500">
                     Copyright © {{ date('Y') }}
@@ -304,7 +349,7 @@
         integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <script src="{{asset('assets/js/modal-image-minified.js')}}"></script>
+    <script src="{{ asset('assets/js/modal-image-minified.js') }}"></script>
 
     @stack('js-internal')
 

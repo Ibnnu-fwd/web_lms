@@ -1,12 +1,12 @@
 <x-user-layout>
-    <section class="relative items-center w-full px-5 py-24 mx-auto md:px-12 lg:px-16 max-w-7xl">
+    <section class="relative items-center w-full px-5 py-12 mx-auto md:px-12 lg:px-16 max-w-7xl">
         <div class="flex flex-col items-center border-b bg-white py-4 sm:flex-row">
-            <a href="#" class="text-2xl font-bold text-gray-800">Checkout</a>
+            <p class="text-2xl font-bold text-gray-800">Checkout</p>
         </div>
         <div class="grid lg:grid-cols-2">
             <div class="mt-10 px-4 pt-8 lg:mt-0">
-                <p class="text-xl font-medium">Payment Details</p>
-                <p class="text-gray-400">Complete your order by providing your payment details.</p>
+                <p class="text-xl font-medium">Detail Pembayaran</p>
+                <p class="text-gray-400">Lengkapi pesanan Anda dengan memberikan detail pembayaran Anda.</p>
                 <div class="">
                     <label for="email" class="mt-4 mb-2 block text-sm font-medium">Email</label>
                     <div class="relative">
@@ -21,7 +21,7 @@
                             </svg>
                         </div>
                     </div>
-                    <label for="card-holder" class="mt-4 mb-2 block text-sm font-medium">Card Holder</label>
+                    <label for="card-holder" class="mt-4 mb-2 block text-sm font-medium">Nama Pemilik Rekening</label>
                     <div class="relative">
                         <input type="text" id="card-holder" name="card-holder"
                             class="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm uppercase shadow-sm outline-none focus:z-10 focus:border-primary focus:ring-primary"
@@ -34,26 +34,7 @@
                             </svg>
                         </div>
                     </div>
-                    <label for="card-no" class="mt-4 mb-2 block text-sm font-medium">Card Details</label>
-                    <div class="flex gap-2">
-                        <div class="relative w-7/12 flex-shrink-0">
-                            <input type="text" id="card-no" name="card-no"
-                                class="w-full rounded-md border border-gray-200 px-2 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-primary focus:ring-primary"
-                                placeholder="xxxx-xxxx-xxxx-xxxx" />
-                            <div class="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
-                                <svg class="h-4 w-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="16"
-                                    height="16" fill="currentColor" viewBox="0 0 16 16">
-                                    <path
-                                        d="M11 5.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1z" />
-                                    <path
-                                        d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2zm13 2v5H1V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zm-1 9H2a1 1 0 0 1-1-1v-1h14v1a1 1 0 0 1-1 1z" />
-                                </svg>
-                            </div>
-                        </div>
-                        <input type="text" name="credit-expiry"
-                            class="w-full rounded-md border border-gray-200 px-2 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-primary focus:ring-primary"
-                            placeholder="MM/YY" />
-                    </div>
+
                     <label for="valed-struck" class="mt-4 mb-2 block text-sm font-medium">Valid Struk</label>
 
                     <div class="relative">
@@ -66,8 +47,7 @@
                     </div>
 
                 </div>
-                <button class="mt-4 mb-8 w-full rounded-md bg-primary px-6 py-3 font-medium text-white">Place
-                    Order</button>
+                <button class="mt-4 mb-8 w-full rounded-md bg-primary px-6 py-3 font-medium text-white">Bayar</button>
             </div>
 
             <div class="px-4 pt-8 bg-gray-50 ">
@@ -83,7 +63,10 @@
                             <span class="float-right text-gray-400 line-clamp-1">Pelajari dasar bahasa pemrograman,
                                 functional
                                 programming, object-oriented programming (OOP)</span>
-                            <p class="text-lg font-bold">Rp. <span>2000.000</span></p>
+                            <p class="text-lg font-bold">Rp. <span>2000.000</span> / <span class="text-sm font-light">
+                                    bulan</span>
+                            </p>
+                            <p class="text-sm font-light text-gray-400">29 jul - 29 Aug </p>
                         </div>
                     </div>
                     <div class="flex flex-col rounded-lg bg-white sm:flex-row">
@@ -95,7 +78,11 @@
                             <span class="float-right text-gray-400 line-clamp-1">Pelajari dasar bahasa pemrograman,
                                 functional
                                 programming, object-oriented programming (OOP)</span>
-                            <p class="mt-auto text-lg font-bold">Rp. <span>2000.000</span></p>
+                            <p class="mt-auto text-lg font-bold">Rp. <span>2000.000</span> / <span
+                                    class="text-sm font-light">
+                                    bulan</span></p>
+
+                            <p class="text-sm font-light text-gray-400">29 jul - 29 Aug </p>
                         </div>
                     </div>
                     <label for="card-holder" class="mt-4 mb-2 block text-sm font-medium">No Rek. Pembayaran</label>

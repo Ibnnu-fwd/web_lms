@@ -56,6 +56,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser']]
 
     //checkout
     Route::get('checkout', fn () => view('checkout'))->name('admin.checkout');
+    Route::get('cart', fn () => view('cart'))->name('admin.cart');
 });
 
 require __DIR__ . '/auth.php';
