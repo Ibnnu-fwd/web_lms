@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Interfaces\MinCoursePurchaseAtRegInterface;
 use App\Models\Configuration\MinCoursePurchaseAtReg;
 use Illuminate\Http\Request;
@@ -88,9 +89,8 @@ class MinCoursePurchaseAtRegController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update($id,)
+    public function update($id, Request $request)
     {
-        $request = request();
         $request->validate(
             [
                 'name'  => ['required', 'string', 'max:255'],
@@ -104,7 +104,7 @@ class MinCoursePurchaseAtRegController extends Controller
 
         try {
             $this->minCoursePurchaseAtReg->update($id, $request->all());
-            return redirect()->route('admin.mincourse.index')->with('success', 'Minimal pembelian kursus berhasil diubah');
+            return redirect()->back()->with('success', 'Minimal pembelian kursus berhasil diubah');
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', 'Minimal pembelian kursus gagal diubah');
         }

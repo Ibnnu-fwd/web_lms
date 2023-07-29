@@ -2,7 +2,7 @@
     <x-breadcrumb name="mincourse" />
     <x-card-container>
         <div class="text-end mb-4">
-            <x-link-button type="button" title="Mincourse" class="bg-gray-700 hover:bg-gray-600"
+            <x-link-button type="button" title="Tambah Minimum Kursus" class="bg-gray-700 hover:bg-gray-600"
                 route="{{ route('admin.mincourse.create') }}" />
         </div>
         <table id="minCourseTable">

@@ -35,6 +35,9 @@ class MinCoursePurchaseAtRegRepository implements MinCoursePurchaseAtRegInterfac
 
     public function update($id, $data)
     {
-        return $this->minCoursePurchaseAtReg->find($id)->update($data);
+        return $this->minCoursePurchaseAtReg->find($id)->update([
+            'name'  => $data['name'],
+            'value' => $data['value']
+        ]);
     }
 }
