@@ -20,7 +20,12 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
     <!-- Alert -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
+
+    <!-- Jquery UI -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
     @stack('css-internal')
 
@@ -32,7 +37,7 @@
     <div class="min-h-screen bg-gray-100">
         <!-- Page Content -->
         <main>
-            <div class="flex h-screen overflow-hidden bg-white">
+            <div class="flex h-screen overflow-hidden bg-gray-50">
                 @include('admin.layout.sidebar')
                 {{-- burger button --}}
                 {{-- end burger button --}}
@@ -86,7 +91,9 @@
 
     <!-- jQuery Modal -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
+    <!-- Datepicker -->
+    <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 
     <script>
         $('select').select2();

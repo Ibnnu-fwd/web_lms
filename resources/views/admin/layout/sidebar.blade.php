@@ -70,8 +70,8 @@
                                 @csrf
                                 <button
                                     class="inline-flex items-center w-full px-4 py-2 mt-1 text-md text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary">
-                                    <ion-icon class="w-4 h-4 md hydrated" name="aperture-outline" role="img"
-                                        aria-label="aperture outline"></ion-icon>
+                                    <ion-icon class="w-4 h-4 md hydrated" name="log-out-outline" role="img">
+                                    </ion-icon>
                                     <span class="ml-4">
                                         Keluar
                                     </span>

@@ -41,6 +41,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser']]
     Route::group(['prefix' => 'profile', 'as' => 'admin.'], function () {
         Route::get('/', [ProfileController::class, 'index'])->name('profile.index');
         Route::post('update/{id}', [ProfileController::class, 'update'])->name('profile.update');
+        Route::post('change-image', [ProfileController::class, 'changeImage'])->name('profile.change-image');
     });
 
     // Course

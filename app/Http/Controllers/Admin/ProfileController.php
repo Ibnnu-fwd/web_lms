@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 
 class ProfileController extends Controller
@@ -39,6 +40,41 @@ class ProfileController extends Controller
             return redirect()->back()->with('error', 'Profile gagal diupdate');
         } else {
             return redirect()->back()->with('success', 'Profile berhasil diupdate');
+        }
+    }
+
+    public function changeImage(Request $request)
+    {
+        $request->validate([
+            'avatar' => ['required', 'mimes:jpeg,png,jpg', 'max:2048']
+        ], [
+            'avatar.required' => 'Foto harus diisi',
+            'avatar.mimes' => 'Foto harus berupa gambar dengan format jpeg, png, jpg',
+            'avatar.max' => 'Foto maksimal berukuran 2MB',
+        ]);
+
+        try {
+            $user = User::find(auth()->user()->id);
+            $imageName = time() . '.' . $request->avatar->extension();
+            $request->avatar->storeAs('public/avatar', $imageName);
+
+            if ($user->avatar != null) {
+                Storage::delete('public/avatar/' . $user->avatar);
+            }
+
+            $user->update([
+                'avatar' => $imageName,
+            ]);
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Foto berhasil diupdate',
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage(),
+            ]);
         }
     }
 }

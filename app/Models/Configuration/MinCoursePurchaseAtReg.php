@@ -9,7 +9,7 @@ class MinCoursePurchaseAtReg extends Model
 {
     use HasFactory;
 
-    public $table = 'min_course_purchase_at_reg';
+    public    $table    = 'min_course_purchase_at_reg';
     protected $fillable = [
         'name',
         'value',
