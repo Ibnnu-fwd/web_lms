@@ -9,7 +9,7 @@
         </span>
     @endif
 @else
-    <span class="px-2 inline-flex text-md leading-5 font-medium rounded-full bg-red-100 text-red-800">
+    <span class="px-2 inline-flex text-md leading-5 font-medium rounded-full bg-yellow-100 text-yellow-800">
         Menunggu
     </span>
 @endif
