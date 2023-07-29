@@ -17,7 +17,7 @@
             <x-textarea id="short_description" name="short_description" label="Deskripsi Singkat" required />
             <x-textarea id="description" name="description" label="Deskripsi Lengkap" required />
             <x-input id="price" name="price" type="number" label="Harga" required />
-            <div class="md:grid md:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-5 gap-x-4 mt-4">
+            <div class="md:grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-x-4 mt-4">
                 <x-input-file id="main_image" name="main_image" label="Gambar Utama" required />
                 <x-input-file id="sneek_peek_1" name="sneek_peek_1" label="Sneek Peek 1" required />
                 <x-input-file id="sneek_peek_2" name="sneek_peek_2" label="Sneek Peek 2" required />

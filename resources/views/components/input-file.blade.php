@@ -31,7 +31,7 @@
             <button type="button"
                 class="px-4 py-2 w-full mt-2 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600"
                 onclick="removeImage('{{ $id }}')">
-                Hapus Gambar
+                <ion-icon name="trash"></ion-icon>
             </button>
         </div>
     </div>
