@@ -91,7 +91,7 @@
                                 <div class="flex items-center">
                                     <div>
                                         <img class="inline-block object-cover rounded-full h-9 w-9"
-                                            src="{{ auth()->user()->avatar ? asset('storage/user/' . auth()->user()->avatar) : asset('images/no_image.jpg') }}"
+                                            src="{{ auth()->user()->avatar ? asset('storage/avatar/' . auth()->user()->avatar) : asset('images/no_image.jpg') }}"
                                             alt="">
                                     </div>
                                     <div class="ml-3 text-left">
