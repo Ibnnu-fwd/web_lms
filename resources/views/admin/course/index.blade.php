@@ -24,7 +24,7 @@
 
     <!-- Image Preview Modal -->
     <div id="image_preview" class="modal">
-        <img id="imagePreview" class="w-    " src="" alt="">
+        <img id="imagePreview" class="w-full" src="" alt="">
     </div>
 
     @push('js-internal')
