@@ -1,8 +1,8 @@
 <x-user-layout>
-    <section class="relative items-center w-full px-5 py-24 mx-auto md:px-12 lg:px-16 max-w-7xl">
-        <div class="flex flex-col items-center border-b bg-white py-4 sm:flex-row">
+    <section class="relative items-center w-full px-5 py-16 mx-auto md:px-12 lg:px-16 max-w-7xl">
+        {{-- <div class="flex flex-col items-center bg-white py-4 sm:flex-row">
             <a href="#" class="text-2xl font-bold text-gray-800">Checkout</a>
-        </div>
+        </div> --}}
         <div class="grid lg:grid-cols-2">
             <div class="mt-10 px-4 pt-8 lg:mt-0">
                 <p class="text-xl font-medium">Payment Details</p>
