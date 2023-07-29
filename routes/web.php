@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\VerificatorController;
+use App\Http\Controllers\MinCoursePurchaseAtRegController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -64,6 +65,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser']]
     // Course Category
     Route::resource('course-category', CourseCategoryController::class)->except(['show'])->names('admin.course-category');
 
+    Route::resource('mincourse', MinCoursePurchaseAtRegController::class)->except(['show'])->names('admin.mincourse');
     // Checkout
     Route::get('checkout', fn () => view('checkout'))->name('admin.checkout');
 

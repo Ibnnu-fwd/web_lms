@@ -46,6 +46,11 @@
                             <x-sidebar-link route="{{ route('admin.course-category.index') }}" icon="folder-outline"
                                 title="Kategori Kursus" active="{{ request()->routeIs('admin.course-category.*') }}" />
                         </li>
+                        <!-- Minumum Course -->
+                        <li>
+                            <x-sidebar-link route="{{ route('admin.mincourse.index') }}" icon="folder-outline"
+                                title="Minimum Kursus" active="{{ request()->routeIs('admin.mincourse*') }}" />
+                        </li>
                     </ul>
 
                     <p class="px-4 pt-4 text-sm font-semibold text-gray-400 uppercase">

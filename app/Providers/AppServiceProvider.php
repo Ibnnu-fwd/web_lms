@@ -13,6 +13,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(\App\Interfaces\CourseCategoryInterface::class, \App\Repositories\CourseCategoryRepository::class);
         $this->app->bind(\App\Interfaces\CourseInterface::class, \App\Repositories\CourseRepository::class);
         $this->app->bind(\App\Interfaces\CourseChapterInterface::class, \App\Repositories\CourseChapterRepository::class);
+        $this->app->bind(\App\Interfaces\MinCoursePurchaseAtRegInterface::class, \App\Repositories\MinCoursePurchaseAtRegRepository::class);
     }
 
     public function boot(): void
