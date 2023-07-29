@@ -48,20 +48,20 @@
             </div>
             <nav :class="{ 'flex': open, 'hidden': !open }"
                 class="flex-col items-center flex-grow hidden md:pb-0 md:flex md:justify-end md:flex-row">
-                <a class="px-2 py-2 text-sm font-medium text-gray-500 lg:px-6 md:px-3 hover:text-red-600 lg:ml-auto
+                <a class="px-2 py-2 text-base text-gray-500 lg:px-6 md:px-3 hover:text-red-600 lg:ml-auto
                 {{ request()->routeIs('/') ? 'text-red-600' : '' }}"
                     href="{{ route('/') }}">
                     Beranda
                 </a>
-                <a class="px-2 py-2 text-sm font-medium text-gray-500 lg:px-6 md:px-3 hover:text-red-600 {{ request()->routeIs('product') ? 'text-red-600' : '' }}"
+                <a class="px-2 py-2 text-base text-gray-500 lg:px-6 md:px-3 hover:text-red-600 {{ request()->routeIs('product') ? 'text-red-600' : '' }}"
                     href="{{ route('product') }}">
                     Materi
                 </a>
-                <a class="px-2 py-2 text-sm font-medium text-gray-500 lg:px-6 md:px-3 hover:text-red-600 {{ request()->routeIs('about') ? 'text-red-600' : '' }}"
+                <a class="px-2 py-2 text-base text-gray-500 lg:px-6 md:px-3 hover:text-red-600 {{ request()->routeIs('about') ? 'text-red-600' : '' }}"
                     href="{{ route('about') }}">
                     Tentang Kami
                 </a>
-                <a class="px-2 py-2 text-sm font-medium text-gray-500 lg:px-6 md:px-3 hover:text-red-600 {{ request()->routeIs('order-flow') ? 'text-red-600' : '' }}"
+                <a class="px-2 py-2 text-base text-gray-500 lg:px-6 md:px-3 hover:text-red-600 {{ request()->routeIs('order-flow') ? 'text-red-600' : '' }}"
                     href="{{ route('order-flow') }}">
                     Alur Pemesanan
                 </a>
@@ -177,16 +177,15 @@
 
                             <x-slot name="content">
                                 <x-dropdown-link :href="route('admin.cart')">
-                                    Chart
+                                    Keranjang
                                 </x-dropdown-link>
 
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-
                                     <x-dropdown-link :href="route('logout')"
                                         onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                        {{ __('Log Out') }}
+                                        Keluar
                                     </x-dropdown-link>
                                 </form>
                             </x-slot>
@@ -196,11 +195,11 @@
                 @else
                     <div class="inline-flex items-center gap-2 list-none lg:ml-auto">
                         <button onclick="window.location.href='{{ route('login') }}'"
-                            class="block px-4 py-2 mt-2 text-sm text-gray-500 md:mt-0 hover:text-red-600 focus:outline-none focus:shadow-outline">
+                            class="block px-4 py-2 mt-2 text-md text-gray-500 md:mt-0 hover:text-red-600 focus:outline-none focus:shadow-outline">
                             Masuk
                         </button>
                         <button onclick="window.location.href='{{ route('register') }}'"
-                            class="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white bg-dark rounded-md group focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 hover:bg-slate-700 active:bg-slate-800 active:text-white focus-visible:outline-black">
+                            class="inline-flex items-center justify-center px-4 py-2 text-md font-semibold text-white bg-dark rounded-md group focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 hover:bg-slate-700 active:bg-slate-800 active:text-white focus-visible:outline-black">
                             Daftar
                         </button>
                     </div>

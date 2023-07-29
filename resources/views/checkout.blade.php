@@ -47,7 +47,8 @@
                     </div>
 
                 </div>
-                <button class="mt-4 mb-8 w-full rounded-md bg-primary px-6 py-3 font-medium text-white">Bayar</button>
+                <button
+                    class="mt-8 mb-8 w-full text-lg rounded-md bg-primary px-6 py-3 font-medium text-white">Bayar</button>
             </div>
 
             <div class="px-4 pt-8">
