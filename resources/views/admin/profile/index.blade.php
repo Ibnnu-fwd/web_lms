@@ -70,6 +70,8 @@
                                         icon: 'success',
                                         title: 'Berhasil',
                                         text: response.message,
+                                    }).then((result) => {
+                                        location.reload();
                                     })
                                 } else {
                                     Swal.fire({

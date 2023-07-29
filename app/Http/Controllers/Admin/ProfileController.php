@@ -6,10 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 
 class ProfileController extends Controller
 {
+    const AVATAR_PATH = 'public/avatar/';
+
     public function index()
     {
         return view('admin.profile.index');
@@ -45,34 +48,39 @@ class ProfileController extends Controller
 
     public function changeImage(Request $request)
     {
-        $request->validate([
-            'avatar' => ['required', 'mimes:jpeg,png,jpg', 'max:2048']
+        $validator = Validator::make($request->all(), [
+            'avatar' => ['required', 'mimes:jpeg,png,jpg', 'max:2048'],
         ], [
             'avatar.required' => 'Foto harus diisi',
             'avatar.mimes' => 'Foto harus berupa gambar dengan format jpeg, png, jpg',
             'avatar.max' => 'Foto maksimal berukuran 2MB',
         ]);
 
-        try {
-            $user = User::find(auth()->user()->id);
-            $imageName = time() . '.' . $request->avatar->extension();
-            $request->avatar->storeAs('public/avatar', $imageName);
+        if ($validator->fails()) {
+            return response()->json([
+                'status'  => false,
+                'message' => $validator->errors()->first(),
+            ]);
+        }
 
-            if ($user->avatar != null) {
-                Storage::delete('public/avatar/' . $user->avatar);
+        try {
+            $user      = User::find(auth()->user()->id);
+            $imageName = time() . '.' . $request->avatar->extension();
+            $request->avatar->storeAs(self::AVATAR_PATH, $imageName);
+
+            if ($user->avatar) {
+                Storage::delete(self::AVATAR_PATH . $user->avatar);
             }
 
-            $user->update([
-                'avatar' => $imageName,
-            ]);
+            $user->update(['avatar' => $imageName]);
 
             return response()->json([
-                'status' => true,
+                'status'  => true,
                 'message' => 'Foto berhasil diupdate',
             ]);
         } catch (\Throwable $th) {
             return response()->json([
-                'status' => false,
+                'status'  => false,
                 'message' => $th->getMessage(),
             ]);
         }
