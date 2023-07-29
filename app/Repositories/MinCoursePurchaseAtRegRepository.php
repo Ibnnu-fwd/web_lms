@@ -20,7 +20,7 @@ class MinCoursePurchaseAtRegRepository implements MinCoursePurchaseAtRegInterfac
     }
     public function getById($id)
     {
-        return $this->minCoursePurchaseAtReg->getById($id);
+        return $this->minCoursePurchaseAtReg->find($id);
     }
 
     public function create($data)
@@ -31,5 +31,10 @@ class MinCoursePurchaseAtRegRepository implements MinCoursePurchaseAtRegInterfac
     public function delete($id)
     {
         return $this->minCoursePurchaseAtReg->destroy($id);
+    }
+
+    public function update($id, $data)
+    {
+        return $this->minCoursePurchaseAtReg->find($id)->update($data);
     }
 }

@@ -81,16 +81,16 @@ class MinCoursePurchaseAtRegController extends Controller
     public function edit($id)
     {
         return view('admin.min-course.edit', [
-            'minCourse' => $this->minCoursePurchaseAtReg->getAll()->where('id', $id)->first(),
+            'minCourse' => $this->minCoursePurchaseAtReg->getById($id)
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, MinCoursePurchaseAtReg $minCoursePurchaseAtReg)
+    public function update($id,)
     {
-
+        $request = request();
         $request->validate(
             [
                 'name'  => ['required', 'string', 'max:255'],
@@ -103,8 +103,8 @@ class MinCoursePurchaseAtRegController extends Controller
         );
 
         try {
-            $minCoursePurchaseAtReg->update($request->all());
-            return redirect()->back()->with('success', 'Minimal pembelian kursus berhasil diubah');
+            $this->minCoursePurchaseAtReg->update($id, $request->all());
+            return redirect()->route('admin.mincourse.index')->with('success', 'Minimal pembelian kursus berhasil diubah');
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', 'Minimal pembelian kursus gagal diubah');
         }
