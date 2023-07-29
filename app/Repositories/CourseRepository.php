@@ -144,7 +144,7 @@ class CourseRepository implements CourseInterface
         $filename_sneek_peek_4 = $course->sneek_peek_4;
 
         if ($data['main_image'] != 'undefined') {
-            $filename_main_image = uniqid() . '.' . $data['main_image']->getOriginalExtension();
+            $filename_main_image = uniqid() . '.' . $data['main_image']->extension();
             $data['main_image']->storeAs('public/courses', $filename_main_image);
             Storage::delete('public/courses/' . $course->main_image);
         }
