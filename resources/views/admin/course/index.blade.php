@@ -22,6 +22,11 @@
         </table>
     </x-card-container>
 
+    <!-- Image Preview Modal -->
+    <div id="image_preview" class="modal">
+        <img id="imagePreview" class="w-full" src="" alt="">
+    </div>
+
     @push('js-internal')
         <script>
             $(function() {

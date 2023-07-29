@@ -5,9 +5,8 @@
         {{ $label }} {!! $required ? '<span class="text-red-500">*</span>' : '' !!}
     </label>
     <textarea id="{{ $id }}" rows="4" name="{{ $name }}" {{ $required ? 'required' : '' }}
-        class="block p-2.5 w-full text-md text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary focus:border-primary">
-        {{ $slot }}
-    </textarea>
+        class="block p-2.5 w-full text-md text-gray-900 
+        rounded-lg border border-gray-300 focus:ring-primary focus:border-primary">{{ $slot }}</textarea>
 
     @error($name)
         <small class="text-red-500">{{ $message }}</small>

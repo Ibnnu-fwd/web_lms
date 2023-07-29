@@ -140,7 +140,7 @@ body:hover::-webkit-scrollbar-thumb {
     height: auto;
     width: auto;
     opacity: 0;
-    z-index: 99;
+    z-index: 0;
     background-color: #fff;
     filter: alpha(opacity=0);
 }

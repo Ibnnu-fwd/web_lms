@@ -13,21 +13,21 @@ class Course extends Model
     const REQUEST_STATUS_APPROVED = 1;
     const REQUEST_STATUS_REJECTED = 2;
 
-    const REQUEST_STATUS_WAITING_TEXT  = 'Waiting';
-    const REQUEST_STATUS_APPROVED_TEXT = 'Approved';
-    const REQUEST_STATUS_REJECTED_TEXT = 'Rejected';
+    const REQUEST_STATUS_WAITING_TEXT  = 'Menunggu';
+    const REQUEST_STATUS_APPROVED_TEXT = 'Disetujui';
+    const REQUEST_STATUS_REJECTED_TEXT = 'Ditolak';
 
     const UPLOAD_STATUS_UNPUBLISHED = 0;
     const UPLOAD_STATUS_PUBLISHED   = 1;
 
-    const UPLOAD_STATUS_UNPUBLISHED_TEXT = 'Unpublished';
-    const UPLOAD_STATUS_PUBLISHED_TEXT   = 'Published';
+    const UPLOAD_STATUS_UNPUBLISHED_TEXT = 'Tidak Dipublish';
+    const UPLOAD_STATUS_PUBLISHED_TEXT   = 'Dipublish';
 
     const ACTIVATE_STATUS_INACTIVE = 0;
     const ACTIVATE_STATUS_ACTIVE   = 1;
 
-    const ACTIVATE_STATUS_INACTIVE_TEXT = 'Inactive';
-    const ACTIVATE_STATUS_ACTIVE_TEXT   = 'Active';
+    const ACTIVATE_STATUS_INACTIVE_TEXT = 'Nonaktif';
+    const ACTIVATE_STATUS_ACTIVE_TEXT   = 'Aktif';
 
     use HasFactory;
 

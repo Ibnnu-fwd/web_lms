@@ -47,6 +47,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser']]
     Route::group(['prefix' => 'course', 'as' => 'admin.'], function () {
         Route::get('/', [CourseController::class, 'index'])->name('course.index');
         Route::get('create', [CourseController::class, 'create'])->name('course.create');
+        Route::post('store', [CourseController::class, 'store'])->name('course.store');
+        Route::get('edit/{id}', [CourseController::class, 'edit'])->name('course.edit');
     });
 
     // Course Category
