@@ -53,6 +53,9 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser']]
 
     // Course Category
     Route::resource('course-category', CourseCategoryController::class)->except(['show'])->names('admin.course-category');
+
+    //checkout
+    Route::get('checkout', fn () => view('checkout'))->name('admin.checkout');
 });
 
 require __DIR__ . '/auth.php';
