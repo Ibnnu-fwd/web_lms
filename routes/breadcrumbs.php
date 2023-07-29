@@ -66,3 +66,19 @@ Breadcrumbs::for('course_category.create', function (BreadcrumbTrail $trail) {
     $trail->parent('course_category');
     $trail->push('Tambah Kategori Kursus', route('admin.course-category.create'));
 });
+/* MINIMUM COURSE */
+Breadcrumbs::for('mincourse', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Minimum Kursus', route('admin.mincourse.index'));
+});
+
+Breadcrumbs::for('mincourse.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('mincourse');
+    $trail->push('Minimum Kursus', route('admin.mincourse.create'));
+});
+
+Breadcrumbs::for('mincourse.edit', function (BreadcrumbTrail $trail, $data) {
+    $trail->parent('mincourse');
+    $trail->push($data->name);
+    $trail->push('Edit', route('admin.mincourse.edit', $data));
+});
