@@ -26,7 +26,7 @@
 
     <div class="preview-image-{{ $id }} hidden">
         <div class="w-full">
-            <img class="w-full h-32 border-0 rounded-lg object-cover object-center" src=""
+            <img class="w-full h-28 border-0 rounded-lg object-cover object-center ring-1 ring-gray-300" src=""
                 alt="preview image" />
             <button type="button"
                 class="px-4 py-2 w-full mt-2 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600"

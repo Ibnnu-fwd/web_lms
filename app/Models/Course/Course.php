@@ -86,6 +86,11 @@ class Course extends Model
         return $this->hasMany(UserCourseAccessLog::class, 'course_id');
     }
 
+    public function courseObjective()
+    {
+        return $this->hasMany(CourseObjective::class, 'course_id');
+    }
+
     // Custom function
     public function getRequestStatusText()
     {

@@ -49,13 +49,16 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser']]
         Route::get('create', [CourseController::class, 'create'])->name('course.create');
         Route::post('store', [CourseController::class, 'store'])->name('course.store');
         Route::get('edit/{id}', [CourseController::class, 'edit'])->name('course.edit');
+        Route::post('update/{id}', [CourseController::class, 'update'])->name('course.update');
     });
 
     // Course Category
     Route::resource('course-category', CourseCategoryController::class)->except(['show'])->names('admin.course-category');
 
-    //checkout
+    // Checkout
     Route::get('checkout', fn () => view('checkout'))->name('admin.checkout');
+
+    // Cart
     Route::get('cart', fn () => view('cart'))->name('admin.cart');
 });
 

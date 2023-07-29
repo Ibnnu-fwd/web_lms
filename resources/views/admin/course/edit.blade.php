@@ -1,13 +1,13 @@
 <x-app-layout>
-    <x-breadcrumb name="course.create" />
+    <x-breadcrumb name="course.edit" :data="$course" />
 
     <div class="xl:grid grid-cols-2 gap-8 space-y-6 md:space-y-0">
-        <x-card-container class="">
+        <x-card-container>
             <h2 class="font-semibold text-lg mb-6">
                 Informasi Kursus
             </h2>
 
-            <x-input id="title" name="title" type="text" label="Judul" required />
+            <x-input id="title" name="title" type="text" label="Judul" :value="$course->title" required />
             <x-select id="category_id" title="Kategori" name="category_id" required>
                 @foreach ($courseCategories as $category)
                     <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -38,7 +38,7 @@
         </x-card-container>
         <x-card-container>
             <h2 class="font-semibold text-lg mb-6">
-                Informasi Benefit
+                Detail Kursus
             </h2>
 
             <div class="md:grid grid-cols-2 gap-x-8">
@@ -71,12 +71,93 @@
             <div id="objective-container" class="block md:grid grid-cols-2 gap-4 mt-4">
             </div>
         </x-card-container>
-        <div>
-            <x-button title="Tambah Kursus" class="w-full 2xl:w-fit mt-4 2xl:mt-0" />
+        <div class="mt-4">
+            <x-button title="Simpan Perubahan" class="w-full 2xl:w-fit mt-4 2xl:mt-0" />
         </div>
     </div>
 
+
     @push('js-internal')
+        <script>
+            $('#category_id').append(
+                `<option value="{{ $course->category_id }}" selected>{{ $course->category->name }}</option>`);
+            $('#price').val('{{ $course->price }}');
+            $('#short_description').val(`{!! $course->short_description !!}`);
+            $('#description').val(`{!! $course->description !!}`);
+            $('#title_1').val('{{ $course->courseBenefit[0]->title }}');
+            $('#description_1').val('{{ $course->courseBenefit[0]->description }}');
+            $('#title_2').val('{{ $course->courseBenefit[1]->title }}');
+            $('#description_2').val('{{ $course->courseBenefit[1]->description }}');
+            $('#title_3').val('{{ $course->courseBenefit[2]->title }}');
+            $('#description_3').val('{{ $course->courseBenefit[2]->description }}');
+            $('#title_4').val('{{ $course->courseBenefit[3]->title }}');
+            $('#description_4').val('{{ $course->courseBenefit[3]->description }}');
+            let objectives = @json($course->courseObjective);
+            objectives.forEach(function(objective) {
+                let id = Math.floor(Math.random() * 1000000);
+                let html = `
+                    <div id="objective-${id}" class="mb-4 mt-2">
+                        <x-input id="title-${id}" name="title-${id}" type="text" label="Tujuan Pembelajaran ` + (
+                    objectives.indexOf(objective) + 1) + `" required value="${objective.title}" />
+                        <x-textarea id="description-${id}" name="description-${id}" label="Deskripsi Tujuan Pembelajaran" required>${objective.description}</x-textarea>
+                        <button type="button" onclick="removeObjective(${id})" class="bg-gray-500 text-white py-2 px-4 rounded-md mt-3">
+                            Hapus
+                        </button>
+                    </div>
+                `;
+                $('#objective-container').append(html);
+            });
+            let technologies = @json($course->courseTechSpec);
+            technologies.forEach(function(technology) {
+                let id = Math.floor(Math.random() * 1000000);
+                let html = `
+                    <div id="technology-${id}" class="mb-4 mt-2">
+                        <label for="" class="mb-4">Teknologi ` + (technologies.indexOf(technology) + 1) + `</label>
+                        <div class="flex justify-between items-center mt-2">
+                            <input type="text" name="technologies[]" class="form-input rounded-md shadow-sm block w-full" placeholder="Teknologi" required value="${technology.name}">
+                            <button type="button" onclick="removeTechnology(${id})" class="bg-gray-500 text-white py-2 px-4 rounded-md ml-3">
+                                Hapus
+                            </button>
+                        </div>
+                    </div>
+                `;
+                $('#technology-container').append(html);
+            });
+
+            @if ($course->main_image)
+                $('.image-container-main_image').addClass('hidden');
+                $('.preview-image-main_image').removeClass('hidden');
+                $('.preview-image-main_image img').attr('src', '{{ asset('storage/courses/' . $course->main_image) }}');
+            @endif
+
+            @if ($course->sneek_peek_1)
+                $('.image-container-sneek_peek_1').addClass('hidden');
+                $('.preview-image-sneek_peek_1').removeClass('hidden');
+                $('.preview-image-sneek_peek_1 img').attr('src',
+                    '{{ asset('storage/sneek_peeks/' . $course->sneek_peek_1) }}');
+            @endif
+
+            @if ($course->sneek_peek_2)
+                $('.image-container-sneek_peek_2').addClass('hidden');
+                $('.preview-image-sneek_peek_2').removeClass('hidden');
+                $('.preview-image-sneek_peek_2 img').attr('src',
+                    '{{ asset('storage/sneek_peeks/' . $course->sneek_peek_2) }}');
+            @endif
+
+            @if ($course->sneek_peek_3)
+                $('.image-container-sneek_peek_3').addClass('hidden');
+                $('.preview-image-sneek_peek_3').removeClass('hidden');
+                $('.preview-image-sneek_peek_3 img').attr('src',
+                    '{{ asset('storage/sneek_peeks/' . $course->sneek_peek_3) }}');
+            @endif
+
+            @if ($course->sneek_peek_4)
+                $('.image-container-sneek_peek_4').addClass('hidden');
+                $('.preview-image-sneek_peek_4').removeClass('hidden');
+                $('.preview-image-sneek_peek_4 img').attr('src',
+                    '{{ asset('storage/sneek_peeks/' . $course->sneek_peek_4) }}');
+            @endif
+        </script>
         <script>
             function removeObjective(id) {
                 $(`#objective-${id}`).remove();
@@ -234,16 +315,16 @@
                     });
 
 
-
                     console.log(title, category_id, short_description,
                         description, price, main_image,
                         sneek_peek_1, sneek_peek_2, sneek_peek_3, sneek_peek_4, technologies, benefit,
-                        objectives);
+                        objectives
+                    );
 
                     // check if all required fields are filled
                     if (title && category_id && short_description && description && price && main_image &&
                         sneek_peek_1 && sneek_peek_2 && sneek_peek_3 && sneek_peek_4 && technologies.length &&
-                        benefit.length && objectives.length) {
+                        benefit.length, objectives.length) {
                         let formData = new FormData();
                         formData.append('_token', '{{ csrf_token() }}');
                         formData.append('title', title);
@@ -267,7 +348,8 @@
                         });
 
                         $.ajax({
-                            url: "{{ route('admin.course.store') }}",
+                            url: "{{ route('admin.course.update', ':id') }}".replace(':id',
+                                '{{ $course->id }}'),
                             type: "POST",
                             data: formData,
                             processData: false,
@@ -285,15 +367,15 @@
                                 });
                             },
                             success: function(response) {
+                                console.log(response);
                                 if (response.status == true) {
                                     Swal.fire({
                                         icon: 'success',
                                         title: 'Berhasil!',
                                         text: response.message,
                                         showConfirmButton: true,
-                                    }).then(function() {
-                                        window.location.href =
-                                            "{{ route('admin.course.index') }}";
+                                    }).then((result) => {
+                                        location.reload();
                                     });
                                 } else {
                                     Swal.fire({

@@ -50,6 +50,12 @@ Breadcrumbs::for('course.create', function (BreadcrumbTrail $trail) {
     $trail->push('Tambah Kursus', route('admin.course.create'));
 });
 
+Breadcrumbs::for('course.edit', function (BreadcrumbTrail $trail, $data) {
+    $trail->parent('course');
+    $trail->push($data->title);
+    $trail->push('Edit', route('admin.course.edit', $data));
+});
+
 /* COURSE CATEGORY */
 Breadcrumbs::for('course_category', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');

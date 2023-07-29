@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Interfaces\CourseCategoryInterface;
 use App\Interfaces\CourseInterface;
+use App\Models\Course\Course;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -99,6 +100,61 @@ class CourseController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'Kursus berhasil ditambahkan',
+            ]);
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage(),
+            ]);
+        }
+    }
+
+    public function edit($id)
+    {
+        return view('admin.course.edit', [
+            'courseCategories' => $this->courseCategory->getAll(),
+            'course'           => $this->course->getById($id),
+        ]);
+    }
+
+    public function update($id)
+    {
+        $request = request();
+        $request->validate([
+            'title'             => ['required'],
+            'category_id'       => ['required'],
+            'short_description' => ['required'],
+            'description'       => ['required'],
+            'price'             => ['required'],
+            'main_image'        => ['nullable'],
+            'sneek_peek_1'      => ['nullable'],
+            'sneek_peek_2'      => ['nullable'],
+            'sneek_peek_3'      => ['nullable'],
+            'sneek_peek_4'      => ['nullable'],
+        ], [
+            'title.required'             => 'Judul harus diisi',
+            'category_id.required'       => 'Kategori harus diisi',
+            'short_description.required' => 'Deskripsi singkat harus diisi',
+            'description.required'       => 'Deskripsi harus diisi',
+            'price.required'             => 'Harga harus diisi',
+            'main_image.mimes'           => 'Gambar utama harus berupa file gambar',
+            'main_image.max'             => 'Gambar utama maksimal 1MB',
+            'sneek_peek_1.mimes'         => 'Gambar sneek peek 1 harus berupa file gambar',
+            'sneek_peek_1.max'           => 'Gambar sneek peek 1 maksimal 1MB',
+            'sneek_peek_2.mimes'         => 'Gambar sneek peek 2 harus berupa file gambar',
+            'sneek_peek_2.max'           => 'Gambar sneek peek 2 maksimal 1MB',
+            'sneek_peek_3.mimes'         => 'Gambar sneek peek 3 harus berupa file gambar',
+            'sneek_peek_3.max'           => 'Gambar sneek peek 3 maksimal 1MB',
+            'sneek_peek_4.mimes'         => 'Gambar sneek peek 4 harus berupa file gambar',
+            'sneek_peek_4.max'           => 'Gambar sneek peek 4 maksimal 1MB',
+        ]);
+
+        try {
+            $this->course->update($request->all(), $id);
+            return response()->json([
+                'status' => true,
+                'message' => 'Kursus berhasil diubah',
             ]);
         } catch (\Throwable $th) {
             dd($th->getMessage());
