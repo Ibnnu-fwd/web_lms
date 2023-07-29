@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\CourseCategoryController;
+use App\Http\Controllers\Admin\CourseChapterController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProfileController;
@@ -51,6 +52,13 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser']]
         Route::post('store', [CourseController::class, 'store'])->name('course.store');
         Route::get('edit/{id}', [CourseController::class, 'edit'])->name('course.edit');
         Route::post('update/{id}', [CourseController::class, 'update'])->name('course.update');
+
+        // Course Chapter
+        Route::post('{course_id}/chapter/{id}/restore', [CourseChapterController::class, 'restore'])->name('course-chapter.restore');
+        Route::resource('{course_id}/chapter', CourseChapterController::class)->names('course-chapter');
+
+        // Course Sub Chapter
+        Route::get('course-sub-chapter/{courseChapterId}', [CourseChapterController::class, 'courseSubChapter'])->name('course-sub-chapter.index');
     });
 
     // Course Category
