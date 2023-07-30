@@ -64,7 +64,12 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser:1'
         Route::get('course-sub-chapter/{courseChapterId}', [CourseSubChapterController::class, 'index'])->name('course-sub-chapter.index');
         Route::get('course-sub-chapter/{courseChapterId}/create', [CourseSubChapterController::class, 'create'])->name('course-sub-chapter.create');
         Route::post('course-sub-chapter/{courseChapterId}/store', [CourseSubChapterController::class, 'store'])->name('course-sub-chapter.store');
+        Route::get('course-sub-chapter/{courseChapterId}/edit/{id}', [CourseSubChapterController::class, 'edit'])->name('course-sub-chapter.edit');
+        Route::post('course-sub-chapter/{courseChapterId}/update/{id}', [CourseSubChapterController::class, 'update'])->name('course-sub-chapter.update');
+        Route::post('course-sub-chapter/{courseSubChapter}/delete-file', [CourseSubChapterController::class, 'deleteFile'])->name('course-sub-chapter.delete-file');
+        Route::post('course-sub-chapter/{courseSubChapter}/delete-video', [CourseSubChapterController::class, 'deleteVideo'])->name('course-sub-chapter.delete-video');
     })->middleware('checkRole:1');
+
 
     // Ckeditor Image Upload
     Route::post('ckeditor/upload', [CKEditorController::class, 'upload'])->name('ckeditor.upload')->middleware('checkRole:1');

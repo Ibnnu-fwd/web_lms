@@ -101,9 +101,16 @@ Breadcrumbs::for('course_sub_chapter', function (BreadcrumbTrail $trail, $data) 
     $trail->push($data->title);
     $trail->push('Sub Materi', route('admin.course-sub-chapter.index', $data));
 });
+
 Breadcrumbs::for('course_sub_chapter.create', function (BreadcrumbTrail $trail, $data) {
     $trail->parent('course_sub_chapter', $data);
     $trail->push('Tambah Sub Materi', route('admin.course-sub-chapter.create', $data));
+});
+
+Breadcrumbs::for('course_sub_chapter.edit', function (BreadcrumbTrail $trail, $data) {
+    $trail->parent('course_sub_chapter', $data->courseChapter);
+    $trail->push($data->title);
+    // $trail->push('Edit', route('admin.course-sub-chapter.edit', [$data->course_chapter_id, $data->id]));
 });
 
 /* MINIMUM COURSE */

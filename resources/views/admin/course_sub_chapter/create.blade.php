@@ -88,8 +88,9 @@
                     formData.append('file', $('#file')[0].files[0]);
                     formData.append('video', $('#video')[0].files[0]);
 
+                    let url = "{{ route('admin.course-sub-chapter.store', $courseChapter->id) }}";
                     $.ajax({
-                        url: '{{ route('course_sub_chapter.store') }}',
+                        url: url,
                         type: 'POST',
                         data: formData,
                         contentType: false,
@@ -103,7 +104,7 @@
                                 }).then((result) => {
                                     if (result.isConfirmed) {
                                         window.location.href =
-                                            '{{ route('course_sub_chapter.index', $courseChapter->id) }}';
+                                            '{{ route('admin.course-sub-chapter.index', $courseChapter->id) }}';
                                     }
                                 });
                             } else {
