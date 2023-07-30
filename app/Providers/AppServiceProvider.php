@@ -14,6 +14,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(\App\Interfaces\CourseInterface::class, \App\Repositories\CourseRepository::class);
         $this->app->bind(\App\Interfaces\CourseChapterInterface::class, \App\Repositories\CourseChapterRepository::class);
         $this->app->bind(\App\Interfaces\MinCoursePurchaseAtRegInterface::class, \App\Repositories\MinCoursePurchaseAtRegRepository::class);
+
+        $this->app->bind(\App\Interfaces\User\UserTransactionInterface::class, \App\Repositories\User\UserTransactionRepository::class);
     }
 
     public function boot(): void

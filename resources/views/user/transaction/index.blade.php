@@ -1,12 +1,12 @@
 <x-app-layout>
     <x-breadcrumb name="user-transaction" />
     <x-card-container>
-        <div class="text-end mb-4">
-        </div>
+
         <table id="courseCategoryTable">
             <thead>
                 <tr>
                     <th>#</th>
+                    <th>Code Transaksi</th>
                     <th>Tipe Transaksi</th>
                     <th>Customer</th>
                     <th>Sub Total</th>
@@ -34,17 +34,41 @@
                             name: 'DT_RowIndex'
                         },
                         {
-                            data: 'icon',
-                            name: 'icon'
+                            data: 'transaction_code',
+                            name: 'transaction_code'
                         },
                         {
-                            data: 'name',
-                            name: 'name'
+                            data: 'transaction_type',
+                            name: 'transaction_type'
+                        },
+                        {
+                            data: 'customer',
+                            name: 'customer'
+                        },
+                        {
+                            data: 'sub_total',
+                            name: 'sub_total'
+                        },
+                        {
+                            data: 'total_payment',
+                            name: 'total_payment'
+                        },
+                        {
+                            data: 'status',
+                            name: 'status'
+                        },
+                        {
+                            data: 'payment_status',
+                            name: 'payment_status'
+                        },
+                        {
+                            data: 'created_at',
+                            name: 'created_at'
                         },
                         {
                             data: 'action',
                             name: 'action'
-                        }
+                        },
                     ]
                 });
             });
