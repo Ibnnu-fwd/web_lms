@@ -17,22 +17,19 @@
                             </div>
                         </span>
                     </div>
-                    <h3 class="mb-3 font-bold text-2xl">Memulai Pemrograman Dengan Kotlin</h3>
+                    <h3 class="mb-3 font-medium text-2xl">Memulai Pemrograman Dengan Kotlin</h3>
                     <div class="mb-3 flex flex-wrap items-center">
                         <p class="font-medium mr-2 my-auto">Teknologi:</p>
                         <span
-                            class="inline-block px-2 py-1 my-2 text-xs 2xl:text-sm
-                            font-medium text-turquoise-800 border border-gray-200 rounded-lg mr-2">
+                            class="inline-block px-2 py-1 my-2 text-xs 2xl:text-sm text-turquoise-800 border border-gray-200 rounded-lg mr-2">
                             VS Code
                         </span>
                         <span
-                            class="inline-block px-2 py-1 my-2 text-xs 2xl:text-sm
-                            font-medium text-turquoise-800 border border-gray-200 rounded-lg mr-2">
+                            class="inline-block px-2 py-1 my-2 text-xs 2xl:text-sm text-turquoise-800 border border-gray-200 rounded-lg mr-2">
                             Chrome
                         </span>
                         <span
-                            class="inline-block px-2 py-1 my-2 text-xs 2xl:text-sm
-                            font-medium text-turquoise-800 border border-gray-200 rounded-lg mr-2">
+                            class="inline-block px-2 py-1 my-2 text-xs 2xl:text-sm text-turquoise-800 border border-gray-200 rounded-lg mr-2">
                             Tailwind
                         </span>
                     </div>
@@ -55,7 +52,7 @@
                         <div class="card-body">
                             @auth
                                 <x-button type="button" title="Belajar Sekarang" class="w-full"
-                                    onclick="location.href='{{ route('admin.checkout') }}'" />
+                                    onclick="location.href='{{ route('user.checkout') }}'" />
                             @endauth
 
                             @guest
@@ -83,7 +80,7 @@
     </section>
 
     <section class="pb-8 pt-6 border-1 border-y">
-        <h2 class="px-3 md:px-0 md:max-w-6xl mx-auto text-xl font-semibold text-gray-700">Apa yang akan kamu dapatkan?
+        <h2 class="px-3 md:px-0 md:max-w-6xl mx-auto text-xl font-medium text-gray-700">Apa yang akan kamu dapatkan?
         </h2>
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mx-auto px-3 md:px-0 md:max-w-6xl mt-8">
@@ -94,7 +91,7 @@
                     </ion-icon>
                 </div>
                 <div>
-                    <p class="font-bold mb-1">Sertifikat</p>
+                    <p class="font-medium mb-1">Sertifikat</p>
                     <p class="text-gray-400 text-md">Dapatkan sertifikat standar industri setelah menyelesaikan
                         kelas
                         ini.</p>
@@ -107,7 +104,7 @@
                     </ion-icon>
                 </div>
                 <div>
-                    <p class="font-bold mb-1">Sertifikat</p>
+                    <p class="font-medium mb-1">Sertifikat</p>
                     <p class="text-gray-400 text-md">Dapatkan sertifikat standar industri setelah menyelesaikan
                         kelas
                         ini.</p>
@@ -120,7 +117,7 @@
                     </ion-icon>
                 </div>
                 <div>
-                    <p class="font-bold mb-1">Sertifikat</p>
+                    <p class="font-medium mb-1">Sertifikat</p>
                     <p class="text-gray-400 text-md">Dapatkan sertifikat standar industri setelah menyelesaikan
                         kelas
                         ini.</p>
@@ -133,7 +130,7 @@
                     </ion-icon>
                 </div>
                 <div>
-                    <p class="font-bold mb-1">Sertifikat</p>
+                    <p class="font-medium mb-1">Sertifikat</p>
                     <p class="text-gray-400 text-md">Dapatkan sertifikat standar industri setelah menyelesaikan
                         kelas
                         ini.</p>
@@ -146,7 +143,7 @@
     <section class="w-full px-5 md:px-0 mx-auto py-10 mb-10 md:max-w-6xl">
         <div class="grid md:grid-cols-2 gap-x-8 gap-y-8">
             <main>
-                <h2 class="text-xl font-semibold text-gray-700">Deskripsi</h2>
+                <h2 class="text-xl font-medium text-gray-700">Deskripsi</h2>
                 <p class="leading-6 text-gray-500 mt-4">
                     Kotlin merupakan bahasa utama yang digunakan dalam pengembangan Android saat
                     ini. Hal ini karena manfaat yang diberikan seperti ringkas, cepat, dan aman.
@@ -158,7 +155,7 @@
                 </p>
             </main>
             <main>
-                <h2 class="text-xl font-semibold text-gray-700">Kontributor</h2>
+                <h2 class="text-xl font-medium text-gray-700">Kontributor</h2>
                 <p class="text-gray-400 mt-4">Mereka yang membantu dalam pembuatan kelas ini:</p>
                 <div class="grid md:grid-cols-2 gap-4 mt-4">
                     <div class="flex items-center">
@@ -180,7 +177,7 @@
                 </div>
             </main>
             <main>
-                <h2 class="text-xl font-semibold text-gray-700">Tujuan Pembelajaran</h2>
+                <h2 class="text-xl font-medium text-gray-700">Tujuan Pembelajaran</h2>
                 <ul role="list" class="grid grid-cols-1 mt-5 gap-4 list-none lg:grid-cols-2 lg:gap-6">
                     <li>
                         <div class="flex items-center space-x-2.5">
@@ -237,7 +234,7 @@
                 </ul>
             </main>
             <main>
-                <h2 class="text-xl font-semibold text-gray-700">Sneek Peek</h2>
+                <h2 class="text-xl font-medium text-gray-700">Sneek Peek</h2>
                 <div class="grid grid-cols-4 gap-4 mt-4">
                     <img src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dmlydHVhbCUyMHJlYWxpdHl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=600&q=60"
                         class="bg-gray-50 rounded-md hover:shadow-sm hover:ring-1 hover:ring-primary w-32 h-20 object-cover"

@@ -21,7 +21,7 @@
 
             <p class="mt-10 text-center text-sm text-gray-500">
                 Belum punya akun?
-                <a href="{{ route('register') }}" class="font-semibold leading-6 text-primary hover:text-indigo-500">
+                <a href="{{ route('register') }}" class="font-medium leading-6 text-primary hover:text-indigo-500">
                     Daftar sekarang
                 </a>
             </p>

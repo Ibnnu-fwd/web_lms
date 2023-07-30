@@ -177,6 +177,15 @@
                             </x-slot>
 
                             <x-slot name="content">
+                                <x-dropdown-link
+                                    href="{{ // check if auth user is admin route to dashboard, if role = 4 route to user-dashboarsd
+                                        Auth::user()->role == 4 ? route('user.dashboard') : (auth()->user()->role == 1 ? route('admin.dashboard') : '#') }}">
+                                    <div class="flex items-center gap-x-2">
+                                        <ion-icon class="text-gray-300" name="log-in-outline"></ion-icon>
+                                        <span>Dashboard</span>
+                                    </div>
+                                </x-dropdown-link>
+
                                 <x-dropdown-link :href="route('user.cart')">
                                     <div class="flex items-center gap-x-2">
                                         <ion-icon class="text-gray-300" name="cart-outline"></ion-icon>
@@ -229,14 +238,14 @@
                         class="text-lg font-bold tracking-tighter transition duration-500 ease-in-out transform text-black tracking-relaxed lg:pr-8">
                         <img src="{{ asset('images/favicon.png') }}" class="w-8 h-8" alt="logo">
                     </a>
-                    <p class="w-1/2 mt-2 text-sm text-gray-500">
+                    <p class="w-1/2 mt-2 text-xs 2xl:text-sm text-gray-500">
                         The smartest way to learn
                     </p>
                 </div>
                 <div class="grid grid-cols-2 gap-8 mt-12 xl:mt-0 xl:col-span-2">
                     <div class="md:grid md:grid-cols-2 md:gap-8">
                         <div>
-                            <h3 class="font-semibold leading-6 uppercase text-black">
+                            <h3 class="font-medium leading-6 uppercase text-black">
                                 Solutions
                             </h3>
                             <ul role="list" class="mt-4 space-y-3">
@@ -263,7 +272,7 @@
                             </ul>
                         </div>
                         <div class="mt-12 md:mt-0">
-                            <h3 class="font-semibold leading-6 uppercase text-black">
+                            <h3 class="font-medium leading-6 uppercase text-black">
                                 Support
                             </h3>
                             <ul role="list" class="mt-4 space-y-4">
@@ -293,7 +302,7 @@
                     <div class="hidden lg:justify-end md:grid md:grid-cols-1">
                         <div class="w-full mt-12 md:mt-0">
                             <div class="mt-8 lg:justify-end xl:mt-0">
-                                <h3 class="font-semibold leading-6 uppercase text-black">
+                                <h3 class="font-medium leading-6 uppercase text-black">
                                     Hubungi Kami
                                 </h3>
                                 <p class="mt-4 text-sm font-light text-gray-500 lg:ml-auto">

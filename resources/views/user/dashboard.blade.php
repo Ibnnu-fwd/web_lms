@@ -20,7 +20,7 @@
                 </ul>
                 <div class="py-4 pt-4 text-left bg-white content">
                     <div x-show="tab==='tab1'"
-                        class="text-gray-500 md:grid xl:grid-cols-2 2xl:grid-cols-3 gap-8 space-y-5 md:space-y-0">
+                        class="text-gray-500 md:grid xl:grid-cols-2 2xl:grid-cols-3 gap-4 space-y-5 md:space-y-0">
                         @for ($i = 1; $i <= 5; $i++)
                             <x-card-container>
                                 {{-- <ion-icon name="code-slash" size="large"></ion-icon> --}}

@@ -61,10 +61,11 @@
                                     </div>
                                     <div class="ml-3 text-left">
                                         <p
-                                            class="text-sm line-clamp-1 font-medium text-gray-500 group-hover:text-primary">
+                                            class="text-xs 2xl:text-sm font-normal line-clamp-1 text-gray-500 group-hover:text-primary">
                                             {{ ucwords(auth()->user()->fullname) }}
                                         </p>
-                                        <p class="text-sm text-gray-500 group-hover:text-primary">
+                                        <p
+                                            class="text-xs 2xl:text-sm font-light text-gray-500 group-hover:text-primary">
                                             {{ auth()->user()->getRoleLabel() }}
                                         </p>
                                     </div>

@@ -17,7 +17,7 @@
 
             <p class="mt-10 text-center text-sm text-gray-500">
                 Sudah punya akun?
-                <a href="{{ route('login') }}" class="font-semibold leading-6 text-primary hover:text-indigo-500">
+                <a href="{{ route('login') }}" class="font-medium leading-6 text-primary hover:text-indigo-500">
                     Masuk
                 </a>
             </p>

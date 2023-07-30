@@ -170,7 +170,7 @@
             <div class="md:text-center">
                 <div class="">
                     <p class="text-lg md:text-2xl text-black">
-                        Mengapa memilih <span class="font-black text-primary">
+                        Mengapa memilih <span class="font-medium text-primary">
                             {{ config('app.name') }}
                         </span>?
                     </p>

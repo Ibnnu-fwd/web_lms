@@ -273,6 +273,14 @@ body:hover::-webkit-scrollbar-thumb {
     @apply text-xs 2xl:text-sm;
 }
 
+.dataTables_filter label {
+    @apply text-xs 2xl:text-sm;
+}
+
+.dataTables_paginate.paging_simple_numbers {
+    @apply text-xs 2xl:text-sm;
+}
+
 .dataTables_filter input {
     @apply ml-2 border-0 py-1.5 text-gray-900 bg-none shadow-sm ring-0 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-primary text-xs 2xl:text-sm sm:leading-6;
 }
