@@ -78,6 +78,8 @@
 
 
     @push('js-internal')
+        <!-- Ckeditor -->
+        <script src="//cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
         <script>
             $('#category_id').append(
                 `<option value="{{ $course->category_id }}" selected>{{ $course->category->name }}</option>`);
@@ -212,9 +214,9 @@
             }
 
             $(function() {
-                CKEDITOR.on('instanceReady', function(ev) {
-                    ev.editor.resize('100%', '100px');
-                });
+                // CKEDITOR.on('instanceReady', function(ev) {
+                //     ev.editor.resize('100%', '100px');
+                // });
 
                 CKEDITOR.replace('short_description');
                 CKEDITOR.replace('description');

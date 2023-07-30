@@ -32,14 +32,15 @@
                         </li>
                     </ul>
 
-                    <p class="px-4 pt-4 text-sm font-semibold text-gray-400 uppercase">
+                    <p class="px-4 pt-4 text-xs 2xl:text-sm font-semibold text-gray-400 uppercase">
                         Kursus
                     </p>
                     <ul>
                         <!-- Course -->
                         <li>
                             <x-sidebar-link route="{{ route('admin.course.index') }}" icon="albums-outline"
-                                title="Daftar" active="{{ request()->routeIs('admin.course.*') }}" />
+                                title="Daftar"
+                                active="{{ request()->routeIs('admin.course.*') || request()->routeIs('admin.course-chapter.*') || request()->routeIs('admin.course-sub-chapter.*') }}" />
                         </li>
                         <!-- Course Category -->
                         <li>
@@ -53,7 +54,7 @@
                         </li>
                     </ul>
 
-                    <p class="px-4 pt-4 text-sm font-semibold text-gray-400 uppercase">
+                    <p class="px-4 pt-4 text-xs 2xl:text-sm font-semibold text-gray-400 uppercase">
                         Autentikasi
                     </p>
                     <ul>
@@ -74,7 +75,7 @@
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
                                 <button
-                                    class="inline-flex items-center w-full px-4 py-2 mt-1 text-md text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary">
+                                    class="inline-flex items-center w-full px-4 py-2 mt-1 text-xs 2xl:text-sm text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary">
                                     <ion-icon class="w-4 h-4 md hydrated" name="log-out-outline" role="img">
                                     </ion-icon>
                                     <span class="ml-4">
@@ -101,10 +102,11 @@
                                     </div>
                                     <div class="ml-3 text-left">
                                         <p
-                                            class="text-sm line-clamp-1 font-medium text-gray-500 group-hover:text-primary">
+                                            class="text-xs 2xl:text-sm line-clamp-1 font-medium text-gray-500 group-hover:text-primary">
                                             {{ ucwords(auth()->user()->fullname) }}
                                         </p>
-                                        <p class="text-sm font-medium text-gray-500 group-hover:text-primary">
+                                        <p
+                                            class="text-xs 2xl:text-sm font-medium text-gray-500 group-hover:text-primary">
                                             {{ auth()->user()->getRoleLabel() }}
                                         </p>
                                     </div>
@@ -130,7 +132,7 @@
                         <div class="px-2 py-2 bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                             <ul>
                                 <li>
-                                    <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-md text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
+                                    <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-xs 2xl:text-sm text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
                                         href="{{ route('admin.account.index') }}">
                                         <ion-icon class="w-4 h-4 md hydrated" name="body-outline" role="img"
                                             aria-label="body outline"></ion-icon>
@@ -140,7 +142,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-md text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
+                                    <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-xs 2xl:text-sm text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
                                         href="#">
                                         <ion-icon class="w-4 h-4 md hydrated" name="person-circle-outline"
                                             role="img" aria-label="person circle outline"></ion-icon>

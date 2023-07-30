@@ -77,6 +77,9 @@
     </div>
 
     @push('js-internal')
+        <!-- Ckeditor -->
+        <script src="//cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
+
         <script>
             function removeObjective(id) {
                 $(`#objective-${id}`).remove();
@@ -131,9 +134,9 @@
             }
 
             $(function() {
-                CKEDITOR.on('instanceReady', function(ev) {
-                    ev.editor.resize('100%', '100px');
-                });
+                // CKEDITOR.on('instanceReady', function(ev) {
+                //     ev.editor.resize('100%', '100px');
+                // });
 
                 CKEDITOR.replace('short_description');
                 CKEDITOR.replace('description');

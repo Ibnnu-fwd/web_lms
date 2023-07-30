@@ -85,6 +85,17 @@ Breadcrumbs::for('course_chapter.edit', function (BreadcrumbTrail $trail, $data)
     $trail->push('Edit', route('admin.course-chapter.edit', [$data->course_id, $data->id]));
 });
 
+/* COURSE SUB CHAPTER */
+Breadcrumbs::for('course_sub_chapter', function (BreadcrumbTrail $trail, $data) {
+    $trail->parent('course_chapter', $data->course);
+    $trail->push($data->title);
+    $trail->push('Sub Materi', route('admin.course-sub-chapter.index', $data));
+});
+Breadcrumbs::for('course_sub_chapter.create', function (BreadcrumbTrail $trail, $data) {
+    $trail->parent('course_sub_chapter', $data);
+    $trail->push('Tambah Sub Materi', route('admin.course-sub-chapter.create', $data));
+});
+
 /* MINIMUM COURSE */
 Breadcrumbs::for('mincourse', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');

@@ -4,10 +4,12 @@ use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\CourseCategoryController;
 use App\Http\Controllers\Admin\CourseChapterController;
 use App\Http\Controllers\Admin\CourseController;
+use App\Http\Controllers\Admin\CourseSubChapterController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\VerificatorController;
 use App\Http\Controllers\Admin\MinCoursePurchaseAtRegController;
+use App\Http\Controllers\CKEditorController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -59,8 +61,12 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser']]
         Route::resource('{course_id}/chapter', CourseChapterController::class)->names('course-chapter');
 
         // Course Sub Chapter
-        Route::get('course-sub-chapter/{courseChapterId}', [CourseChapterController::class, 'courseSubChapter'])->name('course-sub-chapter.index');
+        Route::get('course-sub-chapter/{courseChapterId}', [CourseSubChapterController::class, 'index'])->name('course-sub-chapter.index');
+        Route::get('course-sub-chapter/{courseChapterId}/create', [CourseSubChapterController::class, 'create'])->name('course-sub-chapter.create');
     });
+
+    // Ckeditor Image Upload
+    Route::post('ckeditor/upload', [CKEditorController::class, 'upload'])->name('ckeditor.upload');
 
     // Course Category
     Route::resource('course-category', CourseCategoryController::class)->except(['show'])->names('admin.course-category');

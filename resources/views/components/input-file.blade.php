@@ -1,7 +1,7 @@
 @props(['id' => '', 'name' => '', 'label' => '', 'required' => false])
 
 <div class="mb-4">
-    <label class="block mb-2 text-md text-gray-900">
+    <label class="block mb-2 text-xs 2xl:text-sm text-gray-900">
         {{ $label }} {!! $required ? '<span class="text-red-500">*</span>' : '' !!}
     </label>
     <div class="image-container-{{ $id }}">
@@ -29,7 +29,7 @@
             <img class="w-full h-28 border-0 rounded-lg object-cover object-center ring-1 ring-gray-300" src=""
                 alt="preview image" />
             <button type="button"
-                class="px-4 py-2 w-full mt-2 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600"
+                class="px-4 py-2 w-full mt-2 text-xs 2xl:text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600"
                 onclick="removeImage('{{ $id }}')">
                 <ion-icon name="trash"></ion-icon>
             </button>

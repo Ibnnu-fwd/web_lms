@@ -27,6 +27,9 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
+    <!-- Pdf js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.8.162/web/pdf_viewer.min.css">
+
     @stack('css-internal')
 
     <!-- Scripts -->
@@ -87,13 +90,16 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 
     <!-- Ckeditor -->
-    <script src="//cdn.ckeditor.com/4.22.1/basic/ckeditor.js"></script>
+    <script src="//cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
 
     <!-- jQuery Modal -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 
     <!-- Datepicker -->
     <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+
+    <!-- Pdf js -->
+    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.8.162/build/pdf.min.js"></script>
 
     <script>
         $('select').select2();
