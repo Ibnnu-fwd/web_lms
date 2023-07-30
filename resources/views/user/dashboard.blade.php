@@ -1,3 +1,15 @@
+<style>
+    /* Style tombol */
+    .x-card-container .hover-button {
+        display: none;
+        /* Gaya lain yang Anda inginkan */
+    }
+
+    /* Style x-card-container saat dihover */
+    .x-card-container:hover .hover-button {
+        display: block;
+    }
+</style>
 <x-app-layout>
     <x-breadcrumb name="user-dashboard" />
     <x-card-container>
@@ -87,30 +99,34 @@
                                 </div>
                                 <div x-show="tab==='tab2'" class="text-gray-500" style="display: none;">
                                     <main>
-                                        <!-- === Remove and replace with your own content... === -->
-                                        <div class="py-4">
-                                            <span class="inline-flex items-center text-black">
-                                                <span class="font-mono text-sm" aria-hidden="true">02</span><span
-                                                    class="ml-3 h-3.5 w-px bg-black"></span><span
-                                                    class="ml-3 text-base font-medium tracking-tight">Tab content</span>
-                                            </span>
-                                            <div class="h-32 border border-gray-200 border-dashed rounded-lg"></div>
-                                        </div>
-                                        <!-- === End ===  -->
-                                    </main>
-                                </div>
-                                <div x-show="tab==='tab3'" class="text-gray-500" style="display: none;">
-                                    <main>
-                                        <!-- === Remove and replace with your own content... === -->
-                                        <div class="py-4">
-                                            <span class="inline-flex items-center text-black">
-                                                <span class="font-mono text-sm" aria-hidden="true">03</span><span
-                                                    class="ml-3 h-3.5 w-px bg-black"></span><span
-                                                    class="ml-3 text-base font-medium tracking-tight">Tab content</span>
-                                            </span>
-                                            <div class="h-32 border border-gray-200 border-dashed rounded-lg"></div>
-                                        </div>
-                                        <!-- === End ===  -->
+
+                                        <x-card-container class="mb-2">
+                                            <div class="flex flex-row items-center justify-between">
+                                                <h1 class="text-lg font-medium text-gray-900">Belajar Pemrograman Php
+                                                </h1>
+                                                <button
+                                                    class="inline-flex items-center justify-center px-3 py-3 text-md font-bold leading-none text-white bg-primary rounded-full">Belajar
+                                                    Lagi</button>
+                                            </div>
+                                        </x-card-container>
+                                        <x-card-container class="mb-2">
+                                            <div class="flex flex-row items-center justify-between">
+                                                <h1 class="text-lg font-medium text-gray-900">Belajar Pemrograman Php
+                                                </h1>
+                                                <button
+                                                    class="inline-flex items-center justify-center px-3 py-3 text-md font-bold leading-none text-white bg-primary rounded-full">Belajar
+                                                    Lagi</button>
+                                            </div>
+                                        </x-card-container>
+                                        <x-card-container class="mb-2">
+                                            <div class="flex flex-row items-center justify-between">
+                                                <h1 class="text-lg font-medium text-gray-900">Belajar Pemrograman Php
+                                                </h1>
+                                                <button
+                                                    class="inline-flex items-center justify-center px-3 py-3 text-md font-bold leading-none text-white bg-primary rounded-full">Belajar
+                                                    Lagi</button>
+                                            </div>
+                                        </x-card-container>
                                     </main>
                                 </div>
                             </div>
