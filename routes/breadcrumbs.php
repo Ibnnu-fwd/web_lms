@@ -14,6 +14,12 @@ Breadcrumbs::for('user-dashboard', function (BreadcrumbTrail $trail) {
     $trail->push('Dashboard', route('user.dashboard'));
 });
 
+Breadcrumbs::for('user-transaction', function (BreadcrumbTrail $trail) {
+    $trail->parent('user-dashboard');
+    $trail->push('Transaksi', route('user.dashboard'));
+});
+
+
 /* ACCOUNT */
 Breadcrumbs::for('account', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');

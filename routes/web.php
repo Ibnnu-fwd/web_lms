@@ -81,6 +81,7 @@ Route::group(
         Route::get('/', fn () => view('user.dashboard'))->name('user.dashboard');
         Route::get('checkout', fn () => view('checkout'))->name('user.checkout');
         Route::get('cart', fn () => view('cart'))->name('user.cart');
+        Route::get('transaction', fn () => view('user.transaction.index'))->name('user.transaction');
     }
 );
 
