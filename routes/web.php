@@ -63,6 +63,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser:1'
         // Course Sub Chapter
         Route::get('course-sub-chapter/{courseChapterId}', [CourseSubChapterController::class, 'index'])->name('course-sub-chapter.index');
         Route::get('course-sub-chapter/{courseChapterId}/create', [CourseSubChapterController::class, 'create'])->name('course-sub-chapter.create');
+        Route::post('course-sub-chapter/{courseChapterId}/store', [CourseSubChapterController::class, 'store'])->name('course-sub-chapter.store');
     })->middleware('checkRole:1');
 
     // Ckeditor Image Upload

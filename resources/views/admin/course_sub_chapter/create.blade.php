@@ -57,6 +57,65 @@
                     }
                     fileReader.readAsDataURL(file);
                 });
+
+                $('button[type="submit"]').click(function(e) {
+                    e.preventDefault();
+                    let title = $('#title').val();
+                    let file = $('#file').val();
+                    let video = $('#video').val();
+
+                    if (title == '') {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Judul materi tidak boleh kosong!',
+                        });
+                        return;
+                    }
+
+                    if (file == '' && video == '') {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Mohon diisi salah satu file materi!',
+                        });
+                        return;
+                    }
+
+                    let formData = new FormData();
+                    formData.append('_token', '{{ csrf_token() }}');
+                    formData.append('title', title);
+                    formData.append('file', $('#file')[0].files[0]);
+                    formData.append('video', $('#video')[0].files[0]);
+
+                    $.ajax({
+                        url: '{{ route('course_sub_chapter.store') }}',
+                        type: 'POST',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        success: function(data) {
+                            if (data.status == true) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Berhasil',
+                                    text: data.message,
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        window.location.href =
+                                            '{{ route('course_sub_chapter.index', $courseChapter->id) }}';
+                                    }
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: data.message,
+                                });
+                            }
+                        },
+                    });
+                });
             });
         </script>
     @endpush

@@ -28,4 +28,9 @@ class CourseSubChapterController extends Controller
             'courseChapter' => $this->courseChapter->getById($courseChapterId),
         ]);
     }
+
+    public function store($courseChapterId, Request $request)
+    {
+        dd($request->all());
+    }
 }
