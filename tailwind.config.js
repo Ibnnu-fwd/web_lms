@@ -13,6 +13,7 @@ export default {
         extend: {
             fontFamily: {
                 sans: [
+                    "Rubik",
                     "Figtree",
                     "Inter",
                     "League Spartan",

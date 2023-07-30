@@ -4,7 +4,7 @@
         <h2 class="text-lg font-medium">
             Tambah Verifikator
         </h2>
-        <p class="text-md mt-1 mb-4 text-gray-400">
+        <p class="text-xs 2xl:text-sm mt-1 mb-4 text-gray-400">
             Pengguna yang ditambahkan sebagai verifikator akan memiliki akses untuk memverifikasi course yang diajukan
             oleh pengajar.
         </p>

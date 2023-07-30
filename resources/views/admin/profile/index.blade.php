@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-breadcrumb name="profile" />
-    <x-card-container class="w-full xl:w-1/2 2xl:w-1/3 md:grid grid-cols-3 gap-4">
+    <x-card-container class="w-full xl:w-1/2 md:grid grid-cols-3 gap-4">
         <div>
             <img src="{{ auth()->user()->avatar ? asset('storage/avatar/' . auth()->user()->avatar) : asset('images/no_image.jpg') }}"
                 alt="" class="w-full h-36 object-cover rounded-md object-center" id="avatarContainer">

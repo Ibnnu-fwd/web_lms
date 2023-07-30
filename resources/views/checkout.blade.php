@@ -7,8 +7,10 @@
             <div class="mt-10 px-4 pt-8 lg:mt-0">
                 <p class="text-xl font-medium">Detail Pembayaran</p>
                 <p class="text-gray-400">Lengkapi pesanan Anda dengan memberikan detail pembayaran Anda.</p>
-                <div class="">
-                    <label for="email" class="mt-4 mb-2 block text-sm font-medium">Email</label>
+                <div class="mt-6">
+                    <label for="email" class="mt-4 mb-2 block text-xs 2xl:text-sm">
+                        Email <span class="text-red-500">*</span>
+                    </label>
                     <div class="relative">
                         <input type="text" id="email" name="email"
                             class="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-primary focus:ring-primary"
@@ -21,7 +23,9 @@
                             </svg>
                         </div>
                     </div>
-                    <label for="card-holder" class="mt-4 mb-2 block text-sm font-medium">Nama Pemilik Rekening</label>
+                    <label for="card-holder" class="mt-4 mb-2 block text-xs 2xl:text-sm">
+                        Nama Pemilik Rekening <span class="text-red-500">*</span>
+                    </label>
                     <div class="relative">
                         <input type="text" id="card-holder" name="card-holder"
                             class="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm uppercase shadow-sm outline-none focus:z-10 focus:border-primary focus:ring-primary"
@@ -35,7 +39,7 @@
                         </div>
                     </div>
 
-                    <label for="valed-struck" class="mt-4 mb-2 block text-sm font-medium">Valid Struk</label>
+                    {{-- <label for="valed-struck" class="mt-4 mb-2 block text-xs 2xl:text-sm">Valid Struk</label>
 
                     <div class="relative">
                         <input type="text" id="valed-struck" name="valed-struck"
@@ -44,49 +48,11 @@
                         <div class="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
                             <ion-icon name="folder-outline"></ion-icon>
                         </div>
-                    </div>
+                    </div> --}}
 
-                </div>
-                <button
-                    class="mt-8 mb-8 w-full text-lg rounded-md bg-primary px-6 py-3 font-medium text-white">Bayar</button>
-            </div>
-
-            <div class="px-4 pt-8">
-                <p class="text-xl font-medium">Pesanan Course mu</p>
-                <p class="text-gray-400">Silahkan cek lagi pesanan mu </p>
-                <div class="mt-8 space-y-3 rounded-lg border bg-white px-2 py-4 sm:px-6 divide-y">
-                    <div class="flex flex-col rounded-lg bg-white sm:flex-row">
-                        <img class="m-2 h-24 w-28 rounded-md border object-cover object-center"
-                            src="https://images.unsplash.com/photo-1588690154757-badf4644190f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8a290bGlufGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
-                            alt="" />
-                        <div class="flex w-full flex-col px-4 py-4">
-                            <span class="font-semibold">Memulai Pemrograman Dengan Kotlin</span>
-                            <span class="float-right text-gray-400 line-clamp-1">Pelajari dasar bahasa pemrograman,
-                                functional
-                                programming, object-oriented programming (OOP)</span>
-                            <p class="text-lg font-bold">Rp. <span>2000.000</span> / <span class="text-sm font-light">
-                                    bulan</span>
-                            </p>
-                            <p class="text-sm font-light text-gray-400">29 jul - 29 Aug </p>
-                        </div>
-                    </div>
-                    <div class="flex flex-col rounded-lg bg-white sm:flex-row">
-                        <img class="m-2 h-24 w-28 rounded-md border object-cover object-center"
-                            src="https://media.istockphoto.com/id/1478831653/photo/php-interpreted-programming-language-hypertext-preprocessor-programming.webp?b=1&s=170667a&w=0&k=20&c=Uc9Rg3xaN0-d2m2XWgaD0Fqqwf6uZnJxDui9k625e7s="
-                            alt="" />
-                        <div class="flex w-full flex-col px-4 py-4">
-                            <span class="font-semibold">Memulai Pemrograman Dengan Php</span>
-                            <span class="float-right text-gray-400 line-clamp-1">Pelajari dasar bahasa pemrograman,
-                                functional
-                                programming, object-oriented programming (OOP)</span>
-                            <p class="mt-auto text-lg font-bold">Rp. <span>2000.000</span> / <span
-                                    class="text-sm font-light">
-                                    bulan</span></p>
-
-                            <p class="text-sm font-light text-gray-400">29 jul - 29 Aug </p>
-                        </div>
-                    </div>
-                    <label for="card-holder" class="mt-4 mb-2 block text-sm font-medium">No Rek. Pembayaran</label>
+                    <label for="card-holder" class="mt-4 mb-2 block text-sm">
+                        No Rek. Pembayaran <span class="text-red-500">*</span>
+                    </label>
                     <div class="relative">
                         <input type="text" id="card-holder" name="card-holder"
                             class="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm uppercase shadow-sm outline-none focus:z-10 focus:border-primary focus:ring-primary"
@@ -96,20 +62,62 @@
                         </div>
                     </div>
                     <!-- Total -->
-                    <div class="mt-6 border-t border-b py-2">
+                    <div class="mt-6 border-t py-4">
                         <div class="flex items-center justify-between">
-                            <p class="text-sm font-medium text-gray-900">Subtotal</p>
-                            <p class="font-semibold text-gray-900">Rp. <span>4.000.000</span></p>
+                            <p class="text-sm text-gray-900">Subtotal</p>
+                            <p class="text-md text-gray-900">Rp. <span>4.000.000</span></p>
                         </div>
                         <div class="flex items-center justify-between">
-                            <p class="text-sm font-medium text-gray-900">Discount</p>
-                            <p class="font-semibold text-gray-900">Rp. <span>0</span></p>
+                            <p class="text-sm text-gray-900">Discount</p>
+                            <p class="text-md text-gray-900">Rp. <span>0</span></p>
                         </div>
                     </div>
                     <div class="mt-6 flex items-center justify-between">
-                        <p class="text-sm font-medium text-gray-900">Total</p>
-                        <p class="text-2xl font-semibold text-gray-900">Rp. <Span>4.000.000</Span></p>
+                        <p class="text-sm text-gray-900">Total</p>
+                        <p class="text-xl font-medium text-gray-900">Rp. <Span>4.000.000</Span></p>
                     </div>
+
+
+                </div>
+                <button
+                    class="mt-8 mb-8 w-full text-lg rounded-md bg-primary px-6 py-3 font-medium text-white">Bayar</button>
+            </div>
+
+            <div class="px-4 pt-8">
+                <p class="text-xl font-medium">Pesanan Course mu</p>
+                <p class="text-gray-400">Silahkan cek lagi pesanan mu </p>
+                <div class="mt-8 space-y-3 rounded-lg border bg-white px-2 py-8 sm:px-6">
+                    @for ($i = 1; $i <= 3; $i++)
+                        <div class="flex flex-col bg-white border-b pb-4 sm:flex-row items-center">
+                            <img class="hidden md:inline-block m-2 h-32 w-32 rounded-md border object-cover object-center"
+                                src="https://images.unsplash.com/photo-1588690154757-badf4644190f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8a290bGlufGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
+                                alt="" />
+                            <div class="flex w-full flex-col px-4">
+                                <span class="text-lg">Memulai Pemrograman Dengan Kotlin</span>
+                                <span class="float-right text-gray-400 line-clamp-1">Pelajari dasar bahasa pemrograman,
+                                    functional
+                                    programming, object-oriented programming (OOP)</span>
+                                <div class="md:flex justify-between items-end mt-2">
+                                    <div>
+                                        <p class="text-gray-500">Periode Sewa:</p>
+                                        <p class="text-sm text-gray-600">29 Jul - 29 Aug </p>
+                                    </div>
+                                    <p class="text-sm font-light text-gray-500">Rp. 2000.000
+                                        /
+                                        <span class="text-sm font-light">
+                                            bulan
+                                        </span>
+                                    </p>
+                                </div>
+                                <hr class="my-2 opacity-25">
+                                <div class="flex justify-between items-center">
+                                    <p class="text-sm font-light text-gray-500">Total</p>
+                                    <p class="text-md">Rp. 2000.000</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endfor
+                    {{-- <hr> --}}
                 </div>
             </div>
         </div>

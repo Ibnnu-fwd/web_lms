@@ -32,7 +32,7 @@
                         </li>
                     </ul>
 
-                    <p class="px-4 pt-4 text-xs 2xl:text-sm font-semibold text-gray-400 uppercase">
+                    <p class="px-4 pt-4 text-xs 2xl:text-sm font-medium text-gray-400 uppercase">
                         Kursus
                     </p>
                     <ul>
@@ -54,7 +54,7 @@
                         </li>
                     </ul>
 
-                    <p class="px-4 pt-4 text-xs 2xl:text-sm font-semibold text-gray-400 uppercase">
+                    <p class="px-4 pt-4 text-xs 2xl:text-sm font-medium text-gray-400 uppercase">
                         Autentikasi
                     </p>
                     <ul>

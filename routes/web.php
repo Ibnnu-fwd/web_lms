@@ -9,7 +9,6 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\VerificatorController;
 use App\Http\Controllers\Admin\MinCoursePurchaseAtRegController;
-use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\CKEditorController;
 use Illuminate\Support\Facades\Route;
 

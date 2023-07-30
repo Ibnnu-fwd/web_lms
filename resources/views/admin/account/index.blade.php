@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-breadcrumb name="account" />
     <x-card-container class="w-full md:w-1/3">
-        <h2 class="text-lg font-medium">
+        <h2 class="text-md font-medium">
             Informasi Akun
         </h2>
-        <p class="text-md mt-1 mb-4 text-gray-400">
+        <p class="text-xs 2xl:text-sm mb-4 text-gray-400">
             Ubah informasi akun anda
         </p>
 

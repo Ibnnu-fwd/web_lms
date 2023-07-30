@@ -12,8 +12,9 @@
     <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" type="image/x-icon">
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    {{-- <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" /> --}}
+    <link href="https://fonts.cdnfonts.com/css/rubik" rel="stylesheet">
 
     <!-- Styles -->
     @stack('css-internal')
@@ -48,20 +49,20 @@
             </div>
             <nav :class="{ 'flex': open, 'hidden': !open }"
                 class="flex-col items-center flex-grow hidden md:pb-0 md:flex md:justify-end md:flex-row">
-                <a class="px-2 py-2 text-base text-gray-500 lg:px-6 md:px-3 hover:text-red-600 lg:ml-auto
+                <a class="px-2 py-2 text-xs 2xl:text-sm text-gray-500 lg:px-6 md:px-3 hover:text-red-600 lg:ml-auto
                 {{ request()->routeIs('/') ? 'text-red-600' : '' }}"
                     href="{{ route('/') }}">
                     Beranda
                 </a>
-                <a class="px-2 py-2 text-base text-gray-500 lg:px-6 md:px-3 hover:text-red-600 {{ request()->routeIs('product') ? 'text-red-600' : '' }}"
+                <a class="px-2 py-2 text-xs 2xl:text-sm text-gray-500 lg:px-6 md:px-3 hover:text-red-600 {{ request()->routeIs('product') ? 'text-red-600' : '' }}"
                     href="{{ route('product') }}">
                     Materi
                 </a>
-                <a class="px-2 py-2 text-base text-gray-500 lg:px-6 md:px-3 hover:text-red-600 {{ request()->routeIs('about') ? 'text-red-600' : '' }}"
+                <a class="px-2 py-2 text-xs 2xl:text-sm text-gray-500 lg:px-6 md:px-3 hover:text-red-600 {{ request()->routeIs('about') ? 'text-red-600' : '' }}"
                     href="{{ route('about') }}">
                     Tentang Kami
                 </a>
-                <a class="px-2 py-2 text-base text-gray-500 lg:px-6 md:px-3 hover:text-red-600 {{ request()->routeIs('order-flow') ? 'text-red-600' : '' }}"
+                <a class="px-2 py-2 text-xs 2xl:text-sm text-gray-500 lg:px-6 md:px-3 hover:text-red-600 {{ request()->routeIs('order-flow') ? 'text-red-600' : '' }}"
                     href="{{ route('order-flow') }}">
                     Alur Pemesanan
                 </a>
@@ -96,7 +97,7 @@
                                             role="img" aria-label="search outline"></ion-icon>
                                     </div>
                                     <div class="ml-4">
-                                        <p class="text-base font-medium text-black">
+                                        <p class="text-xs 2xl:text-sm font-medium text-black">
                                             Explore design work
                                         </p>
                                         <p class="mt-1 text-sm text-gray-500">
@@ -111,7 +112,7 @@
                                             role="img" aria-label="book outline"></ion-icon>
                                     </div>
                                     <div class="ml-4">
-                                        <p class="text-base font-medium text-black">
+                                        <p class="text-xs 2xl:text-sm font-medium text-black">
                                             Blog
                                         </p>
                                         <p class="mt-1 text-sm text-gray-500">
@@ -126,7 +127,7 @@
                                             role="img" aria-label="lock closed outline"></ion-icon>
                                     </div>
                                     <div class="ml-4">
-                                        <p class="text-base font-medium text-black">
+                                        <p class="text-xs 2xl:text-sm font-medium text-black">
                                             Secure
                                         </p>
                                         <p class="mt-1 text-sm text-gray-500">
@@ -141,7 +142,7 @@
                                             role="img" aria-label="people outline"></ion-icon>
                                     </div>
                                     <div class="ml-4">
-                                        <p class="text-base font-medium text-black">
+                                        <p class="text-xs 2xl:text-sm font-medium text-black">
                                             Users
                                         </p>
                                         <p class="mt-1 text-sm text-gray-500">
@@ -161,9 +162,9 @@
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
                                 <button
-                                    class="flex flex-row items-center w-full px-4 py-2 mt-2 text-base text-left text-black md:w-auto md:inline md:mt-0 hover:text-red-600 focus:outline-none focus:shadow-outline">
+                                    class="flex flex-row items-center w-full px-4 py-2 mt-2 text-xs 2xl:text-sm text-left text-black md:w-auto md:inline md:mt-0 hover:text-red-600 focus:outline-none focus:shadow-outline">
                                     <span>
-                                        {{ auth()->user()->fullname }}
+                                        {{ ucwords(Auth::user()->fullname) }}
                                     </span>
                                     <svg fill="currentColor" viewBox="0 0 20 20"
                                         :class="{ 'rotate-180': open, 'rotate-0': !open }"
@@ -177,7 +178,10 @@
 
                             <x-slot name="content">
                                 <x-dropdown-link :href="route('user.cart')">
-                                    Keranjang
+                                    <div class="flex items-center gap-x-2">
+                                        <ion-icon class="text-gray-300" name="cart-outline"></ion-icon>
+                                        <span>Keranjang</span>
+                                    </div>
                                 </x-dropdown-link>
 
                                 <form method="POST" action="{{ route('logout') }}">
@@ -185,7 +189,10 @@
                                     <x-dropdown-link :href="route('logout')"
                                         onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                        Keluar
+                                        <div class="flex items-center gap-x-2">
+                                            <ion-icon class="text-gray-300" name="log-out-outline"></ion-icon>
+                                            <span>Keluar</span>
+                                        </div>
                                     </x-dropdown-link>
                                 </form>
                             </x-slot>

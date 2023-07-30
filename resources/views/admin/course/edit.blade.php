@@ -3,7 +3,7 @@
 
     <div class="xl:grid grid-cols-2 gap-8 space-y-6 md:space-y-0">
         <x-card-container>
-            <h2 class="font-semibold text-lg mb-6">
+            <h2 class="font-medium text-md mb-6">
                 Informasi Kursus
             </h2>
 
@@ -25,19 +25,19 @@
                 <x-input-file id="sneek_peek_4" name="sneek_peek_4" label="Sneek Peek 4" required />
             </div>
             <div class="block md:flex justify-between items-center mt-4">
-                <label for="">
+                <label for="" class="font-medium text-xs 2xl:text-sm">
                     Teknologi yang digunakan
                     <span class="text-red-500">*</span>
                 </label>
                 <button type="button" onclick="addTechnology()"
-                    class="bg-dark text-white py-2 px-4 rounded w-full md:w-fit mt-4 md:mt-0">
+                    class="bg-dark text-white py-2 text-xs 2xl:text-sm px-4 rounded w-full md:w-fit mt-4 md:mt-0">
                     Tambah Teknologi </button>
             </div>
             <div id="technology-container" class="block md:grid xl:grid-cols-2 gap-4 mt-4">
             </div>
         </x-card-container>
         <x-card-container>
-            <h2 class="font-semibold text-lg mb-6">
+            <h2 class="font-medium text-md mb-6">
                 Detail Kursus
             </h2>
 
@@ -61,11 +61,11 @@
             </div>
 
             <div class="block md:flex justify-between items-center mt-4">
-                <h2 class="font-semibold text-lg">
+                <h2 class="font-medium text-xs 2xl:text-sm">
                     Tujuan Pembelajaran
                 </h2>
                 <button type="button" onclick="addObjective()"
-                    class="bg-dark text-white py-2 px-4 rounded w-full md:w-fit mt-4 md:mt-0">
+                    class="bg-dark text-white text-xs 2xl:text-sm py-2 px-4 rounded w-full md:w-fit mt-4 md:mt-0">
                     Tambah Tujuan </button>
             </div>
             <div id="objective-container" class="block md:grid grid-cols-2 gap-4 mt-4">
@@ -102,7 +102,7 @@
                         <x-input id="title-${id}" name="title-${id}" type="text" label="Tujuan Pembelajaran ` + (
                     objectives.indexOf(objective) + 1) + `" required value="${objective.title}" />
                         <x-textarea id="description-${id}" name="description-${id}" label="Deskripsi Tujuan Pembelajaran" required>${objective.description}</x-textarea>
-                        <button type="button" onclick="removeObjective(${id})" class="bg-gray-500 text-white py-2 px-4 rounded-md mt-3">
+                        <button type="button" onclick="removeObjective(${id})" class="bg-gray-500 text-white text-xs 2xl:text-sm py-2 px-4 rounded-md mt-3">
                             Hapus
                         </button>
                     </div>
@@ -114,10 +114,11 @@
                 let id = Math.floor(Math.random() * 1000000);
                 let html = `
                     <div id="technology-${id}" class="mb-4 mt-2">
-                        <label for="" class="mb-4">Teknologi ` + (technologies.indexOf(technology) + 1) + `</label>
+                        <label for="" class="mb-4 text-xs 2xl:text-sm">Teknologi ` + (technologies.indexOf(
+                    technology) + 1) + `</label>
                         <div class="flex justify-between items-center mt-2">
-                            <input type="text" name="technologies[]" class="form-input rounded-md shadow-sm block w-full" placeholder="Teknologi" required value="${technology.name}">
-                            <button type="button" onclick="removeTechnology(${id})" class="bg-gray-500 text-white py-2 px-4 rounded-md ml-3">
+                            <input type="text" name="technologies[]" class="form-input rounded-md shadow-sm block w-full text-xs 2xl:text-sm" placeholder="Teknologi" required value="${technology.name}">
+                            <button type="button" onclick="removeTechnology(${id})" class="text-xs 2xl:text-sm bg-gray-500 text-white py-2 px-4 rounded-md ml-3">
                                 Hapus
                             </button>
                         </div>
@@ -218,8 +219,8 @@
                 //     ev.editor.resize('100%', '100px');
                 // });
 
-                CKEDITOR.replace('short_description');
-                CKEDITOR.replace('description');
+                // CKEDITOR.replace('short_description');
+                // CKEDITOR.replace('description');
 
                 $('#main_image').change(function() {
                     let reader = new FileReader();
@@ -276,8 +277,8 @@
 
                     let title = $('#title').val();
                     let category_id = $('#category_id').val();
-                    let short_description = CKEDITOR.instances.short_description.getData();
-                    let description = CKEDITOR.instances.description.getData();
+                    let short_description = $('#short_description').val();
+                    let description = $('#description').val();
                     let price = $('#price').val();
                     let main_image = $('#main_image').val();
                     let sneek_peek_1 = $('#sneek_peek_1').val();

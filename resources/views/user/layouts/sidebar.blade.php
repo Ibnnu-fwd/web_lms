@@ -64,7 +64,7 @@
                                             class="text-sm line-clamp-1 font-medium text-gray-500 group-hover:text-primary">
                                             {{ ucwords(auth()->user()->fullname) }}
                                         </p>
-                                        <p class="text-sm font-medium text-gray-500 group-hover:text-primary">
+                                        <p class="text-sm text-gray-500 group-hover:text-primary">
                                             {{ auth()->user()->getRoleLabel() }}
                                         </p>
                                     </div>

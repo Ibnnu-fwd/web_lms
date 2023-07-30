@@ -263,6 +263,30 @@ body:hover::-webkit-scrollbar-thumb {
     .select2-selection__choice {
     @apply bg-white border cursor-default rounded-md my-1 mr-1 px-2 float-left;
 }
+
+.dataTable thead tr th {
+    @apply text-xs 2xl:text-sm font-medium;
+}
+
+.dataTables_length label,
+.dataTables_info {
+    @apply text-xs 2xl:text-sm;
+}
+
+.dataTables_filter input {
+    @apply ml-2 border-0 py-1.5 text-gray-900 bg-none shadow-sm ring-0 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-primary text-xs 2xl:text-sm sm:leading-6;
+}
+
+.dataTables_length select {
+    @apply text-xs 2xl:text-sm;
+    width: 4em;
+    margin: 0 8px;
+}
+
+.select2-selection__rendered,
+.select2-results__option {
+    @apply text-xs 2xl:text-sm;
+}
 .select2-container--default
     .select2-selection--multiple
     .select2-selection__choice__remove {

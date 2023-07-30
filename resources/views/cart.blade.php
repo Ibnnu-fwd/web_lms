@@ -1,7 +1,7 @@
     <x-user-layout class="relative items-center w-full py-24 mx-auto md:px-12 lg:px-16 max-w-7xl">
         <div class="container mx-auto mb-20 min-h-screen">
             <h1
-                class="leading-relaxed font-primary font-extrabold text-4xl text-center text-palette-primary mt-4 py-2 sm:py-4">
+                class="leading-relaxed font-primary font-medium text-3xl text-center text-palette-primary mt-4 py-2 sm:py-4">
                 Pesanan Anda
             </h1>
             <div class="min-h-80 max-w-7xl my-4 sm:my-8 mx-auto w-full">
@@ -17,14 +17,16 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-palette-lighter">
-                            <tr class="text-sm sm:text-base text-gray-600 text-center">
-                                <td class="font-primary font-medium px-4 sm:px-6 py-4 flex items-center">
+                            <tr class="text-sm sm:text-base text-gray-600">
+                                <td></td>
+                                <td class="font-primary font-medium mr-2 py-4 flex items-center">
                                     <img src="https://images.unsplash.com/photo-1588690154757-badf4644190f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8a290bGlufGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
                                         alt="fashion-dog" class="hidden sm:inline-flex rounded-md me-2 h-16 w-16">
-                                    <a class="pt-1 hover:text-palette-dark" href="#">Belajar Pemrograman
-                                        Kotlin</a>
+                                    <p class="pt-1 hover:text-palette-dark w-full" href="#">
+                                        Belajar Pemrograman Kotlin
+                                    </p>
                                 </td>
-                                <td class="font-primary font-medium px-4 sm:px-6 py-4">
+                                <td class="font-primary px-4 sm:px-6 py-4">
                                     <input type="number" inputmode="numeric" id="variant-quantity"
                                         name="variant-quantity" min="1" step="1"
                                         class="text-gray-900 form-input border border-gray-300 w-16 rounded-md focus:border-primary focus:ring-primary"
@@ -33,7 +35,7 @@
                                 <td class="font-primary text-base font-light px-4 sm:px-6 py-4 hidden sm:table-cell">
                                     Rp.<span class="text-lg">2.000.000</span>
                                 </td>
-                                <td class="font-primary font-medium px-4 sm:px-6 py-4">
+                                <td class="font-primary px-4 sm:px-6 py-4">
                                     Rp.<span class="text-lg">2.000.000</span>
                                 </td>
                                 <td class="font-primary font-medium px-4 sm:px-6 py-4">

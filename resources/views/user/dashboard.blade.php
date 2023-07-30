@@ -3,18 +3,17 @@
     <x-card-container>
         <div class="justify-start w-full text-left">
             <div x-data="{ tab: 'tab1' }">
-                <ul class="flex gap-3 text-gray-500">
+                <ul class="flex gap-3 text-gray-500 mb-6">
                     <li class="-mb-px">
-
                         <a @click.prevent="tab = 'tab1'" href="#"
-                            class="inline-block px-4 py-1 text-md font-medium rounded-lg text-white bg-primary"
-                            :class="{ '  text-white bg-primary': tab === 'tab1' }"> Kelas Yang di
+                            class="inline-block px-4 py-1 text-sm font-medium rounded-md text-white bg-primary"
+                            :class="{ '  text-white bg-primary': tab === 'tab1' }">Kelas yang di
                             pelajari</a>
                     </li>
                     <li class="-mb-px">
                         <a @click.prevent="tab = 'tab2'" href="#"
-                            class="inline-block px-4 py-1 text-md font-medium rounded-lg"
-                            :class="{ '  text-white bg-primary': tab === 'tab2' }"> Kelas Yang Diselesaikan
+                            class="inline-block px-4 py-1 text-sm font-medium rounded-md"
+                            :class="{ '  text-white bg-primary': tab === 'tab2' }"> Kelas yang diselesaikan
                         </a>
                     </li>
 
@@ -25,12 +24,9 @@
                         @for ($i = 1; $i <= 5; $i++)
                             <x-card-container>
                                 {{-- <ion-icon name="code-slash" size="large"></ion-icon> --}}
-                                <div class="flex flex-row items-center justify-between">
-
-                                    <h1 class="text-lg font-bold text-gray-900">Belajar Pemrograman PHP
-                                    </h1>
-                                    <x-link-button route="" title="Belajar" color="black" />
-                                </div>
+                                <h1 class="text-lg font-medium text-gray-900">
+                                    Belajar Pemrograman PHP
+                                </h1>
                                 <div class="flex flex-row items-center gap-5 mt-2">
                                     <div class="flex flex-row items-center gap-2 ">
                                         <ion-icon name="time-outline" style="font-size:20px"></ion-icon>
@@ -42,6 +38,7 @@
                                         <span class="text-sm font-light text-gray-400"> 10 Materi </span>
                                     </div>
                                 </div>
+                                <x-link-button title="Belajar" class="mt-6" color="dark" />
                             </x-card-container>
                         @endfor
                     </div>
