@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\VerificatorController;
 use App\Http\Controllers\Admin\MinCoursePurchaseAtRegController;
 use App\Http\Controllers\CKEditorController;
+use App\Http\Controllers\User\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -87,7 +88,9 @@ Route::group(
         Route::get('/', fn () => view('user.dashboard'))->name('user.dashboard');
         Route::get('checkout', fn () => view('checkout'))->name('user.checkout');
         Route::get('cart', fn () => view('cart'))->name('user.cart');
-        Route::get('transaction', fn () => view('user.transaction.index'))->name('user.transaction');
+        Route::group(['prefix' => 'transaction'], function () {
+            Route::get('/', [TransactionController::class, 'index'])->name('user.transaction');
+        });
     }
 );
 
