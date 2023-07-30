@@ -19,6 +19,11 @@ class CourseCategoryRepository implements CourseCategoryInterface
         return $this->courseCategory->all();
     }
 
+    public function getById($id)
+    {
+        return $this->courseCategory->find($id);
+    }
+
     public function create($data)
     {
         return $this->courseCategory->create($data);
@@ -27,5 +32,10 @@ class CourseCategoryRepository implements CourseCategoryInterface
     public function delete($id)
     {
         return $this->courseCategory->destroy($id);
+    }
+
+    public function update($id, $data)
+    {
+        return $this->courseCategory->find($id)->update($data);
     }
 }

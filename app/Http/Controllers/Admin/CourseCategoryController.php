@@ -66,12 +66,27 @@ class CourseCategoryController extends Controller
 
     public function edit(string $id)
     {
-        //
+        return view('admin.course_category.edit', [
+            'courseCategory' => $this->courseCategory->getById($id)
+        ]);
     }
 
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'icon' => ['required'],
+            'name' => ['required', 'string', 'max:255'],
+        ], [
+            'icon.required' => 'Icon harus diisi',
+            'name.required' => 'Nama harus diisi',
+        ]);
+
+        try {
+            $this->courseCategory->update($id, $request->all());
+            return redirect()->back()->with('success', 'Kategori kursus berhasil diperbarui');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'Kategori kursus gagal diperbarui');
+        }
     }
 
     public function destroy(string $id)

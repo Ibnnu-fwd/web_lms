@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-breadcrumb name="course_category.create" />
+    <x-breadcrumb name="course_category.edit" :data="$courseCategory" />
 
     <x-card-container class="w-full md:w-1/3">
         <div class="flex items-center rounded-md mb-8 bg-gray-50 text-xs 2xl:text-sm px-4 py-3" role="alert">
@@ -13,11 +13,12 @@
                 yang tersedia.
             </p>
         </div>
-        <form action="{{ route('admin.course-category.store') }}" method="POST">
+        <form action="{{ route('admin.course-category.update', $courseCategory->id) }}" method="POST">
             @csrf
-            <x-input id="icon" type="text" name="icon" label="Ikon" required />
-            <x-input id="name" type="text" name="name" label="Nama Kategori" required />
-            <x-button title="Tambah Kategori" />
+            @method('PUT')
+            <x-input id="icon" type="text" name="icon" label="Ikon" :value="$courseCategory->icon" required />
+            <x-input id="name" type="text" name="name" label="Nama Kategori" :value="$courseCategory->name" required />
+            <x-button title="Simpan Perubahan" />
         </form>
     </x-card-container>
 
