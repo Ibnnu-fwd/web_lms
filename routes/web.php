@@ -27,8 +27,7 @@ Route::get('about', fn () => view('about'))->name('about');
 Route::get('order-flow', fn () => view('order-flow'))->name('order-flow');
 
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser:1']], function () {
-
-    Route::get('/', DashboardController::class)->name('dashboard');
+    Route::get('/', DashboardController::class)->name('dashboard')->middleware('checkRole:1');
 
     // Account
     Route::group(['prefix' => 'account', 'as' => 'admin.'], function () {
@@ -77,17 +76,11 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser:1'
     Route::resource('mincourse', MinCoursePurchaseAtRegController::class)->except(['show'])->names('admin.mincourse');
 });
 
-
-
 Route::group(
-    ['prefix' => 'user-dashboard', 'middleware' => ['auth', 'isActiveUser:4']],
+    ['prefix' => 'user-dashboard', 'middleware' => ['isActiveUser:1', 'checkRole:4']],
     function () {
-
         Route::get('/', fn () => view('user.dashboard'))->name('user.dashboard');
-        // Checkout
         Route::get('checkout', fn () => view('checkout'))->name('user.checkout');
-
-        // Cart
         Route::get('cart', fn () => view('cart'))->name('user.cart');
     }
 );

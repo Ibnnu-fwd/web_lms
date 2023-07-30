@@ -147,7 +147,7 @@
                                         <ion-icon class="w-4 h-4 md hydrated" name="person-circle-outline"
                                             role="img" aria-label="person circle outline"></ion-icon>
                                         <span class="ml-4">
-                                            Profile
+                                            Profil
                                         </span>
                                     </a>
                                 </li>

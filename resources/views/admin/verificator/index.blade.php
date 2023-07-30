@@ -24,7 +24,7 @@
             function destroy(id, name) {
                 Swal.fire({
                     title: 'Apakah kamu yakin?',
-                    text: `Verifikator ${name} akan dihapus!`,
+                    text: "Verifikator " + name + " akan dihapus!",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonText: 'Ya, hapus!',

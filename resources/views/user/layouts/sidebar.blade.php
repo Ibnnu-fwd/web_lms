@@ -34,7 +34,7 @@
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
                                 <button
-                                    class="inline-flex items-center w-full px-4 py-2 mt-1 text-md text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary">
+                                    class="inline-flex items-center w-full px-4 py-2 mt-1 text-xs 2xl:text-sm text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary">
                                     <ion-icon class="w-4 h-4 md hydrated" name="log-out-outline" role="img">
                                     </ion-icon>
                                     <span class="ml-4">
@@ -90,7 +90,7 @@
                         <div class="px-2 py-2 bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                             <ul>
                                 <li>
-                                    <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-md text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
+                                    <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-xs 2xl:text-sm text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
                                         href="{{ route('admin.account.index') }}">
                                         <ion-icon class="w-4 h-4 md hydrated" name="body-outline" role="img"
                                             aria-label="body outline"></ion-icon>
@@ -100,12 +100,12 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-md text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
+                                    <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-xs 2xl:text-sm text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
                                         href="#">
                                         <ion-icon class="w-4 h-4 md hydrated" name="person-circle-outline"
                                             role="img" aria-label="person circle outline"></ion-icon>
                                         <span class="ml-4">
-                                            Profile
+                                            Profil
                                         </span>
                                     </a>
                                 </li>

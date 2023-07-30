@@ -11,7 +11,7 @@ Breadcrumbs::for('dashboard', function (BreadcrumbTrail $trail) {
 
 /* User Home */
 Breadcrumbs::for('user-dashboard', function (BreadcrumbTrail $trail) {
-    $trail->push('Progres Belajar', route('user.dashboard'));
+    $trail->push('Dashboard', route('user.dashboard'));
 });
 
 /* ACCOUNT */
