@@ -15,8 +15,19 @@ class IsActiveUser
      */
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
+        // if (auth()->user()->status == 1) {
+        //     return $next($request);
+        // } else {
+        //     auth()->logout();
+        //     return redirect('/login')->with('error', 'Akun anda tidak aktif!');
+        // }
+
         if (auth()->user()->status == 1) {
+            if (in_array(auth()->user()->role, $roles)) {
                 return $next($request);
+            } else {
+                return response()->json(['message' => 'Unauthorized'], 403);
+            }
         } else {
             auth()->logout();
             return redirect('/login')->with('error', 'Akun anda tidak aktif!');

@@ -176,7 +176,7 @@
                             </x-slot>
 
                             <x-slot name="content">
-                                <x-dropdown-link :href="route('admin.cart')">
+                                <x-dropdown-link :href="route('user.cart')">
                                     Keranjang
                                 </x-dropdown-link>
 

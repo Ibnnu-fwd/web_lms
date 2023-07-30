@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div class="max-w-md mx-auto space-y-4 px-2">
-                <a href="{{ route('admin.checkout') }}">
+                <a href="{{ route('user.checkout') }}">
                     <button class="mt-4 mb-8 w-full rounded-md bg-primary px-3 py-3 font-medium text-lg text-white">
                         Checkout
                     </button>

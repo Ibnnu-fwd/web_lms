@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\VerificatorController;
 use App\Http\Controllers\Admin\MinCoursePurchaseAtRegController;
+use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\CKEditorController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +26,8 @@ Route::get('product/{id}', fn ($id) => view('detail-product', ['id' => $id]))->n
 Route::get('about', fn () => view('about'))->name('about');
 Route::get('order-flow', fn () => view('order-flow'))->name('order-flow');
 
-Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser']], function () {
+Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser:1']], function () {
+
     Route::get('/', DashboardController::class)->name('dashboard');
 
     // Account
@@ -73,12 +75,23 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser']]
 
     // Min Course Purchase At Reg
     Route::resource('mincourse', MinCoursePurchaseAtRegController::class)->except(['show'])->names('admin.mincourse');
-
-    // Checkout
-    Route::get('checkout', fn () => view('checkout'))->name('admin.checkout');
-
-    // Cart
-    Route::get('cart', fn () => view('cart'))->name('admin.cart');
 });
+
+
+
+Route::group(
+    ['prefix' => 'user-dashboard', 'middleware' => ['auth', 'isActiveUser:4']],
+    function () {
+
+        Route::get('/', fn () => view('user.dashboard'))->name('user.dashboard');
+        // Checkout
+        Route::get('checkout', fn () => view('checkout'))->name('user.checkout');
+
+        // Cart
+        Route::get('cart', fn () => view('cart'))->name('user.cart');
+    }
+);
+
+
 
 require __DIR__ . '/auth.php';

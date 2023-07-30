@@ -41,7 +41,14 @@
         <!-- Page Content -->
         <main>
             <div class="flex h-screen overflow-hidden bg-gray-50">
-                @include('admin.layout.sidebar')
+
+                {{-- jika role nya == 4 maka tampilkan sidebar user --}}
+                @if (Auth::user()->role == 4)
+                    @include('user.layouts.sidebar')
+                @else
+                    @include('admin.layout.sidebar')
+                @endif
+                {{-- end sidebar --}}
                 {{-- burger button --}}
                 {{-- end burger button --}}
                 <div class="flex flex-col flex-1 w-0 overflow-hidden">
