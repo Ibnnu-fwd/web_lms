@@ -60,7 +60,7 @@
 
                             @guest
                                 <x-button type="button" title="Silahkan login" class="bg-dark hover:bg-slate-900 w-full"
-                                    onclick="location.href='{{ route('admin.checkout') }}'" />
+                                    onclick="location.href='{{ route('user.checkout') }}'" />
                             @endguest
                             <hr class="my-4">
                             <p class="text-gray-400 text-xs">

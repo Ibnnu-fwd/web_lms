@@ -40,7 +40,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser:1'
         Route::get('create', [VerificatorController::class, 'create'])->name('verificator.create');
         Route::post('store', [VerificatorController::class, 'store'])->name('verificator.store');
         Route::delete('destroy/{id}', [VerificatorController::class, 'destroy'])->name('verificator.destroy');
-    });
+    })->middleware('checkRole:1');
 
     // Profile
     Route::group(['prefix' => 'profile', 'as' => 'admin.'], function () {
@@ -64,16 +64,16 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser:1'
         // Course Sub Chapter
         Route::get('course-sub-chapter/{courseChapterId}', [CourseSubChapterController::class, 'index'])->name('course-sub-chapter.index');
         Route::get('course-sub-chapter/{courseChapterId}/create', [CourseSubChapterController::class, 'create'])->name('course-sub-chapter.create');
-    });
+    })->middleware('checkRole:1');
 
     // Ckeditor Image Upload
-    Route::post('ckeditor/upload', [CKEditorController::class, 'upload'])->name('ckeditor.upload');
+    Route::post('ckeditor/upload', [CKEditorController::class, 'upload'])->name('ckeditor.upload')->middleware('checkRole:1');
 
     // Course Category
-    Route::resource('course-category', CourseCategoryController::class)->except(['show'])->names('admin.course-category');
+    Route::resource('course-category', CourseCategoryController::class)->except(['show'])->names('admin.course-category')->middleware('checkRole:1');
 
     // Min Course Purchase At Reg
-    Route::resource('mincourse', MinCoursePurchaseAtRegController::class)->except(['show'])->names('admin.mincourse');
+    Route::resource('mincourse', MinCoursePurchaseAtRegController::class)->except(['show'])->names('admin.mincourse')->middleware('checkRole:1');
 });
 
 Route::group(
