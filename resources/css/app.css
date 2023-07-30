@@ -397,3 +397,8 @@ body:hover::-webkit-scrollbar-thumb {
     height: 30px;
     background-color: #19743b;
 }
+
+table {
+    /* text-sm 2xl:text-sm */
+    @apply text-xs 2xl:text-sm;
+}

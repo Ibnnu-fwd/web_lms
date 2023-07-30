@@ -26,7 +26,8 @@ class IsActiveUser
             if (in_array(auth()->user()->role, $roles)) {
                 return $next($request);
             } else {
-                return response()->json(['message' => 'Unauthorized'], 403);
+                auth()->logout();
+                return redirect('/login')->with('error', 'Akun anda tidak aktif!');
             }
         } else {
             auth()->logout();

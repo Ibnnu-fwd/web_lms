@@ -16,9 +16,8 @@ class User extends Authenticatable
 {
 
     const ROLE_ADMIN       = 1;
-    const ROLE_VERIFICATOR = 2;
-    const ROLE_INSTITUTION = 3;
-    const ROLE_USER        = 4;
+    const ROLE_INSTITUTION = 2;
+    const ROLE_USER        = 3;
 
     const ROLE_ADMIN_LABEL       = 'Admin';
     const ROLE_VERIFICATOR_LABEL = 'Verifikator';
@@ -94,40 +93,23 @@ class User extends Authenticatable
     // Custom Function
     public function getRoleLabel()
     {
-        switch ($this->role) {
-            case self::ROLE_ADMIN:
-                return self::ROLE_ADMIN_LABEL;
-                break;
-            case self::ROLE_VERIFICATOR:
-                return self::ROLE_VERIFICATOR_LABEL;
-                break;
-            case self::ROLE_INSTITUTION:
-                return self::ROLE_INSTITUTION_LABEL;
-                break;
-            case self::ROLE_USER:
-                return self::ROLE_USER_LABEL;
-                break;
-            default:
-                return 'Unknown';
-                break;
-        }
-    }
-
-    public function getStatusLabel()
-    {
-        switch ($this->status) {
-            case self::STATUS_PENDING:
-                return self::STATUS_PENDING_LABEL;
-                break;
-            case self::STATUS_ACTIVE:
-                return self::STATUS_ACTIVE_LABEL;
-                break;
-            case self::STATUS_INACTIVE:
-                return self::STATUS_INACTIVE_LABEL;
-                break;
-            default:
-                return 'Unknown';
-                break;
+        if ($this->is_verificator == true) {
+            return self::ROLE_VERIFICATOR_LABEL;
+        } else {
+            switch ($this->role) {
+                case self::ROLE_ADMIN:
+                    return self::ROLE_ADMIN_LABEL;
+                    break;
+                case self::ROLE_INSTITUTION:
+                    return self::ROLE_INSTITUTION_LABEL;
+                    break;
+                case self::ROLE_USER:
+                    return self::ROLE_USER_LABEL;
+                    break;
+                default:
+                    return 'Unknown';
+                    break;
+            }
         }
     }
 }
