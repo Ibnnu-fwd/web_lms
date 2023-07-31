@@ -38,7 +38,8 @@
                                         <span class="text-sm font-light text-gray-400"> 10 Materi </span>
                                     </div>
                                 </div>
-                                <x-link-button title="Belajar" class="mt-6" color="dark" />
+                                <x-link-button title="Belajar" class="mt-6" color="dark"
+                                    route="{{ route('user.course') }}" />
                             </x-card-container>
                         @endfor
                     </div>
