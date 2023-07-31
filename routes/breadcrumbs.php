@@ -165,3 +165,15 @@ Breadcrumbs::for('question.edit', function (BreadcrumbTrail $trail, $data) {
     $trail->push($data->question);
     $trail->push('Edit', route('admin.question.edit', [$data->quiz_id, $data->id]));
 });
+
+
+/* VERIFICATOR DASHBOARD */
+Breadcrumbs::for('verificator-dashboard', function (BreadcrumbTrail $trail) {
+    $trail->push('Dashboard', route('verificator.dashboard'));
+});
+
+/* COURSE REQUEST */
+Breadcrumbs::for('course-request', function (BreadcrumbTrail $trail) {
+    $trail->parent('verificator-dashboard');
+    $trail->push('Permintaan Kursus', route('verificator.course-request.index'));
+});

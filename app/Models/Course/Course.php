@@ -3,6 +3,7 @@
 namespace App\Models\Course;
 
 use App\Models\Transaction\DetailTransaction;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -89,6 +90,11 @@ class Course extends Model
     public function courseObjective()
     {
         return $this->hasMany(CourseObjective::class, 'course_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'created_by');
     }
 
     // Custom function

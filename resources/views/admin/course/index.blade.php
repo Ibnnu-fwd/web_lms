@@ -29,6 +29,90 @@
 
     @push('js-internal')
         <script>
+            function destroy(id, title) {
+                console.log(id, title);
+                Swal.fire({
+                    title: 'Apakah kamu yakin?',
+                    text: `Kursus ${title} akan dinonaktifkan!`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        let url = "{{ route('admin.course.destroy', ':id') }}";
+                        url = url.replace(':id', id);
+                        $.ajax({
+                            url: url,
+                            type: 'DELETE',
+                            data: {
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function(data) {
+                                if (data.status == true) {
+                                    Swal.fire({
+                                        title: 'Berhasil!',
+                                        text: `Kursus ${title} berhasil dihapus!`,
+                                        icon: 'success',
+                                        showConfirmButton: false,
+                                    }).then((result) => {
+                                        $('#courseTable').DataTable().ajax.reload();
+                                    })
+                                } else {
+                                    Swal.fire({
+                                        title: 'Gagal!',
+                                        text: `Kursus ${title} gagal dihapus!`,
+                                        icon: 'error',
+                                    })
+                                }
+                            },
+                        });
+                    }
+                })
+            }
+
+            function restore(id, title) {
+                console.log(id, title);
+                Swal.fire({
+                    title: 'Apakah kamu yakin?',
+                    text: `Kursus ${title} akan diaktifkan kembali!`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        let url = "{{ route('admin.course.restore', ':id') }}";
+                        url = url.replace(':id', id);
+                        $.ajax({
+                            url: url,
+                            type: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function(data) {
+                                if (data.status == true) {
+                                    Swal.fire({
+                                        title: 'Berhasil!',
+                                        text: `Kursus ${title} berhasil diaktifkan kembali!`,
+                                        icon: 'success',
+                                        showConfirmButton: false,
+                                    }).then((result) => {
+                                        $('#courseTable').DataTable().ajax.reload();
+                                    })
+                                } else {
+                                    Swal.fire({
+                                        title: 'Gagal!',
+                                        text: `Kursus ${title} gagal diaktifkan kembali!`,
+                                        icon: 'error',
+                                    })
+                                }
+                            },
+                        });
+                    }
+                })
+            }
+
             $(function() {
                 $('#courseTable').DataTable({
                     processing: true,

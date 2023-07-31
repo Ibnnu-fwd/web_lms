@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\QuizController;
 use App\Http\Controllers\CKEditorController;
 use App\Http\Controllers\User\TransactionController;
+use App\Http\Controllers\Verificator\CourseRequestController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -58,6 +59,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser:1'
         Route::post('store', [CourseController::class, 'store'])->name('course.store');
         Route::get('edit/{id}', [CourseController::class, 'edit'])->name('course.edit');
         Route::post('update/{id}', [CourseController::class, 'update'])->name('course.update');
+        Route::delete('destroy/{id}', [CourseController::class, 'destroy'])->name('course.destroy');
+        Route::post('restore/{id}', [CourseController::class, 'restore'])->name('course.restore');
 
         // Course Chapter
         Route::post('{course_id}/chapter/{id}/restore', [CourseChapterController::class, 'restore'])->name('course-chapter.restore');
@@ -101,6 +104,14 @@ Route::group(
         Route::get('course', fn () => view('user.course.index'))->name('user.course');
     }
 );
+
+Route::group(['prefix' => 'verificator-dashboard', 'middleware' => ['isActiveUser:1', 'isVerificator'], 'as' => 'verificator.'], function () {
+    Route::get('/', fn () => view('verificator.dashboard'))->name('dashboard');
+    Route::group(['prefix' => 'course-request'], function () {
+        Route::get('/', [CourseRequestController::class, 'index'])->name('course-request.index');
+        Route::post('approve/{id}', [CourseRequestController::class, 'approve'])->name('course-request.approve');
+    });
+});
 
 
 

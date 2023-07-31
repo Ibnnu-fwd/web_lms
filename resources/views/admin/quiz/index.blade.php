@@ -105,6 +105,7 @@
                     }
                 })
             }
+
             $(function() {
                 $('#quizTable').DataTable({
                     processing: true,

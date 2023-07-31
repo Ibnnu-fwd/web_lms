@@ -242,4 +242,23 @@ class CourseRepository implements CourseInterface
 
         DB::commit();
     }
+
+    public function destroy($id)
+    {
+        return $this->getById($id)->update([
+            'activation_status' => Course::ACTIVATE_STATUS_INACTIVE,
+        ]);
+    }
+
+    public function restore($id)
+    {
+        return $this->getById($id)->update([
+            'activation_status' => Course::ACTIVATE_STATUS_ACTIVE,
+        ]);
+    }
+
+    public function getAll()
+    {
+        return $this->course->with(['category', 'courseChapter', 'user'])->where('activation_status', Course::ACTIVATE_STATUS_ACTIVE)->get();
+    }
 }

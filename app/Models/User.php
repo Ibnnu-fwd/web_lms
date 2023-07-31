@@ -84,6 +84,11 @@ class User extends Authenticatable
         return $this->hasMany(UserCourseAccessLog::class);
     }
 
+    public function course()
+    {
+        return $this->hasMany(Course::class, 'created_by', 'id');
+    }
+
     // Scope
     public function scopeActive($query)
     {

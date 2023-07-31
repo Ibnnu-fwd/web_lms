@@ -163,4 +163,22 @@ class CourseController extends Controller
             ]);
         }
     }
+
+    public function destroy($id)
+    {
+        $this->course->destroy($id);
+        return response()->json([
+            'status' => true,
+            'message' => 'Kursus berhasil dihapus',
+        ]);
+    }
+
+    public function restore($id)
+    {
+        $this->course->restore($id);
+        return response()->json([
+            'status' => true,
+            'message' => 'Kursus berhasil dipulihkan',
+        ]);
+    }
 }

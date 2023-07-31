@@ -31,7 +31,9 @@ class AuthenticatedSessionController extends Controller
 
         if (auth()->user()->role == 1) {
             return redirect()->intended(RouteServiceProvider::HOME);
-        } else {
+        } elseif (auth()->user()->is_verificator == true) {
+            return redirect()->intended(RouteServiceProvider::HOME_VERIFICATOR);
+        } elseif (auth()->user()->role != 1 && auth()->user()->is_verificator == false) {
             return redirect()->intended(RouteServiceProvider::HOME_USER);
         }
     }
