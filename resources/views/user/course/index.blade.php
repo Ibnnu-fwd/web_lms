@@ -41,14 +41,14 @@
 <body class="font-sans antialiased">
     <div class="mx-auto">
         <!-- Navbar -->
-        <nav class="flex items-center justify-between px-4 py-4 w-full border-b">
+        <nav class="flex items-center justify-between px-4 py-2 bg-white border-b">
             <!-- Icon Panah untuk Kembali -->
             <a href="#" onclick="window.history.back();" class="text-gray-600 hover:text-gray-800">
                 <ion-icon name="arrow-back-outline" class="text-2xl"></ion-icon>
             </a>
 
             <!-- Judul -->
-            <h1 class="text-xl font-semibold flex-shrink-0"> Judul Course </h1>
+            <h1 class="text-base font-normal "> Judul Course </h1>
             <!-- Placeholder untuk bagian kanan, misalnya tombol logout, notifikasi, dll. -->
             <div>
                 @auth
@@ -100,7 +100,6 @@
                                     </x-dropdown-link>
                                 </form>
                             </x-slot>
-
                         </x-dropdown>
                     </div>
                 @else
@@ -118,7 +117,7 @@
             </div>
         </nav>
 
-        <div class="flex">
+        <div class="flex h-screen">
             <!-- Sidebar (Materials List) -->
             <div class="hidden md:flex md:flex-shrink-0 ">
                 <div class="hidden md:flex md:flex-shrink-0">
@@ -126,120 +125,71 @@
                         <div class="flex flex-col flex-grow pt-5 overflow-y-auto bg-white border-r">
                             <div class="flex flex-col flex-grow px-4">
                                 <nav class="flex-1 space-y-1 bg-white">
-                                    <p class="px-4 pt-4 text-xl font-semibold text-primary uppercase">
-                                        List Materi
-                                    </p>
+                                    <div class="border-b mb-6 pb-8 px-4">
+
+                                        <p class="pt-4 text-xl font-semibold text-primary">
+                                            List Materi
+                                        </p>
+
+                                        <div class="h-1 w-full bg-neutral-200 dark:bg-neutral-600 mt-6">
+                                            <div class="h-1 bg-primary" style="width: 45%"></div>
+                                        </div>
+
+                                        {{-- batas langganan --}}
+
+                                        <p>
+                                            <span class="text-sm text-gray-500">Progres</span>
+                                            <span class="text-sm text-gray-500 float-right">6%</span>
+                                        </p>
+
+                                    </div>
+                                    {{-- progres --}}
+
+
                                     <ul>
-                                        <li>
-                                            <details>
-                                                <summary
-                                                    class="cursor-pointer outline-none focus:outline-none inline-flex
-                                                    items-center w-full px-4 py-2 mt-1 text-base text-gray-500
+                                        @for ($i = 0; $i < 10; $i++)
+                                            <li class="mb-4">
+                                                <details>
+                                                    <summary
+                                                        class="focus:outline-none inline-flex
+                                                    items-center w-full px-4 py-2 text-base text-gray-500
                                                     transition duration-200 ease-in-out transform rounded-lg
                                                     focus:shadow-outline hover:bg-gray-100 hover:scale-95
-                                                    hover:text-primary">
-                                                    Materi 1
+                                                    hover:text-primary ">
+                                                        <p> Materi {{ $i + 1 }}
+                                                        </p>
+                                                        <span
+                                                            class="inline-flex items-center justify-center px-2 py-1 ml-2 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">
+                                                            1/12</span>
 
-                                                    <span
-                                                        class="inline-flex items-center justify-center px-2 py-1 ml-2 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">
-                                                        1/3</span>
-                                                </summary>
-                                                <!-- Dropdown content -->
-                                                <div class="px-4 py-2 mt-1 bg-gray-100">
-                                                    <ul>
-                                                        <li>
-                                                            <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-base text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
-                                                                href="#">
-                                                                Sub Materi 1
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-base text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
-                                                                href="#">
-                                                                Sub Materi 2
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-base text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
-                                                                href="#">
-                                                                Sub Materi 3
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </details>
-                                        </li>
-                                        <li>
-                                            <details>
-                                                <summary
-                                                    class="cursor-pointer outline-none focus:outline-none inline-flex
-                                                    items-center w-full px-4 py-2 mt-1 text-base text-gray-500
-                                                    transition duration-200 ease-in-out transform rounded-lg
-                                                    focus:shadow-outline hover:bg-gray-100 hover:scale-95
-                                                    hover:text-primary">
-                                                    Materi Pembelajaran 2
-                                                </summary>
-                                                <!-- Dropdown content -->
-                                                <div class="px-4 py-2 mt-1 bg-gray-100">
-                                                    <ul>
-                                                        <li>
-                                                            <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-base text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
-                                                                href="#">
-                                                                Sub Materi 1
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-base text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
-                                                                href="#">
-                                                                Sub Materi 2
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-base text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
-                                                                href="#">
-                                                                Sub Materi 3
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </details>
-                                        </li>
-                                        <li>
-                                            <details>
-                                                <summary
-                                                    class="cursor-pointer outline-none focus:outline-none inline-flex
-                                                    items-center w-full px-4 py-2 mt-1 text-base text-gray-500
-                                                    transition duration-200 ease-in-out transform rounded-lg
-                                                    focus:shadow-outline hover:bg-gray-100 hover:scale-95
-                                                    hover:text-primary">
-                                                    Materi Pembelajaran 3
-                                                </summary>
-                                                <!-- Dropdown content -->
-                                                <div class="px-4 py-2 mt-1 bg-gray-100">
-                                                    <ul>
-                                                        <li>
-                                                            <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-base text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
-                                                                href="#">
-                                                                Sub Materi 1
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-base text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
-                                                                href="#">
-                                                                Sub Materi 2
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-base text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
-                                                                href="#">
-                                                                Sub Materi 3
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </details>
-                                        </li>
-
+                                                        <ion-icon class="ml-auto" name="caret-down-outline"></ion-icon>
+                                                    </summary>
+                                                    <!-- Dropdown content -->
+                                                    <div class="px-4 py-2 mt-1">
+                                                        <ul>
+                                                            <li>
+                                                                <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-base text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
+                                                                    href="#">
+                                                                    Sub Materi 1
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-base text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
+                                                                    href="#">
+                                                                    Sub Materi 2
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-base text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
+                                                                    href="#">
+                                                                    Sub Materi 3
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </details>
+                                            </li>
+                                        @endfor
                                     </ul>
                                 </nav>
                             </div>
@@ -259,12 +209,9 @@
                                                     <div class="ml-3 text-left">
                                                         <p
                                                             class="text-sm font-medium text-gray-500 group-hover:text-blue-500">
-                                                            Mike Vega
+                                                            {{ ucwords(Auth::user()->fullname) }}
                                                         </p>
-                                                        <p
-                                                            class="text-xs font-medium text-gray-500 group-hover:text-blue-500">
-                                                            Pro user
-                                                        </p>
+
                                                     </div>
                                                 </div>
                                             </span>
@@ -291,7 +238,7 @@
                                             <ul>
                                                 <li>
                                                     <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-sm text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-blue-500"
-                                                        href="#">
+                                                        href="{{ route('dashboard') }}">
                                                         <ion-icon class="w-4 h-4 md hydrated" name="body-outline"
                                                             role="img" aria-label="body outline"></ion-icon>
                                                         <span class="ml-4">
@@ -319,7 +266,22 @@
                     </div>
                 </div>
             </div>
-            <div class="flex flex-col flex-1 w-0 overflow-hidden">
+
+            <div class="flex flex-col flex-auto w-0 overflow-hidden p-2">
+                <div class="flex items-center sm:hidden">
+                    <button id="toggleButton" @click="toggleSidebar()"
+                        class="toggle-button inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
+                        <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                            <path :class="{ 'hidden': sidebarOpen, 'inline-flex': !sidebarOpen }" class="inline-flex"
+                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                            <path :class="{ 'hidden': !sidebarOpen, 'inline-flex': sidebarOpen }" class="hidden"
+                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+
+                </div>
                 <main class="relative flex-1 overflow-y-auto focus:outline-none">
                     <div class="py-6">
                         <div class="px-4 mx-auto 2xl:max-w-7xl sm:px-6 md:px-8">
@@ -333,9 +295,29 @@
                     </div>
                 </main>
             </div>
-
         </div>
     </div>
+
+    <script>
+        // Function to handle the toggle button on mobile mode
+        function toggleSidebar() {
+            const sidebar = document.querySelector(".hidden.md\\:flex.md\\:flex-shrink-0");
+            if (sidebar) {
+                sidebar.classList.toggle("hidden");
+            }
+        }
+
+        // Add an event listener to the toggle button
+        const toggleButton = document.getElementById("toggleButton");
+        if (toggleButton) {
+            toggleButton.addEventListener("click", toggleSidebar);
+        }
+    </script>
+
+
+
+
+    @stack('js-internal')
 
     <!-- Ion Icons -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
