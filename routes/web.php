@@ -98,6 +98,7 @@ Route::group(
         Route::group(['prefix' => 'transaction'], function () {
             Route::get('/', [TransactionController::class, 'index'])->name('user.transaction');
         });
+        Route::get('course', fn () => view('user.course.index'))->name('user.course');
     }
 );
 
