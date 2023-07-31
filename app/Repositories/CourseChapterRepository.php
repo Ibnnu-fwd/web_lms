@@ -20,7 +20,7 @@ class CourseChapterRepository implements CourseChapterInterface
 
     public function getAll($courseId)
     {
-        return $this->courseChapter->with('courseSubChapters')->where('course_id', $courseId)->get();
+        return $this->courseChapter->with(['courseSubChapters', 'quiz'])->where('course_id', $courseId)->get();
     }
 
     public function getById($id)

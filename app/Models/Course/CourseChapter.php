@@ -2,6 +2,7 @@
 
 namespace App\Models\Course;
 
+use App\Models\Course\Quiz\Quiz;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -29,7 +30,7 @@ class CourseChapter extends Model
 
     public function quiz()
     {
-        return $this->hasOne(Quiz::class);
+        return $this->hasMany(Quiz::class);
     }
 
     public function userCourseAccessLogs()

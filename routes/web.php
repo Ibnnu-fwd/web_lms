@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\VerificatorController;
 use App\Http\Controllers\Admin\MinCoursePurchaseAtRegController;
+use App\Http\Controllers\Admin\QuizController;
 use App\Http\Controllers\CKEditorController;
 use App\Http\Controllers\User\TransactionController;
 use Illuminate\Support\Facades\Route;
@@ -69,6 +70,9 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser:1'
         Route::post('course-sub-chapter/{courseChapterId}/update/{id}', [CourseSubChapterController::class, 'update'])->name('course-sub-chapter.update');
         Route::post('course-sub-chapter/{courseSubChapter}/delete-file', [CourseSubChapterController::class, 'deleteFile'])->name('course-sub-chapter.delete-file');
         Route::post('course-sub-chapter/{courseSubChapter}/delete-video', [CourseSubChapterController::class, 'deleteVideo'])->name('course-sub-chapter.delete-video');
+
+        Route::post('quiz/{quizId}/restore', [QuizController::class, 'restore'])->name('quiz.restore');
+        Route::resource('{courseChapterId}/quiz', QuizController::class)->except(['show']);
     })->middleware('checkRole:1');
 
 

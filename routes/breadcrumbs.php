@@ -135,3 +135,15 @@ Breadcrumbs::for('mincourse.edit', function (BreadcrumbTrail $trail, $data) {
     $trail->push($data->name);
     $trail->push('Edit', route('admin.mincourse.edit', $data));
 });
+
+/* QUIZ */
+Breadcrumbs::for('quiz', function (BreadcrumbTrail $trail, $data) {
+    $trail->parent('course_chapter', $data->course);
+    $trail->push($data->title);
+    $trail->push('Quiz', route('admin.quiz.index',  $data));
+});
+
+Breadcrumbs::for('quiz.create', function (BreadcrumbTrail $trail, $data) {
+    $trail->parent('quiz', $data);
+    $trail->push('Tambah Quiz', route('admin.quiz.create', $data));
+});

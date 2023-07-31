@@ -14,7 +14,8 @@ class Quiz extends Model
     protected $fillable = [
         'course_chapter_id',
         'title',
-        'description'
+        'description',
+        'is_active'
     ];
 
     public function courseChapter()

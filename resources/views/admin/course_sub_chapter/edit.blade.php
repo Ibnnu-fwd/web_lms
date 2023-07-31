@@ -11,7 +11,7 @@
                     Lengkapi data materi teori dengan benar.
                 </p>
                 <div class="mt-8">
-                    <x-input id="title" name="title" type="text" label="Judul Materi" />
+                    <x-input id="title" name="title" type="text" label="Judul Materi" required />
                     {{-- only pdf --}}
                     <x-input id="file" name="file" type="file" label="File Materi Teori"
                         accept="application/pdf" />
