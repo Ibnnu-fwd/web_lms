@@ -1,5 +1,5 @@
 <div class="hidden md:flex md:flex-shrink-0" id="sidebar-container">
-    <div class="flex flex-col w-64">
+    <div class="flex flex-col h-screen w-64">
         <div class="flex flex-col flex-grow pt-5 overflow-y-auto bg-white border-r">
             <div class="flex flex-col flex-shrink-0 px-4">
                 <a class="text-lg mx-3 font-semibold tracking-tighter text-black focus:outline-none focus:ring "
@@ -117,17 +117,4 @@
             </div>
         </div>
     </div>
-</div>
-{{-- burger button --}}
-<div class="m-2 items-center sm:hidden h-fit">
-    <button @click="open = ! open"
-        class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
-        id="nav-toggle">
-        <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-            <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex" stroke-linecap="round"
-                stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            <path :class="{ 'hidden': !open, 'inline-flex': open }" class="hidden" stroke-linecap="round"
-                stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-    </button>
 </div>

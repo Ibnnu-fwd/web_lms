@@ -39,11 +39,22 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen bg-transparent">
         <!-- Page Content -->
+        <div class="px-2 items-center sm:hidden h-fit">
+            <button @click="open = ! open"
+                class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 focus:outline-none transition duration-150 ease-in-out"
+                id="nav-toggle">
+                <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                    <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    <path :class="{ 'hidden': !open, 'inline-flex': open }" class="hidden" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
         <main>
             <div class="flex h-screen overflow-hidden bg-gray-50">
-
                 {{-- jika role nya == 4 maka tampilkan sidebar user --}}
                 @if (Auth::user()->role == 4)
                     @include('user.layouts.sidebar')
@@ -54,7 +65,7 @@
                 {{-- burger button --}}
                 {{-- end burger button --}}
                 <div class="flex flex-col flex-1 w-0 overflow-hidden">
-                    <main class="relative flex-1 overflow-y-auto focus:outline-none">
+                    <main class="relative flex-1 overflow-y-auto focus:outline-none" id="main-content">
                         <div class="py-8">
                             <div class="px-4 mx-auto 2xl:max-w-9xl sm:px-6 md:px-8">
                                 {{ $slot }}
@@ -77,6 +88,16 @@
         // Attach the toggleSidebar function to the "nav-toggle" button
         const navToggle = document.getElementById("nav-toggle");
         navToggle.addEventListener("click", toggleSidebar);
+
+        // hide main-content when sidebar is open
+        const mainContent = document.getElementById("main-content");
+        navToggle.addEventListener("click", function() {
+            if (mainContent.classList.contains("hidden")) {
+                mainContent.classList.remove("hidden");
+            } else {
+                mainContent.classList.add("hidden");
+            }
+        });
     </script>
 
     <!-- Ion Icons -->
