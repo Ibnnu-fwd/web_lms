@@ -147,3 +147,21 @@ Breadcrumbs::for('quiz.create', function (BreadcrumbTrail $trail, $data) {
     $trail->parent('quiz', $data);
     $trail->push('Tambah Quiz', route('admin.quiz.create', $data));
 });
+
+/* QUESTION */
+Breadcrumbs::for('question', function (BreadcrumbTrail $trail, $data) {
+    $trail->parent('quiz', $data->courseChapter);
+    $trail->push($data->title);
+    $trail->push('Soal', route('admin.question.index',  $data));
+});
+
+Breadcrumbs::for('question.create', function (BreadcrumbTrail $trail, $data) {
+    $trail->parent('question', $data);
+    $trail->push('Tambah Soal', route('admin.question.create', $data));
+});
+
+Breadcrumbs::for('question.edit', function (BreadcrumbTrail $trail, $data) {
+    $trail->parent('question', $data->quiz);
+    $trail->push($data->question);
+    $trail->push('Edit', route('admin.question.edit', [$data->quiz_id, $data->id]));
+});

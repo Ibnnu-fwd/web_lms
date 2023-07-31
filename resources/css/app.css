@@ -291,6 +291,10 @@ body:hover::-webkit-scrollbar-thumb {
     margin: 0 8px;
 }
 
+.dataTable thead tr th {
+    @apply text-xs 2xl:text-sm font-normal;
+}
+
 .select2-selection__rendered,
 .select2-results__option {
     @apply text-xs 2xl:text-sm;

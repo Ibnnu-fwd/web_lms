@@ -3,7 +3,7 @@
     @if ($data->is_active)
         <x-delete-button onclick="destroy('{{ $data->id }}', '{{ $data->title }}')" />
         <x-link-button color="dark" title="{{ $data->questions->count() ? 'Lihat Soal' : 'Tambah Soal' }}"
-            route="" />
+            route="{{ route('admin.question.index', $data->id) }}" />
     @else
         <x-restore-button onclick="restore('{{ $data->id }}', '{{ $data->title }}')" />
     @endif

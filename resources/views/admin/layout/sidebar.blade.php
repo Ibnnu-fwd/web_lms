@@ -40,7 +40,7 @@
                         <li>
                             <x-sidebar-link route="{{ route('admin.course.index') }}" icon="albums-outline"
                                 title="Daftar"
-                                active="{{ request()->routeIs('admin.course.*') || request()->routeIs('admin.course-chapter.*') || request()->routeIs('admin.course-sub-chapter.*') }}" />
+                                active="{{ request()->routeIs('admin.course.*') || request()->routeIs('admin.course-chapter.*') || request()->routeIs('admin.course-sub-chapter.*') || request()->routeIs('admin.quiz.*') || request()->routeIs('admin.question.*') }}" />
                         </li>
                         <!-- Course Category -->
                         <li>
