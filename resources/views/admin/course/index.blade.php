@@ -113,6 +113,88 @@
                 })
             }
 
+            function publish(id, title) {
+                Swal.fire({
+                    title: 'Apakah kamu yakin?',
+                    text: `Kursus ${title} akan dipublikasikan!`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, publikasikan!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        let url = "{{ route('admin.course.publish', ':id') }}";
+                        url = url.replace(':id', id);
+                        $.ajax({
+                            url: url,
+                            type: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function(data) {
+                                if (data.status == true) {
+                                    Swal.fire({
+                                        title: 'Berhasil!',
+                                        text: `Kursus ${title} berhasil dipublikasikan!`,
+                                        icon: 'success',
+                                        showConfirmButton: false,
+                                    }).then((result) => {
+                                        $('#courseTable').DataTable().ajax.reload();
+                                    })
+                                } else {
+                                    Swal.fire({
+                                        title: 'Gagal!',
+                                        text: `Kursus ${title} gagal dipublikasikan!`,
+                                        icon: 'error',
+                                    })
+                                }
+                            },
+                        });
+                    }
+                })
+            }
+
+            function unpublish(id, title) {
+                Swal.fire({
+                    title: 'Apakah kamu yakin?',
+                    text: `Kursus ${title} tidak akan dipublikasikan!`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, unpublikasikan!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        let url = "{{ route('admin.course.unpublish', ':id') }}";
+                        url = url.replace(':id', id);
+                        $.ajax({
+                            url: url,
+                            type: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function(data) {
+                                if (data.status == true) {
+                                    Swal.fire({
+                                        title: 'Berhasil!',
+                                        text: `Kursus ${title} berhasil diunpublikasikan!`,
+                                        icon: 'success',
+                                        showConfirmButton: false,
+                                    }).then((result) => {
+                                        $('#courseTable').DataTable().ajax.reload();
+                                    })
+                                } else {
+                                    Swal.fire({
+                                        title: 'Gagal!',
+                                        text: `Kursus ${title} gagal diunpublikasikan!`,
+                                        icon: 'error',
+                                    })
+                                }
+                            },
+                        });
+                    }
+                })
+            }
+
             $(function() {
                 $('#courseTable').DataTable({
                     processing: true,

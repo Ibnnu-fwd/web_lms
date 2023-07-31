@@ -30,7 +30,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: `{{ route('verificator.course-request.approve') }}`,
+                            url: `{{ route('verificator.course-request.approve', ':id') }}`.replace(':id', id),
                             type: 'POST',
                             data: {
                                 _token: '{{ csrf_token() }}',
@@ -58,6 +58,85 @@
                     }
                 })
             }
+
+            function reject(id, title) {
+                Swal.fire({
+                    icon: 'warning',
+                    text: `Apakah anda yakin ingin menolak permintaan kursus ${title}?`,
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya',
+                    cancelButtonText: 'Tidak',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: `{{ route('verificator.course-request.reject', ':id') }}`.replace(':id', id),
+                            type: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                id: id
+                            },
+                            success: function() {
+                                Swal.fire({
+                                    icon: 'success',
+                                    text: 'Permintaan kursus berhasil ditolak',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }).then(() => {
+                                    $('#courseRequestTable').DataTable().ajax.reload();
+                                })
+                            },
+                            error: function() {
+                                Swal.fire({
+                                    icon: 'error',
+                                    text: 'Permintaan kursus gagal ditolak',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            }
+                        })
+                    }
+                })
+            }
+
+            function pending(id, title) {
+                Swal.fire({
+                    icon: 'warning',
+                    text: `Apakah anda yakin ingin mengubah status permintaan kursus ${title} menjadi pending?`,
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya',
+                    cancelButtonText: 'Tidak',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: `{{ route('verificator.course-request.pending', ':id') }}`.replace(':id', id),
+                            type: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                id: id
+                            },
+                            success: function() {
+                                Swal.fire({
+                                    icon: 'success',
+                                    text: 'Status permintaan kursus berhasil diubah menjadi pending',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }).then(() => {
+                                    $('#courseRequestTable').DataTable().ajax.reload();
+                                })
+                            },
+                            error: function() {
+                                Swal.fire({
+                                    icon: 'error',
+                                    text: 'Status permintaan kursus gagal diubah menjadi pending',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            }
+                        })
+                    }
+                })
+            }
+
             $(function() {
                 $('#courseRequestTable').DataTable({
                     processing: true,

@@ -181,4 +181,22 @@ class CourseController extends Controller
             'message' => 'Kursus berhasil dipulihkan',
         ]);
     }
+
+    public function publish($id)
+    {
+        $this->course->publish($id);
+        return response()->json([
+            'status' => true,
+            'message' => 'Berhasil mempublish course'
+        ]);
+    }
+
+    public function unpublish($id)
+    {
+        $this->course->unpublish($id);
+        return response()->json([
+            'status' => true,
+            'message' => 'Berhasil membatalkan publish course'
+        ]);
+    }
 }

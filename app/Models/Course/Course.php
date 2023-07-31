@@ -116,6 +116,24 @@ class Course extends Model
         }
     }
 
+    public function getRequestStatusColor()
+    {
+        switch ($this->request_status) {
+            case self::REQUEST_STATUS_WAITING:
+                return 'dark';
+                break;
+            case self::REQUEST_STATUS_APPROVED:
+                return 'success';
+                break;
+            case self::REQUEST_STATUS_REJECTED:
+                return 'primary';
+                break;
+            default:
+                return 'Unknown';
+                break;
+        }
+    }
+
     public function getUploadStatusText()
     {
         switch ($this->upload_status) {

@@ -61,6 +61,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser:1'
         Route::post('update/{id}', [CourseController::class, 'update'])->name('course.update');
         Route::delete('destroy/{id}', [CourseController::class, 'destroy'])->name('course.destroy');
         Route::post('restore/{id}', [CourseController::class, 'restore'])->name('course.restore');
+        Route::post('publish/{id}', [CourseController::class, 'publish'])->name('course.publish');
+        Route::post('unpublish/{id}', [CourseController::class, 'unpublish'])->name('course.unpublish');
 
         // Course Chapter
         Route::post('{course_id}/chapter/{id}/restore', [CourseChapterController::class, 'restore'])->name('course-chapter.restore');
@@ -110,6 +112,8 @@ Route::group(['prefix' => 'verificator-dashboard', 'middleware' => ['isActiveUse
     Route::group(['prefix' => 'course-request'], function () {
         Route::get('/', [CourseRequestController::class, 'index'])->name('course-request.index');
         Route::post('approve/{id}', [CourseRequestController::class, 'approve'])->name('course-request.approve');
+        Route::post('reject/{id}', [CourseRequestController::class, 'reject'])->name('course-request.reject');
+        Route::post('pending/{id}', [CourseRequestController::class, 'pending'])->name('course-request.pending');
     });
 });
 

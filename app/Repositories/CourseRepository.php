@@ -261,4 +261,39 @@ class CourseRepository implements CourseInterface
     {
         return $this->course->with(['category', 'courseChapter', 'user'])->where('activation_status', Course::ACTIVATE_STATUS_ACTIVE)->get();
     }
+
+    public function approve($id)
+    {
+        return $this->getById($id)->update([
+            'request_status' => Course::REQUEST_STATUS_APPROVED,
+        ]);
+    }
+
+    public function reject($id)
+    {
+        return $this->getById($id)->update([
+            'request_status' => Course::REQUEST_STATUS_REJECTED,
+        ]);
+    }
+
+    public function pending($id)
+    {
+        return $this->getById($id)->update([
+            'request_status' => Course::REQUEST_STATUS_WAITING,
+        ]);
+    }
+
+    public function publish($id)
+    {
+        return $this->getById($id)->update([
+            'upload_status' => Course::UPLOAD_STATUS_PUBLISHED,
+        ]);
+    }
+
+    public function unpublish($id)
+    {
+        return $this->getById($id)->update([
+            'upload_status' => Course::UPLOAD_STATUS_UNPUBLISHED,
+        ]);
+    }
 }

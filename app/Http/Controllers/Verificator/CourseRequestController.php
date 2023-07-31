@@ -40,7 +40,7 @@ class CourseRequestController extends Controller
                     return 'Rp. ' . number_format($data->price, 0, ',', '.');
                 })
                 ->addColumn('request_status', function ($data) {
-                    return strtoupper($data->getRequestStatusText());
+                    return view('verificator.course_request.column.request_status', compact('data'));
                 })
                 ->addColumn('action', function ($data) {
                     return view('verificator.course_request.column.action', compact('data'));
@@ -53,5 +53,28 @@ class CourseRequestController extends Controller
 
     public function approve($id)
     {
+        $this->course->approve($id);
+        return response()->json([
+            'status' => true,
+            'message' => 'Berhasil menyetujui permintaan pembuatan course'
+        ]);
+    }
+
+    public function reject($id)
+    {
+        $this->course->reject($id);
+        return response()->json([
+            'status' => true,
+            'message' => 'Berhasil menolak permintaan pembuatan course'
+        ]);
+    }
+
+    public function pending($id)
+    {
+        $this->course->pending($id);
+        return response()->json([
+            'status' => true,
+            'message' => 'Berhasil mengubah status permintaan pembuatan course menjadi menunggu'
+        ]);
     }
 }
