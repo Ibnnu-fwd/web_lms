@@ -29,9 +29,6 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
-    <!-- Pdf js -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.8.162/web/pdf_viewer.min.css">
-
     @stack('css-internal')
 
     <!-- Scripts -->
@@ -134,9 +131,6 @@
                                         <div class="h-1 w-full bg-neutral-200 dark:bg-neutral-600 mt-6">
                                             <div class="h-1 bg-primary" style="width: 45%"></div>
                                         </div>
-
-                                        {{-- batas langganan --}}
-
                                         <p>
                                             <span class="text-sm text-gray-500">Progres</span>
                                             <span class="text-sm text-gray-500 float-right">6%</span>
@@ -288,7 +282,10 @@
                             <!-- === Remove and replace with your own content... === -->
                             <div class="py-4">
 
-                                <div class="h-screen border border-gray-200 border-dashed rounded-lg"></div>
+                                <div class="h-screen border border-gray-200 border-dashed rounded-lg">
+                                    <iframe src="" frameborder="0" width="100%" id="pdf-viewer"
+                                        height="100%"></iframe>
+                                </div>
                             </div>
                             <!-- === End ===  -->
                         </div>
@@ -297,27 +294,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        // Function to handle the toggle button on mobile mode
-        function toggleSidebar() {
-            const sidebar = document.querySelector(".hidden.md\\:flex.md\\:flex-shrink-0");
-            if (sidebar) {
-                sidebar.classList.toggle("hidden");
-            }
-        }
-
-        // Add an event listener to the toggle button
-        const toggleButton = document.getElementById("toggleButton");
-        if (toggleButton) {
-            toggleButton.addEventListener("click", toggleSidebar);
-        }
-    </script>
-
-
-
-
-    @stack('js-internal')
 
     <!-- Ion Icons -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
@@ -347,11 +323,20 @@
     <!-- Datepicker -->
     <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 
-    <!-- Pdf js -->
-    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.8.162/build/pdf.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.7/pdfobject.min.js"
+        integrity="sha512-g16L6hyoieygYYZrtuzScNFXrrbJo/lj9+1AYsw+0CYYYZ6lx5J3x9Yyzsm+D37/7jMIGh0fDqdvyYkNWbuYuA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         $('select').select2();
+
+        var options = {
+            // remove toolbar
+            toolbar: {
+                show: false
+            },
+        }
+
+        PDFObject.embed("{{ asset('assets/Profile.pdf') }}", "#pdf-viewer", options);
     </script>
 
     @stack('js-internal')
