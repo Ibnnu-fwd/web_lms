@@ -12,8 +12,9 @@ use App\Http\Controllers\Admin\MinCoursePurchaseAtRegController;
 use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\QuizController;
 use App\Http\Controllers\CKEditorController;
-use App\Http\Controllers\User\TransactionController;
+use App\Http\Controllers\User\TransactionController as UserTransactionController;
 use App\Http\Controllers\Verificator\CourseRequestController;
+use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -24,10 +25,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('product', fn() => view('product'))->name('product');
-Route::get('product/{id}', fn($id) => view('detail-product', ['id' => $id]))->name('detail-product');
-Route::get('about', fn() => view('about'))->name('about');
-Route::get('order-flow', fn() => view('order-flow'))->name('order-flow');
+Route::get('product', fn () => view('product'))->name('product');
+Route::get('product/{id}', fn ($id) => view('detail-product', ['id' => $id]))->name('detail-product');
+Route::get('about', fn () => view('about'))->name('about');
+Route::get('order-flow', fn () => view('order-flow'))->name('order-flow');
 
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser:1']], function () {
     Route::get('/', DashboardController::class)->name('dashboard')->middleware('checkRole:1');
@@ -38,8 +39,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser:1'
     });
 
     // Transaction
-    Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
-        Route::get('/transaction', [TransactionController::class, 'index'])->name('transaction.index');
+    Route::group(['prefix' => 'admin/transaction', 'as' => 'admin.'], function () {
+        Route::get('/', [AdminTransactionController::class, 'index'])->name('transaction.index');
     });
 
     // Verificator
@@ -48,7 +49,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser:1'
         Route::get('create', [VerificatorController::class, 'create'])->name('verificator.create');
         Route::post('store', [VerificatorController::class, 'store'])->name('verificator.store');
         Route::delete('destroy/{id}', [VerificatorController::class, 'destroy'])->name('verificator.destroy');
-    })->middleware('checkRole:1');
+    });
 
     // Profile
     Route::group(['prefix' => 'profile', 'as' => 'admin.'], function () {
@@ -100,20 +101,20 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser:1'
 });
 
 Route::group(
-    ['prefix' => 'user-dashboard', 'middleware' => ['isActiveUser:1', 'checkRole:4']],
+    ['prefix' => 'user-dashboard', 'middleware' => ['auth', 'isActiveUser:1', 'checkRole:4']],
     function () {
-        Route::get('/', fn() => view('user.dashboard'))->name('user.dashboard');
-        Route::get('checkout', fn() => view('checkout'))->name('user.checkout');
-        Route::get('cart', fn() => view('cart'))->name('user.cart');
+        Route::get('/', fn () => view('user.dashboard'))->name('user.dashboard');
+        Route::get('checkout', fn () => view('checkout'))->name('user.checkout');
+        Route::get('cart', fn () => view('cart'))->name('user.cart');
         Route::group(['prefix' => 'transaction'], function () {
-            Route::get('/', [TransactionController::class, 'index'])->name('user.transaction');
+            Route::get('/', [UserTransactionController::class, 'index'])->name('user.transaction');
         });
-        Route::get('course', fn() => view('user.course.index'))->name('user.course');
+        Route::get('course', fn () => view('user.course.index'))->name('user.course');
     }
 );
 
 Route::group(['prefix' => 'verificator-dashboard', 'middleware' => ['isActiveUser:1', 'isVerificator'], 'as' => 'verificator.'], function () {
-    Route::get('/', fn() => view('verificator.dashboard'))->name('dashboard');
+    Route::get('/', fn () => view('verificator.dashboard'))->name('dashboard');
     Route::group(['prefix' => 'course-request'], function () {
         Route::get('/', [CourseRequestController::class, 'index'])->name('course-request.index');
         Route::post('approve/{id}', [CourseRequestController::class, 'approve'])->name('course-request.approve');
@@ -122,6 +123,8 @@ Route::group(['prefix' => 'verificator-dashboard', 'middleware' => ['isActiveUse
     });
 });
 
+
+// Institution
 
 
 require __DIR__ . '/auth.php';

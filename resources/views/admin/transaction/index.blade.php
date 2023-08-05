@@ -2,19 +2,19 @@
     <x-breadcrumb name="user-transaction" />
     <x-card-container>
 
-        <table id="courseCategoryTable">
+        <table id="transactionTable">
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Code Transaksi</th>
-                    <th>Tipe Transaksi</th>
-                    <th>Customer</th>
+                    <th>Kode Transaksi</th>
+                    <th>Tipe</th>
+                    <th>Kustomer</th>
                     <th>Sub Total</th>
                     <th>Total Pembayaran</th>
                     <th>Status Pemesanan</th>
                     <th>Status Pembayaran</th>
                     <th>Tanggal</th>
-                    <th>Action</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
         </table>
@@ -23,7 +23,7 @@
     @push('js-internal')
         <script>
             $(function() {
-                $('#courseCategoryTable').DataTable({
+                $('#transactionTable').DataTable({
                     processing: true,
                     serverSide: true,
                     responsive: true,

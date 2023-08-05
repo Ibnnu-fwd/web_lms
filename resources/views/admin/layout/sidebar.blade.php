@@ -55,7 +55,7 @@
                         <!-- Transaction -->
                         <li>
                             <x-sidebar-link route="{{ route('admin.transaction.index') }}" icon="folder-outline"
-                                title="Transaksi" active="{{ request()->routeIs('admin.transaction*') }}" />
+                                title="Transaksi" active="{{ request()->routeIs('admin.transaction.*') }}" />
                         </li>
                     </ul>
 

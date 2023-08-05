@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Interfaces\TransactionInterface;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -10,7 +11,7 @@ class TransactionController extends Controller
     private $transaction;
 
     public function __construct(
-        UserTransactionInterface $transaction
+        TransactionInterface $transaction
     ) {
         $this->transaction = $transaction;
     }
