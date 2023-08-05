@@ -52,6 +52,11 @@
                             <x-sidebar-link route="{{ route('admin.mincourse.index') }}" icon="folder-outline"
                                 title="Minimum Pembelian" active="{{ request()->routeIs('admin.mincourse*') }}" />
                         </li>
+                        <!-- Transaction -->
+                        <li>
+                            <x-sidebar-link route="{{ route('admin.transaction.index') }}" icon="folder-outline"
+                                title="Transaksi" active="{{ request()->routeIs('admin.transaction*') }}" />
+                        </li>
                     </ul>
 
                     <p class="px-4 pt-4 text-xs 2xl:text-sm font-medium text-gray-400 uppercase">
