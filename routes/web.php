@@ -123,6 +123,14 @@ Route::group(['prefix' => 'verificator-dashboard', 'middleware' => ['isActiveUse
     });
 });
 
+Route::group(
+    ['prefix' => 'institution-dashboard', 'middleware' => ['auth', 'isActiveUser:1', 'checkRole:3']],
+    function () {
+        Route::get('/', fn () => view('institution.dashboard'))->name('institution.dashboard');
+        Route::get('management-acount', fn () => view('institution.management-account'))->name('institution.management-account');
+    }
+);
+
 
 // Institution
 

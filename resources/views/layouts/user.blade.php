@@ -179,7 +179,14 @@
                             <x-slot name="content">
                                 <x-dropdown-link
                                     href="{{ // check if auth user is admin route to dashboard, if role = 4 route to user-dashboarsd
-                                        Auth::user()->role == 4 ? route('user.dashboard') : (auth()->user()->role == 1 ? route('dashboard') : '#') }}">
+                                        Auth::user()->role == 4
+                                            ? route('user.dashboard')
+                                            : (auth()->user()->role == 1
+                                                ? route('dashboard')
+                                                : (auth()->user()->role == 3
+                                                    ? route('institution.dashboard')
+                                                    : '#')) }}">
+
                                     <div class="flex items-center gap-x-2">
                                         <ion-icon class="text-gray-300" name="log-in-outline"></ion-icon>
                                         <span>Dashboard</span>

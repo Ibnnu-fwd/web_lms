@@ -21,13 +21,24 @@
                     <ul>
                         <!-- Dashboard -->
                         <li>
-                            <x-sidebar-link route="{{ route('user.dashboard') }}" icon="laptop-outline"
-                                title="Dashboard" active="{{ request()->routeIs('user.dashboard') }}" />
+                            <x-sidebar-link route="{{ route('institution.dashboard') }}" icon="laptop-outline"
+                                title="Dashboard" active="{{ request()->routeIs('institution.dashboard') }}" />
                         </li>
                         <!-- Manajemen Akun -->
                         <li>
-                            <x-sidebar-link route="{{ route('user.transaction') }}" icon="cart-outline"
-                                title="Transaksi" active="{{ request()->routeIs('user.transaction') }}" />
+                            <x-sidebar-link route="{{ route('institution.management-account') }}" icon="person-outline"
+                                title="Management Akun"
+                                active="{{ request()->routeIs('institution.management-account') }}" />
+                        </li>
+                        {{-- Transaksi --}}
+                        <li>
+                            <x-sidebar-link route="{{ '' }}" icon="card-outline" title="Transaksi"
+                                active="{{ '' }}" />
+                        </li>
+                        {{-- Kelas --}}
+                        <li>
+                            <x-sidebar-link route="{{ '' }}" icon="book-outline" title="Kelas"
+                                active="{{ '' }}" />
                         </li>
 
                         <li>

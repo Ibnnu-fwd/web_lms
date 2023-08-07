@@ -177,3 +177,14 @@ Breadcrumbs::for('course-request', function (BreadcrumbTrail $trail) {
     $trail->parent('verificator-dashboard');
     $trail->push('Permintaan Kursus', route('verificator.course-request.index'));
 });
+
+
+/* INSTITUTION */
+
+Breadcrumbs::for('institution-dashboard', function (BreadcrumbTrail $trail) {
+    $trail->push('Dashboard', route('institution.dashboard'));
+});
+
+Breadcrumbs::for('institution.management-account', function (BreadcrumbTrail $trail) {
+    $trail->push('Manajemen Akun', route('institution.management-account'));
+});

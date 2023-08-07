@@ -60,9 +60,11 @@
             <div class="flex h-screen overflow-hidden bg-gray-50">
                 {{-- jika role nya == 4 maka tampilkan sidebar user --}}
                 @if (Auth::user()->role == 4 && Auth::user()->is_verificator == 0)
-                    @include('user.layout.sidebar')
+                    @include('user.layouts.sidebar')
                 @elseif(Auth::user()->role == 4 && Auth::user()->is_verificator == 1)
                     @include('verificator.layout.sidebar')
+                @elseif (Auth::user()->role == 3 && Auth::user()->is_verificator == 0)
+                    @include('institution.layouts.sidebar')
                 @else
                     @include('admin.layout.sidebar')
                 @endif
@@ -104,6 +106,8 @@
             }
         });
     </script>
+
+
 
     <!-- Ion Icons -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
