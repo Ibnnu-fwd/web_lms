@@ -58,10 +58,10 @@
         </div>
         <main>
             <div class="flex h-screen overflow-hidden bg-gray-50">
-                {{-- jika role nya == 4 maka tampilkan sidebar user --}}
-                @if (Auth::user()->role == 4 && Auth::user()->is_verificator == 0)
+                {{-- jika role nya == 2 maka tampilkan sidebar user --}}
+                @if (Auth::user()->role == 2 && Auth::user()->is_verificator == 0)
                     @include('user.layouts.sidebar')
-                @elseif(Auth::user()->role == 4 && Auth::user()->is_verificator == 1)
+                @elseif(Auth::user()->role == 2 && Auth::user()->is_verificator == 1)
                     @include('verificator.layout.sidebar')
                 @elseif (Auth::user()->role == 3 && Auth::user()->is_verificator == 0)
                     @include('institution.layouts.sidebar')
