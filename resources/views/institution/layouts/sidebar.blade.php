@@ -37,8 +37,9 @@
                         </li>
                         {{-- Kelas --}}
                         <li>
-                            <x-sidebar-link route="{{ '' }}" icon="book-outline" title="Kelas"
-                                active="{{ '' }}" />
+                        <x-sidebar-link route="{{ route('institution.course.index') }}" icon="person-outline"
+                                title="Kelas"
+                                active="{{ request()->routeIs('institution.course.*') || request()->routeIs('institution.course-chapter.*') || request()->routeIs('institution.course-sub-chapter.*') || request()->routeIs('institution.quiz.*') || request()->routeIs('institution.question.*') }}" />
                         </li>
 
                         <li>
