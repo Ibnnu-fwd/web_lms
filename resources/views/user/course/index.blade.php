@@ -33,12 +33,13 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
 </head>
 
 <body class="font-sans antialiased">
     <div class="mx-auto">
         <!-- Navbar -->
-        <nav class="flex items-center justify-between px-4 py-2 bg-white border-b">
+        <nav class="flex justify-between items-center px-4 py-2 bg-white border-b">
             <!-- Icon Panah untuk Kembali -->
             <a href="#" onclick="window.history.back();" class="text-gray-600 hover:text-gray-800">
                 <ion-icon name="arrow-back-outline" class="text-2xl"></ion-icon>
@@ -116,10 +117,12 @@
 
         <div class="flex h-screen">
             <!-- Sidebar (Materials List) -->
-            <div class="hidden md:flex md:flex-shrink-0 ">
-                <div class="hidden md:flex md:flex-shrink-0">
+            <div class="md:flex md:flex-shrink-0 ">
+                <div class="flex flex-col w-64">
                     <div class="flex flex-col w-64">
-                        <div class="flex flex-col flex-grow pt-5 overflow-y-auto bg-white border-r">
+                        <div class="flex flex-col flex-grow pt-5 overflow-y-auto bg-white border-r"
+                            :class="['hidden', 'md:flex', 'md:flex-shrink-0', { 'hidden': !open }]"
+                            id="sidebar-container">
                             <div class="flex flex-col flex-grow px-4">
                                 <nav class="flex-1 space-y-1 bg-white">
                                     <div class="border-b mb-6 pb-8 px-4">
@@ -135,59 +138,29 @@
                                             <span class="text-sm text-gray-500">Progres</span>
                                             <span class="text-sm text-gray-500 float-right">6%</span>
                                         </p>
-
                                     </div>
                                     {{-- progres --}}
-
-
                                     <ul>
                                         @for ($i = 0; $i < 10; $i++)
                                             <li class="mb-4">
-                                                <details>
-                                                    <summary
-                                                        class="focus:outline-none inline-flex
+
+                                                <div
+                                                    class="focus:outline-none inline-flex
                                                     items-center w-full px-4 py-2 text-base text-gray-500
                                                     transition duration-200 ease-in-out transform rounded-lg
                                                     focus:shadow-outline hover:bg-gray-100 hover:scale-95
-                                                    hover:text-primary ">
-                                                        <p> Materi {{ $i + 1 }}
-                                                        </p>
-                                                        <span
-                                                            class="inline-flex items-center justify-center px-2 py-1 ml-2 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">
-                                                            1/12</span>
-
-                                                        <ion-icon class="ml-auto" name="caret-down-outline"></ion-icon>
-                                                    </summary>
-                                                    <!-- Dropdown content -->
-                                                    <div class="px-4 py-2 mt-1">
-                                                        <ul>
-                                                            <li>
-                                                                <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-base text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
-                                                                    href="#">
-                                                                    Sub Materi 1
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-base text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
-                                                                    href="#">
-                                                                    Sub Materi 2
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="inline-flex items-center w-full px-4 py-2 mt-1 text-base text-gray-500 transition duration-200 ease-in-out transform rounded-lg focus:shadow-outline hover:bg-gray-100 hover:scale-95 hover:text-primary"
-                                                                    href="#">
-                                                                    Sub Materi 3
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </details>
+                                                    hover:text-primary text-center justify-center">
+                                                    <p> Materi {{ $i + 1 }}
+                                                    </p>
+                                                </div>
                                             </li>
                                         @endfor
                                     </ul>
                                 </nav>
                             </div>
-                            <div class="flex flex-shrink-0 p-4 px-4 bg-gray-50">
+                            <div
+                                class="flex
+                                                    flex-shrink-0 p-4 px-4 bg-gray-50">
                                 <div @click.away="open = false" class="relative inline-flex items-center w-full"
                                     x-data="{ open: false }">
                                     <button @click="open = !open"
@@ -245,7 +218,8 @@
                                                         href="#">
                                                         <ion-icon class="w-4 h-4 md hydrated"
                                                             name="person-circle-outline" role="img"
-                                                            aria-label="person circle outline"></ion-icon>
+                                                            aria-label="person circle outline">
+                                                        </ion-icon>
                                                         <span class="ml-4">
                                                             Profile
                                                         </span>
@@ -262,7 +236,7 @@
             </div>
 
             <div class="flex flex-col flex-auto w-0 overflow-hidden p-2">
-                <div class="flex items-center sm:hidden">
+                <div class="flex items-center ">
                     <button id="toggleButton" @click="toggleSidebar()"
                         class="toggle-button inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
                         <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
@@ -274,17 +248,26 @@
                                 d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
-
                 </div>
-                <main class="relative flex-1 overflow-y-auto focus:outline-none">
+                <main
+                    class="relative flex-1 focus:outline-none lg:w-1/2 md:w-full justify-center mx-auto bg-white rounded-lg overflow-y-auto">
                     <div class="py-6">
                         <div class="px-4 mx-auto 2xl:max-w-7xl sm:px-6 md:px-8">
                             <!-- === Remove and replace with your own content... === -->
-                            <div class="py-4">
+                            <div>
 
-                                <div class="h-screen border border-gray-200 border-dashed rounded-lg">
-                                    <iframe src="" frameborder="0" width="100%" id="pdf-viewer"
-                                        height="100%"></iframe>
+                                {{-- show video with iframe --}}
+                                <div class="embed-responsive embed-responsive-16by9 relative w-full overflow-hidden rounded-lg shadow-lg"
+                                    style="padding-top: 56.25%">
+                                    <iframe
+                                        class="embed-responsive-item absolute top-0 right-0 bottom-0 left-0 h-full w-full"
+                                        src="https://www.youtube.com/embed/rs48iVajzWc" allowfullscreen="true"
+                                        data-gtm-yt-inspected-2340190_699="true" id="240632615"></iframe>
+                                </div>
+
+                                <div class="h-screen border border-gray-200 border-dashed rounded-lg py-6">
+                                    <iframe src="{{ asset('assets/Profile.pdf') }}" frameborder="0" width="100%"
+                                        id="pdf-viewer" height="100%"></iframe>
                                 </div>
                             </div>
                             <!-- === End ===  -->
@@ -337,6 +320,16 @@
         }
 
         PDFObject.embed("{{ asset('assets/Profile.pdf') }}", "#pdf-viewer", options);
+    </script>
+
+    <script>
+        const sidebarContainer = document.getElementById('sidebar-container');
+        const toggleButton = document.getElementById('toggleButton');
+
+        toggleButton.addEventListener('click', () => {
+            sidebarContainer.classList.toggle('hidden');
+
+        });
     </script>
 
     @stack('js-internal')
