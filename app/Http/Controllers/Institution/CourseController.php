@@ -98,7 +98,7 @@ class CourseController extends Controller
             $this->course->store($request->all());
             return response()->json([
                 'status' => true,
-                'message' => 'Kursus berhasil ditambahkan',
+                'message' => 'Kelas berhasil ditambahkan',
             ]);
         } catch (\Throwable $th) {
             dd($th->getMessage());
@@ -153,7 +153,7 @@ class CourseController extends Controller
             $this->course->update($request->all(), $id);
             return response()->json([
                 'status' => true,
-                'message' => 'Kursus berhasil diubah',
+                'message' => 'Kelas berhasil diubah',
             ]);
         } catch (\Throwable $th) {
             dd($th->getMessage());
@@ -169,7 +169,7 @@ class CourseController extends Controller
         $this->course->destroy($id);
         return response()->json([
             'status' => true,
-            'message' => 'Kursus berhasil dihapus',
+            'message' => 'Kelas berhasil dihapus',
         ]);
     }
 
@@ -178,7 +178,7 @@ class CourseController extends Controller
         $this->course->restore($id);
         return response()->json([
             'status' => true,
-            'message' => 'Kursus berhasil dipulihkan',
+            'message' => 'Kelas berhasil dipulihkan',
         ]);
     }
 

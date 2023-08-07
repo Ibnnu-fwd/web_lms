@@ -16,6 +16,7 @@ use App\Http\Controllers\CKEditorController;
 use App\Http\Controllers\User\TransactionController as UserTransactionController;
 use App\Http\Controllers\Verificator\CourseRequestController;
 use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
+use App\Http\Controllers\Institution\TransactionController as InstitutionTransactionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -127,10 +128,14 @@ Route::group(['prefix' => 'verificator-dashboard', 'middleware' => ['isActiveUse
 Route::group(
     ['prefix' => 'institution-dashboard', 'middleware' => ['auth', 'isActiveUser:1', 'checkRole:3']],
     function () {
+        // dashboard
         Route::get('/', fn() => view('institution.dashboard'))->name('institution.dashboard');
-        Route::get('management-acount', fn() => view('institution.management-account'))->name('institution.management-account');
+
+        //management-account
+        Route::get('management-account', fn() => view('institution.management-account'))->name('institution.management-account');
+
         // Course
-        Route::group(['prefix' => 'course', 'as' => 'institution.'], function () {
+        Route::group(['prefix' => 'kelas', 'as' => 'institution.'], function () {
             Route::get('/', [InstitutionCourseController::class, 'index'])->name('course.index');
             Route::get('create', [InstitutionCourseController::class, 'create'])->name('course.create');
             Route::post('store', [InstitutionCourseController::class, 'store'])->name('course.store');
@@ -160,6 +165,10 @@ Route::group(
             Route::resource('{quizId}/question', QuestionController::class);
         })->middleware('checkRole:3');
 
+        // transction
+        Route::group(['prefix' => 'transaction', 'as' => 'institution.'], function () {
+            Route::get('/', [InstitutionTransactionController::class, 'index'])->name('transaction.index');
+        });
     }
 );
 

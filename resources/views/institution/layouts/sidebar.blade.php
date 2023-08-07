@@ -32,12 +32,12 @@
                         </li>
                         {{-- Transaksi --}}
                         <li>
-                            <x-sidebar-link route="{{ '' }}" icon="card-outline" title="Transaksi"
-                                active="{{ '' }}" />
+                        <x-sidebar-link route="{{ route('institution.transaction.index') }}" icon="cart-outline"
+                                title="Transaksi" active="{{ request()->routeIs('institution.transaction.*') }}" />
                         </li>
                         {{-- Kelas --}}
                         <li>
-                        <x-sidebar-link route="{{ route('institution.course.index') }}" icon="person-outline"
+                        <x-sidebar-link route="{{ route('institution.course.index') }}" icon="book-outline"
                                 title="Kelas"
                                 active="{{ request()->routeIs('institution.course.*') || request()->routeIs('institution.course-chapter.*') || request()->routeIs('institution.course-sub-chapter.*') || request()->routeIs('institution.quiz.*') || request()->routeIs('institution.question.*') }}" />
                         </li>

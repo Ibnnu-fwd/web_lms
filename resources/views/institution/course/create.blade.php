@@ -9,32 +9,13 @@
 
             <x-input id="title" name="title" type="text" label="Kode Kelas" required />
             <x-input id="title" name="title" type="text" label="Nama Kelas" required />
-
-            <x-textarea id="short_description" name="short_description" label="Deskripsi Singkat" required />
-            <x-textarea id="description" name="description" label="Deskripsi Lengkap" required />
-            <x-input id="price" name="price" type="number" label="Harga" required />
-            <div class="md:grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-x-4 mt-4">
-                <x-input-file id="main_image" name="main_image" label="Gambar Utama" required />
-                <x-input-file id="sneek_peek_1" name="sneek_peek_1" label="Sneek Peek 1" required />
-                <x-input-file id="sneek_peek_2" name="sneek_peek_2" label="Sneek Peek 2" required />
-                <x-input-file id="sneek_peek_3" name="sneek_peek_3" label="Sneek Peek 3" required />
-                <x-input-file id="sneek_peek_4" name="sneek_peek_4" label="Sneek Peek 4" required />
-            </div>
-            <div class="block md:flex justify-between items-center mt-4">
-                <label for="" class="text-xs 2xl:text-sm">
-                    Teknologi yang digunakan
-                    <span class="text-red-500">*</span>
-                </label>
-                <button type="button" onclick="addTechnology()"
-                    class="bg-dark text-white text-xs 2xl:text-sm py-2 px-4 rounded w-full md:w-fit mt-4 md:mt-0">
-                    Tambah Teknologi </button>
-            </div>
-            <div id="technology-container" class="block md:grid xl:grid-cols-2 gap-4 mt-4">
-            </div>
+            <x-input id="dateAcces" label="Tanggal Akses" name="dateAcces" type="text" required
+                value="{{ auth()->user()->dateAcces }}" />
+            
         </x-card-container>
         <x-card-container>
             <h2 class="font-medium text-md mb-6">
-                Informasi Benefit
+                Daftar Murid
             </h2>
 
             <div class="md:grid grid-cols-2 gap-x-8">
@@ -68,7 +49,7 @@
             </div>
         </x-card-container>
         <div>
-            <x-button title="Tambah Kursus" class="w-full 2xl:w-fit mt-4 2xl:mt-0" />
+            <x-button title="Simpan Perubahan" class="w-full 2xl:w-fit mt-4 2xl:mt-0" />
         </div>
     </div>
 
@@ -77,6 +58,14 @@
         <script src="//cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
 
         <script>
+            $(function() {
+                $("#dateAcces").datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    showButtonPanel: true,
+                    dateFormat: 'yy-mm-dd',
+                });
+            });
             function removeObjective(id) {
                 $(`#objective-${id}`).remove();
                 $('#objective-container').children().each(function(index) {
