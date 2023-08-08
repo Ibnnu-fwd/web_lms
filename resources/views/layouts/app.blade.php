@@ -65,8 +65,10 @@
                     $isVerificator = $user->is_verificator;
                 @endphp
 
-                @if ($role == 2 && $isVerificator == 0)
-                    @include('institution.layouts.sidebar')
+                @if ($role == 1 && $isVerificator == 0)
+                    @include('admin.layout.sidebar')
+                @elseif ($role == 3 && $isVerificator == 0)
+                    @include('user.layouts.sidebar')
                 @elseif ($role == 3 && $isVerificator == 0)
                     @include('user.layouts.sidebar')
                 @elseif ($isVerificator == 1)

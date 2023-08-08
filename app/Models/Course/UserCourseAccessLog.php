@@ -15,7 +15,6 @@ class UserCourseAccessLog extends Model
         'user_id',
         'course_id',
         'course_chapter_id',
-        'course_sub_chapter_id'
     ];
 
     public function user()
@@ -31,10 +30,5 @@ class UserCourseAccessLog extends Model
     public function courseChapter()
     {
         return $this->belongsTo(CourseChapter::class);
-    }
-
-    public function courseSubChapter()
-    {
-        return $this->belongsTo(CourseSubChapter::class);
     }
 }

@@ -11,7 +11,6 @@
                 <tr>
                     <th>Judul</th>
                     <th>Deskripsi</th>
-                    <th>Jumlah Sub Materi</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -118,10 +117,6 @@
                         {
                             data: 'description',
                             name: 'description'
-                        },
-                        {
-                            data: 'course_sub_chapter_count',
-                            name: 'course_sub_chapter_count'
                         },
                         {
                             data: 'action',

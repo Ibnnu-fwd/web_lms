@@ -16,7 +16,6 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('course_id')->nullable();
             $table->unsignedBigInteger('course_chapter_id')->nullable();
-            $table->unsignedBigInteger('course_sub_chapter_id')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')
@@ -28,9 +27,6 @@ return new class extends Migration
             $table->foreign('course_chapter_id')
                 ->references('id')
                 ->on('course_chapters');
-            $table->foreign('course_sub_chapter_id')
-                ->references('id')
-                ->on('course_sub_chapters');
         });
     }
 
@@ -44,7 +40,6 @@ return new class extends Migration
             $table->dropForeign(['user_id']);
             $table->dropForeign(['course_id']);
             $table->dropForeign(['course_chapter_id']);
-            $table->dropForeign(['course_sub_chapter_id']);
         });
     }
 };

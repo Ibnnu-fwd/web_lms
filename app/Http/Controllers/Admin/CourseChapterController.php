@@ -29,9 +29,6 @@ class CourseChapterController extends Controller
                 ->addColumn('description', function ($data) {
                     return $data->description;
                 })
-                ->addColumn('course_sub_chapter_count', function ($data) {
-                    return $data->courseSubChapters->count();
-                })
                 ->addColumn('action', function ($data) {
                     return view('admin.course_chapter.column.action', compact('data'));
                 })

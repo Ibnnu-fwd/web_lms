@@ -218,11 +218,11 @@
                 @else
                     <div class="inline-flex items-center gap-2 list-none lg:ml-auto">
                         <button onclick="window.location.href='{{ route('login') }}'"
-                            class="block px-4 py-2 mt-2 text-md text-gray-500 md:mt-0 hover:text-red-600 focus:outline-none focus:shadow-outline">
+                            class="block px-4 py-2 mt-2 text-xs 2xl:text-sm text-gray-500 md:mt-0 hover:text-red-600 focus:outline-none focus:shadow-outline">
                             Masuk
                         </button>
                         <button onclick="window.location.href='{{ route('register') }}'"
-                            class="inline-flex items-center justify-center px-4 py-2 text-md font-semibold text-white bg-dark rounded-md group focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 hover:bg-slate-700 active:bg-slate-800 active:text-white focus-visible:outline-black">
+                            class="inline-flex items-center justify-center px-4 py-2 text-xs 2xl:text-sm font-semibold text-white bg-dark rounded-md group focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 hover:bg-slate-700 active:bg-slate-800 active:text-white focus-visible:outline-black">
                             Daftar
                         </button>
                     </div>

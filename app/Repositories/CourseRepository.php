@@ -46,59 +46,51 @@ class CourseRepository implements CourseInterface
     public function store($data)
     {
         DB::beginTransaction();
+        DB::beginTransaction();
 
-        $filename_main_image   = uniqid() . '.' . $data['main_image']->extension();
-        $filename_sneek_peek_1 = uniqid() . '.' . $data['sneek_peek_1']->extension();
-        $filename_sneek_peek_2 = uniqid() . '.' . $data['sneek_peek_2']->extension();
-        $filename_sneek_peek_3 = uniqid() . '.' . $data['sneek_peek_3']->extension();
-        $filename_sneek_peek_4 = uniqid() . '.' . $data['sneek_peek_4']->extension();
+        $mainImageFilename = uniqid() . '.' . $data['main_image']->extension();
+        $mainImagePath     = 'public/courses/' . $mainImageFilename;
 
-        try {
-            $data['main_image']->storeAs('public/courses', $filename_main_image);
-            $data['sneek_peek_1']->storeAs('public/sneek_peeks', $filename_sneek_peek_1);
-            $data['sneek_peek_2']->storeAs('public/sneek_peeks', $filename_sneek_peek_2);
-            $data['sneek_peek_3']->storeAs('public/sneek_peeks', $filename_sneek_peek_3);
-            $data['sneek_peek_4']->storeAs('public/sneek_peeks', $filename_sneek_peek_4);
-        } catch (\Throwable $th) {
-            throw $th;
-        }
-
+        $sneekPeekFilenames = [];
+        $sneekPeekPaths     = [];
 
         try {
+            // Store main image
+            $data['main_image']->storeAs('public/courses', $mainImageFilename);
+
+            // Store sneek peek images
+            foreach (['sneek_peek_1', 'sneek_peek_2', 'sneek_peek_3', 'sneek_peek_4'] as $sneekPeekKey) {
+                $filename = uniqid() . '.' . $data[$sneekPeekKey]->extension();
+                $data[$sneekPeekKey]->storeAs('public/sneek_peeks', $filename);
+                $sneekPeekFilenames[] = $filename;
+                $sneekPeekPaths[]     = 'public/sneek_peeks/' . $filename;
+            }
+
+            // Create the course
             $course = $this->course->create([
                 'title'             => $data['title'],
                 'category_id'       => $data['category_id'],
                 'short_description' => $data['short_description'],
                 'description'       => $data['description'],
                 'price'             => $data['price'],
-                'main_image'        => $filename_main_image,
-                'sneek_peek_1'      => $filename_sneek_peek_1,
-                'sneek_peek_2'      => $filename_sneek_peek_2,
-                'sneek_peek_3'      => $filename_sneek_peek_3,
-                'sneek_peek_4'      => $filename_sneek_peek_4,
+                'main_image'        => $mainImagePath,
+                'sneek_peek_1'      => $sneekPeekPaths[0],
+                'sneek_peek_2'      => $sneekPeekPaths[1],
+                'sneek_peek_3'      => $sneekPeekPaths[2],
+                'sneek_peek_4'      => $sneekPeekPaths[3],
                 'request_status'    => Course::REQUEST_STATUS_WAITING,
                 'upload_status'     => Course::UPLOAD_STATUS_UNPUBLISHED,
                 'activation_status' => Course::ACTIVATE_STATUS_ACTIVE,
                 'created_by'        => auth()->user()->id,
             ]);
-        } catch (\Throwable $th) {
-            DB::rollBack();
-            dd($th->getMessage());
-        }
 
-        try {
             foreach ($data['technologies'] as $tech_spec) {
                 $this->courseTechSpec->create([
                     'course_id' => $course->id,
                     'name'      => $tech_spec,
                 ]);
             }
-        } catch (\Throwable $th) {
-            DB::rollBack();
-            dd($th->getMessage());
-        }
 
-        try {
             foreach ($data['benefits'] as $benefit => $value) {
                 $value = json_decode($value, true);
                 $this->courseBenefit->create([
@@ -107,12 +99,7 @@ class CourseRepository implements CourseInterface
                     'description' => $value['description'],
                 ]);
             }
-        } catch (\Throwable $th) {
-            DB::rollBack();
-            dd($th->getMessage());
-        }
 
-        try {
             if (isset($data['objectives'])) {
                 foreach ($data['objectives'] as $objective => $value) {
                     $value = json_decode($value, true);
@@ -123,12 +110,26 @@ class CourseRepository implements CourseInterface
                     ]);
                 }
             }
+
+            DB::commit();
         } catch (\Throwable $th) {
             DB::rollBack();
+            Storage::delete($mainImagePath);
+            foreach ($sneekPeekPaths as $path) {
+                Storage::delete($path);
+            }
+            foreach ($course->courseTechSpec as $techSpec) {
+                $techSpec->delete();
+            }
+            foreach ($course->courseBenefit as $benefit) {
+                $benefit->delete();
+            }
+            foreach ($course->courseObjective as $objective) {
+                $objective->delete();
+            }
+
             dd($th->getMessage());
         }
-
-        DB::commit();
     }
 
     public function update($data, $id)
