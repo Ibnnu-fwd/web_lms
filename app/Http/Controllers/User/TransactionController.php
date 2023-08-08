@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Interfaces\User\UserTransactionInterface;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -28,7 +29,7 @@ class TransactionController extends Controller
                     return $data->transaction_type;
                 })
                 ->addColumn('customer', function ($data) {
-                    return $data->customer->name;
+                    return $data->customer->fullname;
                 })
                 ->addColumn('sub_total', function ($data) {
                     return $data->sub_total;
@@ -37,17 +38,19 @@ class TransactionController extends Controller
                     return $data->total_payment;
                 })
                 ->addColumn('status_order', function ($data) {
-                    return $data->status_order;
+                    return strtoupper($data->getStatusOrderLabel());
                 })
                 ->addColumn('status_payment', function ($data) {
-                    return $data->status_payment;
+                    return strtoupper($data->getStatusPaymentLabel());
                 })
                 ->addColumn('created_at', function ($data) {
-                    return $data->created_at ?? '-';
+                    return Carbon::parse($data->created_at)->isoFormat('D MMMM Y H:m');
                 })
                 ->addColumn('action', function ($data) {
                     return view('user.transaction.column.action', compact('data'));
-                });
+                })
+                ->addIndexColumn()
+                ->make(true);
         }
         // dd($this->transaction->getAll());
         return view('user.transaction.index');

@@ -93,6 +93,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser:1'
     Route::resource('mincourse', MinCoursePurchaseAtRegController::class)->except(['show'])->names('admin.mincourse')->middleware('checkRole:1');
 });
 
+// User
 Route::group(
     ['prefix' => 'user-dashboard', 'middleware' => ['auth', 'isActiveUser:1', 'checkRole:3']],
     function () {
@@ -104,9 +105,13 @@ Route::group(
             Route::get('detail/{id}', [UserTransactionController::class, 'detail'])->name('user.transaction.detail');
         });
         Route::get('course', fn () => view('user.course.index'))->name('user.course');
+
+        // Transaction
+
     }
 );
 
+// Verificator
 Route::group(['prefix' => 'verificator-dashboard', 'middleware' => ['isActiveUser:1', 'isVerificator'], 'as' => 'verificator.'], function () {
     Route::get('/', fn () => view('verificator.dashboard'))->name('dashboard');
     Route::group(['prefix' => 'course-request'], function () {
@@ -117,6 +122,7 @@ Route::group(['prefix' => 'verificator-dashboard', 'middleware' => ['isActiveUse
     });
 });
 
+// Institution
 Route::group(
     ['prefix' => 'institution-dashboard', 'middleware' => ['auth', 'isActiveUser:1', 'checkRole:2']],
     function () {

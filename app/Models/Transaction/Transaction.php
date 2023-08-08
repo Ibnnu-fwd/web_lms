@@ -13,6 +13,9 @@ class Transaction extends Model
     const TRANSACTION_TYPE_RENEW    = 'renew';
 
     // TODO: add status order
+    const STATUS_ORDER_WAITING = 0;
+    const STATUS_ORDER_SUCCESS = 1;
+    const STATUS_ORDER_CANCEL  = 2;
 
     const STATUS_PAYMENT_WAITING = 0;
     const STATUS_PAYMENT_PAID    = 1;
@@ -42,5 +45,29 @@ class Transaction extends Model
     public function detailTransaction()
     {
         return $this->hasMany(DetailTransaction::class, 'transaction_id');
+    }
+
+    public function getStatusPaymentLabel()
+    {
+        if ($this->status_payment == self::STATUS_PAYMENT_WAITING) {
+            return 'Menunggu';
+        } elseif ($this->status_payment == self::STATUS_PAYMENT_PAID) {
+            return 'Dibayar';
+        } elseif ($this->status_payment == self::STATUS_PAYMENT_CONFIRM) {
+            return 'Dikonfirmasi';
+        } elseif ($this->status_payment == self::STATUS_PAYMENT_DECLINE) {
+            return 'Ditolak';
+        }
+    }
+
+    public function getStatusOrderLabel()
+    {
+        if ($this->status_order == self::STATUS_ORDER_WAITING) {
+            return 'Menunggu';
+        } elseif ($this->status_order == self::STATUS_ORDER_SUCCESS) {
+            return 'Berhasil';
+        } elseif ($this->status_order == self::STATUS_ORDER_CANCEL) {
+            return 'Dibatalkan';
+        }
     }
 }
