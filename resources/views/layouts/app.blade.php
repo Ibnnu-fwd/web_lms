@@ -59,15 +59,20 @@
         <main>
             <div class="flex h-screen overflow-hidden bg-gray-50">
                 {{-- jika role nya == 2 maka tampilkan sidebar user --}}
-                @if (Auth::user()->role == 2 && Auth::user()->is_verificator == 0)
-                    @include('user.layouts.sidebar')
-                @elseif(Auth::user()->role == 2 && Auth::user()->is_verificator == 1)
-                    @include('verificator.layout.sidebar')
-                @elseif (Auth::user()->role == 3 && Auth::user()->is_verificator == 0)
+                @php
+                    $user = Auth::user();
+                    $role = $user->role;
+                    $isVerificator = $user->is_verificator;
+                @endphp
+
+                @if ($role == 2 && $isVerificator == 0)
                     @include('institution.layouts.sidebar')
-                @else
-                    @include('admin.layout.sidebar')
+                @elseif ($role == 3 && $isVerificator == 0)
+                    @include('user.layouts.sidebar')
+                @elseif ($isVerificator == 1)
+                    @include('verificator.layout.sidebar')
                 @endif
+
                 {{-- end sidebar --}}
                 {{-- burger button --}}
                 {{-- end burger button --}}

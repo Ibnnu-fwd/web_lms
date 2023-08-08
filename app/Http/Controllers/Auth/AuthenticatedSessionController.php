@@ -31,12 +31,12 @@ class AuthenticatedSessionController extends Controller
 
         if (auth()->user()->role == 1) {
             return redirect()->intended(RouteServiceProvider::HOME);
+        } elseif (auth()->user()->role == 2 && auth()->user()->is_verificator == false) {
+            return redirect()->intended(RouteServiceProvider::HOME_INSTITUTION);
+        } elseif (auth()->user()->role == 3 && auth()->user()->is_verificator == false) {
+            return redirect()->intended(RouteServiceProvider::HOME_USER);
         } elseif (auth()->user()->is_verificator == true) {
             return redirect()->intended(RouteServiceProvider::HOME_VERIFICATOR);
-        } elseif (auth()->user()->role == 2 && auth()->user()->is_verificator == false) {
-            return redirect()->intended(RouteServiceProvider::HOME_USER);
-        } elseif (auth()->user()->role == 3 && auth()->user()->is_verificator == false) {
-            return redirect()->intended(RouteServiceProvider::HOME_INSTITUTION);
         }
     }
 

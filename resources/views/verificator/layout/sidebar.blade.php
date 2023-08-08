@@ -68,7 +68,7 @@
                                         </p>
                                         <p
                                             class="text-xs 2xl:text-sm font-light text-gray-500 group-hover:text-primary">
-                                            {{ auth()->user()->getRoleLabel() }}
+                                            Verifikator
                                         </p>
                                     </div>
                                 </div>

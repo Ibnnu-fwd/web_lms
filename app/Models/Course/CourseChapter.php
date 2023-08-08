@@ -23,11 +23,6 @@ class CourseChapter extends Model
         return $this->belongsTo(Course::class);
     }
 
-    public function courseSubChapters()
-    {
-        return $this->hasMany(CourseSubChapter::class);
-    }
-
     public function quiz()
     {
         return $this->hasMany(Quiz::class);

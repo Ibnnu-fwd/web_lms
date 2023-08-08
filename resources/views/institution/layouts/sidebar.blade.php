@@ -32,12 +32,12 @@
                         </li>
                         {{-- Transaksi --}}
                         <li>
-                        <x-sidebar-link route="{{ route('institution.transaction.index') }}" icon="cart-outline"
+                            <x-sidebar-link route="{{ route('institution.transaction.index') }}" icon="cart-outline"
                                 title="Transaksi" active="{{ request()->routeIs('institution.transaction.*') }}" />
                         </li>
                         {{-- Kelas --}}
                         <li>
-                        <x-sidebar-link route="{{ route('institution.course.index') }}" icon="book-outline"
+                            <x-sidebar-link route="{{ route('institution.course.index') }}" icon="book-outline"
                                 title="Kelas"
                                 active="{{ request()->routeIs('institution.course.*') || request()->routeIs('institution.course-chapter.*') || request()->routeIs('institution.course-sub-chapter.*') || request()->routeIs('institution.quiz.*') || request()->routeIs('institution.question.*') }}" />
                         </li>
@@ -78,7 +78,7 @@
                                         </p>
                                         <p
                                             class="text-xs 2xl:text-sm font-light text-gray-500 group-hover:text-primary">
-                                            {{ auth()->user()->getRoleLabel() }}
+                                            Institusi
                                         </p>
                                     </div>
                                 </div>

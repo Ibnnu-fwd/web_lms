@@ -438,3 +438,14 @@ table {
     /* text-sm 2xl:text-sm */
     @apply text-xs 2xl:text-sm;
 }
+
+table.dataTable.no-footer {
+    /* no border */
+    @apply border-none;
+}
+
+table.dataTable > thead > tr > th,
+table.dataTable > thead > tr > td {
+    /* border-bottom none */
+    @apply border-b-0;
+}

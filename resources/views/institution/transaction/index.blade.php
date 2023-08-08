@@ -28,7 +28,7 @@
                     serverSide: true,
                     responsive: true,
                     autoWidth: false,
-                    ajax: "{{ route('user.transaction') }}",
+                    ajax: "{{ route('institution.transaction.index') }}",
                     columns: [{
                             data: 'DT_RowIndex',
                             name: 'DT_RowIndex'

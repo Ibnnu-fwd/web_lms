@@ -182,7 +182,7 @@ Breadcrumbs::for('course-request', function (BreadcrumbTrail $trail) {
 /* INSTITUTION */
 
 Breadcrumbs::for('institution-dashboard', function (BreadcrumbTrail $trail) {
-    $trail->push('Dashboard', route('institution.dashboard'));
+    $trail->push('Dashboard Institusi', route('institution.dashboard'));
 });
 
 Breadcrumbs::for('institution.management-account', function (BreadcrumbTrail $trail) {

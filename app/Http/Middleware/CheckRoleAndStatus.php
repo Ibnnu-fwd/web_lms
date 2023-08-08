@@ -15,6 +15,7 @@ class CheckRoleAndStatus
         if (in_array($user->role, $roles)) {
             return $next($request);
         } else {
+            auth()->logout();
             return redirect('/login')->with('error', 'Anda tidak memiliki akses!');
         }
     }

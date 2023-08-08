@@ -46,9 +46,9 @@ class TransactionController extends Controller
                     return $data->created_at;
                 })
                 ->addColumn('action', function ($data) {
-                    return view('user.transaction.column.action', compact('data'));
+                    return view('institution.transaction.column.action', compact('data'));
                 });
         }
-        return view('user.transaction.index');
+        return view('institution.transaction.index');
     }
 }
