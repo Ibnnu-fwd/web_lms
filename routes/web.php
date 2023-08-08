@@ -41,7 +41,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser:1'
     });
 
     // Transaction
-    Route::group(['prefix' => 'admin/transaction', 'as' => 'admin.'], function () {
+    Route::group(['prefix' => 'admin-transaction', 'as' => 'admin.'], function () {
         Route::get('/', [AdminTransactionController::class, 'index'])->name('transaction.index');
     });
 
@@ -100,7 +100,7 @@ Route::group(
         Route::get('/', fn () => view('user.dashboard'))->name('user.dashboard');
         Route::get('checkout', fn () => view('checkout'))->name('user.checkout');
         Route::get('cart', fn () => view('cart'))->name('user.cart');
-        Route::group(['prefix' => 'transaction'], function () {
+        Route::group(['prefix' => 'user-transaction'], function () {
             Route::get('/', [UserTransactionController::class, 'index'])->name('user.transaction');
             Route::get('detail/{id}', [UserTransactionController::class, 'detail'])->name('user.transaction.detail');
         });
@@ -164,7 +164,7 @@ Route::group(
         })->middleware('checkRole:3');
 
         // transaction
-        Route::group(['prefix' => 'institution/transaction', 'as' => 'institution.'], function () {
+        Route::group(['prefix' => 'institution-transaction', 'as' => 'institution.'], function () {
             Route::get('/', [InstitutionTransactionController::class, 'index'])->name('transaction.index');
         });
     }

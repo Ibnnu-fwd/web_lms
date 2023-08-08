@@ -16,11 +16,11 @@ class TransactionRepository implements TransactionInterface
 
     public function getAll()
     {
-        return $this->transaction->getAll();
+        return $this->transaction->all();
     }
 
     public function getByUserId($userId)
     {
-        return $this->transaction->where('user_id', $userId)->get();
+        return $this->transaction->where('customer_id', $userId)->get();
     }
 }

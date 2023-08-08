@@ -22,6 +22,6 @@ class UserTransactionRepository implements UserTransactionInterface
 
     public function getByUserId($userId)
     {
-        return $this->transaction->where('user_id', $userId)->get();
+        return $this->transaction->where('customer_id', $userId)->get();
     }
 }
