@@ -33,19 +33,24 @@ class CourseChapterRepository implements CourseChapterInterface
     {
         DB::beginTransaction();
 
-        $pdfFilename   = uniqid() . '-' . time() . '.' . $data['pdf_file']->extension();
-        $videoFilename = uniqid() . '-' . time() . '.' . $data['video_file']->extension();
+        if (isset($data['pdf_file'])) {
+            $pdfFilename = uniqid() . '-' . time() . '.' . $data['pdf_file']->extension();
+            $data['pdf_file']->storeAs('public/course/chapter/pdf', $pdfFilename);
+        }
+
+        if (isset($data['video_file'])) {
+            $videoFilename = uniqid() . '-' . time() . '.' . $data['video_file']->extension();
+            $data['video_file']->storeAs('public/course/chapter/video', $videoFilename);
+        }
 
         try {
-            $data['pdf_file']->storeAs('public/course/chapter/pdf', $pdfFilename);
-            $data['video_file']->storeAs('public/course/chapter/video', $videoFilename);
 
             $courseChapter = $this->courseChapter->create([
                 'course_id'   => $courseId,
                 'title'       => $data['title'],
                 'description' => $data['description'],
-                'pdf_file'    => $pdfFilename,
-                'video_file'  => $videoFilename,
+                'pdf_file'    => $pdfFilename ?? null,
+                'video_file'  => $videoFilename ?? null,
             ]);
 
             DB::commit();

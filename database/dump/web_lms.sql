@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 08 Agu 2023 pada 15.12
+-- Waktu pembuatan: 08 Agu 2023 pada 16.15
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.2.4
 
@@ -135,6 +135,13 @@ CREATE TABLE `course_chapters` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `course_chapters`
+--
+
+INSERT INTO `course_chapters` (`id`, `course_id`, `title`, `description`, `is_active`, `pdf_file`, `video_file`, `scrom_file`, `created_at`, `updated_at`) VALUES
+(1, 1, 'contoh diubah lagi', 'update contoh', 1, '64d24c7706323-1691503735.pdf', '64d247993464d-1691502489.mp4', NULL, '2023-08-08 13:48:09', '2023-08-08 14:13:14');
 
 -- --------------------------------------------------------
 
@@ -620,7 +627,7 @@ ALTER TABLE `course_categories`
 -- AUTO_INCREMENT untuk tabel `course_chapters`
 --
 ALTER TABLE `course_chapters`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `course_objectives`

@@ -90,12 +90,12 @@
                     const pdfFile = $('#pdf_file')[0].files[0];
                     const videoFile = $('#video_file')[0].files[0];
 
-                    // Check if at least one file is uploaded
+                    // Check if at least pdf or video file is uploaded
                     if (!pdfFile && !videoFile) {
                         Swal.fire({
                             icon: 'error',
                             title: 'Gagal',
-                            text: 'Harap upload minimal satu file',
+                            text: 'Harus mengunggah file materi teori atau materi praktikum',
                         });
                         return false;
                     }

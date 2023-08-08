@@ -62,8 +62,8 @@ class CourseChapterController extends Controller
         $request->validate([
             'title'       => ['required'],
             'description' => ['required'],
-            'pdf_file'    => 'required',
-            'video_file'  => 'required',
+            'pdf_file'    => 'nullable',
+            'video_file'  => 'nullable',
         ]);
 
         try {
