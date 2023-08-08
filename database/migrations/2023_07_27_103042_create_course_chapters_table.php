@@ -16,6 +16,9 @@ return new class extends Migration
             $table->unsignedBigInteger('course_id');
             $table->string('title');
             $table->text('description')->nullable();
+            $table->longText('pdf_file')->nullable();
+            $table->longText('video_file')->nullable();
+            $table->longText('scrom_file')->nullable();
             $table->timestamps();
 
             $table->foreign('course_id')

@@ -46,10 +46,9 @@ class CourseRepository implements CourseInterface
     public function store($data)
     {
         DB::beginTransaction();
-        DB::beginTransaction();
 
         $mainImageFilename = uniqid() . '.' . $data['main_image']->extension();
-        $mainImagePath     = 'public/courses/' . $mainImageFilename;
+        $mainImagePath     = $mainImageFilename;
 
         $sneekPeekFilenames = [];
         $sneekPeekPaths     = [];
@@ -63,7 +62,7 @@ class CourseRepository implements CourseInterface
                 $filename = uniqid() . '.' . $data[$sneekPeekKey]->extension();
                 $data[$sneekPeekKey]->storeAs('public/sneek_peeks', $filename);
                 $sneekPeekFilenames[] = $filename;
-                $sneekPeekPaths[]     = 'public/sneek_peeks/' . $filename;
+                $sneekPeekPaths[]     = $filename;
             }
 
             // Create the course

@@ -15,6 +15,9 @@ class CourseChapter extends Model
         'course_id',
         'title',
         'description',
+        'pdf_file',
+        'video_file',
+        'scrom_file',
         'is_active'
     ];
 
