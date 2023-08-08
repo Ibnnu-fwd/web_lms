@@ -69,8 +69,8 @@
                     @include('admin.layout.sidebar')
                 @elseif ($role == 3 && $isVerificator == 0)
                     @include('user.layouts.sidebar')
-                @elseif ($role == 3 && $isVerificator == 0)
-                    @include('user.layouts.sidebar')
+                @elseif ($role == 2 && $isVerificator == 0)
+                    @include('institution.layouts.sidebar')
                 @elseif ($isVerificator == 1)
                     @include('verificator.layout.sidebar')
                 @endif
