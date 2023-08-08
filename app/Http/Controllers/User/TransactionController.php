@@ -28,7 +28,7 @@ class TransactionController extends Controller
                     return $data->transaction_type;
                 })
                 ->addColumn('customer', function ($data) {
-                    return $data->customer->fullname;
+                    return $data->customer->name;
                 })
                 ->addColumn('sub_total', function ($data) {
                     return $data->sub_total;
@@ -36,19 +36,20 @@ class TransactionController extends Controller
                 ->addColumn('total_payment', function ($data) {
                     return $data->total_payment;
                 })
-                ->addColumn('status', function ($data) {
-                    return $data->status;
+                ->addColumn('status_order', function ($data) {
+                    return $data->status_order;
                 })
-                ->addColumn('payment_status', function ($data) {
-                    return $data->payment_status;
+                ->addColumn('status_payment', function ($data) {
+                    return $data->status_payment;
                 })
                 ->addColumn('created_at', function ($data) {
-                    return $data->created_at;
+                    return $data->created_at ?? '-';
                 })
                 ->addColumn('action', function ($data) {
                     return view('user.transaction.column.action', compact('data'));
                 });
         }
+        // dd($this->transaction->getAll());
         return view('user.transaction.index');
     }
 }

@@ -49,6 +49,8 @@ class TransactionController extends Controller
                     return view('admin.transaction.column.action', compact('data'));
                 });
         }
+
+        dd($this->transaction->getAll());
         return view('admin.transaction.index');
     }
 }

@@ -101,6 +101,7 @@ Route::group(
         Route::get('cart', fn () => view('cart'))->name('user.cart');
         Route::group(['prefix' => 'transaction'], function () {
             Route::get('/', [UserTransactionController::class, 'index'])->name('user.transaction');
+            Route::get('detail/{id}', [UserTransactionController::class, 'detail'])->name('user.transaction.detail');
         });
         Route::get('course', fn () => view('user.course.index'))->name('user.course');
     }

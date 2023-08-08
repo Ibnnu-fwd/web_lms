@@ -2,7 +2,7 @@
     <x-breadcrumb name="user-transaction" />
     <x-card-container>
 
-        <table id="courseCategoryTable">
+        <table id="userTransactionTable">
             <thead>
                 <tr>
                     <th>#</th>
@@ -23,7 +23,7 @@
     @push('js-internal')
         <script>
             $(function() {
-                $('#courseCategoryTable').DataTable({
+                $('#userTransactionTable').DataTable({
                     processing: true,
                     serverSide: true,
                     responsive: true,
@@ -54,12 +54,12 @@
                             name: 'total_payment'
                         },
                         {
-                            data: 'status',
-                            name: 'status'
+                            data: 'status_order',
+                            name: 'status_order'
                         },
                         {
-                            data: 'payment_status',
-                            name: 'payment_status'
+                            data: 'status_payment',
+                            name: 'status_payment'
                         },
                         {
                             data: 'created_at',

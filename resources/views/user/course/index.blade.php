@@ -13,7 +13,6 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" /> --}}
     <link href="https://fonts.cdnfonts.com/css/rubik" rel="stylesheet">
 
-
     <!-- Datatable -->
     <link rel="stylesheet" href="https://nightly.datatables.net/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://nightly.datatables.net/responsive/css/responsive.dataTables.min.css">
@@ -32,10 +31,8 @@
 
     @stack('css-internal')
 
-
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
 </head>
 
 <body class="font-sans antialiased">
@@ -134,17 +131,14 @@
 
         <div class="flex h-screen">
             <!-- Sidebar (Materials List) -->
-
             @include('user.course.sidebar')
-
             <div class="flex flex-col flex-auto w-0 overflow-hidden p-2">
                 <main
-                    class="relative flex-1 focus:outline-none  lg:w-1/2 md:w-full md:mt-8 justify-center mx-auto bg-white rounded-lg overflow-y-auto">
+                    class="relative flex-1 focus:outline-none  lg:max-w-6xl md:w-full md:mt-8 justify-center mx-auto bg-white rounded-lg overflow-y-auto">
                     <div class="py-6">
                         <div class="px-4 mx-auto 2xl:max-w-7xl sm:px-6 md:px-8">
                             <!-- === Remove and replace with your own content... === -->
                             <div>
-
                                 {{-- show video with iframe --}}
                                 <div class="embed-responsive embed-responsive-16by9 relative w-full overflow-hidden rounded-lg shadow-lg"
                                     style="padding-top: 56.25%">
