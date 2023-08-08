@@ -18,4 +18,9 @@ class TransactionRepository implements TransactionInterface
     {
         return $this->transaction->getAll();
     }
+
+    public function getByUserId($userId)
+    {
+        return $this->transaction->where('user_id', $userId)->get();
+    }
 }

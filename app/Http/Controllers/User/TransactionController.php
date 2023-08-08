@@ -21,7 +21,7 @@ class TransactionController extends Controller
     {
         if ($request->ajax()) {
             return datatables()
-                ->of($this->transaction->getAll())
+                ->of($this->transaction->getByUserId(auth()->user()->id))
                 ->addColumn('transaction_code', function ($data) {
                     return $data->transaction_code;
                 })

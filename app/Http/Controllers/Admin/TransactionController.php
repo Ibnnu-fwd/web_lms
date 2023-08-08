@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Interfaces\TransactionInterface;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -39,11 +40,14 @@ class TransactionController extends Controller
                 ->addColumn('status', function ($data) {
                     return $data->status;
                 })
-                ->addColumn('payment_status', function ($data) {
-                    return $data->payment_status;
+                ->addColumn('status_order', function ($data) {
+                    return strtoupper($data->getStatusOrderLabel());
+                })
+                ->addColumn('status_payment', function ($data) {
+                    return strtoupper($data->getStatusPaymentLabel());
                 })
                 ->addColumn('created_at', function ($data) {
-                    return $data->created_at;
+                    return Carbon::parse($data->created_at)->isoFormat('D MMMM Y H:m');
                 })
                 ->addColumn('action', function ($data) {
                     return view('admin.transaction.column.action', compact('data'));
