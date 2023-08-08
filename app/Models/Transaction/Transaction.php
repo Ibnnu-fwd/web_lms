@@ -30,7 +30,8 @@ class Transaction extends Model
         'sub_total',
         'total_payment',
         'status_order',
-        'status_payment'
+        'status_payment',
+        'payment_proof'
     ];
 
     public function customer()
