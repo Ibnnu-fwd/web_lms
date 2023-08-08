@@ -52,7 +52,15 @@ class TransactionController extends Controller
                 ->addIndexColumn()
                 ->make(true);
         }
-        // dd($this->transaction->getAll());
         return view('user.transaction.index');
+    }
+    // detail transaction
+    public function detail($id)
+    {
+        $transaction = $this->transaction->getByUserId(auth()->user()->id)->where('id', $id)->first();
+        return view(
+            'user.transaction.detail',
+            compact('transaction')
+        );
     }
 }

@@ -105,7 +105,6 @@ Route::group(
             Route::get('detail/{id}', [UserTransactionController::class, 'detail'])->name('user.transaction.detail');
         });
         Route::get('course', fn () => view('user.course.index'))->name('user.course');
-
         // Transaction
 
     }

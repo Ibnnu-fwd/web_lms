@@ -19,6 +19,10 @@ Breadcrumbs::for('user-transaction', function (BreadcrumbTrail $trail) {
     $trail->push('Transaksi', route('user.transaction'));
 });
 
+Breadcrumbs::for('user-transaction-detail', function (BreadcrumbTrail $trail, $data) {
+    $trail->parent('user-transaction');
+    $trail->push('Detail Transaksi', route('user.transaction.detail', $data));
+});
 
 /* ACCOUNT */
 Breadcrumbs::for('account', function (BreadcrumbTrail $trail) {
