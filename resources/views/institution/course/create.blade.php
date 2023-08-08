@@ -4,46 +4,47 @@
     <div class="xl:grid grid-cols-2 gap-8 space-y-6 md:space-y-0">
         <x-card-container class="">
             <h2 class="font-medium text-md mb-6">
-                Informasi Kursus
+                Tambahkan Pengguna
             </h2>
 
             <x-input id="title" name="title" type="text" label="Kode Kelas" required />
             <x-input id="title" name="title" type="text" label="Nama Kelas" required />
             <x-input id="dateAcces" label="Tanggal Akses" name="dateAcces" type="text" required
                 value="{{ auth()->user()->dateAcces }}" />
+            <div class="block md:flex justify-between items-center mt-4">
+                <label for="" class="text-xs 2xl:text-sm">
+                    Invite Student
+                    <span class="text-red-500">*</span>
+                </label>
+                <button type="button" onclick="addStudent()"
+                    class="bg-dark text-white text-xs 2xl:text-sm py-2 px-4 rounded w-full md:w-fit mt-4 md:mt-0">
+                    Tambahkan </button>
+            </div>
+            <div id="technology-container" class="block md:grid xl:grid-cols-2 gap-4 mt-4">
+            </div>
             
         </x-card-container>
         <x-card-container>
             <h2 class="font-medium text-md mb-6">
-                Daftar Murid
+                Surat Keterangan
             </h2>
 
-            <div class="md:grid grid-cols-2 gap-x-8">
-                <div>
-                    <x-input id="title_1" name="title_1" type="text" label="Benefit 1" required />
-                    <x-textarea id="description_1" name="description_1" label="Deskripsi Benefit 1" required />
-                </div>
-                <div>
-                    <x-input id="title_2" name="title_2" type="text" label="Benefit 2" required />
-                    <x-textarea id="description_2" name="description_2" label="Deskripsi Benefit 2" required />
-                </div>
-                <div>
-                    <x-input id="title_3" name="title_3" type="text" label="Benefit 3" required />
-                    <x-textarea id="description_3" name="description_3" label="Deskripsi Benefit 3" required />
-                </div>
-                <div>
-                    <x-input id="title_4" name="title_4" type="text" label="Benefit 4" required />
-                    <x-textarea id="description_4" name="description_4" label="Deskripsi Benefit 4" required />
-                </div>
+            <div >
+                <form>
+                    <label class="text-xs 2xl:text-sm" for="image">Pilih Gambar:</label>
+                    <input type="file" name="file" id="file">
+                    <br>
+                </form>
+                
             </div>
 
             <div class="block md:flex justify-between items-center mt-4">
-                <h2 class="font-medium text-xs 2xl:text-sm">
-                    Tujuan Pembelajaran
+                <h2 class="text-xs 2xl:text-sm">
+                    *Upload fIle berupa gambar atau pdf
                 </h2>
                 <button type="button" onclick="addObjective()"
                     class="bg-dark text-white py-2 px-4 text-xs 2xl:text-sm rounded w-full md:w-fit mt-4 md:mt-0">
-                    Tambah Tujuan </button>
+                    Unggah </button>
             </div>
             <div id="objective-container" class="block md:grid grid-cols-2 gap-4 mt-4">
             </div>
@@ -95,14 +96,14 @@
                 });
             }
 
-            function addTechnology() {
+            function addStudent() {
                 let id = Math.floor(Math.random() * 1000000);
                 let count = $('#technology-container').children().length;
                 let html = `
                     <div id="technology-${id}" class="mb-4 mt-2">
-                        <label for="" class="mb-4 text-xs 2xl:text-sm">Teknologi ` + (count + 1) + `</label>
+                        <label for="" class="mb-4 text-xs 2xl:text-sm">Student ` + (count + 1) + `</label>
                         <div class="flex justify-between items-center mt-2">
-                            <input type="text" name="technologies[]" class="form-input rounded-md shadow-sm block w-full text-xs 2xl:text-sm" placeholder="Teknologi" required>
+                            <input type="text" name="technologies[]" class="form-input rounded-md shadow-sm block w-full text-xs 2xl:text-sm" placeholder="Add Student" required>
                             <button type="button" onclick="removeTechnology(${id})" class="bg-gray-500 text-white py-2 px-4 rounded-md ml-3 text-xs 2xl:text-sm">
                                 Hapus
                             </button>
