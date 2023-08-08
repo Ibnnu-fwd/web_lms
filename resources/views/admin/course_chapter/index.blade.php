@@ -11,6 +11,8 @@
                 <tr>
                     <th>Judul</th>
                     <th>Deskripsi</th>
+                    <th>Pdf</th>
+                    <th>Video</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -117,6 +119,14 @@
                         {
                             data: 'description',
                             name: 'description'
+                        },
+                        {
+                            data: 'pdf_file',
+                            name: 'pdf_file'
+                        },
+                        {
+                            data: 'video_file',
+                            name: 'video_file'
                         },
                         {
                             data: 'action',

@@ -26,12 +26,19 @@ class CourseChapterController extends Controller
                 ->addColumn('title', function ($data) {
                     return $data->title;
                 })
+                ->addColumn('pdf_file', function ($data) {
+                    return view('admin.course_chapter.column.pdf_file', compact('data'));
+                })
+                ->addColumn('video_file', function ($data) {
+                    return view('admin.course_chapter.column.video_file', compact('data'));
+                })
                 ->addColumn('description', function ($data) {
                     return $data->description;
                 })
                 ->addColumn('action', function ($data) {
                     return view('admin.course_chapter.column.action', compact('data'));
                 })
+                ->rawColumns(['pdf_file', 'video_file'])
                 ->addIndexColumn()
                 ->make(true);
         }
@@ -55,14 +62,16 @@ class CourseChapterController extends Controller
         $request->validate([
             'title'       => ['required'],
             'description' => ['required'],
+            'pdf_file'    => 'required',
+            'video_file'  => 'required',
         ]);
 
         try {
             $this->courseChapter->store($request->all(), $courseId);
-            return redirect()->back()->with('success', 'Berhasil menambahkan bab baru');
+            return redirect()->back()->with('success', 'Berhasil menambahkan chapter baru');
         } catch (\Throwable $th) {
             dd($th->getMessage());
-            return redirect()->back()->with('error', 'Gagal menambahkan bab baru');
+            return redirect()->back()->with('error', 'Gagal menambahkan chapter baru');
         }
     }
 
@@ -93,14 +102,16 @@ class CourseChapterController extends Controller
         $request->validate([
             'title'       => ['required'],
             'description' => ['required'],
+            'pdf_file'    => 'nullable',
+            'video_file'  => 'nullable',
         ]);
 
         try {
             $this->courseChapter->update($request->all(), $id);
-            return redirect()->back()->with('success', 'Berhasil mengubah bab');
+            return redirect()->back()->with('success', 'Berhasil mengubah chapter');
         } catch (\Throwable $th) {
             dd($th->getMessage());
-            return redirect()->back()->with('error', 'Gagal mengubah bab');
+            return redirect()->back()->with('error', 'Gagal mengubah chapter');
         }
     }
 
@@ -113,7 +124,7 @@ class CourseChapterController extends Controller
             $this->courseChapter->destroy($id);
             return response()->json([
                 'status'  => true,
-                'message' => 'Berhasil menghapus bab'
+                'message' => 'Berhasil menghapus chapter'
             ]);
         } catch (\Throwable $th) {
             dd($th->getMessage());
@@ -130,7 +141,7 @@ class CourseChapterController extends Controller
             $this->courseChapter->restore($id);
             return response()->json([
                 'status'  => true,
-                'message' => 'Berhasil menghapus bab'
+                'message' => 'Berhasil menghapus chapter'
             ]);
         } catch (\Throwable $th) {
             dd($th->getMessage());
