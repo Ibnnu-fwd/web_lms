@@ -89,7 +89,7 @@
                 $('#objective-container').append(html);
             }
 
-            function removeTechnology(id) {
+            function removeStudent(id) {
                 $(`#technology-${id}`).remove();
                 $('#technology-container').children().each(function(index) {
                     $(this).find('label').text(`Teknologi ${index + 1}`);
@@ -104,7 +104,7 @@
                         <label for="" class="mb-4 text-xs 2xl:text-sm">Student ` + (count + 1) + `</label>
                         <div class="flex justify-between items-center mt-2">
                             <input type="text" name="technologies[]" class="form-input rounded-md shadow-sm block w-full text-xs 2xl:text-sm" placeholder="Add Student" required>
-                            <button type="button" onclick="removeTechnology(${id})" class="bg-gray-500 text-white py-2 px-4 rounded-md ml-3 text-xs 2xl:text-sm">
+                            <button type="button" onclick="removeStudent(${id})" class="bg-gray-500 text-white py-2 px-4 rounded-md ml-3 text-xs 2xl:text-sm">
                                 Hapus
                             </button>
                         </div>
