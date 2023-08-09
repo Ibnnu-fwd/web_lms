@@ -37,9 +37,6 @@ class TransactionController extends Controller
                 ->addColumn('total_payment', function ($data) {
                     return $data->total_payment;
                 })
-                ->addColumn('status', function ($data) {
-                    return $data->status;
-                })
                 ->addColumn('status_order', function ($data) {
                     return strtoupper($data->getStatusOrderLabel());
                 })
@@ -47,13 +44,43 @@ class TransactionController extends Controller
                     return strtoupper($data->getStatusPaymentLabel());
                 })
                 ->addColumn('created_at', function ($data) {
-                    return Carbon::parse($data->created_at)->isoFormat('D MMMM Y H:m');
+                    return Carbon::parse($data->created_at)->isoFormat('D/MM/Y H:m');
                 })
                 ->addColumn('action', function ($data) {
-                    return view('admin.transaction.column.action', compact('data'));
-                });
+                    if ($data->status_order !== 3) {
+                        return view('admin.transaction.column.action', compact('data'));
+                    }
+                })
+                ->addIndexColumn()
+                ->make(true);
         }
 
         return view('admin.transaction.index');
+    }
+
+    public function detail($id)
+    {
+        $transaction = $this->transaction->getById($id);
+        return view('admin.transaction.detail', compact('transaction'));
+    }
+
+    public function approve($id)
+    {
+        try {
+            $this->transaction->approve($id);
+            return redirect()->back()->with('success', 'Berhasil menyetujui transaksi');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'Gagal menyetujui transaksi');
+        }
+    }
+
+    public function decline($id)
+    {
+        try {
+            $this->transaction->decline($id);
+            return redirect()->back()->with('success', 'Berhasil menolak transaksi');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'Gagal menolak transaksi');
+        }
     }
 }

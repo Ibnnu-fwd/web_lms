@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
@@ -23,7 +22,7 @@ class DashboardController extends Controller
             case User::ROLE_INSTITUTION:
                 return view('institution.dashboard');
             case User::ROLE_USER:
-                return view('user.dashboard');
+                return route('user.dashboard');
             default:
                 abort(404);
         }

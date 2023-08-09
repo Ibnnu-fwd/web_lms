@@ -1,11 +1,9 @@
 <x-app-layout>
-    <x-breadcrumb name="user-transaction-detail" :route="'user.transaction.detail'" :data="$transaction" />
+    <x-breadcrumb name="transaction.detail" :data="$transaction" />
     <section class="max-w-2xl mx-auto">
         <x-card-container>
             <div class="mt-10 px-4 pt-8 lg:mt-0">
-                <p class="text-xl font-medium mb-2">Detail Pembayaran</p>
-                <p class="text-gray-400 text-xs 2xl:text-sm">Lengkapi pesanan Anda dengan memberikan detail pembayaran
-                    Anda.</p>
+                <p class="text-xl font-medium mb-2">Detail Transaksi</p>
                 <div class="mt-6">
                     <label for="card-holder" class="mt-4 mb-2 block text-xs 2xl:text-sm">
                         Email
@@ -86,73 +84,36 @@
 
                     </div>
 
-                    @if ($transaction->status_order != 3)
-                        @if ($transaction->status_payment == 0)
-                            <form action="{{ route('user.transaction.upload-payment', $transaction->id) }}"
-                                method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <label for="card-holder" class="mt-4 mb-2 block text-xs 2xl:text-sm">
-                                    Unggah Bukti Pembayaran
-                                </label>
-                                <div class="relative">
-                                    <input type="file" id="card-holder" name="proof_payment"
-                                        class="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm uppercase shadow-sm outline-none focus:z-10 focus:border-primary focus:ring-primary"
-                                        placeholder="Your full name here" />
-                                    <div
-                                        class="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
-                                        <ion-icon name="card-outline"></ion-icon>
-                                    </div>
-                                </div>
-                                <button type="submit" id="upload-payment-button"
-                                    class="mt-8 mb-8 w-full uppercase text-lg rounded-md bg-primary px-6 py-3 font-medium text-white">
-                                    Unggah Bukti Pembayaran</button>
-                            </form>
+                    @if ($transaction->status_payment == 0)
+                    @elseif($transaction->status_payment == 1)
+                        <div class="mt-4">
+                            <p class="text-xs 2xl:text-sm mb-4 font-medium mt-4">Bukti Pembayaran</p>
+                            <img class="w-20 h-20 object-cover object-center border-gray-300 border-2 rounded-md"
+                                onclick="window.open('{{ asset('storage/proof_payment/' . $transaction->payment_proof) }}')"
+                                src="{{ asset('storage/proof_payment/' . $transaction->payment_proof) }}"
+                                alt="proof payment" />
+                        </div>
+                        <form action="{{ route('admin.transaction.approve', $transaction->id) }}" method="POST">
+                            @csrf
+                            <button type="submit"
+                                class="mt-8 mb-2 w-full text-lg uppercase text-center rounded-md bg-success px-6 py-3 font-medium text-white">
+                                Konfirmasi Pembayaran</button>
+                        </form>
 
-                            <!--  cancel transaction -->
-                            <form action="{{ route('user.transaction.cancel', $transaction->id) }}" method="POST">
-                                @csrf
-                                <button type="submit" id="cancel-transaction-button"
-                                    class="mt-8 mb-8 w-full uppercase text-lg rounded-md bg-red-500 px-6 py-3 font-medium text-white">
-                                    Batalkan Transaksi</button>
-                            </form>
-                        @elseif($transaction->status_payment == 1)
-                            <div
-                                class="mt-8 mb-8 w-full uppercase text-lg text-center rounded-md bg-orange-500 px-6 py-3 font-medium text-white">
-                                Menunggu Konfirmasi Pembayaran</div>
-                        @elseif($transaction->status_payment == 2)
-                            <div
-                                class="mt-8 mb-8 w-full uppercase text-lg text-center rounded-md bg-green-500 px-6 py-3 font-medium text-white">
-                                Pembayaran Diterima</div>
-                        @elseif($transaction->status_payment == 3)
-                            <div
-                                class="mt-8 mb-8 w-full uppercase text-lg text-center rounded-md bg-red-500 px-6 py-3 font-medium text-white">
-                                Pembayaran Ditolak</div>
-
-                            <!-- Upload ulang bukti pembayaran -->
-                            <form action="{{ route('user.transaction.upload-payment', $transaction->id) }}"
-                                method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <label for="card-holder" class="mt-4 mb-2 block text-xs 2xl:text-sm">
-                                    Unggah Bukti Pembayaran
-                                </label>
-                                <div class="relative">
-                                    <input type="file" id="card-holder" name="proof_payment"
-                                        class="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm uppercase shadow-sm outline-none focus:z-10 focus:border-primary focus:ring-primary"
-                                        placeholder="Your full name here" />
-                                    <div
-                                        class="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
-                                        <ion-icon name="card-outline"></ion-icon>
-                                    </div>
-                                </div>
-                                <button type="submit" id="upload-payment-button"
-                                    class="mt-8 mb-8 w-full uppercase text-lg rounded-md bg-dark px-6 py-3 font-medium text-white">
-                                    Unggah Bukti Pembayaran Ulang</button>
-                            </form>
-                        @endif
-                    @else
+                        <form action="{{ route('admin.transaction.decline', $transaction->id) }}" method="POST">
+                            @csrf
+                            <button type="submit"
+                                class="mb-8 w-full text-lg uppercase text-center rounded-md bg-danger px-6 py-3 font-medium text-white">
+                                Tolak Pembayaran</button>
+                        </form>
+                    @elseif($transaction->status_payment == 2)
                         <div
-                            class="mt-8 mb-8 w-full uppercase text-lg text-center rounded-md bg-red-500 px-6 py-3 font-medium text-white">
-                            Transaksi Dibatalkan</div>
+                            class="mt-8 mb-8 w-full text-lg uppercase text-center rounded-md bg-green-500 px-6 py-3 font-medium text-white">
+                            Pembayaran Diterima</div>
+                    @elseif($transaction->status_payment == 3)
+                        <div
+                            class="mt-8 mb-8 w-full text-lg uppercase text-center rounded-md bg-red-500 px-6 py-3 font-medium text-white">
+                            Pembayaran Ditolak</div>
                     @endif
 
                 </div>

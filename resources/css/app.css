@@ -449,3 +449,11 @@ table.dataTable > thead > tr > td {
     /* border-bottom none */
     @apply border-b-0;
 }
+
+.ui-datepicker-title,
+.ui-datepicker-calendar thead,
+.ui-datepicker-calendar tbody,
+.ui-datepicker-current,
+.ui-datepicker-close {
+    @apply text-xs 2xl:text-sm;
+}

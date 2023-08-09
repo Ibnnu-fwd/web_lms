@@ -27,7 +27,7 @@
                         <!-- Manajemen Akun -->
                         <li>
                             <x-sidebar-link route="{{ route('user.transaction') }}" icon="cart-outline"
-                                title="Transaksi" active="{{ request()->routeIs('user.transaction') }}" />
+                                title="Transaksi" active="{{ request()->routeIs('user.transaction.*') }}" />
                         </li>
 
                         <li>

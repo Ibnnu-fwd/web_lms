@@ -28,7 +28,7 @@
                     serverSide: true,
                     responsive: true,
                     autoWidth: false,
-                    ajax: "{{ route('user.transaction') }}",
+                    ajax: "{{ route('admin.transaction.index') }}",
                     columns: [{
                             data: 'DT_RowIndex',
                             name: 'DT_RowIndex'
@@ -54,12 +54,12 @@
                             name: 'total_payment'
                         },
                         {
-                            data: 'status',
-                            name: 'status'
+                            data: 'status_order',
+                            name: 'status_order'
                         },
                         {
-                            data: 'payment_status',
-                            name: 'payment_status'
+                            data: 'status_payment',
+                            name: 'status_payment'
                         },
                         {
                             data: 'created_at',

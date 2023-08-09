@@ -15,7 +15,8 @@ class Transaction extends Model
     // TODO: add status order
     const STATUS_ORDER_WAITING = 0;
     const STATUS_ORDER_SUCCESS = 1;
-    const STATUS_ORDER_CANCEL  = 2;
+    const STATUS_ORDER_REJECT  = 2;
+    const STATUS_ORDER_CANCEL  = 3;
 
     const STATUS_PAYMENT_WAITING = 0;
     const STATUS_PAYMENT_PAID    = 1;
@@ -66,6 +67,8 @@ class Transaction extends Model
             return 'Menunggu';
         } elseif ($this->status_order == self::STATUS_ORDER_SUCCESS) {
             return 'Berhasil';
+        } elseif ($this->status_order == self::STATUS_ORDER_REJECT) {
+            return 'Ditolak';
         } elseif ($this->status_order == self::STATUS_ORDER_CANCEL) {
             return 'Dibatalkan';
         }

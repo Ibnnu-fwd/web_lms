@@ -44,7 +44,7 @@ class TransactionController extends Controller
                     return strtoupper($data->getStatusPaymentLabel());
                 })
                 ->addColumn('created_at', function ($data) {
-                    return Carbon::parse($data->created_at)->isoFormat('D MMMM Y H:m');
+                    return Carbon::parse($data->created_at)->isoFormat('DD/MM/Y H:m');
                 })
                 ->addColumn('action', function ($data) {
                     return view('user.transaction.column.action', compact('data'));
@@ -54,13 +54,34 @@ class TransactionController extends Controller
         }
         return view('user.transaction.index');
     }
-    // detail transaction
+
     public function detail($id)
     {
-        $transaction = $this->transaction->getByUserId(auth()->user()->id)->where('id', $id)->first();
-        return view(
-            'user.transaction.detail',
-            compact('transaction')
-        );
+        $transaction = $this->transaction->getById($id);
+        return view('user.transaction.detail', compact('transaction'));
+    }
+
+    public function uploadPayment($id, Request $request)
+    {
+        $this->validate($request, [
+            'proof_payment' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+        ]);
+
+        try {
+            $this->transaction->uploadPayment($id, $request->all());
+            return redirect()->back()->with(['success' => 'Upload bukti pembayaran berhasil']);
+        } catch (\Throwable $th) {
+            return redirect()->back()->with(['error' => $th->getMessage()]);
+        }
+    }
+
+    public function cancel($id)
+    {
+        try {
+            $this->transaction->cancel($id);
+            return redirect()->back()->with(['success' => 'Transaksi berhasil dibatalkan']);
+        } catch (\Throwable $th) {
+            return redirect()->back()->with(['error' => $th->getMessage()]);
+        }
     }
 }

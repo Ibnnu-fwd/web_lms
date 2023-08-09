@@ -13,16 +13,16 @@
                         <ul class="grid grid-cols-2 mx-auto text-sm text-center text-black border-b">
                             <li class="w-full -mb-px">
                                 <a @click.prevent="tab = 'tab1'" href="#"
-                                    class="inline-block py-2 font-medium ´ border-b-2 px-6 w-full border-transaprent bg-white text-primary border-primary"
-                                    :class="{ ' bg-white text-primary  border-primary': tab === 'tab1' }">
+                                    class="inline-block py-2 font-medium text-xs 2xl:text-sm border-b-2 px-6 w-full border-transaprent bg-white text-primary border-primary"
+                                    :class="{ ' bg-white text-primary border-primary': tab === 'tab1' }">
                                     Register Sebagai Personal
                                 </a>
                             </li>
                             <li class="w-full -mb-px">
                                 <a @click.prevent="tab = 'tab2'" href="#"
-                                    class="inline-block py-2 font-medium ´ border-b-2 px-6 w-full border-transaprent"
-                                    :class="{ ' bg-white text-primary  border-primary': tab === 'tab2' }">
-                                    Register Sebagain Instansi
+                                    class="inline-block py-2 font-medium ´ border-b-2 px-6 w-full border-transaprent text-xs 2xl:text-sm"
+                                    :class="{ ' bg-white text-primary border-primary': tab === 'tab2' }">
+                                    Register Sebagai Instansi
                                 </a>
                             </li>
                         </ul>
@@ -43,11 +43,11 @@
                                                 <option value="L">Laki Laki</option>
                                                 <option value="P">Perempuan</option>
                                             </x-select>
-                                            <x-input id="birthday" label="Tanggal Lahir" name="birthday"
-                                                type="birthday" required />
-                                            <x-input id="phone" label="No.Telephone" name="phone" type="phone"
+                                            <x-input id="birthday" label="Tanggal Lahir" name="birthday" type="text"
                                                 required />
-                                            <x-input id="job" label="Pekerjaan" name="job" type="job" />
+                                            <x-input id="phone" label="No.Telephone" name="phone" type="text"
+                                                required />
+                                            <x-input id="job" label="Pekerjaan" name="job" type="text" />
                                             <x-input id="institution" label="Institusi" name="institution"
                                                 type="institution" />
                                             <x-button title="Daftar" />
@@ -75,10 +75,10 @@
                                                 type="birthday" required />
                                             <x-input id="phone" label="No.Telephone" name="phone" type="phone"
                                                 required />
-                                            <x-input id="job" label="Pekerjaan" name="job" type="job"
+                                            <x-input id="job" label="Pekerjaan" name="job" type="jtextob"
                                                 required />
                                             <x-input id="institution" label="Institusi" name="institution"
-                                                type="institution" required />
+                                                type="text" required />
 
                                             <x-input-file id="file" label="File" name="file" required />
 

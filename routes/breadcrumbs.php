@@ -9,11 +9,23 @@ Breadcrumbs::for('dashboard', function (BreadcrumbTrail $trail) {
     $trail->push('Dashboard', route('dashboard'));
 });
 
-/* User Home */
+/* USER HOME */
 Breadcrumbs::for('user-dashboard', function (BreadcrumbTrail $trail) {
     $trail->push('Dashboard', route('user.dashboard'));
 });
 
+// TRANSACTION
+Breadcrumbs::for('transaction', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Transaksi', route('admin.transaction.index'));
+});
+
+Breadcrumbs::for('transaction.detail', function (BreadcrumbTrail $trail, $data) {
+    $trail->parent('transaction');
+    $trail->push('Detail Transaksi', route('admin.transaction.detail', $data));
+});
+
+// USER TRANSACTION
 Breadcrumbs::for('user-transaction', function (BreadcrumbTrail $trail) {
     $trail->parent('user-dashboard');
     $trail->push('Transaksi', route('user.transaction'));
@@ -184,7 +196,6 @@ Breadcrumbs::for('course-request', function (BreadcrumbTrail $trail) {
 
 
 /* INSTITUTION */
-
 Breadcrumbs::for('institution-dashboard', function (BreadcrumbTrail $trail) {
     $trail->push('Dashboard Institusi', route('institution.dashboard'));
 });

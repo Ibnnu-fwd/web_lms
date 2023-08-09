@@ -21,27 +21,30 @@
                 <div class="py-4 pt-4 text-left bg-white content">
                     <div x-show="tab==='tab1'"
                         class="text-gray-500 md:grid xl:grid-cols-2 2xl:grid-cols-3 gap-4 space-y-5 md:space-y-0">
-                        @for ($i = 1; $i <= 5; $i++)
+                        @foreach ($detailTransaction as $data)
                             <x-card-container>
                                 {{-- <ion-icon name="code-slash" size="large"></ion-icon> --}}
                                 <h1 class="text-lg font-medium text-gray-900">
-                                    Belajar Pemrograman PHP
+                                    {{ $data->course->title }}
                                 </h1>
                                 <div class="flex flex-row items-center gap-5 mt-2">
                                     <div class="flex flex-row items-center gap-2 ">
                                         <ion-icon name="time-outline" style="font-size:20px"></ion-icon>
-                                        <span class="text-sm font-light text-gray-400"> 29 jul - 29 Aug
+                                        <span class="text-sm font-light text-gray-400">
+                                            {{ \Carbon\Carbon::parse($data->start_date)->format('d M Y') }} -
+                                            {{ \Carbon\Carbon::parse($data->end_date)->format('d M Y') }}
                                         </span>
                                     </div>
                                     <div class="flex flex-row items-center gap-2 ">
                                         <ion-icon name="book-outline" style="font-size:20px"></ion-icon>
-                                        <span class="text-sm font-light text-gray-400"> 10 Materi </span>
+                                        <span class="text-sm font-light text-gray-400">
+                                            {{ $data->course->courseChapter->count() }} Materi </span>
                                     </div>
                                 </div>
                                 <x-link-button title="Belajar" class="mt-6" color="dark"
                                     route="{{ route('user.course') }}" />
                             </x-card-container>
-                        @endfor
+                        @endforeach
                     </div>
                     <div x-show="tab==='tab2'" class="text-gray-500" style="display: none;">
                         <main>

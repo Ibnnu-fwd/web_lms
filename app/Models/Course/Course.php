@@ -74,7 +74,7 @@ class Course extends Model
 
     public function detailTransaction()
     {
-        return $this->hasOne(DetailTransaction::class, 'course_id');
+        return $this->hasMany(DetailTransaction::class, 'course_id');
     }
 
     public function courseChapter()

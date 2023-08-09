@@ -17,6 +17,7 @@ use App\Http\Controllers\User\TransactionController as UserTransactionController
 use App\Http\Controllers\Verificator\CourseRequestController;
 use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
 use App\Http\Controllers\Institution\TransactionController as InstitutionTransactionController;
+use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -42,8 +43,11 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser:1'
 
     // Transaction
     Route::group(['prefix' => 'admin-transaction', 'as' => 'admin.'], function () {
+        Route::post('decline/{id}', [AdminTransactionController::class, 'decline'])->name('transaction.decline');
+        Route::post('approve/{id}', [AdminTransactionController::class, 'approve'])->name('transaction.approve');
+        Route::get('detail/{id}', [AdminTransactionController::class, 'detail'])->name('transaction.detail');
         Route::get('/', [AdminTransactionController::class, 'index'])->name('transaction.index');
-    });
+    })->middleware('checkRole:1');
 
     // Verificator
     Route::group(['prefix' => 'verificator', 'as' => 'admin.'], function () {
@@ -97,16 +101,16 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser:1'
 Route::group(
     ['prefix' => 'user-dashboard', 'middleware' => ['auth', 'isActiveUser:1', 'checkRole:3']],
     function () {
-        Route::get('/', fn () => view('user.dashboard'))->name('user.dashboard');
+        Route::get('/', UserDashboardController::class)->name('user.dashboard');
         Route::get('checkout', fn () => view('checkout'))->name('user.checkout');
         Route::get('cart', fn () => view('cart'))->name('user.cart');
         Route::group(['prefix' => 'user-transaction'], function () {
             Route::get('/', [UserTransactionController::class, 'index'])->name('user.transaction');
             Route::get('detail/{id}', [UserTransactionController::class, 'detail'])->name('user.transaction.detail');
+            Route::post('upload-payment/{id}', [UserTransactionController::class, 'uploadPayment'])->name('user.transaction.upload-payment');
+            Route::post('cancel/{id}', [UserTransactionController::class, 'cancel'])->name('user.transaction.cancel');
         });
         Route::get('course', fn () => view('user.course.index'))->name('user.course');
-        // Transaction
-
     }
 );
 
