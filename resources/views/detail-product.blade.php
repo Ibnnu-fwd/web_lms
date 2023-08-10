@@ -1,6 +1,7 @@
 <x-user-layout>
 
     <!-- Course -->
+
     <section class="items-center bg-gray-50 w-full px-5 mx-auto md:px-12 lg:px-6 py-16">
         <section class="max-w-6xl mx-auto">
             <div class="grid grid-cols-12 gap-x-8">
@@ -13,11 +14,11 @@
                         <img src="{{ asset('icon/category.svg') }}" class="h-3 w-3 lg:h-5 lg:w-5" alt="">
                         <span class="font-medium ml-2">
                             <div class="flex flex-wrap">
-                                <p class="flex">Mechanic</p>
+                                <p class="flex">{{ $course->category->name }}</p>
                             </div>
                         </span>
                     </div>
-                    <h3 class="mb-3 font-medium text-2xl">Memulai Pemrograman Dengan Kotlin</h3>
+                    <h3 class="mb-3 font-medium text-2xl">{{ $course->title }}</h3>
                     <div class="mb-3 flex flex-wrap items-center">
                         <p class="font-medium mr-2 my-auto">Teknologi:</p>
                         <span
@@ -41,11 +42,12 @@
                                 d="M5 2.667a2.333 2.333 0 100 4.666 2.333 2.333 0 000-4.666zM4 5a1 1 0 112 0 1 1 0 01-2 0zM11 2.667a2.333 2.333 0 100 4.666 2.333 2.333 0 000-4.666zM10 5a1 1 0 112 0 1 1 0 01-2 0zM8 9.558a3.667 3.667 0 00-6.667 2.109V14c0 .368.299.667.667.667h12a.667.667 0 00.667-.667v-2.333A3.667 3.667 0 008 9.558zm-.667 3.775v-1.668a2.333 2.333 0 00-4.666.002v1.666h4.666zm1.334-1.668v1.668h4.666v-1.666a2.333 2.333 0 00-4.666-.002z"
                                 clip-rule="evenodd"></path>
                         </svg>
-                        <span class="text-gray-500">47.527</span>
+                        <span class="text-gray-500">
+                            {{ $course->users ? $course->users->count() : '0' }}
+                        </span>
                         <p class="m-0 ml-2 text-gray-700">Pengguna Terdaftar</p>
                     </div>
-                    <span class="font-light text-gray-600">Pelajari dasar bahasa pemrograman, functional programming,
-                        object-oriented programming (OOP), serta concurrency dengan menggunakan Kotlin.</span>
+                    <span class="font-light text-gray-600">{{ $course->short_description }}</span>
                 </div>
                 <div class="col-span-3">
                     <div class="card border-none shadow-lg bg-white rounded-lg mt-5 hidden md:block p-4 z-10">
@@ -145,13 +147,7 @@
             <main>
                 <h2 class="text-xl font-medium text-gray-700">Deskripsi</h2>
                 <p class="leading-6 text-gray-500 mt-4">
-                    Kotlin merupakan bahasa utama yang digunakan dalam pengembangan Android saat
-                    ini. Hal ini karena manfaat yang diberikan seperti ringkas, cepat, dan aman.
-                    Selain itu, sifatnya yang interoperability membuat developer bisa beralih dari
-                    bahasa Java ke Kotlin dengan cepat. Tak ayal, Google pernah melaporkan hampir
-                    80% dari 1000 aplikasi teratas di Play Store menggunakan Kotlin. Selain
-                    pengembangan Android, Kotlin dapat digunakan untuk berbagai macam pengembangan,
-                    baik itu server, back-end, maupun website.
+                    {{ $course->description }}
                 </p>
             </main>
             <main>

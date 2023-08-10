@@ -30,7 +30,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('product', fn () => view('product'))->name('product');
-Route::get('product/{id}', fn ($id) => view('detail-product', ['id' => $id]))->name('detail-product');
+Route::get('product/{id}', [UserCourseController::class, 'show'])->name('product.show');
 Route::get('about', fn () => view('about'))->name('about');
 Route::get('order-flow', fn () => view('order-flow'))->name('order-flow');
 

@@ -119,4 +119,12 @@ class CourseController extends Controller
         // If not the last chapter, proceed to the next chapter
         return redirect()->route('user.course.detail', [$id, $page + 1]);
     }
+
+    // show 
+    public function show($id)
+    {
+        $course = $this->course->getById($id);
+
+        return view('detail-product', compact('course'));
+    }
 }
