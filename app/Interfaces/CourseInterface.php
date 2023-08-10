@@ -17,4 +17,7 @@ interface CourseInterface
     public function pending($id);
     public function publish($id);
     public function unpublish($id);
+
+    public function getLearnProgress($courseId, $userId);
+    public function isLearned($chapterId, $userId);
 }

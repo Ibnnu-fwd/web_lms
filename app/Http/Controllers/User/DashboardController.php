@@ -17,6 +17,7 @@ class DashboardController extends Controller
 
     public function __invoke()
     {
+        // dd($this->transaction->getApprovedTransactionUser(auth()->id()));
         return view('user.dashboard', [
             'detailTransaction' => $this->transaction->getApprovedTransactionUser(auth()->id())
         ]);

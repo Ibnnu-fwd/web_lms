@@ -28,9 +28,6 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
-
-    @stack('css-internal')
-
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -44,7 +41,9 @@
                 <ion-icon name="arrow-back-outline" class="text-2xl"></ion-icon>
             </a>
             <!-- Judul -->
-            <h1 class="text-base font-normal "> Judul Course </h1>
+            <h1 class="text-base font-normal">
+                {{ $course->title }}
+            </h1>
             <!-- Placeholder untuk bagian kanan, misalnya tombol logout, notifikasi, dll. -->
             <div>
                 @auth
@@ -114,7 +113,7 @@
         </nav>
 
         <div class="md:flex md:flex-shrink-0 absolute ml-52">
-            <div class="flex items-center ">
+            <div class="flex items-center">
                 <button id="toggleButton" @click="toggleSidebar()"
                     class="toggle-button inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-300 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
@@ -129,33 +128,126 @@
         </div>
 
 
-        <div class="flex h-screen">
+        <div class="flex min-h-screen">
             <!-- Sidebar (Materials List) -->
-            @include('user.course.sidebar')
+            <div class="flex flex-col w-64 " id="sidebar-container">
+                <div class="flex flex-col w-64 duration-300 min-h-screen">
+                    <div class="flex flex-col flex-grow pt-5 overflow-y-auto bg-white border-r">
+                        <div class="flex flex-col flex-grow px-4">
+                            <nav class="flex-1 space-y-1 bg-white">
+                                <div class="border-b mb-6 pb-8 px-4">
+
+                                    <p class="pt-4 text-xl font-semibold">
+                                        List Materi
+                                    </p>
+
+                                    <div class="h-1 w-full bg-neutral-200 rounded-full mt-2">
+                                        <div class="h-1 bg-primary rounded-full"
+                                            style="width: {{ $learnProgress['progress'] }}%">
+                                        </div>
+                                    </div>
+                                    <p class="mt-2">
+                                        <span class="text-sm text-gray-500">Progress</span>
+                                        <span
+                                            class="text-sm text-gray-500 font-medium float-right">{{ $learnProgress['progress'] }}%</span>
+                                    </p>
+                                </div>
+                                {{-- progres --}}
+                                <ul>
+                                    @foreach ($course->courseChapter as $data)
+                                        <li class="mb-4">
+                                            <div @if (isset($data->isLearned) && $data->isLearned == true) onclick="window.location.href='{{ route('user.course.detail', [$course->id, $data->id]) }}'" @endif
+                                                class="focus:outline-none inline-flex
+                                                            items-center w-full px-4 py-2 text-base text-gray-500
+                                                            transition duration-200 ease-in-out transform rounded-lg
+                                                            focus:shadow-outline hover:bg-gray-100 hover:scale-95
+                                                            hover:text-primary
+                                                            {{ $loop->iteration == $page ? 'bg-gray-100 text-primary' : '' }}">
+                                                <span class="text-xs 2xl:text-sm">{{ $data->title }}</span>
+                                                @if ($data->isLearned)
+                                                    <ion-icon name="checkmark-done-outline"
+                                                        class="ml-auto text-primary"></ion-icon>
+                                                @else
+                                                    <ion-icon name="play-outline" class="ml-auto"></ion-icon>
+                                                @endif
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="flex flex-col flex-auto w-0 overflow-hidden p-2">
                 <main
                     class="relative flex-1 focus:outline-none  lg:max-w-6xl md:w-full md:mt-8 justify-center mx-auto bg-white rounded-lg overflow-y-auto">
                     <div class="py-6">
                         <div class="px-4 mx-auto 2xl:max-w-7xl sm:px-6 md:px-8">
-                            <!-- === Remove and replace with your own content... === -->
                             <div>
-                                {{-- show video with iframe --}}
-                                <div class="embed-responsive embed-responsive-16by9 relative w-full overflow-hidden rounded-lg shadow-lg"
-                                    style="padding-top: 56.25%">
-                                    <iframe
-                                        class="embed-responsive-item absolute top-0 right-0 bottom-0 left-0 h-full w-full"
-                                        src="https://www.youtube.com/embed/rs48iVajzWc" allowfullscreen="true"
-                                        data-gtm-yt-inspected-2340190_699="true" id="240632615"></iframe>
-                                </div>
+                                @if ($chapter->video_file)
+                                    <div class="video-container">
+                                        <iframe
+                                            src="{{ asset('storage/course/chapter/video/' . $chapter->video_file) }}"
+                                            allowfullscreen="true" data-gtm-yt-inspected-2340190_699="true"
+                                            id="240632615"></iframe>
+                                    </div>
+                                @endif
 
-                                <div class="h-screen border border-gray-200 border-dashed rounded-lg py-6">
-                                    <iframe src="{{ asset('assets/Profile.pdf') }}" frameborder="0" width="100%"
-                                        id="pdf-viewer" height="100%"></iframe>
-                                </div>
-                            <iframe src="{{ asset('unity/index.html') }}" width="1088" height="800" frameborder="0"></iframe>
+                                @if ($chapter->scrom_file)
+                                    <iframe src="{{ asset('unity/index.html') }}" width="1088" height="800"
+                                        frameborder="0"></iframe>
+                                @endif
+
+                                @if ($chapter->pdf_file)
+                                    <div class="h-fit border border-gray-200 border-dashed rounded-lg">
+                                        <iframe src="{{ asset('storage/course/chapter/pdf/' . $chapter->pdf_file) }}"
+                                            width="100%" height="100%" frameborder="0" id="pdf-viewer"></iframe>
+                                    </div>
+                                @endif
                             </div>
 
                             <!-- === End ===  -->
+
+                            <!-- Previous and Next Button -->
+                            <div class="flex justify-between mt-4">
+                                @if ($previousChapter)
+                                    <a href="{{ route('user.course.detail', [$course->id, $previousChapter->id]) }}"
+                                        class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                                        <ion-icon name="arrow-back-outline" class="mr-2"></ion-icon>
+                                        <span>Sebelumnya</span>
+                                    </a>
+                                @else
+                                    <button disabled
+                                        class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                                        <ion-icon name="arrow-back-outline" class="mr-2"></ion-icon>
+                                        <span>Sebelumnya</span>
+                                    </button>
+                                @endif
+
+                                @if ($nextChapter)
+                                    <form action="{{ route('user.course.next-page', [$course->id, $chapter->id]) }}"
+                                        method="POST">
+                                        @csrf
+                                        <button type="submit"
+                                            class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-primary border border-transparent rounded-md shadow-sm hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                                            <span>Selanjutnya</span>
+                                            <ion-icon name="arrow-forward-outline" class="ml-2"></ion-icon>
+                                        </button>
+                                    </form>
+                                @elseif ($isLastChapter)
+                                    <form action="{{ route('user.course.next-page', [$course->id, $chapter->id]) }}"
+                                        method="POST">
+                                        @csrf
+                                        <button type="submit"
+                                            class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-primary border border-transparent rounded-md shadow-sm hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                                            <span>Selesai</span>
+                                            <ion-icon name="checkmark-done-outline" class="ml-2"></ion-icon>
+                                        </button>
+                                @endif
+                            </div>
+
                         </div>
                     </div>
                 </main>
@@ -173,6 +265,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
         integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 
     <!-- Datatable -->
     <script src="https://nightly.datatables.net/js/jquery.dataTables.min.js"></script>
@@ -234,6 +327,16 @@
                     }, 300);
                 }
             });
+
+            // set video full width
+            const videoContainer = $('.video-container');
+            const video = $('iframe');
+
+            videoContainer.css('width', '100%');
+            videoContainer.css('height', '100%');
+            video.css('width', '100%');
+            video.css('height', '500px');
+            video.css('object-fit', 'cover');
         });
     </script>
 

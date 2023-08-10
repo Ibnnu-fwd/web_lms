@@ -179,11 +179,11 @@
                             <x-slot name="content">
                                 <x-dropdown-link
                                     href="{{ // check if auth user is admin route to dashboard, if role = 4 route to user-dashboarsd
-                                        Auth::user()->role == 4
+                                        Auth::user()->role == 3
                                             ? route('user.dashboard')
                                             : (auth()->user()->role == 1
                                                 ? route('dashboard')
-                                                : (auth()->user()->role == 3
+                                                : (auth()->user()->role == 2
                                                     ? route('institution.dashboard')
                                                     : '#')) }}">
 

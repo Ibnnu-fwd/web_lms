@@ -163,4 +163,18 @@ class Course extends Model
                 break;
         }
     }
+
+    public function getProgressCourse($userId)
+    {
+        $totalChapter = $this->courseChapter()->count();
+        $totalChapterAccessed = $this->userCourseAccessLogs()->where('user_id', $userId)->count();
+
+        // dd($totalChapter, $totalChapterAccessed);
+
+        if ($totalChapter == 0) {
+            return 0;
+        }
+
+        return round(($totalChapterAccessed / $totalChapter) * 100);
+    }
 }

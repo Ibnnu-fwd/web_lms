@@ -41,8 +41,14 @@
                                             {{ $data->course->courseChapter->count() }} Materi </span>
                                     </div>
                                 </div>
+                                <div class="w-full mt-4 bg-neutral-200 rounded-full">
+                                    <div class="bg-dark rounded-full text-white p-0.2 text-center text-xs font-medium leading-none text-primary-100"
+                                        style="width: {{ $data->course->progress }}%">
+                                        {{ $data->course->progress }}%
+                                    </div>
+                                </div>
                                 <x-link-button title="Belajar" class="mt-6" color="dark"
-                                    route="{{ route('user.course') }}" />
+                                    route="{{ route('user.course.detail', [$data->course->id, 1]) }}" />
                             </x-card-container>
                         @endforeach
                     </div>
@@ -106,4 +112,16 @@
             </div>
         </div>
     </x-card-container>
+
+    @push('js-internal')
+        <script>
+            @if (Session::has('finish'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: '{{ Session::get('finish') }}',
+                })
+            @endif
+        </script>
+    @endpush
 </x-app-layout>

@@ -17,6 +17,7 @@ use App\Http\Controllers\User\TransactionController as UserTransactionController
 use App\Http\Controllers\Verificator\CourseRequestController;
 use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
 use App\Http\Controllers\Institution\TransactionController as InstitutionTransactionController;
+use App\Http\Controllers\User\CourseController as UserCourseController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -110,7 +111,9 @@ Route::group(
             Route::post('upload-payment/{id}', [UserTransactionController::class, 'uploadPayment'])->name('user.transaction.upload-payment');
             Route::post('cancel/{id}', [UserTransactionController::class, 'cancel'])->name('user.transaction.cancel');
         });
-        Route::get('course', fn () => view('user.course.index'))->name('user.course');
+        Route::get('course/{id}/{page}', [UserCourseController::class, 'index'])->name('user.course.detail');
+        Route::post('course/{id}/{page}/next', [UserCourseController::class, 'nextPage'])->name('user.course.next-page');
+        Route::post('course/{id}/finish', [UserCourseController::class, 'finish'])->name('user.course.finish');
     }
 );
 

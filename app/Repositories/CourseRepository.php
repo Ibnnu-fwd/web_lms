@@ -8,6 +8,7 @@ use App\Models\Course\CourseBenefit;
 use App\Models\Course\CourseCategory;
 use App\Models\Course\CourseObjective;
 use App\Models\Course\CourseTechSpec;
+use App\Models\Course\UserCourseAccessLog;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -18,19 +19,22 @@ class CourseRepository implements CourseInterface
     private $courseTechSpec;
     private $courseBenefit;
     private $courseObjective;
+    private $userCourseAccessLog;
 
     public function __construct(
         Course $course,
         CourseCategory $courseCategory,
         CourseTechSpec $courseTechSpec,
         CourseBenefit $courseBenefit,
-        CourseObjective $courseObjective
+        CourseObjective $courseObjective,
+        UserCourseAccessLog $userCourseAccessLog
     ) {
-        $this->course          = $course;
-        $this->courseCategory  = $courseCategory;
-        $this->courseTechSpec  = $courseTechSpec;
-        $this->courseBenefit   = $courseBenefit;
-        $this->courseObjective = $courseObjective;
+        $this->course              = $course;
+        $this->courseCategory      = $courseCategory;
+        $this->courseTechSpec      = $courseTechSpec;
+        $this->courseBenefit       = $courseBenefit;
+        $this->courseObjective     = $courseObjective;
+        $this->userCourseAccessLog = $userCourseAccessLog;
     }
 
     public function getByUserId($userId)
@@ -40,7 +44,7 @@ class CourseRepository implements CourseInterface
 
     public function getById($id)
     {
-        return $this->course->with(['category', 'courseTechSpec', 'courseBenefit', 'courseObjective'])->find($id);
+        return $this->course->with(['category', 'courseChapter', 'courseTechSpec', 'courseBenefit', 'courseObjective'])->find($id);
     }
 
     public function store($data)
@@ -295,5 +299,23 @@ class CourseRepository implements CourseInterface
         return $this->getById($id)->update([
             'upload_status' => Course::UPLOAD_STATUS_UNPUBLISHED,
         ]);
+    }
+
+    public function getLearnProgress($courseId, $userId)
+    {
+        $course = $this->getById($courseId);
+        $totalChapter = $course->courseChapter->count();
+        $learnedChapter = $this->userCourseAccessLog->where('user_id', $userId)->where('course_id', $courseId)->count();
+        $progress = ($learnedChapter / $totalChapter) * 100;
+        return [
+            'progress' => $progress,
+            'learned'  => $learnedChapter,
+            'total'    => $totalChapter,
+        ];
+    }
+
+    public function isLearned($chapterId, $userId)
+    {
+        return $this->userCourseAccessLog->where('course_chapter_id', $chapterId)->where('user_id', $userId)->count() > 0;
     }
 }

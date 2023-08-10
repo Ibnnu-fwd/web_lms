@@ -457,3 +457,7 @@ table.dataTable > thead > tr > td {
 .ui-datepicker-close {
     @apply text-xs 2xl:text-sm;
 }
+
+.swal2-title {
+    @apply font-medium;
+}

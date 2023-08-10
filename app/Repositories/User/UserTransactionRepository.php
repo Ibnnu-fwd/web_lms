@@ -78,11 +78,18 @@ class UserTransactionRepository implements UserTransactionInterface
 
     public function getApprovedTransactionUser($userId)
     {
-        return $this->detailTransaction->whereHas('transaction', function ($query) use ($userId) {
+        $detailTransaction = $this->detailTransaction->whereHas('transaction', function ($query) use ($userId) {
             $query->where('customer_id', $userId)
                 ->where('status_order', Transaction::STATUS_ORDER_SUCCESS);
         })
             ->with(['course'])
             ->get();
+
+        // get progress course
+        $detailTransaction->map(function ($item) {
+            $item->course->progress = $item->course->getProgressCourse(auth()->id());
+        });
+
+        return $detailTransaction;
     }
 }
