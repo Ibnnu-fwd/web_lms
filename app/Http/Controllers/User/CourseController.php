@@ -124,7 +124,11 @@ class CourseController extends Controller
     public function show($id)
     {
         $course = $this->course->getById($id);
+        $techSpecs = $course->courseTechSpec;
+        $benefits = $course->courseBenefit;
+        $courseObjectives = $course->courseObjective;
+        $authors = $course->author;
 
-        return view('detail-product', compact('course'));
+        return view('detail-product', compact('course', 'techSpecs', 'benefits', 'courseObjectives', 'authors'));
     }
 }

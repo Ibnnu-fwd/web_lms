@@ -21,18 +21,12 @@
                     <h3 class="mb-3 font-medium text-2xl">{{ $course->title }}</h3>
                     <div class="mb-3 flex flex-wrap items-center">
                         <p class="font-medium mr-2 my-auto">Teknologi:</p>
-                        <span
-                            class="inline-block px-2 py-1 my-2 text-xs 2xl:text-sm text-turquoise-800 border border-gray-200 rounded-lg mr-2">
-                            VS Code
-                        </span>
-                        <span
-                            class="inline-block px-2 py-1 my-2 text-xs 2xl:text-sm text-turquoise-800 border border-gray-200 rounded-lg mr-2">
-                            Chrome
-                        </span>
-                        <span
-                            class="inline-block px-2 py-1 my-2 text-xs 2xl:text-sm text-turquoise-800 border border-gray-200 rounded-lg mr-2">
-                            Tailwind
-                        </span>
+                        @foreach ($techSpecs as $tech)
+                            <span
+                                class="inline-block px-2 py-1 my-2 text-xs 2xl:text-sm text-turquoise-800 border border-gray-200 rounded-lg mr-2">
+                                {{ $tech->name }}
+                            </span>
+                        @endforeach
                     </div>
 
                     <div class="flex mb-4 items-center">
@@ -86,58 +80,19 @@
         </h2>
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mx-auto px-3 md:px-0 md:max-w-6xl mt-8">
-            <div class="border border-1 rounded-md h-30 flex flex-col lg:flex-row items-start p-4">
-                <div class="mr-3 mb-2 lg:mb-0">
-                    <ion-icon class="w-8 h-8 text-red-500 md hydrated mr-1 hidden md:inline-block" name="ribbon"
-                        role="img">
-                    </ion-icon>
+            @foreach ($benefits as $benefit)
+                <div class="border border-1 rounded-md h-30 flex flex-col lg:flex-row items-start p-4">
+                    <div class="mr-3 mb-2 lg:mb-0">
+                        <ion-icon class="w-8 h-8 text-red-500 md hydrated mr-1 hidden md:inline-block" name="ribbon"
+                            role="img">
+                        </ion-icon>
+                    </div>
+                    <div>
+                        <p class="font-medium mb-1">{{ $benefit->title }}</p>
+                        <p class="text-gray-400 text-md">{{ $benefit->description }}</p>
+                    </div>
                 </div>
-                <div>
-                    <p class="font-medium mb-1">Sertifikat</p>
-                    <p class="text-gray-400 text-md">Dapatkan sertifikat standar industri setelah menyelesaikan
-                        kelas
-                        ini.</p>
-                </div>
-            </div>
-            <div class="border border-1 rounded-md h-30 flex flex-col lg:flex-row items-start p-4">
-                <div class="mr-3 mb-2 lg:mb-0">
-                    <ion-icon class="w-8 h-8 text-red-500 md hydrated mr-1 hidden md:inline-block" name="ribbon"
-                        role="img">
-                    </ion-icon>
-                </div>
-                <div>
-                    <p class="font-medium mb-1">Sertifikat</p>
-                    <p class="text-gray-400 text-md">Dapatkan sertifikat standar industri setelah menyelesaikan
-                        kelas
-                        ini.</p>
-                </div>
-            </div>
-            <div class="border border-1 rounded-md h-30 flex flex-col lg:flex-row items-start p-4">
-                <div class="mr-3 mb-2 lg:mb-0">
-                    <ion-icon class="w-8 h-8 text-red-500 md hydrated mr-1 hidden md:inline-block" name="ribbon"
-                        role="img">
-                    </ion-icon>
-                </div>
-                <div>
-                    <p class="font-medium mb-1">Sertifikat</p>
-                    <p class="text-gray-400 text-md">Dapatkan sertifikat standar industri setelah menyelesaikan
-                        kelas
-                        ini.</p>
-                </div>
-            </div>
-            <div class="border border-1 rounded-md h-30 flex flex-col lg:flex-row items-start p-4">
-                <div class="mr-3 mb-2 lg:mb-0">
-                    <ion-icon class="w-8 h-8 text-red-500 md hydrated mr-1 hidden md:inline-block" name="ribbon"
-                        role="img">
-                    </ion-icon>
-                </div>
-                <div>
-                    <p class="font-medium mb-1">Sertifikat</p>
-                    <p class="text-gray-400 text-md">Dapatkan sertifikat standar industri setelah menyelesaikan
-                        kelas
-                        ini.</p>
-                </div>
-            </div>
+            @endforeach
         </div>
     </section>
 
@@ -154,6 +109,7 @@
                 <h2 class="text-xl font-medium text-gray-700">Kontributor</h2>
                 <p class="text-gray-400 mt-4">Mereka yang membantu dalam pembuatan kelas ini:</p>
                 <div class="grid md:grid-cols-2 gap-4 mt-4">
+                    {{-- @foreach ($suthors as $author) --}}
                     <div class="flex items-center">
                         <img src="{{ asset('images/no_image.jpg') }}" class="rounded-full w-12 h-12 mr-4"
                             alt="kontributor">
@@ -162,6 +118,7 @@
                             <p class="text-gray-400">Role, Pekerjaan saat ini</p>
                         </div>
                     </div>
+                    {{-- @endforeach --}}
                     <div class="flex items-center">
                         <img src="{{ asset('images/no_image.jpg') }}" class="rounded-full w-12 h-12 mr-4"
                             alt="kontributor">
@@ -175,58 +132,22 @@
             <main>
                 <h2 class="text-xl font-medium text-gray-700">Tujuan Pembelajaran</h2>
                 <ul role="list" class="grid grid-cols-1 mt-5 gap-4 list-none lg:grid-cols-2 lg:gap-6">
-                    <li>
-                        <div class="flex items-center space-x-2.5">
-                            <svg class="flex-shrink-0 w-3.5 h-3.5 text-success" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5" />
-                            </svg>
-                            <span class="text-md font-medium leading-6 text-black">Individual configuration</span>
-                        </div>
-                        <div class="ml-6 mt-1 text-sm text-gray-500">
-                            Plus, our platform is constantly evolving to meet the changing needs.
-                        </div>
-                    </li>
-                    <li>
-                        <div class="flex items-center space-x-2.5">
-                            <svg class="flex-shrink-0 w-3.5 h-3.5 text-success" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5" />
-                            </svg>
-                            <span class="text-md font-medium leading-6 text-black">Individual configuration</span>
-                        </div>
-                        <div class="ml-6 mt-1 text-sm text-gray-500">
-                            Plus, our platform is constantly evolving to meet the changing needs.
-                        </div>
-                    </li>
-                    <li>
-                        <div class="flex items-center space-x-2.5">
-                            <svg class="flex-shrink-0 w-3.5 h-3.5 text-success" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5" />
-                            </svg>
-                            <span class="text-md font-medium leading-6 text-black">Individual configuration</span>
-                        </div>
-                        <div class="ml-6 mt-1 text-sm text-gray-500">
-                            Plus, our platform is constantly evolving to meet the changing needs.
-                        </div>
-                    </li>
-                    <li>
-                        <div class="flex items-center space-x-2.5">
-                            <svg class="flex-shrink-0 w-3.5 h-3.5 text-success" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5" />
-                            </svg>
-                            <span class="text-md font-medium leading-6 text-black">Individual configuration</span>
-                        </div>
-                        <div class="ml-6 mt-1 text-sm text-gray-500">
-                            Plus, our platform is constantly evolving to meet the changing needs.
-                        </div>
-                    </li>
+                    @foreach ($courseObjectives as $courseObjective)
+                        <li>
+                            <div class="flex items-center space-x-2.5">
+                                <svg class="flex-shrink-0 w-3.5 h-3.5 text-success" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5" />
+                                </svg>
+                                <span
+                                    class="text-md font-medium leading-6 text-black">{{ $courseObjective->title }}</span>
+                            </div>
+                            <div class="ml-6 mt-1 text-sm text-gray-500">
+                                {{ $courseObjective->description }}
+                            </div>
+                        </li>
+                    @endforeach
                 </ul>
             </main>
             <main>
