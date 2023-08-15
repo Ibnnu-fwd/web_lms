@@ -11,6 +11,7 @@ interface CourseInterface
     public function destroy($id);
     public function restore($id);
     public function getAll();
+    public function discount($id);
 
     public function approve($id);
     public function reject($id);

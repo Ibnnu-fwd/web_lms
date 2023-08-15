@@ -24,28 +24,22 @@
                             <x-sidebar-link route="{{ route('dashboard') }}" icon="home" title="Dashboard"
                                 active="{{ request()->routeIs('dashboard') }}" />
                         </li>
-
-                        <!-- Manajemen Akun -->
-                        <li>
-                            <x-sidebar-link route="{{ route('admin.verificator.index') }}" icon="shield-outline"
-                                title="Verifikator" active="{{ request()->routeIs('admin.verificator.*') }}" />
-                        </li>
                     </ul>
 
                     <p class="px-4 pt-4 text-xs 2xl:text-sm font-medium text-gray-400 uppercase">
-                        Kursus
+                        Modul
                     </p>
                     <ul>
+                        <!-- Course Category -->
+                        <li>
+                            <x-sidebar-link route="{{ route('admin.course-category.index') }}" icon="folder-outline"
+                                title="Kategori" active="{{ request()->routeIs('admin.course-category.*') }}" />
+                        </li>
                         <!-- Course -->
                         <li>
                             <x-sidebar-link route="{{ route('admin.course.index') }}" icon="albums-outline"
                                 title="Daftar"
                                 active="{{ request()->routeIs('admin.course.*') || request()->routeIs('admin.course-chapter.*') || request()->routeIs('admin.course-sub-chapter.*') || request()->routeIs('admin.quiz.*') || request()->routeIs('admin.question.*') }}" />
-                        </li>
-                        <!-- Course Category -->
-                        <li>
-                            <x-sidebar-link route="{{ route('admin.course-category.index') }}" icon="folder-outline"
-                                title="Kategori" active="{{ request()->routeIs('admin.course-category.*') }}" />
                         </li>
                         <!-- Minumum Course -->
                         <li>
@@ -63,11 +57,16 @@
                         Autentikasi
                     </p>
                     <ul>
-                        <!-- Account -->
+                        <!-- Manajemen Akun -->
+                        <li>
+                            <x-sidebar-link route="{{ route('admin.verificator.index') }}" icon="shield-outline"
+                                title="Daftar Verifikator" active="{{ request()->routeIs('admin.verificator.*') }}" />
+                        </li>
+                        {{-- <!-- Account -->
                         <li>
                             <x-sidebar-link route="{{ route('admin.account.index') }}" icon="person-outline"
                                 title="Akun" active="{{ request()->routeIs('admin.account.index') }}" />
-                        </li>
+                        </li> --}}
 
                         <!-- Profile -->
                         <li>

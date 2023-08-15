@@ -104,6 +104,7 @@ class CourseController extends Controller
         return view('admin.course.edit', [
             'courseCategories' => $this->courseCategory->getAll(),
             'course'           => $this->course->getById($id),
+            'courseDiscount'   => $this->course->discount($id)
         ]);
     }
 

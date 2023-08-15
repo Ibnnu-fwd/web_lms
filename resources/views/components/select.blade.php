@@ -1,7 +1,7 @@
-@props(['title' => '', 'name', 'id', 'required' => false])
+@props(['title' => '', 'name', 'id', 'required' => false, 'full' => false])
 
 <div class="mb-4">
-    <label for="{{ $id }}" class="block mb-2 text-xs 2xl:text-sm text-gray-900">
+    <label for="{{ $id }}" class="block mb-2 text-xs 2xl:text-sm text-gray-900 {{$full ? 'w-full' : ''}}">
         {{ $title }} {!! $required ? '<span class="text-red-500">*</span>' : '' !!}
     </label>
     <select id="{{ $id }}" {{ $required ? 'required' : '' }}

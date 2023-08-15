@@ -2,6 +2,7 @@
 
 namespace App\Models\Course;
 
+use App\Models\Discount;
 use App\Models\Transaction\DetailTransaction;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -95,6 +96,11 @@ class Course extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'created_by');
+    }
+    
+    public function discount()
+    {
+        return $this->hasOne(Discount::class, 'course_id');
     }
 
     // Custom function

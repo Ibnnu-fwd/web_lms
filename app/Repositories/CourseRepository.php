@@ -9,17 +9,19 @@ use App\Models\Course\CourseCategory;
 use App\Models\Course\CourseObjective;
 use App\Models\Course\CourseTechSpec;
 use App\Models\Course\UserCourseAccessLog;
+use App\Models\Discount;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class CourseRepository implements CourseInterface
 {
     private $course;
-    private $courseCategory;
     private $courseTechSpec;
     private $courseBenefit;
     private $courseObjective;
+    private $courseCategory;
     private $userCourseAccessLog;
+    private $discount;
 
     public function __construct(
         Course $course,
@@ -27,7 +29,8 @@ class CourseRepository implements CourseInterface
         CourseTechSpec $courseTechSpec,
         CourseBenefit $courseBenefit,
         CourseObjective $courseObjective,
-        UserCourseAccessLog $userCourseAccessLog
+        UserCourseAccessLog $userCourseAccessLog,
+        Discount $discount
     ) {
         $this->course              = $course;
         $this->courseCategory      = $courseCategory;
@@ -35,7 +38,8 @@ class CourseRepository implements CourseInterface
         $this->courseBenefit       = $courseBenefit;
         $this->courseObjective     = $courseObjective;
         $this->userCourseAccessLog = $userCourseAccessLog;
-    }
+        $this->discount            = $discount;
+     }
 
     public function getByUserId($userId)
     {
@@ -110,6 +114,20 @@ class CourseRepository implements CourseInterface
                         'course_id'   => $course->id,
                         'title'       => $value['title'],
                         'description' => $value['description'],
+                    ]);
+                }
+            }
+
+            if(isset($data['discount'])) {
+                $data['discount'] = json_decode($data['discount'], true);
+                foreach($data['discount'] as $data => $value)
+                {
+                    $this->discount->create([
+                        'role' => $value['role'],
+                        'course_id' => $course->id,
+                        'discount_price' => $value['discount_price'],
+                        'start_date' => date('Y-m-d', strtotime($value['start_date'])),
+                        'end_date' => date('Y-m-d', strtotime($value['end_date'])),
                     ]);
                 }
             }
@@ -244,6 +262,26 @@ class CourseRepository implements CourseInterface
             dd($th->getMessage());
         }
 
+        try {
+            if(isset($data['discount'])) {
+                $data['discount'] = json_decode($data['discount'], true);
+                $this->discount->where('course_id', $course->id)->delete();
+                foreach($data['discount'] as $data => $value)
+                {
+                    $this->discount->create([
+                        'role' => $value['role'],
+                        'course_id' => $course->id,
+                        'discount_price' => $value['discount_price'],
+                        'start_date' => date('Y-m-d', strtotime($value['start_date'])),
+                        'end_date' => date('Y-m-d', strtotime($value['end_date'])),
+                    ]);
+                }
+            }
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            dd($th->getMessage());
+        }
+
         DB::commit();
     }
 
@@ -317,5 +355,10 @@ class CourseRepository implements CourseInterface
     public function isLearned($chapterId, $userId)
     {
         return $this->userCourseAccessLog->where('course_chapter_id', $chapterId)->where('user_id', $userId)->count() > 0;
+    }
+
+    public function discount($id)
+    {
+        return $this->discount->where('course_id', $id)->get();
     }
 }

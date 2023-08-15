@@ -1,86 +1,290 @@
 <x-app-layout>
     <x-breadcrumb name="course.edit" :data="$course" />
+    <x-card-container class="w-full md:w-[70%]">
+        <div class="justify-start text-left">
 
-    <div class="xl:grid grid-cols-2 gap-8 space-y-6 md:space-y-0">
-        <x-card-container>
-            <h2 class="font-medium text-md mb-6">
-                Informasi Kursus
-            </h2>
-
-            <x-input id="title" name="title" type="text" label="Judul" :value="$course->title" required />
-            <x-select id="category_id" title="Kategori" name="category_id" required>
-                @foreach ($courseCategories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                @endforeach
-            </x-select>
-
-            <x-textarea id="short_description" name="short_description" label="Deskripsi Singkat" required />
-            <x-textarea id="description" name="description" label="Deskripsi Lengkap" required />
-            <x-input id="price" name="price" type="number" label="Harga" required />
-            <div class="md:grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-x-4 mt-4">
-                <x-input-file id="main_image" name="main_image" label="Gambar Utama" required />
-                <x-input-file id="sneek_peek_1" name="sneek_peek_1" label="Sneek Peek 1" required />
-                <x-input-file id="sneek_peek_2" name="sneek_peek_2" label="Sneek Peek 2" required />
-                <x-input-file id="sneek_peek_3" name="sneek_peek_3" label="Sneek Peek 3" required />
-                <x-input-file id="sneek_peek_4" name="sneek_peek_4" label="Sneek Peek 4" required />
-            </div>
-            <div class="block md:flex justify-between items-center mt-4">
-                <label for="" class="font-medium text-xs 2xl:text-sm">
-                    Teknologi yang digunakan
-                    <span class="text-red-500">*</span>
-                </label>
-                <button type="button" onclick="addTechnology()"
-                    class="bg-dark text-white py-2 text-xs 2xl:text-sm px-4 rounded w-full md:w-fit mt-4 md:mt-0">
-                    Tambah Teknologi </button>
-            </div>
-            <div id="technology-container" class="block md:grid xl:grid-cols-2 gap-4 mt-4">
-            </div>
-        </x-card-container>
-        <x-card-container>
-            <h2 class="font-medium text-md mb-6">
-                Detail Kursus
-            </h2>
-
-            <div class="md:grid grid-cols-2 gap-x-8">
-                <div>
-                    <x-input id="title_1" name="title_1" type="text" label="Benefit 1" required />
-                    <x-textarea id="description_1" name="description_1" label="Deskripsi Benefit 1" required />
+            <div x-data="{ tab: 'tab1' }">
+                <ul class="flex gap-3 text-sm text-black border-b">
+                    <li class="-mb-px">
+                        <!-- event handler set state to 'tab1' and add conditional :class for active state -->
+                        <a @click.prevent="tab = 'tab1'" href="#" class="inline-block py-2 text-xs 2xl:text-sm"
+                            :class="{ ' bg-white text-blue-500 border-b-2 border-blue-500': tab === 'tab1' }">
+                            Informasi Kursus
+                        </a>
+                    </li>
+                    <li class="-mb-px">
+                        <a @click.prevent="tab = 'tab2'" href="#" class="inline-block py-2 text-xs 2xl:text-sm"
+                            :class="{ ' bg-white text-blue-500 border-b-2 border-blue-500': tab === 'tab2' }">
+                            Gambar
+                        </a>
+                    </li>
+                    <li class="-mb-px">
+                        <a @click.prevent="tab = 'tab3'" href="#"
+                            class="inline-block py-2 text-xs 2xl:text-sm bg-white text-blue-500 border-b-2 border-blue-500"
+                            :class="{ ' bg-white text-blue-500 border-b-2 border-blue-500': tab === 'tab3' }">
+                            Teknologi
+                        </a>
+                    </li>
+                    <li class="-mb-px">
+                        <a @click.prevent="tab = 'tab4'" href="#"
+                            class="inline-block py-2 text-xs 2xl:text-sm bg-white text-blue-500 border-b-2 border-blue-500"
+                            :class="{ ' bg-white text-blue-500 border-b-2 border-blue-500': tab === 'tab4' }">
+                            Benefit
+                        </a>
+                    </li>
+                    <li class="-mb-px">
+                        <a @click.prevent="tab = 'tab5'" href="#"
+                            class="inline-block py-2 text-xs 2xl:text-sm bg-white text-blue-500 border-b-2 border-blue-500"
+                            :class="{ ' bg-white text-blue-500 border-b-2 border-blue-500': tab === 'tab5' }">
+                            Tujuan
+                        </a>
+                    </li>
+                    <li class="-mb-px">
+                        <a @click.prevent="tab = 'tab6'" href="#"
+                            class="inline-block py-2 text-xs 2xl:text-sm bg-white text-blue-500 border-b-2 border-blue-500"
+                            :class="{ ' bg-white text-blue-500 border-b-2 border-blue-500': tab === 'tab6' }">
+                            Diskon
+                        </a>
+                    </li>
+                </ul>
+                <div class="py-4 pt-4 text-left bg-white content">
+                    <!-- show tab1 only -->
+                    <div x-show="tab==='tab1'" class="text-gray-500" style="display: none;">
+                        <main>
+                            <!-- === Remove and replace with your own content... === -->
+                            <div class="py-4 cl:grid grid-cols-2 gap-3">
+                                <x-input id="title" name="title" type="text" label="Judul" required />
+                                <x-select id="category_id" title="Kategori" name="category_id" required>
+                                    @foreach ($courseCategories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </x-select>
+                                <x-textarea id="short_description" name="short_description" label="Deskripsi Singkat"
+                                    required />
+                                <x-textarea id="description" name="description" label="Deskripsi Lengkap" required />
+                                <x-input id="price" name="price" type="number" label="Harga" required />
+                            </div>
+                            <!-- === End ===  -->
+                        </main>
+                    </div>
+                    <div x-show="tab==='tab2'" class="text-gray-500" style="display: none;">
+                        <main>
+                            <!-- === Remove and replace with your own content... === -->
+                            <div class="py-4">
+                                <div class="md:grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-x-4 mt-4">
+                                    <x-input-file id="main_image" name="main_image" label="Gambar Utama" required />
+                                    <x-input-file id="sneek_peek_1" name="sneek_peek_1" label="Sneek Peek 1" required />
+                                    <x-input-file id="sneek_peek_2" name="sneek_peek_2" label="Sneek Peek 2" required />
+                                    <x-input-file id="sneek_peek_3" name="sneek_peek_3" label="Sneek Peek 3" required />
+                                    <x-input-file id="sneek_peek_4" name="sneek_peek_4" label="Sneek Peek 4" required />
+                                </div>
+                            </div>
+                            <!-- === End ===  -->
+                        </main>
+                    </div>
+                    <div x-show="tab==='tab3'" class="text-gray-500">
+                        <main>
+                            <!-- === Remove and replace with your own content... === -->
+                            <div class="py-4">
+                                <button type="button" onclick="addTechnology()"
+                                    class="bg-dark text-white text-xs 2xl:text-sm py-2 px-4 rounded w-full md:w-fit mt-4 md:mt-0">
+                                    Tambah Teknologi </button>
+                                <div id="technology-container" class="block md:grid xl:grid-cols-2 gap-4 mt-4">
+                                </div>
+                            </div>
+                            <!-- === End ===  -->
+                        </main>
+                    </div>
+                    <div x-show="tab==='tab4'" class="text-gray-500">
+                        <main>
+                            <!-- === Remove and replace with your own content... === -->
+                            <div class="py-4">
+                                <div class="md:grid grid-cols-2 gap-x-8">
+                                    <div>
+                                        <x-input id="title_1" name="title_1" type="text" label="Benefit 1"
+                                            required />
+                                        <x-textarea id="description_1" name="description_1" label="Deskripsi Benefit 1"
+                                            required />
+                                    </div>
+                                    <div>
+                                        <x-input id="title_2" name="title_2" type="text" label="Benefit 2"
+                                            required />
+                                        <x-textarea id="description_2" name="description_2" label="Deskripsi Benefit 2"
+                                            required />
+                                    </div>
+                                    <div>
+                                        <x-input id="title_3" name="title_3" type="text" label="Benefit 3"
+                                            required />
+                                        <x-textarea id="description_3" name="description_3"
+                                            label="Deskripsi Benefit 3" required />
+                                    </div>
+                                    <div>
+                                        <x-input id="title_4" name="title_4" type="text" label="Benefit 4"
+                                            required />
+                                        <x-textarea id="description_4" name="description_4"
+                                            label="Deskripsi Benefit 4" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- === End ===  -->
+                        </main>
+                    </div>
+                    <div x-show="tab==='tab5'" class="text-gray-500">
+                        <main>
+                            <!-- === Remove and replace with your own content... === -->
+                            <div class="py-4">
+                                <div class="block md:flex justify-between items-center mt-4">
+                                    <button type="button" onclick="addObjective()"
+                                        class="bg-dark text-white py-2 px-4 text-xs 2xl:text-sm rounded w-full md:w-fit mt-4 md:mt-0">
+                                        Tambah Tujuan </button>
+                                </div>
+                                <div id="objective-container" class="block md:grid grid-cols-2 gap-4 mt-4">
+                                </div>
+                            </div>
+                            <!-- === End ===  -->
+                        </main>
+                    </div>
+                    <div x-show="tab==='tab6'" class="text-gray-500">
+                        <main>
+                            <!-- === Remove and replace with your own content... === -->
+                            <div class="py-4">
+                                <div class="text-end">
+                                    <x-link-button title="Tambah" onclick="addDiscount()" />
+                                </div>
+                                <table id="discountTable" class="w-ful">
+                                    <thead>
+                                        <tr>
+                                            <th>Grup</th>
+                                            <th>Harga</th>
+                                            <th>Tgl. Mulai</th>
+                                            <th>Tgl. Berakhir</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (isset($courseDiscount))
+                                            @foreach ($courseDiscount as $data)
+                                                <tr>
+                                                    <td>
+                                                        <select name="discount_group[]" class="form-input rounded-md shadow-sm block w-full text-xs 2xl:text-sm" required>
+                                                            <option value="">Pilih</option>
+                                                            <option value="2" {{ $data['role'] == 2 ? 'selected' : '' }}>Insitusi</option>
+                                                            <option value="3" {{ $data['role'] == 3 ? 'selected' : '' }}>Personal</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <input type="number" name="discount[]" class="form-input rounded-md shadow-sm block w-full text-xs 2xl:text-sm" placeholder="Potongan Harga" required value="{{ $data['discount_price'] }}">
+                                                    </td>
+                                                    <td>
+                                                        <input type="date" name="start_date[]" class="form-input rounded-md shadow-sm block w-full text-xs 2xl:text-sm" placeholder="Tanggal Mulai" required value="{{ $data['start_date'] }}">
+                                                    </td>
+                                                    <td>
+                                                        <input type="date" name="end_date[]" class="form-input rounded-md shadow-sm block w-full text-xs 2xl:text-sm" placeholder="Tanggal Berakhir" required value="{{ $data['end_date'] }}">
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" onclick="removeDiscount()" class="bg-gray-500 text-white text-xs 2xl:text-sm py-2 px-4 rounded-md">
+                                                            Hapus
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @else
+                                        <tr>
+                                            <td>
+                                                <select name="discount_group[]" class="form-input rounded-md shadow-sm block w-full text-xs 2xl:text-sm" required>
+                                                    <option value="">Pilih</option>
+                                                    <option value="2">Insitusi</option>
+                                                    <option value="3">Personal</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input type="number" name="discount[]" class="form-input rounded-md shadow-sm block w-full text-xs 2xl:text-sm" placeholder="Potongan Harga" required>
+                                            </td>
+                                            <td>
+                                                <input type="date" name="start_date[]" class="form-input rounded-md shadow-sm block w-full text-xs 2xl:text-sm" placeholder="Tanggal Mulai" required>
+                                            </td>
+                                            <td>
+                                                <input type="date" name="end_date[]" class="form-input rounded-md shadow-sm block w-full text-xs 2xl:text-sm" placeholder="Tanggal Berakhir" required>
+                                            </td>
+                                            <td>
+                                                <button type="button" onclick="removeDiscount()" class="bg-gray-500 text-white text-xs 2xl:text-sm py-2 px-4 rounded-md">
+                                                    Hapus
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        @endif
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- === End ===  -->
+                        </main>
+                    </div>
                 </div>
-                <div>
-                    <x-input id="title_2" name="title_2" type="text" label="Benefit 2" required />
-                    <x-textarea id="description_2" name="description_2" label="Deskripsi Benefit 2" required />
-                </div>
-                <div>
-                    <x-input id="title_3" name="title_3" type="text" label="Benefit 3" required />
-                    <x-textarea id="description_3" name="description_3" label="Deskripsi Benefit 3" required />
-                </div>
-                <div>
-                    <x-input id="title_4" name="title_4" type="text" label="Benefit 4" required />
-                    <x-textarea id="description_4" name="description_4" label="Deskripsi Benefit 4" required />
-                </div>
             </div>
-
-            <div class="block md:flex justify-between items-center mt-4">
-                <h2 class="font-medium text-xs 2xl:text-sm">
-                    Tujuan Pembelajaran
-                </h2>
-                <button type="button" onclick="addObjective()"
-                    class="bg-dark text-white text-xs 2xl:text-sm py-2 px-4 rounded w-full md:w-fit mt-4 md:mt-0">
-                    Tambah Tujuan </button>
-            </div>
-            <div id="objective-container" class="block md:grid grid-cols-2 gap-4 mt-4">
-            </div>
-        </x-card-container>
-        <div class="mt-4">
-            <x-button title="Simpan Perubahan" class="w-full 2xl:w-fit mt-4 2xl:mt-0" />
         </div>
-    </div>
+    </x-card-container>
+
+    <x-button title="Simpan Perubahan" class="mt-4 2xl:mt-0" />
+
 
 
     @push('js-internal')
         <!-- Ckeditor -->
         <script src="//cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
         <script>
+            function addDiscount() {
+                // add input field
+                let html = `
+                    <tr>
+                        <td>
+                            <select name="discount_group[]" class="form-input rounded-md shadow-sm block w-full text-xs 2xl:text-sm" required>
+                                <option value="">Pilih</option>
+                                <option value="2">Insitusi</option>
+                                <option value="3">Personal</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="number" name="discount[]" class="form-input rounded-md shadow-sm block w-full text-xs 2xl:text-sm" placeholder="Potongan Harga" required>
+                        </td>
+                        <td>
+                            <input type="date" name="start_date[]" class="form-input rounded-md shadow-sm block w-full text-xs 2xl:text-sm" placeholder="Tanggal Mulai" required>
+                        </td>
+                        <td>
+                            <input type="date" name="end_date[]" class="form-input rounded-md shadow-sm block w-full text-xs 2xl:text-sm" placeholder="Tanggal Berakhir" required>
+                        </td>
+                        <td>
+                            <button type="button" onclick="removeDiscount()" class="bg-gray-500 text-white text-xs 2xl:text-sm py-2 px-4 rounded-md">
+                                Hapus
+                            </button>
+                        </td>
+                    </tr>
+                `;
+
+                $("#discountTable tbody").append(html);
+            }
+
+            function removeDiscount() {
+                // remove input field
+                $("#discountTable tbody tr:last-child").remove();
+            }
+
+            // Add event listener to mark selected rows
+            $("#discountTable tbody tr").on("click", function() {
+                $(this).toggleClass("selected");
+            });
+
+            $(function() {
+                $('#discountTable').DataTable({
+                    // hide search & show entries
+                    searching: false,
+                    lengthChange: false,
+                    autoWidth: false,
+                });
+            })
+        </script>
+
+        <script>
+            $('#title').val('{{$course->title}}');
             $('#category_id').append(
                 `<option value="{{ $course->category_id }}" selected>{{ $course->category->name }}</option>`);
             $('#price').val('{{ $course->price }}');
@@ -94,7 +298,9 @@
             $('#description_3').val('{{ $course->courseBenefit[2]->description }}');
             $('#title_4').val('{{ $course->courseBenefit[3]->title }}');
             $('#description_4').val('{{ $course->courseBenefit[3]->description }}');
+
             let objectives = @json($course->courseObjective);
+
             objectives.forEach(function(objective) {
                 let id = Math.floor(Math.random() * 1000000);
                 let html = `
@@ -318,11 +524,22 @@
                     });
 
 
+                    // get all discount
+                    let discount = [];
+                    $('select[name^="discount_group"]').each(function(index) {
+                        discount.push({
+                            role: $(this).val(),
+                            discount_price: $(`input[name="discount[]"]`).eq(index).val(),
+                            start_date: $(`input[name="start_date[]"]`).eq(index).val(),
+                            end_date: $(`input[name="end_date[]"]`).eq(index).val(),
+                        });
+                    });
+
+
                     console.log(title, category_id, short_description,
                         description, price, main_image,
                         sneek_peek_1, sneek_peek_2, sneek_peek_3, sneek_peek_4, technologies, benefit,
-                        objectives
-                    );
+                        objectives, discount);
 
                     // check if all required fields are filled
                     if (title && category_id && short_description && description && price && main_image &&
@@ -349,6 +566,10 @@
                         objectives.forEach(function(objective) {
                             formData.append('objectives[]', JSON.stringify(objective));
                         });
+                        if(discount.length > 0)
+                        {
+                            formData.append('discount', JSON.stringify(discount));
+                        }
 
                         $.ajax({
                             url: "{{ route('admin.course.update', ':id') }}".replace(':id',

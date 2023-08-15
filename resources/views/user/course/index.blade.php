@@ -195,10 +195,10 @@
                                     </div>
                                 @endif
 
-                                @if ($chapter->scrom_file)
-                                    <iframe src="{{ asset('unity/index.html') }}" width="1088" height="800"
-                                        frameborder="0"></iframe>
-                                @endif
+                                {{-- @if ($chapter->scrom_file) --}}
+                                <iframe src="{{ asset('unity/index.html') }}" width="1088" height="800"
+                                    frameborder="0"></iframe>
+                                {{-- @endif --}}
 
                                 @if ($chapter->pdf_file)
                                     <div class="h-fit border border-gray-200 border-dashed rounded-lg">
