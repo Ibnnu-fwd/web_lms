@@ -16,6 +16,9 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" /> --}}
     <link href="https://fonts.cdnfonts.com/css/rubik" rel="stylesheet">
 
+    <!-- Sweetalert -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
     <!-- Styles -->
     @stack('css-internal')
 
@@ -323,31 +326,6 @@
             </div>
         </div>
         <div class="px-5 py-12 mx-auto border-t max-w-7xl sm:px-6 md:flex md:items-center md:justify-between lg:px-20">
-            {{-- <div class="flex justify-center mb-8 space-x-6 md:order-last md:mb-0">
-                <span class="inline-flex justify-center w-full gap-3 lg:ml-auto md:justify-start md:w-auto">
-                    <a class="w-6 h-6 transition fill-black hover:text-red-500">
-                        <span class="sr-only"> github</span>
-                        <ion-icon class="w-5 h-5 md hydrated" name="logo-github" role="img"
-                            aria-label="logo github"></ion-icon>
-
-                    </a>
-                    <a class="w-6 h-6 transition fill-black hover:text-red-500">
-                        <span class="sr-only"> twitter</span>
-                        <ion-icon class="w-5 h-5 md hydrated" name="logo-twitter" role="img"
-                            aria-label="logo twitter"></ion-icon>
-                    </a>
-                    <a class="w-6 h-6 transition fill-black hover:text-red-500">
-                        <span class="sr-only">Instagram</span>
-                        <ion-icon class="w-5 h-5 md hydrated" name="logo-instagram" role="img"
-                            aria-label="logo instagram"></ion-icon>
-                    </a>
-                    <a class="w-6 h-6 transition fill-black hover:text-red-500">
-                        <span class="sr-only">Linkedin</span>
-                        <ion-icon class="w-5 h-5 md hydrated" name="logo-linkedin" role="img"
-                            aria-label="logo linkedin"></ion-icon>
-                    </a>
-                </span>
-            </div> --}}
 
             <div class="mt-8 md:mt-0 md:order-1">
                 <span class="mt-2 text-sm font-light text-gray-500">
@@ -370,6 +348,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
         integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Sweetalert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 
     <script src="{{ asset('assets/js/modal-image-minified.js') }}"></script>
 

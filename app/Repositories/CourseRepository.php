@@ -10,6 +10,7 @@ use App\Models\Course\CourseObjective;
 use App\Models\Course\CourseTechSpec;
 use App\Models\Course\UserCourseAccessLog;
 use App\Models\Discount;
+use App\Models\Transaction\DetailTransaction;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -22,24 +23,19 @@ class CourseRepository implements CourseInterface
     private $courseCategory;
     private $userCourseAccessLog;
     private $discount;
+    private $detailTransaction;
 
-    public function __construct(
-        Course $course,
-        CourseCategory $courseCategory,
-        CourseTechSpec $courseTechSpec,
-        CourseBenefit $courseBenefit,
-        CourseObjective $courseObjective,
-        UserCourseAccessLog $userCourseAccessLog,
-        Discount $discount
-    ) {
-        $this->course              = $course;
-        $this->courseCategory      = $courseCategory;
-        $this->courseTechSpec      = $courseTechSpec;
-        $this->courseBenefit       = $courseBenefit;
-        $this->courseObjective     = $courseObjective;
+    public function __construct(Course $course, CourseCategory $courseCategory, CourseTechSpec $courseTechSpec, CourseBenefit $courseBenefit, CourseObjective $courseObjective, UserCourseAccessLog $userCourseAccessLog, Discount $discount, DetailTransaction $detailTransaction)
+    {
+        $this->course = $course;
+        $this->courseCategory = $courseCategory;
+        $this->courseTechSpec = $courseTechSpec;
+        $this->courseBenefit = $courseBenefit;
+        $this->courseObjective = $courseObjective;
         $this->userCourseAccessLog = $userCourseAccessLog;
-        $this->discount            = $discount;
-     }
+        $this->discount = $discount;
+        $this->detailTransaction = $detailTransaction;
+    }
 
     public function getByUserId($userId)
     {
@@ -48,7 +44,9 @@ class CourseRepository implements CourseInterface
 
     public function getById($id)
     {
-        return $this->course->with(['category', 'courseChapter', 'courseTechSpec', 'courseBenefit', 'courseObjective'])->find($id);
+        $course = $this->course->with(['category', 'courseChapter', 'courseTechSpec', 'courseBenefit', 'courseObjective'])->find($id);
+        $course->isBought = $this->detailTransaction->where([['customer_id', auth()->user()->id], ['course_id', $id]])->count() > 0;
+        return $course;
     }
 
     public function store($data)
@@ -56,10 +54,10 @@ class CourseRepository implements CourseInterface
         DB::beginTransaction();
 
         $mainImageFilename = uniqid() . '.' . $data['main_image']->extension();
-        $mainImagePath     = $mainImageFilename;
+        $mainImagePath = $mainImageFilename;
 
         $sneekPeekFilenames = [];
-        $sneekPeekPaths     = [];
+        $sneekPeekPaths = [];
 
         try {
             // Store main image
@@ -70,39 +68,39 @@ class CourseRepository implements CourseInterface
                 $filename = uniqid() . '.' . $data[$sneekPeekKey]->extension();
                 $data[$sneekPeekKey]->storeAs('public/sneek_peeks', $filename);
                 $sneekPeekFilenames[] = $filename;
-                $sneekPeekPaths[]     = $filename;
+                $sneekPeekPaths[] = $filename;
             }
 
             // Create the course
             $course = $this->course->create([
-                'title'             => $data['title'],
-                'category_id'       => $data['category_id'],
+                'title' => $data['title'],
+                'category_id' => $data['category_id'],
                 'short_description' => $data['short_description'],
-                'description'       => $data['description'],
-                'price'             => $data['price'],
-                'main_image'        => $mainImagePath,
-                'sneek_peek_1'      => $sneekPeekPaths[0],
-                'sneek_peek_2'      => $sneekPeekPaths[1],
-                'sneek_peek_3'      => $sneekPeekPaths[2],
-                'sneek_peek_4'      => $sneekPeekPaths[3],
-                'request_status'    => Course::REQUEST_STATUS_WAITING,
-                'upload_status'     => Course::UPLOAD_STATUS_UNPUBLISHED,
+                'description' => $data['description'],
+                'price' => $data['price'],
+                'main_image' => $mainImagePath,
+                'sneek_peek_1' => $sneekPeekPaths[0],
+                'sneek_peek_2' => $sneekPeekPaths[1],
+                'sneek_peek_3' => $sneekPeekPaths[2],
+                'sneek_peek_4' => $sneekPeekPaths[3],
+                'request_status' => Course::REQUEST_STATUS_WAITING,
+                'upload_status' => Course::UPLOAD_STATUS_UNPUBLISHED,
                 'activation_status' => Course::ACTIVATE_STATUS_ACTIVE,
-                'created_by'        => auth()->user()->id,
+                'created_by' => auth()->user()->id,
             ]);
 
             foreach ($data['technologies'] as $tech_spec) {
                 $this->courseTechSpec->create([
                     'course_id' => $course->id,
-                    'name'      => $tech_spec,
+                    'name' => $tech_spec,
                 ]);
             }
 
             foreach ($data['benefits'] as $benefit => $value) {
                 $value = json_decode($value, true);
                 $this->courseBenefit->create([
-                    'course_id'   => $course->id,
-                    'title'       => $value['title'],
+                    'course_id' => $course->id,
+                    'title' => $value['title'],
                     'description' => $value['description'],
                 ]);
             }
@@ -111,17 +109,16 @@ class CourseRepository implements CourseInterface
                 foreach ($data['objectives'] as $objective => $value) {
                     $value = json_decode($value, true);
                     $this->courseObjective->create([
-                        'course_id'   => $course->id,
-                        'title'       => $value['title'],
+                        'course_id' => $course->id,
+                        'title' => $value['title'],
                         'description' => $value['description'],
                     ]);
                 }
             }
 
-            if(isset($data['discount'])) {
+            if (isset($data['discount'])) {
                 $data['discount'] = json_decode($data['discount'], true);
-                foreach($data['discount'] as $data => $value)
-                {
+                foreach ($data['discount'] as $data => $value) {
                     $this->discount->create([
                         'role' => $value['role'],
                         'course_id' => $course->id,
@@ -159,7 +156,7 @@ class CourseRepository implements CourseInterface
 
         $course = $this->course->find($id);
 
-        $filename_main_image   = $course->main_image;
+        $filename_main_image = $course->main_image;
         $filename_sneek_peek_1 = $course->sneek_peek_1;
         $filename_sneek_peek_2 = $course->sneek_peek_2;
         $filename_sneek_peek_3 = $course->sneek_peek_3;
@@ -197,20 +194,20 @@ class CourseRepository implements CourseInterface
 
         try {
             $course->update([
-                'title'             => $data['title'],
-                'category_id'       => $data['category_id'],
+                'title' => $data['title'],
+                'category_id' => $data['category_id'],
                 'short_description' => $data['short_description'],
-                'description'       => $data['description'],
-                'price'             => $data['price'],
-                'main_image'        => $filename_main_image,
-                'sneek_peek_1'      => $filename_sneek_peek_1,
-                'sneek_peek_2'      => $filename_sneek_peek_2,
-                'sneek_peek_3'      => $filename_sneek_peek_3,
-                'sneek_peek_4'      => $filename_sneek_peek_4,
-                'request_status'    => Course::REQUEST_STATUS_WAITING,
-                'upload_status'     => Course::UPLOAD_STATUS_UNPUBLISHED,
+                'description' => $data['description'],
+                'price' => $data['price'],
+                'main_image' => $filename_main_image,
+                'sneek_peek_1' => $filename_sneek_peek_1,
+                'sneek_peek_2' => $filename_sneek_peek_2,
+                'sneek_peek_3' => $filename_sneek_peek_3,
+                'sneek_peek_4' => $filename_sneek_peek_4,
+                'request_status' => Course::REQUEST_STATUS_WAITING,
+                'upload_status' => Course::UPLOAD_STATUS_UNPUBLISHED,
                 'activation_status' => Course::ACTIVATE_STATUS_ACTIVE,
-                'created_by'        => auth()->user()->id,
+                'created_by' => auth()->user()->id,
             ]);
         } catch (\Throwable $th) {
             DB::rollBack();
@@ -222,7 +219,7 @@ class CourseRepository implements CourseInterface
             foreach ($data['technologies'] as $tech_spec) {
                 $this->courseTechSpec->create([
                     'course_id' => $course->id,
-                    'name'      => $tech_spec,
+                    'name' => $tech_spec,
                 ]);
             }
         } catch (\Throwable $th) {
@@ -235,8 +232,8 @@ class CourseRepository implements CourseInterface
             foreach ($data['benefits'] as $benefit => $value) {
                 $value = json_decode($value, true);
                 $this->courseBenefit->create([
-                    'course_id'   => $course->id,
-                    'title'       => $value['title'],
+                    'course_id' => $course->id,
+                    'title' => $value['title'],
                     'description' => $value['description'],
                 ]);
             }
@@ -251,8 +248,8 @@ class CourseRepository implements CourseInterface
                 foreach ($data['objectives'] as $objective => $value) {
                     $value = json_decode($value, true);
                     $this->courseObjective->create([
-                        'course_id'   => $course->id,
-                        'title'       => $value['title'],
+                        'course_id' => $course->id,
+                        'title' => $value['title'],
                         'description' => $value['description'],
                     ]);
                 }
@@ -263,11 +260,10 @@ class CourseRepository implements CourseInterface
         }
 
         try {
-            if(isset($data['discount'])) {
+            if (isset($data['discount'])) {
                 $data['discount'] = json_decode($data['discount'], true);
                 $this->discount->where('course_id', $course->id)->delete();
-                foreach($data['discount'] as $data => $value)
-                {
+                foreach ($data['discount'] as $data => $value) {
                     $this->discount->create([
                         'role' => $value['role'],
                         'course_id' => $course->id,
@@ -301,7 +297,15 @@ class CourseRepository implements CourseInterface
 
     public function getAll()
     {
-        return $this->course->with(['category', 'courseChapter', 'user'])->where('activation_status', Course::ACTIVATE_STATUS_ACTIVE)->get();
+        $courses = $this->course
+            ->with(['category', 'courseChapter', 'user'])
+            ->where('activation_status', Course::ACTIVATE_STATUS_ACTIVE)
+            ->get();
+        // get amount of people who bought the course from detail_transaction
+        foreach ($courses as $course) {
+            $course->amount_of_people_bought = $course->detailTransaction->count();
+        }
+        return $courses;
     }
 
     public function approve($id)
@@ -343,18 +347,24 @@ class CourseRepository implements CourseInterface
     {
         $course = $this->getById($courseId);
         $totalChapter = $course->courseChapter->count();
-        $learnedChapter = $this->userCourseAccessLog->where('user_id', $userId)->where('course_id', $courseId)->count();
+        $learnedChapter = $this->userCourseAccessLog
+            ->where('user_id', $userId)
+            ->where('course_id', $courseId)
+            ->count();
         $progress = ($learnedChapter / $totalChapter) * 100;
         return [
             'progress' => $progress,
-            'learned'  => $learnedChapter,
-            'total'    => $totalChapter,
+            'learned' => $learnedChapter,
+            'total' => $totalChapter,
         ];
     }
 
     public function isLearned($chapterId, $userId)
     {
-        return $this->userCourseAccessLog->where('course_chapter_id', $chapterId)->where('user_id', $userId)->count() > 0;
+        return $this->userCourseAccessLog
+            ->where('course_chapter_id', $chapterId)
+            ->where('user_id', $userId)
+            ->count() > 0;
     }
 
     public function discount($id)

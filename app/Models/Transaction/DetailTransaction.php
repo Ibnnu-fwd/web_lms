@@ -3,6 +3,7 @@
 namespace App\Models\Transaction;
 
 use App\Models\Course\Course;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,7 +20,8 @@ class DetailTransaction extends Model
         'end_date',
         'total_month',
         'sub_total',
-        'total_payment'
+        'total_payment',
+        'customer_id'
     ];
 
     public function transaction()
@@ -35,5 +37,10 @@ class DetailTransaction extends Model
     public function rentedCourse()
     {
         return $this->hasOne(RentedCourse::class, 'detail_transaction_id');
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo(User::class, 'customer_id');
     }
 }

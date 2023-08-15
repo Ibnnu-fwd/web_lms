@@ -100,11 +100,6 @@
     <section class="flex items-center w-full bg-white">
         <div class="relative items-center w-full px-5 my-12 mx-auto md:px-0 lg:px-0 lg:max-w-6xl">
             <div class="grid grid-flow-col gap-8 md:gap-0 overflow-auto md:overflow-hidden">
-                {{-- ambil semua data category yang ada pada databse --}}
-                @php
-                    $categories = \App\Models\Course\CourseCategory::all();
-                @endphp
-
                 @foreach ($categories as $category)
                     <center class="category-item">
                         <div
@@ -115,9 +110,6 @@
                             class="mt-4 text-md text-center font-bold leading-6 text-black transition-colors category-item-name">
                             {{ $category->name }}
                         </p>
-                        {{-- <p class="text-md text-center font-medium leading-6 text-gray-600 transition-colors">
-
-                        </p> --}}
                     </center>
                 @endforeach
             </div>
@@ -128,41 +120,36 @@
     <section class="relative items-center w-full px-5 mx-auto md:px-12 pb-24 lg:px-0 max-w-6xl">
         <h2 class="text-2xl font-bold mb-8">Semua course</h2>
 
-        @php
-            $products = \App\Models\Course\Course::all();
-        @endphp
-
-        @foreach ($products as $product)
-            <a class="" href="product/{{ $product->id }}">
-
-                <div class="grid gap-x-5 gap-y-12 grid-cols-2 md:grid-cols-6">
-                    <figure id="card-item">
-                        <img class="w-48 h-36 object-cover rounded-md"
-                            src="{{ asset('storage/' . $product->main_image) }}" alt="">
-                        <p class="mt-2 text-xs font-light leading-6 text-gray-400 uppercase">
-                            {{ $product->category->name }}
+        <div class="grid gap-x-5 gap-y-12 grid-cols-2 md:grid-cols-6">
+            @foreach ($products as $product)
+                <figure id="card-item" onclick="window.location.href='{{ route('product.show', $product->id) }}'" class="card-item cursor-pointer">
+                    <img class="w-48 h-36 object-cover rounded-md" src="{{ asset('storage/courses/' . $product->main_image) }}"
+                        alt="">
+                    <p class="mt-2 text-xs font-light leading-6 text-gray-400 uppercase">
+                        {{ $product->category->name }}
+                    </p>
+                    <p class="text-lg font-normal leading-tight truncate text-black">
+                        {{ $product->title }}
+                    </p>
+                    <div class="flex items-center mt-2">
+                        <p class="items-center flex justify-center text-xs text-gray-500">
+                            <ion-icon class="sm hydrated" name="people" role="img">
+                            </ion-icon>&nbsp;<span class="text-xs">
+                                {{ $product->amount_of_people_bought . ' orang' }}
                         </p>
-                        <p class="text-lg font-normal leading-tight truncate text-black">
-                            {{ $product->title }}
-                        </p>
-                        <div class="flex items-center mt-2">
-                            <p class="items-center flex justify-center text-xs text-gray-500">
-                                <ion-icon class="sm hydrated" name="people" role="img">
-                                </ion-icon>&nbsp;<span class="text-xs">
-                                    {{ $product->users ? $product->users->count() : '0 orang' }}
-                            </p>
-                            <div class="h-4 mx-2 border-l border-gray-300"></div>
-                            <p class="items-center flex justify-center text-xs text-gray-500">
-                                <ion-icon class="sm hydrated" name="heart" role="img">
-                                </ion-icon>&nbsp;<span class="text-xs">(121)</span>
-                            </p>
-                        </div>
-                        <p class="text-md mt-2 font-light leading-6 text-primary">
-                            IDR {{ $product->price }}<small class="text-gray-400">/bulan</small>
-                        </p>
-                    </figure>
-                </div>
-            </a>
-        @endforeach
+                        {{-- <div class="h-4 mx-2 border-l border-gray-300"></div>
+                        <p class="items-center flex justify-center text-xs text-gray-500">
+                            <ion-icon class="sm hydrated" name="heart" role="img">
+                            </ion-icon>&nbsp;<span class="text-xs">(121)</span>
+                        </p> --}}
+                    </div>
+                    <p class="text-md mt-2 font-light leading-6 text-primary">
+                        IDR {{
+                            number_format($product->price, 0, ',', '.')
+                        }}<small class="text-gray-400">/bulan</small>
+                    </p>
+                </figure>
+            @endforeach
+        </div>
     </section>
 </x-user-layout>

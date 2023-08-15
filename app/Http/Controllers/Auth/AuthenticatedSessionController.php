@@ -34,7 +34,7 @@ class AuthenticatedSessionController extends Controller
         } elseif (auth()->user()->role == 2 && auth()->user()->is_verificator == false) {
             return redirect()->intended(RouteServiceProvider::HOME_INSTITUTION);
         } elseif (auth()->user()->role == 3 && auth()->user()->is_verificator == false) {
-            return redirect()->intended(RouteServiceProvider::HOME_USER);
+            return redirect()->route('/');
         } elseif (auth()->user()->is_verificator == true) {
             return redirect()->intended(RouteServiceProvider::HOME_VERIFICATOR);
         }

@@ -89,6 +89,11 @@ class User extends Authenticatable
         return $this->hasMany(Course::class, 'created_by', 'id');
     }
 
+    public function detailTransaction()
+    {
+        return $this->hasMany(Transaction::class, 'customer_id', 'id');
+    }
+
     // Scope
     public function scopeActive($query)
     {

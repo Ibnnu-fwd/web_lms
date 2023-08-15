@@ -16,29 +16,36 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-palette-lighter">
+                        @foreach ($carts as $cart)
                         <tr class="text-sm sm:text-base text-gray-600 ">
                             <td class="font-primary font-medium mr-2 py-4 flex items-center text-left gap-3 px-4">
-                                <img src="https://images.unsplash.com/photo-1588690154757-badf4644190f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8a290bGlufGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
+                                <img src="{{asset('storage/courses/' . $cart['main_image'])}}"
                                     alt="fashion-dog" class="hidden sm:inline-flex rounded-md me-2 h-16 w-16">
                                 <p class="pt-1 hover:text-palette-dark w-full" href="#">
-                                    Belajar Pemrograman Kotlin
+                                    {{{$cart['name']}}}
                                 </p>
                             </td>
                             <td class="font-primary px-4 sm:px-6 py-4 text-center">
                                 <input type="number" inputmode="numeric" id="variant-quantity" name="variant-quantity"
-                                    min="1" step="1"
+                                    min="{{
+                                        auth()->user()->role == 2 ? 3 : 1
+                                    }}" step="1"
                                     class="text-gray-900 form-input border border-gray-300 w-16 rounded-md focus:border-primary focus:ring-primary"
-                                    value="1">
+                                    value="{{$cart['rent_month']}}">
                             </td>
                             <td
                                 class="font-primary text-base font-light px-4 sm:px-6 py-4 hidden sm:table-cell text-center">
-                                Rp.<span class="text-lg">2.000.000</span>
+                                Rp.<span class="text-lg">
+                                    {{number_format($cart['price'], 0, ',', '.')}}
+                                </span>
                             </td>
                             <td class="font-primary px-4 sm:px-6 py-4 text-center">
-                                Rp.<span class="text-lg">2.000.000</span>
+                                Rp.<span class="text-lg">
+                                    {{number_format($cart['total_price'], 0, ',', '.')}}
+                                </span>
                             </td>
                             <td class="font-primary font-medium px-4 sm:px-6 py-4 text-center">
-                                <button aria-label="delete-item"><svg aria-hidden="true" focusable="false"
+                                <button aria-label="delete-item"><svg aria-hidden="true" focusable="false" onclick="deleteItem({{$cart['id']}})" data-prefix="fas" data-icon="times"
                                         data-prefix="fas" data-icon="times"
                                         class="svg-inline--fa fa-times rounded-md fa-w-11 w-8 h-8 text-palette-primary border border-palette-primary p-1 hover:bg-palette-lighter"
                                         role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512">
@@ -49,6 +56,7 @@
                                 </button>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -61,4 +69,33 @@
             </a>
         </div>
     </div>
+
+    @push('js-internal')
+        <script>
+            function deleteItem(id)
+            {
+                $.ajax({
+                    url: "{{ route('user.cart.delete') }}",
+                    type: "POST",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        id: id
+                    },
+                    success: function (response) {
+                        if (response.status == true) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Berhasil',
+                                text: response.message,
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(() => {
+                                window.location.reload();
+                            });
+                        }
+                    }
+                });
+            }
+        </script>
+    @endpush
 </x-user-layout>

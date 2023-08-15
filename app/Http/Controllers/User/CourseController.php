@@ -30,14 +30,6 @@ class CourseController extends Controller
         $nextChapter     = $this->getNextChapter($courseChapters, $chapter);
         $isLastChapter   = $chapter->orderNumber == $courseChapters->count();
 
-        // return [
-        //     'course'          => $course,
-        //     'learnProgress'   => $learnProgress,
-        //     'chapter'         => $chapter,
-        //     'previousChapter' => $previousChapter,
-        //     'nextChapter'     => $nextChapter,
-        // ];
-
         return view('user.course.index', compact(
             'course',
             'learnProgress',
