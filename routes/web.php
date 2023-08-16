@@ -34,8 +34,8 @@ Route::get('/dashboard', function () {
 
 Route::get('product', [ProductController::class, 'index'])->name('product');
 Route::get('product/{id}', [ProductController::class, 'show'])->name('product.show');
-Route::get('about', fn() => view('about'))->name('about');
-Route::get('order-flow', fn() => view('order-flow'))->name('order-flow');
+Route::get('about', fn () => view('about'))->name('about');
+Route::get('order-flow', fn () => view('order-flow'))->name('order-flow');
 
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser:1']], function () {
     Route::get('/', DashboardController::class)
@@ -97,26 +97,32 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser:1'
         ->name('ckeditor.upload')
         ->middleware('checkRole:1');
 
+
     // Course Category
     Route::resource('course-category', CourseCategoryController::class)
         ->except(['show'])
         ->names('admin.course-category')
         ->middleware('checkRole:1');
 
+
     // Min Course Purchase At Reg
     Route::resource('mincourse', MinCoursePurchaseAtRegController::class)
         ->except(['show'])
         ->names('admin.mincourse')
         ->middleware('checkRole:1');
+
+    // Cart
+    Route::get('cart', [ProductController::class, 'getAllCart'])->name('cart');
+    Route::post('cart/delete', [ProductController::class, 'deleteCart'])->name('cart.delete');
+    Route::post('product/add-to-cart', [ProductController::class, 'addToCart'])->name('product.add-to-cart');
+
+    // Checkout
+    Route::get('checkout', fn () => view('checkout'))->name('checkout');
 });
 
 // User
 Route::group(['prefix' => 'user-dashboard', 'middleware' => ['auth', 'isActiveUser:1', 'checkRole:3']], function () {
     Route::get('/', UserDashboardController::class)->name('user.dashboard');
-    Route::get('checkout', fn() => view('checkout'))->name('user.checkout');
-    Route::get('cart', [ProductController::class, 'getAllCart'])->name('user.cart');
-    Route::post('cart/delete', [ProductController::class, 'deleteCart'])->name('user.cart.delete');
-    Route::post('product/add-to-cart', [ProductController::class, 'addToCart'])->name('product.add-to-cart');
     Route::group(['prefix' => 'user-transaction'], function () {
         Route::get('/', [UserTransactionController::class, 'index'])->name('user.transaction');
         Route::get('detail/{id}', [UserTransactionController::class, 'detail'])->name('user.transaction.detail');
@@ -130,7 +136,7 @@ Route::group(['prefix' => 'user-dashboard', 'middleware' => ['auth', 'isActiveUs
 
 // Verificator
 Route::group(['prefix' => 'verificator-dashboard', 'middleware' => ['isActiveUser:1', 'isVerificator'], 'as' => 'verificator.'], function () {
-    Route::get('/', fn() => view('verificator.dashboard'))->name('dashboard');
+    Route::get('/', fn () => view('verificator.dashboard'))->name('dashboard');
     Route::group(['prefix' => 'course-request'], function () {
         Route::get('/', [CourseRequestController::class, 'index'])->name('course-request.index');
         Route::post('approve/{id}', [CourseRequestController::class, 'approve'])->name('course-request.approve');
@@ -142,10 +148,10 @@ Route::group(['prefix' => 'verificator-dashboard', 'middleware' => ['isActiveUse
 // Institution
 Route::group(['prefix' => 'institution-dashboard', 'middleware' => ['auth', 'isActiveUser:1', 'checkRole:2']], function () {
     // dashboard
-    Route::get('/', fn() => view('institution.dashboard'))->name('institution.dashboard');
+    Route::get('/', fn () => view('institution.dashboard'))->name('institution.dashboard');
 
     //management-account
-    Route::get('management-account', fn() => view('institution.management-account'))->name('institution.management-account');
+    Route::get('management-account', fn () => view('institution.management-account'))->name('institution.management-account');
 
     // Course
     Route::group(['prefix' => 'kelas', 'as' => 'institution.'], function () {

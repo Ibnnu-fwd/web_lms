@@ -45,7 +45,9 @@ class CourseRepository implements CourseInterface
     public function getById($id)
     {
         $course = $this->course->with(['category', 'courseChapter', 'courseTechSpec', 'courseBenefit', 'courseObjective'])->find($id);
-        $course->isBought = $this->detailTransaction->where([['customer_id', auth()->user()->id], ['course_id', $id]])->count() > 0;
+        if (auth()->check()) {
+            $course->isBought = $this->detailTransaction->where([['customer_id', auth()->user()->id], ['course_id', $id]])->count() > 0;
+        }
         return $course;
     }
 

@@ -46,11 +46,22 @@
                 <div class="col-span-3">
                     <div class="card border-none shadow-lg bg-white rounded-lg mt-5 hidden md:block p-4 z-10">
                         <div class="card-body">
-                            @if ($isBought)
-                                <x-link-button type="button" title="Belajar Sekarang"
-                                    route="{{ route('user.course.detail', [$course->id,1]) }}" class="w-full" />
+                            @auth
+                                @if ($isBought)
+                                    <x-link-button type="button" title="Belajar Sekarang"
+                                        route="{{ route('user.course.detail', [$course->id, 1]) }}" class="w-full" />
+                                @else
+                                    @if ($course->isInCart)
+                                        <x-link-button type="button" title="Lihat Keranjang" route="{{ route('cart') }}"
+                                            class="w-full" />
+                                    @else
+                                        <x-button type="button" color="dark" title="Beli Kelas" class="w-full"
+                                            onclick="addToCart({{ $course->id }})" />
+                                    @endif
+                                @endauth
                             @else
-                                <x-button type="button" color="dark" title="Beli Kelas" class="w-full" onclick="addToCart({{ $course->id }})" />
+                                <x-button type="button" color="dark" title="Beli Kelas" class="w-full"
+                                    onclick="window.location.href='{{ route('login') }}'" />
                             @endauth
                             <hr class="my-4">
                             <p class="text-gray-400 text-xs">
@@ -164,11 +175,17 @@
 <!-- Bottom Navigation for Mobile -->
 <section class="fixed bottom-0 left-0 right-0 z-10 bg-white shadow-md md:hidden py-3">
     <div class="grid grid-cols-2 gap-x-2 px-5 py-3">
-        @if ($isBought)
-            <x-link-button type="button" title="Belajar Sekarang"
-                route="{{ route('user.course.detail', [$course->id, 1]) }}" class="w-full" />
+        @auth
+            @if ($isBought)
+                <x-link-button type="button" title="Belajar Sekarang"
+                    route="{{ route('user.course.detail', [$course->id, 1]) }}" class="w-full" />
+            @else
+                <x-button type="button" color="dark" title="Beli Kelas" class="w-full"
+                    onclick="addToCart({{ $course->id }})" />
+            @endauth
         @else
-            <x-button type="button" color="dark" title="Beli Kelas" class="w-full" />
+            <x-button type="button" color="dark" title="Beli Kelas" class="w-full"
+                onclick="window.location.href='{{ route('login') }}'" />
         @endauth
 </div>
 </section>
@@ -183,40 +200,38 @@ class="fixed top-0 left-0 z-50 w-screen h-screen flex items-center justify-cente
 </div>
 
 @push('js-internal')
-    <script>
-        function addToCart(courseId)
-        {
-            $.ajax({
-                url: "{{ route('product.add-to-cart') }}",
-                type: "POST",
-                data: {
-                    _token: "{{ csrf_token() }}",
-                    id: courseId
-                },
-                success: function(response) {
-                    if (response.status == true) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Berhasil',
-                            text: response.message,
-                            showConfirmButton: false,
-                            timer: 1500
-                        }).then(() => {
-                            window.location.reload();
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Gagal',
-                            text: response.message,
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                    }
+<script>
+    function addToCart(courseId) {
+        $.ajax({
+            url: "{{ route('product.add-to-cart') }}",
+            type: "POST",
+            data: {
+                _token: "{{ csrf_token() }}",
+                id: courseId
+            },
+            success: function(response) {
+                if (response.status == true) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil',
+                        text: response.message,
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).then(() => {
+                        window.location.reload();
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal',
+                        text: response.message,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                 }
-            });
-        }
-
-    </script>
+            }
+        });
+    }
+</script>
 @endpush
 </x-user-layout>

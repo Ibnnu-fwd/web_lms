@@ -57,7 +57,7 @@
                     href="{{ route('/') }}">
                     Beranda
                 </a>
-                <a class="px-2 py-2 text-xs 2xl:text-sm text-gray-500 lg:px-6 md:px-3 hover:text-red-600 {{ request()->routeIs('product') ? 'text-red-600' : '' }}"
+                <a class="px-2 py-2 text-xs 2xl:text-sm text-gray-500 lg:px-6 md:px-3 hover:text-red-600 {{ request()->routeIs('product') || request()->routeIs('product.show') ? 'text-red-600' : '' }}"
                     href="{{ route('product') }}">
                     Materi
                 </a>
@@ -196,7 +196,7 @@
                                     </div>
                                 </x-dropdown-link>
 
-                                <x-dropdown-link :href="route('user.cart')">
+                                <x-dropdown-link :href="route('cart')">
                                     <div class="flex items-center gap-x-2">
                                         <ion-icon class="text-gray-300" name="cart-outline"></ion-icon>
                                         <span>Keranjang</span>
