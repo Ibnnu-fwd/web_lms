@@ -14,7 +14,7 @@ class IsActiveUser
             return $next($request);
         } else {
             auth()->logout();
-            return redirect('/login')->with('error', 'Akun anda tidak aktif!');
+            return redirect('/login')->with('error', 'Akun anda tidak aktif, tunggu konfirmasi dari admin!');
         }
     }
 }

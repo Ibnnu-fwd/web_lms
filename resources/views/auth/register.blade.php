@@ -30,8 +30,9 @@
                             <div x-show="tab==='tab1'" class="text-gray-500">
                                 <main>
                                     <div class="mt-5 sm:mx-auto sm:w-full sm:max-w-sm">
-                                    <form class="space-y-6" action="{{ route('register') }}" method="POST" enctype="multipart/form-data">
-                                        @csrf
+                                        <form class="space-y-6" action="{{ route('register') }}" method="POST"
+                                            enctype="multipart/form-data">
+                                            @csrf
                                             <x-input id="fullname" label="Nama Lengkap" name="fullname" type="text"
                                                 required />
                                             <x-input id="email" label="Email" name="email" type="email"
@@ -59,23 +60,32 @@
                             <div x-show="tab==='tab2'" class="text-gray-500" style="display: none;">
                                 <main>
                                     <div class="mt-5 sm:mx-auto sm:w-full sm:max-w-sm">
-                                    <form class="space-y-6" id="registerForm" action="{{ route('register_institution') }}" method="POST" enctype="multipart/form-data">
-                                        @csrf
-                                        <x-input id="fullname" label="Nama Lengkap" name="fullname" type="text" required />
-                                        <x-input id="email" label="Email" name="email" type="email" required />
-                                        <x-input id="password" label="Kata sandi" name="password" type="password" required />
-                                        <x-select id="gender" title="Gender" name="gender" class="w-full" required>
-                                            <option value="L">Laki Laki</option>
-                                            <option value="P">Perempuan</option>
-                                        </x-select>
-                                        <x-input id="birthday" label="Tanggal Lahir" name="birthday" type="date" required /> 
-                                        <x-input id="phone" label="No.Telephone" name="phone" type="tel" required />
-                                        <x-input id="job" label="Pekerjaan" name="job" type="text" required />
-                                        <x-input id="institution" label="Institusi" name="institution" type="text" required />
-                                        <x-input-file id="file" name="file" label="File" required />
-                                        <x-button id="daftarInstitution" title="Daftar" />
-                                    </form>
-
+                                        <form class="space-y-6" action="{{ route('register_institution') }}"
+                                            id="registerForm" method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            <x-input id="fullname" label="Nama Lengkap" name="fullname" type="text"
+                                                required />
+                                            <x-input id="email" label="Email" name="email" type="email"
+                                                required />
+                                            <x-input id="password" label="Kata sandi" name="password" type="password"
+                                                required />
+                                            <x-select id="gender" title="Gender" name="gender" class="w-full"
+                                                required>
+                                                <option value="L">Laki Laki</option>
+                                                <option value="P">Perempuan</option>
+                                            </x-select>
+                                            <x-input id="birthday" label="Tanggal Lahir" name="birthday" type="date"
+                                                required />
+                                            <x-input id="phone" label="No.Telephone" name="phone" type="tel"
+                                                required />
+                                            <x-input id="job" label="Pekerjaan" name="job" type="text"
+                                                required />
+                                            <x-input id="institution" label="Institusi" name="institution"
+                                                type="text" required />
+                                            <x-input id="file" name="file" label="File" type="file"
+                                                required />
+                                            <x-button id="daftarInstitution" title="Daftar" />
+                                        </form>
                                     </div>
                                 </main>
                             </div>
@@ -92,76 +102,38 @@
             </div>
         </section>
     </div>
-    
 
-    @push('js-internal')s
+
+    @push('js-internal')
         <script>
             $('#file').change(function() {
-                    let reader = new FileReader();
-                    reader.onload = (e) => {
-                        $('.image-container-file').addClass('hidden');
-                        $('.preview-image-file').removeClass('hidden');
-                        $('.preview-image-file img').attr('src', e.target.result);
-                    }
-                    reader.readAsDataURL(this.files[0]);
-                });
-            function removeImage(id) {
-                $(`.image-container-${id}`).removeClass('hidden');
-                $(`.preview-image-${id}`).addClass('hidden');
-                $(`#${id}`).val('');
-            }
-            
-            $('#registerForm').submit(function(e) {
-                e.preventDefault();
-                let formData = new FormData(this);
+                // check if not pdf extension then remove value
+                var ext = $('#file').val().split('.').pop().toLowerCase();
+                if ($.inArray(ext, ['pdf']) == -1) {
+                    $('#file').val('');
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'File harus berupa PDF!',
+                    });
+                }
+            })
 
-                $.ajax({
-                    url: "{{ route('register_institution') }}",
-                    type: "POST",
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    beforeSend: function() {
-                        Swal.fire({
-                            title: 'Mohon tunggu sebentar!',
-                            html: 'Sedang melakukan pendaftaran...',
-                            didOpen: () => {
-                                Swal.showLoading()
-                            },
-                            allowOutsideClick: false,
-                            allowEscapeKey: false,
-                            allowEnterKey: false
-                        });
-                    },
-                    success: function(response) {
-                        Swal.close(); // Tutup modal Swal
-                        if (response.status == true) {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Berhasil!',
-                                text: response.message,
-                                showConfirmButton: true,
-                            }).then(function() {
-                                window.location.href = "{{ route('login') }}";
-                            });
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Oops...',
-                                text: response.message,
-                            });
-                        }
-                    },
-                    error: function(xhr) {
-                        Swal.close(); // Tutup modal Swal
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Terjadi kesalahan saat mengirim data!',
-                        });
-                    }
-                });
-            });
+            @if (Session::has('success'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: '{{ Session::get('success') }}',
+                })
+            @endif
+
+            @if (Session::has('error'))
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: '{{ Session::get('error') }}',
+                })
+            @endif
         </script>
     @endpush
 </x-guest-layout>

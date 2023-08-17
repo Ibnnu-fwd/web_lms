@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 15 Agu 2023 pada 17.24
+-- Waktu pembuatan: 17 Agu 2023 pada 07.00
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.2.4
 
@@ -55,7 +55,7 @@ CREATE TABLE `courses` (
 
 INSERT INTO `courses` (`id`, `category_id`, `title`, `short_description`, `description`, `file`, `main_image`, `sneek_peek_1`, `sneek_peek_2`, `sneek_peek_3`, `sneek_peek_4`, `price`, `request_status`, `upload_status`, `activation_status`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
 (1, 1, 'Tenetur ea dolor in', 'Maiores magni aut vo', 'Illum nostrud ea qu', NULL, '64d23f255b20d.jpg', '64d23f2573f5b.jpg', '64d23f2574138.jpg', '64d23f25742b3.png', '64d23f2575b5f.png', '336', 0, 0, 1, 1, NULL, '2023-08-08 13:12:05', '2023-08-08 13:12:05'),
-(5, 2, 'Quasi ut deserunt du', 'Culpa qui quo sequi', 'Eligendi dignissimos', NULL, '64db8a1e22709.jpg', '64db8a1e25bff.png', '64db8a1e274f7.jpg', '64db8a1e27742.png', '64db8a1e281b8.png', '68', 0, 0, 1, 1, NULL, '2023-08-15 14:22:22', '2023-08-15 14:22:22');
+(5, 2, 'Quasi ut deserunt du', 'Culpa qui quo sequi', 'Eligendi dignissimos', NULL, '64db8a1e22709.jpg', '64db8a1e25bff.png', '64db8a1e274f7.jpg', '64db8a1e27742.png', '64db8a1e281b8.png', '900000', 0, 0, 1, 1, NULL, '2023-08-15 14:22:22', '2023-08-16 21:08:04');
 
 -- --------------------------------------------------------
 
@@ -95,10 +95,10 @@ INSERT INTO `course_benefits` (`id`, `course_id`, `title`, `description`, `creat
 (2, 1, 'Qui sit consequuntur', 'Velit enim sunt quos', '2023-08-08 13:12:05', '2023-08-08 13:12:05'),
 (3, 1, 'Excepturi corrupti ', 'Eius dolor iusto ut ', '2023-08-08 13:12:05', '2023-08-08 13:12:05'),
 (4, 1, 'Quo rerum non sint p', 'Est consequuntur exc', '2023-08-08 13:12:05', '2023-08-08 13:12:05'),
-(29, 5, 'Ut eligendi expedita', 'Libero voluptatem pl', '2023-08-15 14:57:38', '2023-08-15 14:57:38'),
-(30, 5, 'Et non est ipsum do', 'Enim saepe ad quidem', '2023-08-15 14:57:38', '2023-08-15 14:57:38'),
-(31, 5, 'Repellendus Cillum ', 'Distinctio Eos sus', '2023-08-15 14:57:38', '2023-08-15 14:57:38'),
-(32, 5, 'In est lorem corrupt', 'Sit commodo nemo ex', '2023-08-15 14:57:38', '2023-08-15 14:57:38');
+(77, 5, 'Ut eligendi expedita', 'Libero voluptatem pl', '2023-08-16 21:08:23', '2023-08-16 21:08:23'),
+(78, 5, 'Et non est ipsum do', 'Enim saepe ad quidem', '2023-08-16 21:08:23', '2023-08-16 21:08:23'),
+(79, 5, 'Repellendus Cillum ', 'Distinctio Eos sus', '2023-08-16 21:08:23', '2023-08-16 21:08:23'),
+(80, 5, 'In est lorem corrupt', 'Sit commodo nemo ex', '2023-08-16 21:08:23', '2023-08-16 21:08:23');
 
 -- --------------------------------------------------------
 
@@ -171,9 +171,9 @@ CREATE TABLE `course_objectives` (
 INSERT INTO `course_objectives` (`id`, `course_id`, `title`, `description`, `created_at`, `updated_at`) VALUES
 (1, 1, 'Quaerat laborum sint', 'Quisquam ut et minim', '2023-08-08 13:12:05', '2023-08-08 13:12:05'),
 (2, 1, 'Ratione dolorum et m', 'Et doloremque modi a', '2023-08-08 13:12:05', '2023-08-08 13:12:05'),
-(21, 5, 'Velit autem aut temp', 'Enim modi consequatu', '2023-08-15 14:57:38', '2023-08-15 14:57:38'),
-(22, 5, 'Deserunt aut aut nec', 'Debitis aut pariatur', '2023-08-15 14:57:38', '2023-08-15 14:57:38'),
-(23, 5, 'Proident velit et ', 'In recusandae Paria', '2023-08-15 14:57:38', '2023-08-15 14:57:38');
+(57, 5, 'Velit autem aut temp', 'Enim modi consequatu', '2023-08-16 21:08:23', '2023-08-16 21:08:23'),
+(58, 5, 'Deserunt aut aut nec', 'Debitis aut pariatur', '2023-08-16 21:08:23', '2023-08-16 21:08:23'),
+(59, 5, 'Proident velit et ', 'In recusandae Paria', '2023-08-16 21:08:23', '2023-08-16 21:08:23');
 
 -- --------------------------------------------------------
 
@@ -196,9 +196,9 @@ CREATE TABLE `course_tech_specs` (
 INSERT INTO `course_tech_specs` (`id`, `course_id`, `name`, `created_at`, `updated_at`) VALUES
 (1, 1, 'Ipsa aut quia moles', '2023-08-08 13:12:05', '2023-08-08 13:12:05'),
 (2, 1, 'Aut in quod beatae a', '2023-08-08 13:12:05', '2023-08-08 13:12:05'),
-(21, 5, 'Necessitatibus ipsa', '2023-08-15 14:57:38', '2023-08-15 14:57:38'),
-(22, 5, 'Nesciunt consequatu', '2023-08-15 14:57:38', '2023-08-15 14:57:38'),
-(23, 5, 'Facere unde enim dol', '2023-08-15 14:57:38', '2023-08-15 14:57:38');
+(57, 5, 'Necessitatibus ipsa', '2023-08-16 21:08:23', '2023-08-16 21:08:23'),
+(58, 5, 'Nesciunt consequatu', '2023-08-16 21:08:23', '2023-08-16 21:08:23'),
+(59, 5, 'Facere unde enim dol', '2023-08-16 21:08:23', '2023-08-16 21:08:23');
 
 -- --------------------------------------------------------
 
@@ -225,7 +225,9 @@ CREATE TABLE `detail_transactions` (
 --
 
 INSERT INTO `detail_transactions` (`id`, `transaction_id`, `course_id`, `start_date`, `end_date`, `total_month`, `sub_total`, `total_payment`, `created_at`, `updated_at`, `customer_id`) VALUES
-(1, 1, 1, '2023-08-08', '2023-09-08', 1, '890000', '890000', '2023-08-08 16:49:12', '2023-08-08 16:49:12', 0);
+(1, 1, 1, '2023-08-08', '2023-09-08', 1, '890000', '890000', '2023-08-08 16:49:12', '2023-08-08 16:49:12', 2),
+(4, 9, 5, '2023-08-17', '2024-02-17', 6, '4200000', '4200000', '2023-08-17 00:21:30', '2023-08-17 00:21:30', 3),
+(5, 9, 1, '2023-08-17', '2024-03-17', 7, '2352', '2352', '2023-08-17 00:21:30', '2023-08-17 00:21:30', 3);
 
 -- --------------------------------------------------------
 
@@ -249,10 +251,8 @@ CREATE TABLE `discounts` (
 --
 
 INSERT INTO `discounts` (`id`, `role`, `course_id`, `discount_price`, `start_date`, `end_date`, `created_at`, `updated_at`) VALUES
-(4, 2, 5, 21, '2014-08-08', '2021-11-01', '2023-08-15 14:57:38', '2023-08-15 14:57:38'),
-(5, 3, 5, 47, '1987-11-04', '1978-06-19', '2023-08-15 14:57:38', '2023-08-15 14:57:38'),
-(6, 2, 5, 66, '1998-12-11', '1996-02-21', '2023-08-15 14:57:38', '2023-08-15 14:57:38'),
-(7, 3, 5, 22, '1991-06-20', '1987-09-20', '2023-08-15 14:57:38', '2023-08-15 14:57:38');
+(31, 2, 5, 700000, '2023-08-17', '2023-08-19', '2023-08-16 21:08:23', '2023-08-16 21:08:23'),
+(32, 3, 5, 800000, '2023-08-17', '2023-08-19', '2023-08-16 21:08:23', '2023-08-16 21:08:23');
 
 -- --------------------------------------------------------
 
@@ -435,7 +435,8 @@ CREATE TABLE `transactions` (
 --
 
 INSERT INTO `transactions` (`id`, `transaction_code`, `transaction_type`, `customer_id`, `sub_total`, `total_payment`, `status_order`, `status_payment`, `payment_proof`, `created_at`, `updated_at`) VALUES
-(1, 'tr-0021', 'buy', 2, '890000', '890000', 1, 2, '64d280173b8e0.jpg', '2023-08-08 14:56:35', '2023-08-08 17:49:26');
+(1, 'tr-0021', 'buy', 2, '890000', '890000', 1, 2, '64d280173b8e0.jpg', '2023-08-08 14:56:35', '2023-08-08 17:49:26'),
+(9, 'TRX1692231690', 'buy', 3, '4202352', '4202352', 1, 2, '64dd6c8271d37.jpg', '2023-08-17 00:21:30', '2023-08-17 00:41:48');
 
 -- --------------------------------------------------------
 
@@ -687,7 +688,7 @@ ALTER TABLE `course_authors`
 -- AUTO_INCREMENT untuk tabel `course_benefits`
 --
 ALTER TABLE `course_benefits`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT untuk tabel `course_categories`
@@ -705,25 +706,25 @@ ALTER TABLE `course_chapters`
 -- AUTO_INCREMENT untuk tabel `course_objectives`
 --
 ALTER TABLE `course_objectives`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT untuk tabel `course_tech_specs`
 --
 ALTER TABLE `course_tech_specs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT untuk tabel `detail_transactions`
 --
 ALTER TABLE `detail_transactions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `discounts`
 --
 ALTER TABLE `discounts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT untuk tabel `failed_jobs`
@@ -771,7 +772,7 @@ ALTER TABLE `rented_course`
 -- AUTO_INCREMENT untuk tabel `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
