@@ -25,6 +25,17 @@ Breadcrumbs::for('transaction.detail', function (BreadcrumbTrail $trail, $data) 
     $trail->push('Detail Transaksi', route('admin.transaction.detail', $data));
 });
 
+// INSTITUTION TRANSACTION
+Breadcrumbs::for('institution-transaction', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Transaksi', route('institution.transaction.index'));
+});
+
+Breadcrumbs::for('institution-transaction-detail', function (BreadcrumbTrail $trail, $data) {
+    $trail->parent('institution-transaction');
+    $trail->push('Detail Transaksi', route('institution.transaction.detail', $data));
+});
+
 // USER TRANSACTION
 Breadcrumbs::for('user-transaction', function (BreadcrumbTrail $trail) {
     $trail->parent('user-dashboard');

@@ -9,12 +9,36 @@ class UserRepository implements UserInterface
 {
     private $user;
 
-    public function __construct(User $user) {
+    public function __construct(User $user)
+    {
         $this->user = $user;
     }
 
     public function getAll()
     {
         return $this->user->active()->get();
+    }
+
+    public function getRole()
+    {
+        $user = auth()->user();
+        if ($user->is_verificator == true) {
+            return User::ROLE_VERIFICATOR_LABEL;
+        }
+
+        switch ($user->role) {
+            case User::ROLE_ADMIN:
+                return User::ROLE_ADMIN_LABEL;
+                break;
+            case User::ROLE_INSTITUTION:
+                return User::ROLE_INSTITUTION_LABEL;
+                break;
+            case User::ROLE_USER:
+                return User::ROLE_USER_LABEL;
+                break;
+            default:
+                return 'Unknown';
+                break;
+        }
     }
 }

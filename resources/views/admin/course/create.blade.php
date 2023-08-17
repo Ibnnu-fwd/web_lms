@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-breadcrumb name="course.create" />
 
-    <x-card-container class="w-full md:w-[70%]">
+    <x-card-container class="w-full">
         <div class="justify-start text-left">
 
             <div x-data="{ tab: 'tab1' }">
@@ -55,11 +55,11 @@
                             <!-- === Remove and replace with your own content... === -->
                             <div class="py-4 cl:grid grid-cols-2 gap-3">
                                 <x-input id="title" name="title" type="text" label="Judul" required />
-                                    <x-select id="category_id" title="Kategori" name="category_id" required>
-                                        @foreach ($courseCategories as $category)
-                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                        @endforeach
-                                    </x-select>
+                                <x-select id="category_id" title="Kategori" name="category_id" required>
+                                    @foreach ($courseCategories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </x-select>
                                 <x-textarea id="short_description" name="short_description" label="Deskripsi Singkat"
                                     required />
                                 <x-textarea id="description" name="description" label="Deskripsi Lengkap" required />
@@ -72,7 +72,7 @@
                         <main>
                             <!-- === Remove and replace with your own content... === -->
                             <div class="py-4">
-                                <div class="md:grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-x-4 mt-4">
+                                <div class="md:grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-x-4 mt-4">
                                     <x-input-file id="main_image" name="main_image" label="Gambar Utama" required />
                                     <x-input-file id="sneek_peek_1" name="sneek_peek_1" label="Sneek Peek 1" required />
                                     <x-input-file id="sneek_peek_2" name="sneek_peek_2" label="Sneek Peek 2" required />
@@ -90,7 +90,7 @@
                                 <button type="button" onclick="addTechnology()"
                                     class="bg-dark text-white text-xs 2xl:text-sm py-2 px-4 rounded w-full md:w-fit mt-4 md:mt-0">
                                     Tambah Teknologi </button>
-                                <div id="technology-container" class="block md:grid xl:grid-cols-2 gap-4 mt-4">
+                                <div id="technology-container" class="block md:grid xl:grid-cols-4 gap-4 mt-4">
                                 </div>
                             </div>
                             <!-- === End ===  -->
@@ -100,25 +100,28 @@
                         <main>
                             <!-- === Remove and replace with your own content... === -->
                             <div class="py-4">
-                                <div class="md:grid grid-cols-2 gap-x-8">
+                                <div class="">
                                     <div>
                                         <x-input id="title_1" name="title_1" type="text" label="Benefit 1"
                                             required />
                                         <x-textarea id="description_1" name="description_1" label="Deskripsi Benefit 1"
                                             required />
                                     </div>
+                                    <hr class="my-2">
                                     <div>
                                         <x-input id="title_2" name="title_2" type="text" label="Benefit 2"
                                             required />
                                         <x-textarea id="description_2" name="description_2" label="Deskripsi Benefit 2"
                                             required />
                                     </div>
+                                    <hr class="my-2">
                                     <div>
                                         <x-input id="title_3" name="title_3" type="text" label="Benefit 3"
                                             required />
-                                        <x-textarea id="description_3" name="description_3" label="Deskripsi Benefit 3"
-                                            required />
+                                        <x-textarea id="description_3" name="description_3"
+                                            label="Deskripsi Benefit 3" required />
                                     </div>
+                                    <hr class="my-2">
                                     <div>
                                         <x-input id="title_4" name="title_4" type="text" label="Benefit 4"
                                             required />
@@ -139,7 +142,7 @@
                                         class="bg-dark text-white py-2 px-4 text-xs 2xl:text-sm rounded w-full md:w-fit mt-4 md:mt-0">
                                         Tambah Tujuan </button>
                                 </div>
-                                <div id="objective-container" class="block md:grid grid-cols-2 gap-4 mt-4">
+                                <div id="objective-container" class="mt-4">
                                 </div>
                             </div>
                             <!-- === End ===  -->
@@ -163,7 +166,38 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr></tr>
+                                        <tr>
+                                            <td>
+                                                <select name="discount_group[]"
+                                                    class="form-input rounded-md shadow-sm block w-full text-xs 2xl:text-sm"
+                                                    required>
+                                                    <option value="">Pilih</option>
+                                                    <option value="2">Insitusi</option>
+                                                    <option value="3">Personal</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input type="number" name="discount[]"
+                                                    class="form-input rounded-md shadow-sm block w-full text-xs 2xl:text-sm"
+                                                    placeholder="Potongan Harga" required>
+                                            </td>
+                                            <td>
+                                                <input type="date" name="start_date[]"
+                                                    class="form-input rounded-md shadow-sm block w-full text-xs 2xl:text-sm"
+                                                    placeholder="Tanggal Mulai" required>
+                                            </td>
+                                            <td>
+                                                <input type="date" name="end_date[]"
+                                                    class="form-input rounded-md shadow-sm block w-full text-xs 2xl:text-sm"
+                                                    placeholder="Tanggal Berakhir" required>
+                                            </td>
+                                            <td>
+                                                <button type="button" onclick="removeDiscount()"
+                                                    class="bg-gray-500 text-white text-xs 2xl:text-sm py-2 px-4 rounded-md">
+                                                    Hapus
+                                                </button>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -174,14 +208,47 @@
             </div>
         </div>
     </x-card-container>
-    <x-button title="Tambah Kursus" class="mt-4 2xl:mt-0" />
+    <x-button title="Tambah Kursus" class="mt-4 2xl:mt-4" />
 
     @push('js-internal')
         <!-- Ckeditor -->
         <script src="//cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
 
         <script>
+            let discount = [];
+
             function addDiscount() {
+                // get all discount
+                discount = [];
+                $('select[name^="discount_group"]').each(function(index) {
+                    discount.push({
+                        role: $(this).val(),
+                        discount_price: $(`input[name="discount[]"]`).eq(index).val(),
+                        start_date: $(`input[name="start_date[]"]`).eq(index).val(),
+                        end_date: $(`input[name="end_date[]"]`).eq(index).val(),
+                    });
+                });
+
+                // unable to add if there's empty field
+                if (discount.length > 0) {
+                    let isExist = false;
+                    discount.forEach(function(discount) {
+                        if (!discount.role || !discount.discount_price || !discount.start_date ||
+                            !discount.end_date) {
+                            isExist = true;
+                        }
+                    });
+
+                    if (isExist) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Periksa kembali semua field wajib diisi!',
+                        });
+                        return;
+                    }
+                }
+
                 // add input field
                 let html = `
                     <tr>
@@ -212,15 +279,48 @@
                 $("#discountTable tbody").append(html);
             }
 
-            function removeDiscount() {
-                // remove input field
-                $("#discountTable tbody tr:last-child").remove();
-            }
+            // check if user choose same role
+            $(document).on('change', 'select[name^="discount_group"]', function() {
+                let role = $(this).val();
+                let index = $(this).closest('tr').index();
+                let isExist = false;
+                $('select[name^="discount_group"]').each(function(i) {
+                    if (i != index && $(this).val() == role) {
+                        isExist = true;
+                    }
+                });
 
-            // Add event listener to mark selected rows
-            $("#discountTable tbody tr").on("click", function() {
-                $(this).toggleClass("selected");
+                if (isExist) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Anda sudah memilih role yang sama!',
+                    });
+                    $(this).val('');
+                }
             });
+
+            // get start date & end date discount, then check if end date is less than start date
+            $(document).on('change', 'input[name^="start_date"], input[name^="end_date"]', function() {
+                let startDate = $(this).closest('tr').find('input[name^="start_date"]').val();
+                let endDate = $(this).closest('tr').find('input[name^="end_date"]').val();
+
+                if (startDate && endDate) {
+                    if (endDate < startDate) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Tanggal berakhir tidak boleh kurang dari tanggal mulai!',
+                        });
+                        $(this).val('');
+                    }
+                }
+            });
+
+            function removeDiscount() {
+                // remove this row
+                $(event.target).closest('tr').remove();
+            }
 
             $(function() {
                 $('#discountTable').DataTable({
@@ -423,8 +523,7 @@
                             formData.append('objectives[]', JSON.stringify(objective));
                         });
 
-                        if(discount.length > 0)
-                        {
+                        if (discount.length > 0) {
                             formData.append('discount', JSON.stringify(discount));
                         }
 

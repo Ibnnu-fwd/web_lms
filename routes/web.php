@@ -115,9 +115,11 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser:1'
     Route::get('cart', [ProductController::class, 'getAllCart'])->name('cart');
     Route::post('cart/delete', [ProductController::class, 'deleteCart'])->name('cart.delete');
     Route::post('product/add-to-cart', [ProductController::class, 'addToCart'])->name('product.add-to-cart');
+    Route::post('cart/update', [ProductController::class, 'updateCart'])->name('cart.update');
 
     // Checkout
-    Route::get('checkout', fn () => view('checkout'))->name('checkout');
+    Route::post('checkout/payment', [ProductController::class, 'checkoutPayment'])->name('checkout.payment');
+    Route::get('checkout', [ProductController::class, 'checkout'])->name('checkout');
 });
 
 // User
@@ -186,6 +188,10 @@ Route::group(['prefix' => 'institution-dashboard', 'middleware' => ['auth', 'isA
 
     // transaction
     Route::group(['prefix' => 'institution-transaction', 'as' => 'institution.'], function () {
+        Route::post('approve/{id}', [InstitutionTransactionController::class, 'approve'])->name('transaction.approve');
+        Route::post('upload-payment/{id}', [InstitutionTransactionController::class, 'uploadPayment'])->name('transaction.upload-payment');
+        Route::post('cancel/{id}', [InstitutionTransactionController::class, 'cancel'])->name('transaction.cancel');
+        Route::get('detail/{id}', [InstitutionTransactionController::class, 'detail'])->name('transaction.detail');
         Route::get('/', [InstitutionTransactionController::class, 'index'])->name('transaction.index');
     });
 });

@@ -32,7 +32,7 @@ class UserTransactionRepository implements UserTransactionInterface
 
     public function getById($id)
     {
-        return $this->transaction->find($id)->with('detailTransaction')->first();
+        return $this->transaction->with('detailTransaction')->where('id', $id)->first();
     }
 
     public function uploadPayment($id, $data)

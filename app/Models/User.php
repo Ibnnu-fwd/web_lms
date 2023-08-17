@@ -101,25 +101,46 @@ class User extends Authenticatable
     }
 
     // Custom Function
+    public function getRoleLabelAttribute()
+    {
+        if ($this->is_verificator == 1) {
+            return self::ROLE_VERIFICATOR_LABEL;
+        }
+
+        switch ($this->role) {
+            case self::ROLE_ADMIN:
+                return self::ROLE_ADMIN_LABEL;
+                break;
+            case self::ROLE_INSTITUTION:
+                return self::ROLE_INSTITUTION_LABEL;
+                break;
+            case self::ROLE_USER:
+                return self::ROLE_USER_LABEL;
+                break;
+            default:
+                return 'Unknown';
+                break;
+        }
+    }
     public function getRoleLabel()
     {
-        if ($this->is_verificator == true) {
+        if ($this->is_verificator == 1) {
             return self::ROLE_VERIFICATOR_LABEL;
-        } else {
-            switch ($this->role) {
-                case self::ROLE_ADMIN:
-                    return self::ROLE_ADMIN_LABEL;
-                    break;
-                case self::ROLE_INSTITUTION:
-                    return self::ROLE_INSTITUTION_LABEL;
-                    break;
-                case self::ROLE_USER:
-                    return self::ROLE_USER_LABEL;
-                    break;
-                default:
-                    return 'Unknown';
-                    break;
-            }
+        }
+
+        switch ($this->role) {
+            case self::ROLE_ADMIN:
+                return self::ROLE_ADMIN_LABEL;
+                break;
+            case self::ROLE_INSTITUTION:
+                return self::ROLE_INSTITUTION_LABEL;
+                break;
+            case self::ROLE_USER:
+                return self::ROLE_USER_LABEL;
+                break;
+            default:
+                return 'Unknown';
+                break;
         }
     }
 }

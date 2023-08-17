@@ -5,4 +5,5 @@ namespace App\Interfaces;
 interface UserInterface
 {
     public function getAll();
+    public function getRole();
 }

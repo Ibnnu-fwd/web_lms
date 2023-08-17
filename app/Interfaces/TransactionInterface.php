@@ -9,4 +9,5 @@ interface TransactionInterface
     public function getById($id);
     public function approve($id);
     public function decline($id);
+    public function checkoutPayment($data);
 }

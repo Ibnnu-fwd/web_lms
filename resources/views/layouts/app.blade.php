@@ -148,7 +148,7 @@
     <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.8.162/build/pdf.min.js"></script>
 
     <script>
-        $('select').select2();
+        // $('select').select2();
     </script>
 
     @stack('js-internal')

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Institution;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Interfaces\User\UserTransactionInterface;
+use Carbon\Carbon;
 
 class TransactionController extends Controller
 {
@@ -18,9 +19,11 @@ class TransactionController extends Controller
 
     public function index(Request $request)
     {
+        $transaction = $this->transaction->getByUserId(auth()->user()->id);
+
         if ($request->ajax()) {
             return datatables()
-                ->of($this->transaction->getAll())
+                ->of($transaction)
                 ->addColumn('transaction_code', function ($data) {
                     return $data->transaction_code;
                 })
@@ -36,19 +39,51 @@ class TransactionController extends Controller
                 ->addColumn('total_payment', function ($data) {
                     return $data->total_payment;
                 })
-                ->addColumn('status', function ($data) {
-                    return $data->status;
+                ->addColumn('status_order', function ($data) {
+                    return strtoupper($data->getStatusOrderLabel());
                 })
-                ->addColumn('payment_status', function ($data) {
-                    return $data->payment_status;
+                ->addColumn('status_payment', function ($data) {
+                    return strtoupper($data->getStatusPaymentLabel());
                 })
                 ->addColumn('created_at', function ($data) {
-                    return $data->created_at;
+                    return Carbon::parse($data->created_at)->isoFormat('DD/MM/Y H:m');
                 })
                 ->addColumn('action', function ($data) {
                     return view('institution.transaction.column.action', compact('data'));
-                });
+                })
+                ->addIndexColumn()
+                ->make(true);
         }
         return view('institution.transaction.index');
+    }
+
+    public function detail($id)
+    {
+        $transaction = $this->transaction->getById($id);
+        return view('institution.transaction.detail', compact('transaction'));
+    }
+
+    public function uploadPayment($id, Request $request)
+    {
+        $this->validate($request, [
+            'proof_payment' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+        ]);
+
+        try {
+            $this->transaction->uploadPayment($id, $request->all());
+            return redirect()->back()->with(['success' => 'Upload bukti pembayaran berhasil']);
+        } catch (\Throwable $th) {
+            return redirect()->back()->with(['error' => $th->getMessage()]);
+        }
+    }
+
+    public function cancel($id)
+    {
+        try {
+            $this->transaction->cancel($id);
+            return redirect()->back()->with(['success' => 'Transaksi berhasil dibatalkan']);
+        } catch (\Throwable $th) {
+            return redirect()->back()->with(['error' => $th->getMessage()]);
+        }
     }
 }

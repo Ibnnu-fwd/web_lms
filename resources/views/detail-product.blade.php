@@ -6,7 +6,7 @@
         <section class="max-w-6xl mx-auto">
             <div class="grid grid-cols-12 gap-x-8">
                 <div class="hidden lg:block lg:col-span-3">
-                    <img src="{{ asset('images/no_image.jpg') }}"
+                    <img src="{{ asset('storage/courses/' . $course->main_image) }}"
                         class="object-cover bg-gray-50 aspect-auto h-40 w-40 lg:h-60 lg:w-60 rounded-md" alt="">
                 </div>
                 <div class="col-span-12 lg:col-span-6">
@@ -46,6 +46,38 @@
                 <div class="col-span-3">
                     <div class="card border-none shadow-lg bg-white rounded-lg mt-5 hidden md:block p-4 z-10">
                         <div class="card-body">
+                            @guest
+                                <div class="mb-2">
+                                    <span
+                                        class="text-2xl font-medium text-gray-700">Rp{{ number_format($course->price, 0, ',', '.') }}</span>
+                                    <span class="text-xs 2xl:text-sm text-gray-500">/Bulan</span>
+                                </div>
+                            @endguest
+                            @auth
+                                <div class="mb-2">
+                                    @if ($discount != null)
+                                        <div>
+                                            {{-- coret harga asli --}}
+                                            <span
+                                                class="text-xs 2xl:text-sm text-gray-500 line-through">Rp{{ number_format($course->price, 0, ',', '.') }}</span>
+                                            {{-- harga setelah diskon --}}
+                                            <br>
+                                            <span
+                                                class="text-2xl font-medium text-gray-700">Rp{{ number_format($discount->discount_price, 0, ',', '.') }}</span>
+                                            <span class="text-xs 2xl:text-sm text-gray-500">/Bulan</span>
+                                        </div>
+
+                                        <small class="text-xs animate-pulse text-gray-500">
+                                            Diskon berlaku sampai
+                                            {{ date('d F Y', strtotime($discount->end_date)) }}
+                                        </small>
+                                    @else
+                                        <span
+                                            class="text-2xl font-medium text-gray-700">Rp{{ number_format($course->price, 0, ',', '.') }}</span>
+                                        <span class="text-xs 2xl:text-sm text-gray-500">/Bulan</span>
+                                    @endif
+                                </div>
+                            @endauth
                             @auth
                                 @if ($isBought)
                                     <x-link-button type="button" title="Belajar Sekarang"

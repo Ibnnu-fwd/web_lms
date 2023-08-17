@@ -3,7 +3,19 @@
         <h1 class="leading-relaxed font-primary font-medium text-3xl text-center text-palette-primary mt-4 py-2 sm:py-4">
             Pesanan Anda
         </h1>
+
         <div class="min-h-80 max-w-7xl my-4 sm:my-8 mx-auto w-full">
+            <div class="bg-gray-100 border text-gray-700 px-4 py-3 rounded relative mt-4 mb-4" role="alert">
+                <span class="block sm:inline">
+                    Jika anda ingin mengubah jumlah sewa, silahkan ubah pada kolom <strong
+                        class="font-primary font-medium">Sewa / bulan</strong> dibawah ini.
+                    <hr class="my-2">
+
+                    <strong class="font-primary font-medium">Note:</strong> Jumlah sewa untuk
+                    <strong class="font-medium">{{ $role }}</strong> minimal
+                    <strong class="font-medium">{{ auth()->user()->role == 2 ? 6 : 1 }}</strong> bulan.
+                </span>
+            </div>
             <div class="overflow-x-auto">
                 <table class="w-full table-fixed">
                     <thead>
@@ -18,7 +30,7 @@
                     <tbody class="divide-y divide-palette-lighter">
                         @if (isset($carts))
                             @foreach ($carts as $cart)
-                                <tr class="text-sm sm:text-base text-gray-600 ">
+                                <tr class="text-sm sm:text-base text-gray-600" data-id="{{ $cart['id'] }}">
                                     <td
                                         class="font-primary font-medium mr-2 py-4 flex items-center text-left gap-3 px-4">
                                         <img src="{{ asset('storage/courses/' . $cart['main_image']) }}"
@@ -28,9 +40,8 @@
                                         </p>
                                     </td>
                                     <td class="font-primary px-4 sm:px-6 py-4 text-center">
-                                        <input type="number" inputmode="numeric" id="variant-quantity"
-                                            name="variant-quantity" min="{{ auth()->user()->role == 2 ? 3 : 1 }}"
-                                            step="1"
+                                        <input type="number" inputmode="numeric" id="rent_month" name="rent_month"
+                                            min="{{ auth()->user()->role == 2 ? 3 : 1 }}" step="1"
                                             class="text-gray-900 form-input border border-gray-300 w-16 rounded-md focus:border-primary focus:ring-primary"
                                             value="{{ $cart['rent_month'] }}">
                                     </td>
@@ -65,17 +76,17 @@
             </div>
         </div>
         @if (isset($cart))
-            <div class="max-w-md mx-auto space-y-4 px-2">
+            <div class="text-center">
                 <a href="{{ route('checkout') }}">
-                    <button class="mt-4 mb-8 w-full rounded-md bg-primary px-3 py-3 font-medium text-lg text-white">
-                        Checkout
+                    <button class="mt-4 mb-8 rounded-md bg-primary px-5 py-3 text-md text-white">
+                        Lanjutkan ke Pembayaran
                     </button>
                 </a>
             </div>
         @else
-            <div class="max-w-md mx-auto space-y-4 px-2">
+            <div class="text-center">
                 <a href="{{ route('product') }}">
-                    <button class="mt-4 mb-8 w-full rounded-md bg-primary px-3 py-3 font-medium text-lg text-white">
+                    <button class="mt-4 mb-8 rounded-md bg-primary px-5 py-3 text-md text-white">
                         Jelajahi Modul
                     </button>
                 </a>
@@ -118,6 +129,53 @@
                     }
                 })
             }
+
+            // set total price on change rent month
+            $(document).on('change', '#rent_month', function() {
+                let rent_month = $(this).val();
+                let id = $(this).closest('tr').data('id');
+                let min_rent_month = @json($minRentMonth);
+
+                // rent month must't be less than 1 or null or undefined
+                if (rent_month < min_rent_month || rent_month == null || rent_month == undefined ||
+                    rent_month == '') {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Peringatan',
+                        text: 'Jumlah sewa minimal ' + min_rent_month + ' bulan',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+
+                    $(this).val(min_rent_month);
+                    rent_month = min_rent_month;
+
+                    return false;
+                }
+
+                $.ajax({
+                    url: "{{ route('cart.update') }}",
+                    type: "POST",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        id: id,
+                        rent_month: rent_month
+                    },
+                    success: function(response) {
+                        if (response.status == true) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Berhasil',
+                                text: response.message,
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(() => {
+                                window.location.reload();
+                            });
+                        }
+                    }
+                });
+            });
         </script>
     @endpush
 </x-user-layout>

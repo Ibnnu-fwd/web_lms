@@ -54,12 +54,12 @@
                             name: 'total_payment'
                         },
                         {
-                            data: 'status',
-                            name: 'status'
+                            data: 'status_order',
+                            name: 'status_order'
                         },
                         {
-                            data: 'payment_status',
-                            name: 'payment_status'
+                            data: 'status_payment',
+                            name: 'status_payment'
                         },
                         {
                             data: 'created_at',
