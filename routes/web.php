@@ -204,8 +204,11 @@ Route::group(
     }
 );
 
+// Register-institution
+Route::post('register_institution', [RegisteredInstitutionController::class, 'registeredInstitution'])->name('register_institution');
 
-// Institution
-
+// Register-personal
+Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
+Route::post('register', [RegisteredUserController::class, 'store']);
 
 require __DIR__ . '/auth.php';
