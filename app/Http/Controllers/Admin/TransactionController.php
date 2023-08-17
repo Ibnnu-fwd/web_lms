@@ -26,7 +26,7 @@ class TransactionController extends Controller
                     return $data->transaction_code;
                 })
                 ->addColumn('transaction_type', function ($data) {
-                    return $data->transaction_type;
+                    return strtoupper($data->transaction_type);
                 })
                 ->addColumn('customer', function ($data) {
                     return $data->customer->fullname;
