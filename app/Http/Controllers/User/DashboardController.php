@@ -17,9 +17,13 @@ class DashboardController extends Controller
 
     public function __invoke()
     {
-        // dd($this->transaction->getApprovedTransactionUser(auth()->id()));
+        $detailTransaction = $this->transaction->getApprovedTransactionUser(auth()->id());
+        foreach ($detailTransaction as $dt) {
+            $dt->isExpired = date('Y-m-d H:i:s', strtotime($dt->end_date . ' + 1 days')) < date('Y-m-d H:i:s');
+        }
+
         return view('user.dashboard', [
-            'detailTransaction' => $this->transaction->getApprovedTransactionUser(auth()->id())
+            'detailTransaction' => $detailTransaction
         ]);
     }
 }

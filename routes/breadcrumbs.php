@@ -25,6 +25,23 @@ Breadcrumbs::for('transaction.detail', function (BreadcrumbTrail $trail, $data) 
     $trail->push('Detail Transaksi', route('admin.transaction.detail', $data));
 });
 
+// INSTITUTION COURSE
+Breadcrumbs::for('institution-course.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('institution-dashboard');
+    $trail->push('Kelas', route('institution.course.index'));
+});
+
+Breadcrumbs::for('institution-course.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('institution-course.index');
+    $trail->push('Tambah Kelas', route('institution.course.create'));
+});
+
+Breadcrumbs::for('institution-course.edit', function (BreadcrumbTrail $trail, $data) {
+    $trail->parent('institution-course.index');
+    $trail->push($data->title);
+    $trail->push('Edit', route('institution.course.edit', $data));
+});
+
 // INSTITUTION TRANSACTION
 Breadcrumbs::for('institution-transaction', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
@@ -68,6 +85,12 @@ Breadcrumbs::for('verificator.edit', function (BreadcrumbTrail $trail, $data) {
     $trail->parent('verificator');
     $trail->push($data->fullname);
     $trail->push('Edit', route('admin.verificator.edit', $data));
+});
+
+// MEMBER
+Breadcrumbs::for('member', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Daftar Member', route('admin.member.index'));
 });
 
 /* PROFILE */

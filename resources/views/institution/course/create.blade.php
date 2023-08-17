@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-breadcrumb name="course.create" />
+    <x-breadcrumb name="institution-course.create" />
 
     <div class="xl:grid grid-cols-2 gap-8 space-y-6 md:space-y-0">
         <x-card-container class="">
@@ -22,20 +22,20 @@
             </div>
             <div id="technology-container" class="block md:grid xl:grid-cols-2 gap-4 mt-4">
             </div>
-            
+
         </x-card-container>
         <x-card-container>
             <h2 class="font-medium text-md mb-6">
                 Surat Keterangan
             </h2>
 
-            <div >
+            <div>
                 <form>
                     <label class="text-xs 2xl:text-sm" for="image">Pilih Gambar:</label>
                     <input type="file" name="file" id="file">
                     <br>
                 </form>
-                
+
             </div>
 
             <div class="block md:flex justify-between items-center mt-4">
@@ -67,6 +67,7 @@
                     dateFormat: 'yy-mm-dd',
                 });
             });
+
             function removeObjective(id) {
                 $(`#objective-${id}`).remove();
                 $('#objective-container').children().each(function(index) {

@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-breadcrumb name="course" />
+    <x-breadcrumb name="institution-course.index" />
 
     <x-card-container>
         <div class="text-end mb-4">

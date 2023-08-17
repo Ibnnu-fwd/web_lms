@@ -42,10 +42,10 @@
                                 active="{{ request()->routeIs('admin.course.*') || request()->routeIs('admin.course-chapter.*') || request()->routeIs('admin.course-sub-chapter.*') || request()->routeIs('admin.quiz.*') || request()->routeIs('admin.question.*') }}" />
                         </li>
                         <!-- Minumum Course -->
-                        <li>
+                        {{-- <li>
                             <x-sidebar-link route="{{ route('admin.mincourse.index') }}" icon="folder-outline"
                                 title="Minimum Pembelian" active="{{ request()->routeIs('admin.mincourse*') }}" />
-                        </li>
+                        </li> --}}
                         <!-- Transaction -->
                         <li>
                             <x-sidebar-link route="{{ route('admin.transaction.index') }}" icon="folder-outline"
@@ -58,6 +58,11 @@
                     </p>
                     <ul>
                         <!-- Manajemen Akun -->
+                        <li>
+                            <x-sidebar-link route="{{ route('admin.member.index') }}" icon="people-outline"
+                                title="Daftar Pengguna" active="{{ request()->routeIs('admin.member.*') }}" />
+                        </li>
+                        <!-- Manajemen Verifikator -->
                         <li>
                             <x-sidebar-link route="{{ route('admin.verificator.index') }}" icon="shield-outline"
                                 title="Daftar Verifikator" active="{{ request()->routeIs('admin.verificator.*') }}" />

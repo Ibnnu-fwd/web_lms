@@ -143,4 +143,22 @@ class User extends Authenticatable
                 break;
         }
     }
+
+    public function getStatusLabel()
+    {
+        switch ($this->status) {
+            case self::STATUS_PENDING:
+                return self::STATUS_PENDING_LABEL;
+                break;
+            case self::STATUS_ACTIVE:
+                return self::STATUS_ACTIVE_LABEL;
+                break;
+            case self::STATUS_INACTIVE:
+                return self::STATUS_INACTIVE_LABEL;
+                break;
+            default:
+                return 'Unknown';
+                break;
+        }
+    }
 }

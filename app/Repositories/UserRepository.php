@@ -16,7 +16,12 @@ class UserRepository implements UserInterface
 
     public function getAll()
     {
-        return $this->user->active()->get();
+        $users = $this->user->all();
+        foreach ($users as $user) {
+            $user->status = $user->getStatusLabel();
+        }
+
+        return $users;
     }
 
     public function getRole()
@@ -40,5 +45,10 @@ class UserRepository implements UserInterface
                 return 'Unknown';
                 break;
         }
+    }
+
+    public function changeStatus($id, $status)
+    {
+        return $this->user->where('id', $id)->update(['status' => $status]);
     }
 }

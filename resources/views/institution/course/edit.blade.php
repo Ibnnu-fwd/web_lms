@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-breadcrumb name="course.edit" :data="$course" />
+    <x-breadcrumb name="institution-course.edit" :data="$course" />
 
     <div class="xl:grid grid-cols-2 gap-8 space-y-6 md:space-y-0">
         <x-card-container>

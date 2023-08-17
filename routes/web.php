@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Institution\CourseController as InstitutionCourseController;
 use App\Http\Controllers\Admin\CourseSubChapterController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\VerificatorController;
 use App\Http\Controllers\Admin\MinCoursePurchaseAtRegController;
@@ -56,6 +57,11 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser:1'
         Route::get('detail/{id}', [AdminTransactionController::class, 'detail'])->name('transaction.detail');
         Route::get('/', [AdminTransactionController::class, 'index'])->name('transaction.index');
     })->middleware('checkRole:1');
+
+    Route::group(['prefix' => 'member', 'as' => 'admin.'], function () {
+        Route::post('change-status/{id}', [MemberController::class, 'changeStatus'])->name('member.change-status');
+        Route::get('/', [MemberController::class, 'index'])->name('member.index');
+    });
 
     // Verificator
     Route::group(['prefix' => 'verificator', 'as' => 'admin.'], function () {
@@ -167,7 +173,7 @@ Route::group(
         Route::get('management-account', fn () => view('institution.management-account'))->name('institution.management-account');
 
         // Course
-        Route::group(['prefix' => 'kelas', 'as' => 'institution.'], function () {
+        Route::group(['prefix' => 'institution-course', 'as' => 'institution.'], function () {
             Route::get('/', [InstitutionCourseController::class, 'index'])->name('course.index');
             Route::get('create', [InstitutionCourseController::class, 'create'])->name('course.create');
             Route::post('store', [InstitutionCourseController::class, 'store'])->name('course.store');
