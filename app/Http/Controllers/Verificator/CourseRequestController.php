@@ -31,7 +31,7 @@ class CourseRequestController extends Controller
                     return $data->category->name;
                 })
                 ->addColumn('chapter_count', function ($data) {
-                    return $data->courseChapter->count() . ' Chapter';
+                    return $data->courseChapter->count() . ' Bab';
                 })
                 ->addColumn('contributor', function ($data) {
                     return $data->user->fullname;
