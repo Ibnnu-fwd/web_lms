@@ -9,7 +9,7 @@
                 accept="application/pdf" />
             <x-input id="video_file" name="video_file" type="file" label="File Materi Praktikum (mp4, max. 1 MB)"
                 accept="video/*" />
-            {{-- <x-input id="scrom_file" name="scrom_file" type="file" label="File SCROM" accept="application/zip" /> --}}
+            {{-- <x-input id="scrom_file" name="scrom_file" type="file" label="File Latih" accept="application/zip" /> --}}
             <x-button title="Tambah Materi" />
         </form>
     </x-card-container>

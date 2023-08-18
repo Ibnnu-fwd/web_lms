@@ -38,7 +38,7 @@
                         <!-- Course -->
                         <li>
                             <x-sidebar-link route="{{ route('admin.course.index') }}" icon="albums-outline"
-                                title="Daftar"
+                                title="Produk"
                                 active="{{ request()->routeIs('admin.course.*') || request()->routeIs('admin.course-chapter.*') || request()->routeIs('admin.course-sub-chapter.*') || request()->routeIs('admin.quiz.*') || request()->routeIs('admin.question.*') }}" />
                         </li>
                         <!-- Minumum Course -->

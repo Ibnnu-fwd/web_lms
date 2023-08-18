@@ -28,7 +28,7 @@
                         <!-- Course Request -->
                         <li>
                             <x-sidebar-link route="{{ route('verificator.course-request.index') }}"
-                                icon="folder-open-outline" title="Permintaan Kursus"
+                                icon="folder-open-outline" title="Permintaan Produk"
                                 active="{{ request()->routeIs('verificator.course-request.*') }}" />
                         </li>
 

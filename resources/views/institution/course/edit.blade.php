@@ -4,7 +4,7 @@
     <div class="xl:grid grid-cols-2 gap-8 space-y-6 md:space-y-0">
         <x-card-container>
             <h2 class="font-medium text-md mb-6">
-                Informasi Kursus
+                Informasi Produk
             </h2>
 
             <x-input id="title" name="title" type="text" label="Judul" :value="$course->title" required />
@@ -38,7 +38,7 @@
         </x-card-container>
         <x-card-container>
             <h2 class="font-medium text-md mb-6">
-                Detail Kursus
+                Detail Produk
             </h2>
 
             <div class="md:grid grid-cols-2 gap-x-8">

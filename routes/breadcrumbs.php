@@ -28,12 +28,12 @@ Breadcrumbs::for('transaction.detail', function (BreadcrumbTrail $trail, $data) 
 // INSTITUTION COURSE
 Breadcrumbs::for('institution-course.index', function (BreadcrumbTrail $trail) {
     $trail->parent('institution-dashboard');
-    $trail->push('Kelas', route('institution.course.index'));
+    $trail->push('Produk', route('institution.course.index'));
 });
 
 Breadcrumbs::for('institution-course.create', function (BreadcrumbTrail $trail) {
     $trail->parent('institution-course.index');
-    $trail->push('Tambah Kelas', route('institution.course.create'));
+    $trail->push('Tambah Produk', route('institution.course.create'));
 });
 
 Breadcrumbs::for('institution-course.edit', function (BreadcrumbTrail $trail, $data) {
@@ -102,12 +102,12 @@ Breadcrumbs::for('profile', function (BreadcrumbTrail $trail) {
 /* COURSE */
 Breadcrumbs::for('course', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
-    $trail->push('Kelas', route('admin.course.index'));
+    $trail->push('Produk', route('admin.course.index'));
 });
 
 Breadcrumbs::for('course.create', function (BreadcrumbTrail $trail) {
     $trail->parent('course');
-    $trail->push('Tambah Kelas', route('admin.course.create'));
+    $trail->push('Tambah Produk', route('admin.course.create'));
 });
 
 Breadcrumbs::for('course.edit', function (BreadcrumbTrail $trail, $data) {
@@ -119,12 +119,12 @@ Breadcrumbs::for('course.edit', function (BreadcrumbTrail $trail, $data) {
 /* COURSE CATEGORY */
 Breadcrumbs::for('course_category', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
-    $trail->push('Kategori Kelas', route('admin.course-category.index'));
+    $trail->push('Kategori Produk', route('admin.course-category.index'));
 });
 
 Breadcrumbs::for('course_category.create', function (BreadcrumbTrail $trail) {
     $trail->parent('course_category');
-    $trail->push('Tambah Kategori Kelas', route('admin.course-category.create'));
+    $trail->push('Tambah Kategori Produk', route('admin.course-category.create'));
 });
 
 Breadcrumbs::for('course_category.edit', function (BreadcrumbTrail $trail, $data) {
@@ -172,12 +172,12 @@ Breadcrumbs::for('course_sub_chapter.edit', function (BreadcrumbTrail $trail, $d
 /* MINIMUM COURSE */
 Breadcrumbs::for('mincourse', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
-    $trail->push('Minimum Kelas', route('admin.mincourse.index'));
+    $trail->push('Minimum Produk', route('admin.mincourse.index'));
 });
 
 Breadcrumbs::for('mincourse.create', function (BreadcrumbTrail $trail) {
     $trail->parent('mincourse');
-    $trail->push('Minimum Kelas', route('admin.mincourse.create'));
+    $trail->push('Minimum Produk', route('admin.mincourse.create'));
 });
 
 Breadcrumbs::for('mincourse.edit', function (BreadcrumbTrail $trail, $data) {
@@ -225,7 +225,7 @@ Breadcrumbs::for('verificator-dashboard', function (BreadcrumbTrail $trail) {
 /* COURSE REQUEST */
 Breadcrumbs::for('course-request', function (BreadcrumbTrail $trail) {
     $trail->parent('verificator-dashboard');
-    $trail->push('Permintaan Kelas', route('verificator.course-request.index'));
+    $trail->push('Permintaan Produk', route('verificator.course-request.index'));
 });
 
 

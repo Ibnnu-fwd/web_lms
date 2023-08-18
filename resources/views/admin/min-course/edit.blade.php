@@ -4,7 +4,7 @@
     <div class="md:grid xl:w-1/2 2xl:w-1/3 gap-8 space-y-6 md:space-y-0">
         <x-card-container>
             <h2 class="font-semibold text-lg mb-6">
-                Informasi Minimum Kursus
+                Informasi Minimum Produk
             </h2>
 
             <form action="{{ route('admin.mincourse.update', $minCourse->id) }}" method="POST">

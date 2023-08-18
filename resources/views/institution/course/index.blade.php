@@ -14,7 +14,7 @@
                     <th>Judul</th>
                     <th>Gambar</th>
                     <th>Harga</th>
-                    <th>Status Request</th>
+                    <th>Status Permintaan</th>
                     <th>Status Unggah</th>
                     <th>Aksi</th>
                 </tr>

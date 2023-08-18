@@ -3,7 +3,7 @@
 
     <x-card-container>
         <div class="text-end mb-4">
-            <x-link-button type="button" title="Tambah Kursus" class="bg-gray-700 hover:bg-gray-600"
+            <x-link-button type="button" title="Tambah Produk" class="bg-gray-700 hover:bg-gray-600"
                 route="{{ route('admin.course.create') }}" />
         </div>
         <table id="courseTable">
@@ -14,7 +14,7 @@
                     <th>Judul</th>
                     <th>Gambar</th>
                     <th>Harga</th>
-                    <th>Status Request</th>
+                    <th>Status Permintaan</th>
                     <th>Status Unggah</th>
                     <th>Aksi</th>
                 </tr>
@@ -33,7 +33,7 @@
                 console.log(id, title);
                 Swal.fire({
                     title: 'Apakah kamu yakin?',
-                    text: `Kursus ${title} akan dinonaktifkan!`,
+                    text: `Produk ${title} akan dinonaktifkan!`,
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonText: 'Ya, hapus!',
@@ -52,7 +52,7 @@
                                 if (data.status == true) {
                                     Swal.fire({
                                         title: 'Berhasil!',
-                                        text: `Kursus ${title} berhasil dihapus!`,
+                                        text: `Produk ${title} berhasil dihapus!`,
                                         icon: 'success',
                                         showConfirmButton: false,
                                     }).then((result) => {
@@ -61,7 +61,7 @@
                                 } else {
                                     Swal.fire({
                                         title: 'Gagal!',
-                                        text: `Kursus ${title} gagal dihapus!`,
+                                        text: `Produk ${title} gagal dihapus!`,
                                         icon: 'error',
                                     })
                                 }
@@ -75,7 +75,7 @@
                 console.log(id, title);
                 Swal.fire({
                     title: 'Apakah kamu yakin?',
-                    text: `Kursus ${title} akan diaktifkan kembali!`,
+                    text: `Produk ${title} akan diaktifkan kembali!`,
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonText: 'Ya, hapus!',
@@ -94,7 +94,7 @@
                                 if (data.status == true) {
                                     Swal.fire({
                                         title: 'Berhasil!',
-                                        text: `Kursus ${title} berhasil diaktifkan kembali!`,
+                                        text: `Produk ${title} berhasil diaktifkan kembali!`,
                                         icon: 'success',
                                         showConfirmButton: false,
                                     }).then((result) => {
@@ -103,7 +103,7 @@
                                 } else {
                                     Swal.fire({
                                         title: 'Gagal!',
-                                        text: `Kursus ${title} gagal diaktifkan kembali!`,
+                                        text: `Produk ${title} gagal diaktifkan kembali!`,
                                         icon: 'error',
                                     })
                                 }
@@ -116,7 +116,7 @@
             function publish(id, title) {
                 Swal.fire({
                     title: 'Apakah kamu yakin?',
-                    text: `Kursus ${title} akan dipublikasikan!`,
+                    text: `Produk ${title} akan dipublikasikan!`,
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonText: 'Ya, publikasikan!',
@@ -135,7 +135,7 @@
                                 if (data.status == true) {
                                     Swal.fire({
                                         title: 'Berhasil!',
-                                        text: `Kursus ${title} berhasil dipublikasikan!`,
+                                        text: `Produk ${title} berhasil dipublikasikan!`,
                                         icon: 'success',
                                         showConfirmButton: false,
                                     }).then((result) => {
@@ -144,7 +144,7 @@
                                 } else {
                                     Swal.fire({
                                         title: 'Gagal!',
-                                        text: `Kursus ${title} gagal dipublikasikan!`,
+                                        text: `Produk ${title} gagal dipublikasikan!`,
                                         icon: 'error',
                                     })
                                 }
@@ -157,7 +157,7 @@
             function unpublish(id, title) {
                 Swal.fire({
                     title: 'Apakah kamu yakin?',
-                    text: `Kursus ${title} tidak akan dipublikasikan!`,
+                    text: `Produk ${title} tidak akan dipublikasikan!`,
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonText: 'Ya, unpublikasikan!',
@@ -176,7 +176,7 @@
                                 if (data.status == true) {
                                     Swal.fire({
                                         title: 'Berhasil!',
-                                        text: `Kursus ${title} berhasil diunpublikasikan!`,
+                                        text: `Produk ${title} berhasil diunpublikasikan!`,
                                         icon: 'success',
                                         showConfirmButton: false,
                                     }).then((result) => {
@@ -185,7 +185,7 @@
                                 } else {
                                     Swal.fire({
                                         title: 'Gagal!',
-                                        text: `Kursus ${title} gagal diunpublikasikan!`,
+                                        text: `Produk ${title} gagal diunpublikasikan!`,
                                         icon: 'error',
                                     })
                                 }

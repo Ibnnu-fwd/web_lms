@@ -9,7 +9,7 @@
                         <!-- event handler set state to 'tab1' and add conditional :class for active state -->
                         <a @click.prevent="tab = 'tab1'" href="#" class="inline-block py-2 text-xs 2xl:text-sm"
                             :class="{ ' bg-white text-blue-500 border-b-2 border-blue-500': tab === 'tab1' }">
-                            Informasi Kursus
+                            Informasi Produk
                         </a>
                     </li>
                     <li class="-mb-px">
