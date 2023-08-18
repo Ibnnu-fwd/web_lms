@@ -1,7 +1,4 @@
 <x-user-layout>
-
-    <!-- Course -->
-
     <section class="items-center bg-gray-50 w-full px-5 mx-auto md:px-12 lg:px-6 py-16">
         <section class="max-w-6xl mx-auto">
             <div class="grid grid-cols-12 gap-x-8">
@@ -55,7 +52,7 @@
                             @endguest
                             @auth
                                 <div class="mb-2">
-                                    @if ($discount != null)
+                                    @if (isset($discount) && $discount == true)
                                         <div>
                                             {{-- coret harga asli --}}
                                             <span
@@ -79,7 +76,7 @@
                                 </div>
                             @endauth
                             @auth
-                                @if ($isBought)
+                                @if (isset($isBought) && $isBought == true)
                                     <x-link-button type="button" title="Belajar Sekarang"
                                         route="{{ route('user.course.detail', [$course->id, 1]) }}" class="w-full" />
                                 @else
@@ -208,7 +205,7 @@
 <section class="fixed bottom-0 left-0 right-0 z-10 bg-white shadow-md md:hidden py-3">
     <div class="grid grid-cols-2 gap-x-2 px-5 py-3">
         @auth
-            @if ($isBought)
+            @if (isset($isBought))
                 <x-link-button type="button" title="Belajar Sekarang"
                     route="{{ route('user.course.detail', [$course->id, 1]) }}" class="w-full" />
             @else

@@ -62,11 +62,15 @@ class CourseRequestController extends Controller
 
     public function reject($id)
     {
-        $this->course->reject($id);
-        return response()->json([
-            'status' => true,
-            'message' => 'Berhasil menolak permintaan pembuatan course'
-        ]);
+        try {
+            $this->course->reject($id);
+            return response()->json([
+                'status' => true,
+                'message' => 'Berhasil menolak permintaan pembuatan course'
+            ]);
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
+        }
     }
 
     public function pending($id)

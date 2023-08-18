@@ -26,8 +26,14 @@ class ProductController extends Controller
 
     public function index()
     {
+        $courses = $this->course->getAll()
+            ->filter(function ($course) {
+                return $course->upload_status == true && $course->activation_status == true;
+            })
+            ->sortByDesc('created_at');
+
         return view('product', [
-            'products'   => $this->course->getAll(),
+            'products'   => $courses,
             'categories' => $this->courseCategory->getAll()
         ]);
     }
@@ -191,9 +197,9 @@ class ProductController extends Controller
         }
 
         return view('checkout', [
-            'carts' => $carts,
+            'carts'      => $carts,
             'totalPrice' => $totalPrice,
-            'user'  => auth()->user(),
+            'user'       => auth()->user(),
         ]);
     }
 
@@ -218,7 +224,6 @@ class ProductController extends Controller
 
         try {
             $this->transaction->checkoutPayment($request->all());
-            session()->forget('cart');
             return redirect()->back()->with('success', 'Pesanan berhasil dilakukan!');
         } catch (Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());

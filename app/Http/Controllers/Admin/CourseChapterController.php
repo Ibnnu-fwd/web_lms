@@ -32,6 +32,9 @@ class CourseChapterController extends Controller
                 ->addColumn('video_file', function ($data) {
                     return view('admin.course_chapter.column.video_file', compact('data'));
                 })
+                ->addColumn('scrom_file', function ($data) {
+                    return view('admin.course_chapter.column.scrom_file', compact('data'));
+                })
                 ->addColumn('description', function ($data) {
                     return $data->description;
                 })
@@ -64,6 +67,7 @@ class CourseChapterController extends Controller
             'description' => ['required'],
             'pdf_file'    => 'nullable',
             'video_file'  => 'nullable',
+            'scrome_file' => 'nullable',
         ]);
 
         try {

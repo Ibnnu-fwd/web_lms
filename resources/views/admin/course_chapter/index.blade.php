@@ -13,6 +13,7 @@
                     <th>Deskripsi</th>
                     <th>Pdf</th>
                     <th>Video</th>
+                    <th>Scrom</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -127,6 +128,10 @@
                         {
                             data: 'video_file',
                             name: 'video_file'
+                        },
+                        {
+                            data: 'scrom_file',
+                            name: 'scrom_file'
                         },
                         {
                             data: 'action',

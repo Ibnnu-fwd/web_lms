@@ -115,12 +115,37 @@ class CourseController extends Controller
     // show 
     public function show($id)
     {
-        $course = $this->course->getById($id);
-        $techSpecs = $course->courseTechSpec;
-        $benefits = $course->courseBenefit;
+        $course           = $this->course->getById($id);
+        $techSpecs        = $course->courseTechSpec;
+        $benefits         = $course->courseBenefit;
         $courseObjectives = $course->courseObjective;
-        $authors = $course->author;
+        $authors          = $course->author;
+        $isBought         = $course->isBought;
+        $carts            = session()->get('cart');
+        $discount         = $this->course->discount($id);
+        // get discount that is not expired yet
+        $discount = $discount->filter(function ($discount) {
+            return $discount->end_date > now() && $discount->start_date < now() && $discount->role == auth()->user()->role;
+        })->first();
 
-        return view('detail-product', compact('course', 'techSpecs', 'benefits', 'courseObjectives', 'authors'));
+        if ($carts != null) {
+            $carts = array_filter($carts, function ($cart) {
+                return $cart['user_id'] == auth()->user()->id;
+            });
+
+            // change to array
+            $carts = array_values($carts);
+
+            // check if course is in cart
+            $course->isInCart = false;
+            foreach ($carts as $cart) {
+                if ($cart['id'] == $id) {
+                    $course->isInCart = true;
+                    break;
+                }
+            }
+        }
+
+        return view('detail-product', compact('course', 'techSpecs', 'benefits', 'courseObjectives', 'authors', 'isBought', 'carts', 'discount'));
     }
 }

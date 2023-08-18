@@ -102,6 +102,7 @@
                     title: 'Berhasil',
                     text: '{{ Session::get('success') }}',
                 });
+                localStorage.removeItem('cart');
                 window.location.href =
                     "{{ auth()->user()->role == 2 ? route('institution.dashboard') : (auth()->user()->role == 3 ? route('user.dashboard') : route('dashboard')) }}";
             @endif

@@ -104,7 +104,7 @@
                                     </div>
                                 </div>
                                 <button type="submit" id="upload-payment-button"
-                                    class="mt-8 mb-8 w-full uppercase text-lg rounded-md bg-primary px-6 py-3 font-medium text-white">
+                                    class="mt-8 w-full uppercase text-lg rounded-md bg-primary px-6 py-3 font-medium text-white">
                                     Unggah Bukti Pembayaran</button>
                             </form>
 
@@ -112,7 +112,7 @@
                             <form action="{{ route('user.transaction.cancel', $transaction->id) }}" method="POST">
                                 @csrf
                                 <button type="submit" id="cancel-transaction-button"
-                                    class="mt-8 mb-8 w-full uppercase text-lg rounded-md bg-red-500 px-6 py-3 font-medium text-white">
+                                    class="mt-4  w-full uppercase text-lg rounded-md bg-gray-200 px-6 py-3 font-medium text-black">
                                     Batalkan Transaksi</button>
                             </form>
                         @elseif($transaction->status_payment == 1)

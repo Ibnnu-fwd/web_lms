@@ -312,35 +312,35 @@ class CourseRepository implements CourseInterface
 
     public function approve($id)
     {
-        return $this->getById($id)->update([
+        return $this->course->where('id', $id)->update([
             'request_status' => Course::REQUEST_STATUS_APPROVED,
         ]);
     }
 
     public function reject($id)
     {
-        return $this->getById($id)->update([
+        return $this->course->where('id', $id)->update([
             'request_status' => Course::REQUEST_STATUS_REJECTED,
         ]);
     }
 
     public function pending($id)
     {
-        return $this->getById($id)->update([
+        return $this->course->where('id', $id)->update([
             'request_status' => Course::REQUEST_STATUS_WAITING,
         ]);
     }
 
     public function publish($id)
     {
-        return $this->getById($id)->update([
+        return $this->course->where('id', $id)->update([
             'upload_status' => Course::UPLOAD_STATUS_PUBLISHED,
         ]);
     }
 
     public function unpublish($id)
     {
-        return $this->getById($id)->update([
+        return $this->course->where('id', $id)->update([
             'upload_status' => Course::UPLOAD_STATUS_UNPUBLISHED,
         ]);
     }
@@ -353,11 +353,23 @@ class CourseRepository implements CourseInterface
             ->where('user_id', $userId)
             ->where('course_id', $courseId)
             ->count();
+        if ($learnedChapter == 0) return [
+            'progress' => 0,
+            'learned'  => $learnedChapter,
+            'total'    => $totalChapter,
+        ];
+
+        if ($learnedChapter == $totalChapter) return [
+            'progress' => 100,
+            'learned'  => $learnedChapter,
+            'total'    => $totalChapter,
+        ];
+
         $progress = ($learnedChapter / $totalChapter) * 100;
         return [
             'progress' => $progress,
-            'learned' => $learnedChapter,
-            'total' => $totalChapter,
+            'learned'  => $learnedChapter,
+            'total'    => $totalChapter,
         ];
     }
 

@@ -47,9 +47,9 @@ class VerificatorController extends Controller
     public function create()
     {
         $verificators = $this->user->getAll()
-            ->where('is_verificator', false)
-            ->where('role', '!=', User::ROLE_ADMIN);
-
+            ->filter(function ($user) {
+                return $user->is_verificator == false && $user->role != User::ROLE_ADMIN;
+            });
         return view('admin.verificator.create', [
             'users' => $verificators,
         ]);

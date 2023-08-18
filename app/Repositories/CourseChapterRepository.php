@@ -43,6 +43,9 @@ class CourseChapterRepository implements CourseChapterInterface
             $data['video_file']->storeAs('public/course/chapter/video', $videoFilename);
         }
 
+        if (isset($data['scrom_file'])) {
+        }
+
         try {
 
             $courseChapter = $this->courseChapter->create([

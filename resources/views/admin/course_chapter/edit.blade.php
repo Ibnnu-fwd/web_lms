@@ -12,7 +12,7 @@
                 accept="application/pdf" />
             <x-input id="video_file" name="video_file" type="file" label="File Materi Praktikum (mp4, max. 1 MB)"
                 accept="video/*" />
-            {{-- <x-input id="scrom_file" name="scrom_file" type="file" label="File SCROM" accept="application/zip" /> --}}
+            <x-input id="scrom_file" name="scrom_file" type="file" label="File SCROM" accept="application/zip" />
             <x-button title="Simpan Perubahan" />
         </form>
     </x-card-container>
@@ -24,7 +24,13 @@
                     Preview Materi Teori
                 </h2>
             </div>
-            <embed id="pdf_preview" src="" class="w-full rounded-lg">
+            {{-- fullscreen button --}}
+            <div class="flex justify-end mb-4">
+                <button id="fullscreen" class="bg-gray-700 hover:bg-gray-600 text-white rounded-lg px-4 py-2">
+                    Fullscreen
+                </button>
+            </div>
+            <embed id="pdf_preview" src="" class="w-full rounded-lg" style="height: 400px">
         </div>
         <div class="border-gray-200 border-2 border-dashed rounded-lg p-4">
             <div class="md:flex justify-between items-center mb-6">
@@ -32,16 +38,9 @@
                     Preview Materi Praktikum
                 </h2>
             </div>
-            <iframe src="" frameborder="0" id="video_preview" class="w-full rounded-lg"></iframe>
+            <iframe src="" frameborder="0" id="video_preview" class="w-full rounded-lg"
+                style="height: 400px"></iframe>
         </div>
-        {{-- <div class="border-gray-200 border-2 border-dashed rounded-lg p-4">
-            <div class="md:flex justify-between items-center mb-6">
-                <h2 class="text-xs 2xl:text-sm font-medium">
-                    Preview SCROM
-                </h2>
-            </div>
-            <iframe src="" frameborder="0" id="scrom_preview" class="w-full rounded-lg"></iframe>
-        </div> --}}
     </div>
 
     @push('js-internal')

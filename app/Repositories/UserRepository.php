@@ -16,7 +16,7 @@ class UserRepository implements UserInterface
 
     public function getAll()
     {
-        $users = $this->user->all();
+        $users = $this->user->active()->get();
         foreach ($users as $user) {
             $user->status = $user->getStatusLabel();
         }
