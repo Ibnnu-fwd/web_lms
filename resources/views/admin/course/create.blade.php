@@ -166,38 +166,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>
-                                                <select name="discount_group[]"
-                                                    class="form-input rounded-md shadow-sm block w-full text-xs 2xl:text-sm"
-                                                    required>
-                                                    <option value="">Pilih</option>
-                                                    <option value="2">Insitusi</option>
-                                                    <option value="3">Personal</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <input type="number" name="discount[]"
-                                                    class="form-input rounded-md shadow-sm block w-full text-xs 2xl:text-sm"
-                                                    placeholder="Potongan Harga" required>
-                                            </td>
-                                            <td>
-                                                <input type="date" name="start_date[]"
-                                                    class="form-input rounded-md shadow-sm block w-full text-xs 2xl:text-sm"
-                                                    placeholder="Tanggal Mulai" required>
-                                            </td>
-                                            <td>
-                                                <input type="date" name="end_date[]"
-                                                    class="form-input rounded-md shadow-sm block w-full text-xs 2xl:text-sm"
-                                                    placeholder="Tanggal Berakhir" required>
-                                            </td>
-                                            <td>
-                                                <button type="button" onclick="removeDiscount()"
-                                                    class="bg-gray-500 text-white text-xs 2xl:text-sm py-2 px-4 rounded-md">
-                                                    Hapus
-                                                </button>
-                                            </td>
-                                        </tr>
+
                                     </tbody>
                                 </table>
                             </div>

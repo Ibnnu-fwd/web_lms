@@ -122,11 +122,11 @@ class CourseRepository implements CourseInterface
                 $data['discount'] = json_decode($data['discount'], true);
                 foreach ($data['discount'] as $data => $value) {
                     $this->discount->create([
-                        'role' => $value['role'],
-                        'course_id' => $course->id,
+                        'role'           => $value['role'],
+                        'course_id'      => $course->id,
                         'discount_price' => $value['discount_price'],
-                        'start_date' => date('Y-m-d', strtotime($value['start_date'])),
-                        'end_date' => date('Y-m-d', strtotime($value['end_date'])),
+                        'start_date'     => date('Y-m-d', strtotime($value['start_date'])),
+                        'end_date'       => date('Y-m-d', strtotime($value['end_date'])),
                     ]);
                 }
             }
