@@ -172,6 +172,27 @@
                                                 @endif
                                             </div>
                                         </li>
+                                        @if ($data->quiz != null)
+                                            @foreach ($data->quiz as $quizItem)
+                                                <li class="mb-4">
+                                                    <div @if (isset($data->isLearned) && $data->isLearned == true) onclick="window.location.href='{{ route('user.quiz', [$data->id, 1]) }}'" @endif
+                                                        class="focus:outline-none inline-flex
+                                                                items-center w-full px-4 py-2 text-base text-gray-500
+                                                                transition duration-200 ease-in-out transform rounded-lg
+                                                                focus:shadow-outline hover:bg-gray-100 hover:scale-95 @if ($quizItem->user_quiz_attempt != null) text-primary @endif
+                                                                hover:text-primary">
+                                                        <span
+                                                            class="text-xs 2xl:text-sm">{{ $quizItem->title }}</span>
+                                                        @if ($quizItem->user_quiz_attempt != null)
+                                                            <ion-icon name="checkmark-done-outline"
+                                                                class="ml-auto text-primary"></ion-icon>
+                                                        @else
+                                                            <ion-icon name="play-outline" class="ml-auto"></ion-icon>
+                                                        @endif
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                        @endif
                                     @endforeach
                                 </ul>
                             </nav>
@@ -226,8 +247,8 @@
                                     </button>
                                 @endif
 
-                                @if ($nextChapter)
-                                    <form action="{{ route('user.course.next-page', [$course->id, $chapter->id]) }}"
+                                @if ($nextIsQuiz)
+                                    <form action="{{ route('user.quiz', [$chapter->quiz->first()->id, 1]) }}"
                                         method="POST">
                                         @csrf
                                         <button type="submit"
@@ -236,15 +257,29 @@
                                             <ion-icon name="arrow-forward-outline" class="ml-2"></ion-icon>
                                         </button>
                                     </form>
-                                @elseif ($isLastChapter)
-                                    <form action="{{ route('user.course.next-page', [$course->id, $chapter->id]) }}"
-                                        method="POST">
-                                        @csrf
-                                        <button type="submit"
-                                            class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-primary border border-transparent rounded-md shadow-sm hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
-                                            <span>Selesai</span>
-                                            <ion-icon name="checkmark-done-outline" class="ml-2"></ion-icon>
-                                        </button>
+                                @else
+                                    @if ($nextChapter)
+                                        <form
+                                            action="{{ route('user.course.next-page', [$course->id, $chapter->id]) }}"
+                                            method="POST">
+                                            @csrf
+                                            <button type="submit"
+                                                class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-primary border border-transparent rounded-md shadow-sm hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                                                <span>Selanjutnya</span>
+                                                <ion-icon name="arrow-forward-outline" class="ml-2"></ion-icon>
+                                            </button>
+                                        </form>
+                                    @elseif ($isLastChapter)
+                                        <form
+                                            action="{{ route('user.course.next-page', [$course->id, $chapter->id]) }}"
+                                            method="POST">
+                                            @csrf
+                                            <button type="submit"
+                                                class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-primary border border-transparent rounded-md shadow-sm hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                                                <span>Selesai</span>
+                                                <ion-icon name="checkmark-done-outline" class="ml-2"></ion-icon>
+                                            </button>
+                                    @endif
                                 @endif
                             </div>
 

@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 @if (!$data->isExpired)
-                    <x-link-button title="Belajar" class="mt-6" color="dark"
+                    <x-link-button title="Pelajari Sekarang" class="mt-6" color="dark"
                         route="{{ route('user.course.detail', [$data->course->id, 1]) }}" />
                 @else
                     <x-link-button title="Modul Kadaluarsa" class="mt-6 bg-gray-600" onclick="javascript:void(0)" />

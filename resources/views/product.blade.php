@@ -82,12 +82,15 @@
                 class="absolute top-0 right-0 bottom-0 left-0 h-full w-full overflow-hidden bg-[hsla(0,0%,0%,0.75)] bg-fixed">
                 <div class="flex h-full items-center">
                     <div class="px-6 text-white md:px-12">
-                        <p class="tracking-tight uppercase text-lg">discover all best course</p>
+                        <p class="tracking-tight uppercase text-lg">
+                            Menyediakan berbagai macam modul
+                        </p>
                         <p class="tracking-tight font-bold text-3xl mt-4">
-                            This week: 50% off <br>Greenworks assets
+                            Diskon Khusus <br> Untuk Anda
                         </p>
                         <p class="tracking-tight text-lg mt-4">
-                            Save 50% on assets from Greenworks and <br>get a free gift in this week’s Publisher Sale.
+                            Belajar lebih mudah dan interaktif <br>
+                            dengan berbagai macam modul yang tersedia
                         </p>
                     </div>
                 </div>
@@ -107,7 +110,7 @@
                             {!! $category->icon !!}
                         </div>
                         <p
-                            class="mt-4 text-md text-center font-bold leading-6 text-black transition-colors category-item-name">
+                            class="mt-4 text-md text-center font-medium leading-6 text-black transition-colors category-item-name">
                             {{ $category->name }}
                         </p>
                     </center>
@@ -122,9 +125,10 @@
 
         <div class="grid gap-x-5 gap-y-12 grid-cols-2 md:grid-cols-6">
             @foreach ($products as $product)
-                <figure id="card-item" onclick="window.location.href='{{ route('product.show', $product->id) }}'" class="card-item cursor-pointer">
-                    <img class="w-48 h-36 object-cover rounded-md" src="{{ asset('storage/courses/' . $product->main_image) }}"
-                        alt="">
+                <figure id="card-item" onclick="window.location.href='{{ route('product.show', $product->id) }}'"
+                    class="card-item cursor-pointer">
+                    <img class="w-48 h-36 object-cover rounded-md"
+                        src="{{ asset('storage/courses/' . $product->main_image) }}" alt="">
                     <p class="mt-2 text-xs font-light leading-6 text-gray-400 uppercase">
                         {{ $product->category->name }}
                     </p>
@@ -144,9 +148,7 @@
                         </p> --}}
                     </div>
                     <p class="text-md mt-2 font-light leading-6 text-primary">
-                        IDR {{
-                            number_format($product->price, 0, ',', '.')
-                        }}<small class="text-gray-400">/bulan</small>
+                        IDR {{ number_format($product->price, 0, ',', '.') }}<small class="text-gray-400">/bulan</small>
                     </p>
                 </figure>
             @endforeach

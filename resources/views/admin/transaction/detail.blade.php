@@ -72,13 +72,16 @@
                             </div>
                             <div class="flex items-center justify-between">
                                 <p class="text-sm text-gray-900">Sub Total</p>
-                                <p class="text-md text-gray-900">Rp. <span>{{ $transaction->sub_total }}</span></p>
+                                <p class="text-md text-gray-900">Rp.
+                                    <span>{{ number_format($transaction->sub_total, '0', ',', '.') }}</span></p>
                             </div>
                         </div>
                         <div class="mt-6 flex items-center justify-between">
                             <p class="text-sm text-gray-900">Total</p>
                             <p class="text-md font-medium text-gray-900">Rp.
-                                <Span>{{ $transaction->total_payment }}</Span>
+                                <span>
+                                    {{ number_format($transaction->total_payment, '0', ',', '.') }}
+                                </span>
                             </p>
                         </div>
 

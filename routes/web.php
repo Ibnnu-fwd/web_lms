@@ -145,6 +145,7 @@ Route::group(
             Route::post('upload-payment/{id}', [UserTransactionController::class, 'uploadPayment'])->name('user.transaction.upload-payment');
             Route::post('cancel/{id}', [UserTransactionController::class, 'cancel'])->name('user.transaction.cancel');
         });
+        Route::post('quiz/{id}/{question_number}', [UserCourseController::class, 'quiz'])->name('user.quiz');
         Route::get('course/{id}/{page}', [UserCourseController::class, 'index'])->name('user.course.detail');
         Route::post('course/{id}/{page}/next', [UserCourseController::class, 'nextPage'])->name('user.course.next-page');
         Route::post('course/{id}/finish', [UserCourseController::class, 'finish'])->name('user.course.finish');

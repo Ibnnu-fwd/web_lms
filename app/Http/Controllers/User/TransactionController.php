@@ -32,10 +32,10 @@ class TransactionController extends Controller
                     return $data->customer->fullname;
                 })
                 ->addColumn('sub_total', function ($data) {
-                    return $data->sub_total;
+                    return number_format($data->sub_total, 0, ',', '.');
                 })
                 ->addColumn('total_payment', function ($data) {
-                    return $data->total_payment;
+                    return number_format($data->total_payment, 0, ',', '.');
                 })
                 ->addColumn('status_order', function ($data) {
                     return strtoupper($data->getStatusOrderLabel());

@@ -84,12 +84,12 @@
                                         <x-link-button type="button" title="Lihat Keranjang" route="{{ route('cart') }}"
                                             class="w-full" />
                                     @else
-                                        <x-button type="button" color="dark" title="Beli Kelas" class="w-full"
+                                        <x-button type="button" color="dark" title="Beli Produk" class="w-full"
                                             onclick="addToCart({{ $course->id }})" />
                                     @endif
                                 @endauth
                             @else
-                                <x-button type="button" color="dark" title="Beli Kelas" class="w-full"
+                                <x-button type="button" color="dark" title="Beli Produk" class="w-full"
                                     onclick="window.location.href='{{ route('login') }}'" />
                             @endauth
                             <hr class="my-4">
@@ -209,11 +209,11 @@
                 <x-link-button type="button" title="Belajar Sekarang"
                     route="{{ route('user.course.detail', [$course->id, 1]) }}" class="w-full" />
             @else
-                <x-button type="button" color="dark" title="Beli Kelas" class="w-full"
+                <x-button type="button" color="dark" title="Beli Produk" class="w-full"
                     onclick="addToCart({{ $course->id }})" />
             @endauth
         @else
-            <x-button type="button" color="dark" title="Beli Kelas" class="w-full"
+            <x-button type="button" color="dark" title="Beli Produk" class="w-full"
                 onclick="window.location.href='{{ route('login') }}'" />
         @endauth
 </div>
