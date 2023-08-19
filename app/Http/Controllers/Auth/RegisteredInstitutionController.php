@@ -20,36 +20,36 @@ class RegisteredInstitutionController extends Controller
     {
         // Validasi data yang diterima dari permintaan
         $validator = Validator::make($request->all(), [
-            'fullname'    => 'required',
-            'email'       => 'required|email',
-            'password'    => 'required',
-            'gender'      => 'required|in:L,P',
-            'birthday'    => 'required|date',
-            'phone'       => 'required',
-            'job'         => 'required',
+            'fullname' => 'required',
+            'email' => 'required|email',
+            'password' => 'required',
+            'gender' => 'required|in:L,P',
+            'birthday' => 'required|date',
+            'phone' => 'required',
+            'job' => 'required',
             'institution' => 'required',
-            'file'        => 'required|mimes:pdf|max:2048',
+            'file' => 'required|mimes:pdf|max:2048',
         ]);
 
         try {
-            $file     = $request->file('file');
+            $file = $request->file('file');
             $fileName = uniqid() . '.' . $file->extension();
 
             $file->storeAs('public/institution', $fileName);
 
             User::create([
-                'fullname'       => $request->fullname,
-                'email'          => $request->email,
-                'password'       => password_hash($request->password, PASSWORD_DEFAULT),
-                'gender'         => $request->gender,
-                'birthday'       => date('Y-m-d', strtotime($request->birthday)),
-                'avatar'         => null,
-                'file'           => $fileName,
-                'phone'          => $request->phone,
-                'job'            => $request->job,
-                'institution'    => $request->institution,
-                'role'           => User::ROLE_INSTITUTION,
-                'status'         => User::STATUS_PENDING,
+                'fullname' => $request->fullname,
+                'email' => $request->email,
+                'password' => password_hash($request->password, PASSWORD_DEFAULT),
+                'gender' => $request->gender,
+                'birthday' => date('Y-m-d', strtotime($request->birthday)),
+                'avatar' => null,
+                'file' => $fileName,
+                'phone' => $request->phone,
+                'job' => $request->job,
+                'institution' => $request->institution,
+                'role' => User::ROLE_INSTITUTION,
+                'status' => User::STATUS_PENDING,
                 'is_verificator' => null
             ]);
 
@@ -59,5 +59,12 @@ class RegisteredInstitutionController extends Controller
             Storage::delete('public/institution/' . $fileName);
             return redirect()->back()->with('error', 'Pendaftaran gagal, silahkan coba lagi');
         }
+    }
+    public function downloadTemplate()
+    {
+        $templatePath = public_path('template surat/Template_Surat_Pernyataan.pdf');
+        $templateName = 'Template_Surat_Pernyataan.pdf';
+
+        return response()->download($templatePath, $templateName);
     }
 }
