@@ -82,8 +82,13 @@
                                                 required />
                                             <x-input id="institution" label="Institusi" name="institution"
                                                 type="text" required />
-                                            <x-input id="file" name="file" label="File" type="file"
-                                                required />
+                                            <div>
+                                            <div class="file-upload-section">
+                                                <x-input id="file" name="file" label="Surat Pernyataan" type="file" required />
+                                                <div class="download-template">
+                                                    <a href="{{ route('download_template') }}" class="btn-download" target="_blank">Unduh Template Surat Pernyataan</a>
+                                                </div>
+                                            </div>
                                             <x-button id="daftarInstitution" title="Daftar" />
                                         </form>
                                     </div>
@@ -102,6 +107,57 @@
             </div>
         </section>
     </div>
+
+    <style>
+    .file-upload-section {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .file-input {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0;
+    }
+
+    .file-label {
+        font-weight: bold;
+        margin-right: 10px;
+    }
+
+    .file-input-field {
+        border: 1px solid #ccc;
+        padding: 5px 10px;
+        border-radius: 4px;
+    }
+
+    .download-template {
+        display: flex;
+        justify-content: center;
+        padding-bottom: 10px;
+    }
+
+    .btn-download {
+        color: #d21312;
+        font-size: 12px;
+        padding: 0 16px 8px 16px;
+        border-radius: 20px;
+        text-decoration: none;
+        transition: background-color 0.3s, color 0.3s ease-in-out;
+        border: 1px solid #d21312;
+        padding: 8px 16px;
+    }
+
+    .btn-download:hover {
+        background-color: #d21312;
+        color: #fff;
+    }
+    #daftarInstitution {
+        margin-top: 10px;
+    }
+</style>
+
+
 
 
     @push('js-internal')
