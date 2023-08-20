@@ -1,6 +1,6 @@
 @if ($data->scrom_file)
     <a class="text-success cursor-pointer uppercase"
-        href="{{ asset('storage/course/chapter/scrom_file/' . $data->scrom_file) }}" target="_blank">
+        href="{{ asset('storage/app/public/course/chapter/scrom/scrom_extracted/' . $data->scrom_file) }}" target="_blank">
         Lihat
     </a>
 @else

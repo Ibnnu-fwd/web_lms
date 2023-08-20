@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Interfaces\CourseChapterInterface;
 use App\Interfaces\CourseInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use illuminate\Support\Str;
+use ZipArchive;
 
 class CourseChapterController extends Controller
 {
@@ -14,7 +17,7 @@ class CourseChapterController extends Controller
 
     public function __construct(CourseInterface $course, CourseChapterInterface $courseChapter)
     {
-        $this->course        = $course;
+        $this->course = $course;
         $this->courseChapter = $courseChapter;
     }
 
@@ -63,15 +66,43 @@ class CourseChapterController extends Controller
     public function store(Request $request, $courseId)
     {
         $request->validate([
-            'title'       => ['required'],
+            'title' => ['required'],
             'description' => ['required'],
-            'pdf_file'    => 'nullable',
-            'video_file'  => 'nullable',
-            'scrome_file' => 'nullable',
+            'pdf_file' => 'nullable',
+            'video_file' => 'nullable',
+            'scrom_file' => 'nullable'
         ]);
 
         try {
-            $this->courseChapter->store($request->all(), $courseId);
+            $courseChapterData = [
+                'title' => $request->input('title'),
+                'description' => $request->input('description'),
+                'pdf_file' => $request->input('pdf_file'),
+                'video_file' => $request->input('video_file'),
+                'scrom_file' => ''
+            ];
+
+            if ($request->hasFile('scrom_file')) {
+                $scromFile = $request->file('scrom_file');
+                $scromExtractedFileName = Str::random(16);
+                $scromFileName = $scromExtractedFileName . '.zip';
+
+                $destinationPath = 'course/chapter/scrom/scrom';
+
+                $scromFile->storeAs($destinationPath, $scromFileName, 'public');
+
+                $extractedPath = storage_path('app/public/' . $destinationPath . '_extracted/' . $scromExtractedFileName);
+
+                $zip = new ZipArchive;
+                if ($zip->open(storage_path('app/public/' . $destinationPath . '/' . $scromFileName)) === TRUE) {
+                    $zip->extractTo($extractedPath);
+                    $zip->close();
+                }
+
+                $courseChapterData['scrom_file'] = $scromExtractedFileName;
+            }
+
+            $this->courseChapter->store($courseChapterData, $courseId);
             return redirect()->back()->with('success', 'Berhasil menambahkan chapter baru');
         } catch (\Throwable $th) {
             dd($th->getMessage());
@@ -93,7 +124,7 @@ class CourseChapterController extends Controller
     public function edit($courseId, $id)
     {
         return view('admin.course_chapter.edit', [
-            'course_id'      => $courseId,
+            'course_id' => $courseId,
             'course_chapter' => $this->courseChapter->getById($id),
         ]);
     }
@@ -104,10 +135,10 @@ class CourseChapterController extends Controller
     public function update($courseId, Request $request, string $id)
     {
         $request->validate([
-            'title'       => ['required'],
+            'title' => ['required'],
             'description' => ['required'],
-            'pdf_file'    => 'nullable',
-            'video_file'  => 'nullable',
+            'pdf_file' => 'nullable',
+            'video_file' => 'nullable',
         ]);
 
         try {
@@ -127,13 +158,13 @@ class CourseChapterController extends Controller
         try {
             $this->courseChapter->destroy($id);
             return response()->json([
-                'status'  => true,
+                'status' => true,
                 'message' => 'Berhasil menghapus chapter'
             ]);
         } catch (\Throwable $th) {
             dd($th->getMessage());
             return response()->json([
-                'status'  => false,
+                'status' => false,
                 'message' => $th->getMessage()
             ]);
         }
@@ -144,13 +175,13 @@ class CourseChapterController extends Controller
         try {
             $this->courseChapter->restore($id);
             return response()->json([
-                'status'  => true,
+                'status' => true,
                 'message' => 'Berhasil menghapus chapter'
             ]);
         } catch (\Throwable $th) {
             dd($th->getMessage());
             return response()->json([
-                'status'  => false,
+                'status' => false,
                 'message' => $th->getMessage()
             ]);
         }

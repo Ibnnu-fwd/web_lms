@@ -9,7 +9,7 @@
                 accept="application/pdf" />
             <x-input id="video_file" name="video_file" type="file" label="File Materi Praktikum (mp4, max. 1 MB)"
                 accept="video/*" />
-            {{-- <x-input id="scrom_file" name="scrom_file" type="file" label="File Latih" accept="application/zip" /> --}}
+            <x-input id="scrom_file" name="scrom_file" type="file" label="File Latih (zip)" accept="application/zip" />
             <x-button title="Tambah Materi" />
         </form>
     </x-card-container>
@@ -31,14 +31,14 @@
             </div>
             <iframe src="" frameborder="0" id="video_preview" class="w-full rounded-lg"></iframe>
         </div>
-        {{-- <div class="border-gray-200 border-2 border-dashed rounded-lg p-4">
+        <div class="border-gray-200 border-2 border-dashed rounded-lg p-4">
             <div class="md:flex justify-between items-center mb-6">
                 <h2 class="text-xs 2xl:text-sm font-medium">
                     Preview SCROM
                 </h2>
             </div>
             <iframe src="" frameborder="0" id="scrom_preview" class="w-full rounded-lg"></iframe>
-        </div> --}}
+        </div> 
     </div>
 
     @push('js-internal')
@@ -55,9 +55,9 @@
                 }
 
                 // Function to update the SCORM preview
-                // function updateScromPreview(url) {
-                //     $('#scrom_preview').attr('src', url);
-                // }
+                function updateScromPreview(url) {
+                    $('#scrom_preview').attr('src', url);
+                }
 
                 // Event listener for the PDF file input change
                 $('#pdf_file').on('change', function() {
@@ -77,14 +77,14 @@
                     }
                 });
 
-                // Event listener for the SCORM file input change
-                // $('#scrom_file').on('change', function() {
-                //     var file = this.files[0];
-                //     if (file) {
-                //         var url = URL.createObjectURL(file);
-                //         updateScromPreview(url);
-                //     }
-                // });
+                Event listener for the SCORM file input change
+                $('#scrom_file').on('change', function() {
+                    var file = this.files[0];
+                    if (file) {
+                        var url = URL.createObjectURL(file);
+                        updateScromPreview(url);
+                    }
+                });
 
                 $('button[type="submit"]').on('click', function() {
                     const pdfFile = $('#pdf_file')[0].files[0];
@@ -139,10 +139,10 @@
                     }
 
                     // Validate SCROM file
-                    // if (!validateFile(scromFile, 'application/zip', maxSize,
-                    //         'Ukuran file SCROM maksimal 100 MB dan harus berformat ZIP')) {
-                    //     return false;
-                    // }
+                    if (!validateFile(scromFile, 'application/zip', maxSize,
+                            'Ukuran file SCROM maksimal 100 MB dan harus berformat ZIP')) {
+                        return false;
+                    }
 
                     return true;
                 });
