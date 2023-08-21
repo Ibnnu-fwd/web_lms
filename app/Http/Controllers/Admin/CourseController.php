@@ -15,7 +15,7 @@ class CourseController extends Controller
     public function __construct(CourseCategoryInterface $courseCategory, CourseInterface $course)
     {
         $this->courseCategory = $courseCategory;
-        $this->course         = $course;
+        $this->course = $course;
     }
 
     public function index(Request $request)
@@ -61,27 +61,27 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title'             => ['required'],
-            'category_id'       => ['required'],
+            'title' => ['required'],
+            'category_id' => ['required'],
             'short_description' => ['required'],
-            'description'       => ['required'],
-            'price'             => ['required'],
-            'main_image'        => ['required'],
-            'sneek_peek_1'      => ['required'],
-            'sneek_peek_2'      => ['required'],
-            'sneek_peek_3'      => ['required'],
-            'sneek_peek_4'      => ['required'],
+            'description' => ['required'],
+            'price' => ['required'],
+            'main_image' => ['required'],
+            'sneek_peek_1' => ['required'],
+            'sneek_peek_2' => ['required'],
+            'sneek_peek_3' => ['required'],
+            'sneek_peek_4' => ['required'],
         ], [
-            'title.required'             => 'Judul harus diisi',
-            'category_id.required'       => 'Kategori harus diisi',
+            'title.required' => 'Judul harus diisi',
+            'category_id.required' => 'Kategori harus diisi',
             'short_description.required' => 'Deskripsi singkat harus diisi',
-            'description.required'       => 'Deskripsi harus diisi',
-            'price.required'             => 'Harga harus diisi',
-            'main_image.required'        => 'Gambar utama harus diisi',
-            'sneeek_peek_1.required'     => 'Gambar sneek peek 1 harus diisi',
-            'sneeek_peek_2.required'     => 'Gambar sneek peek 2 harus diisi',
-            'sneeek_peek_3.required'     => 'Gambar sneek peek 3 harus diisi',
-            'sneeek_peek_4.required'     => 'Gambar sneek peek 4 harus diisi',
+            'description.required' => 'Deskripsi harus diisi',
+            'price.required' => 'Harga harus diisi',
+            'main_image.required' => 'Gambar utama harus diisi',
+            'sneeek_peek_1.required' => 'Gambar sneek peek 1 harus diisi',
+            'sneeek_peek_2.required' => 'Gambar sneek peek 2 harus diisi',
+            'sneeek_peek_3.required' => 'Gambar sneek peek 3 harus diisi',
+            'sneeek_peek_4.required' => 'Gambar sneek peek 4 harus diisi',
         ]);
 
         try {
@@ -103,8 +103,8 @@ class CourseController extends Controller
     {
         return view('admin.course.edit', [
             'courseCategories' => $this->courseCategory->getAll(),
-            'course'           => $this->course->getById($id),
-            'courseDiscount'   => $this->course->discount($id)
+            'course' => $this->course->getById($id),
+            'courseDiscount' => $this->course->discount($id)
         ]);
     }
 
@@ -112,27 +112,27 @@ class CourseController extends Controller
     {
         $request = request();
         $request->validate([
-            'title'             => ['required'],
-            'category_id'       => ['required'],
+            'title' => ['required'],
+            'category_id' => ['required'],
             'short_description' => ['required'],
-            'description'       => ['required'],
-            'price'             => ['required'],
-            'main_image'        => ['nullable'],
-            'sneek_peek_1'      => ['nullable'],
-            'sneek_peek_2'      => ['nullable'],
-            'sneek_peek_3'      => ['nullable'],
-            'sneek_peek_4'      => ['nullable'],
+            'description' => ['required'],
+            'price' => ['required'],
+            'main_image' => ['nullable'],
+            'sneek_peek_1' => ['nullable'],
+            'sneek_peek_2' => ['nullable'],
+            'sneek_peek_3' => ['nullable'],
+            'sneek_peek_4' => ['nullable'],
         ], [
-            'title.required'             => 'Judul harus diisi',
-            'category_id.required'       => 'Kategori harus diisi',
+            'title.required' => 'Judul harus diisi',
+            'category_id.required' => 'Kategori harus diisi',
             'short_description.required' => 'Deskripsi singkat harus diisi',
-            'description.required'       => 'Deskripsi harus diisi',
-            'price.required'             => 'Harga harus diisi',
-            'main_image.required'        => 'Gambar utama harus diisi',
-            'sneeek_peek_1.required'     => 'Gambar sneek peek 1 harus diisi',
-            'sneeek_peek_2.required'     => 'Gambar sneek peek 2 harus diisi',
-            'sneeek_peek_3.required'     => 'Gambar sneek peek 3 harus diisi',
-            'sneeek_peek_4.required'     => 'Gambar sneek peek 4 harus diisi',
+            'description.required' => 'Deskripsi harus diisi',
+            'price.required' => 'Harga harus diisi',
+            'main_image.required' => 'Gambar utama harus diisi',
+            'sneeek_peek_1.required' => 'Gambar sneek peek 1 harus diisi',
+            'sneeek_peek_2.required' => 'Gambar sneek peek 2 harus diisi',
+            'sneeek_peek_3.required' => 'Gambar sneek peek 3 harus diisi',
+            'sneeek_peek_4.required' => 'Gambar sneek peek 4 harus diisi',
         ]);
 
         try {

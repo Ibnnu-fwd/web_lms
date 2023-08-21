@@ -11,25 +11,25 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
 
-    const REQUEST_STATUS_WAITING  = 0;
+    const REQUEST_STATUS_WAITING = 0;
     const REQUEST_STATUS_APPROVED = 1;
     const REQUEST_STATUS_REJECTED = 2;
 
-    const REQUEST_STATUS_WAITING_TEXT  = 'Menunggu';
+    const REQUEST_STATUS_WAITING_TEXT = 'Menunggu';
     const REQUEST_STATUS_APPROVED_TEXT = 'Disetujui';
     const REQUEST_STATUS_REJECTED_TEXT = 'Ditolak';
 
     const UPLOAD_STATUS_UNPUBLISHED = 0;
-    const UPLOAD_STATUS_PUBLISHED   = 1;
+    const UPLOAD_STATUS_PUBLISHED = 1;
 
     const UPLOAD_STATUS_UNPUBLISHED_TEXT = 'Tidak Dipublish';
-    const UPLOAD_STATUS_PUBLISHED_TEXT   = 'Dipublish';
+    const UPLOAD_STATUS_PUBLISHED_TEXT = 'Dipublish';
 
     const ACTIVATE_STATUS_INACTIVE = 0;
-    const ACTIVATE_STATUS_ACTIVE   = 1;
+    const ACTIVATE_STATUS_ACTIVE = 1;
 
     const ACTIVATE_STATUS_INACTIVE_TEXT = 'Nonaktif';
-    const ACTIVATE_STATUS_ACTIVE_TEXT   = 'Aktif';
+    const ACTIVATE_STATUS_ACTIVE_TEXT = 'Aktif';
 
     use HasFactory;
 
@@ -97,7 +97,7 @@ class Course extends Model
     {
         return $this->belongsTo(User::class, 'created_by');
     }
-    
+
     public function discount()
     {
         return $this->hasOne(Discount::class, 'course_id');

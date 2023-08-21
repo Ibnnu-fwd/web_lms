@@ -5,9 +5,15 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Interfaces\CourseChapterInterface;
 use App\Interfaces\CourseInterface;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+<<<<<<< Updated upstream
 use Illuminate\Support\Facades\Storage;
 use illuminate\Support\Str;
+=======
+use Illuminate\Support\Str;
+use App\Models\Course\CourseChapter;
+>>>>>>> Stashed changes
 use ZipArchive;
 
 class CourseChapterController extends Controller
@@ -68,6 +74,7 @@ class CourseChapterController extends Controller
         $request->validate([
             'title' => ['required'],
             'description' => ['required'],
+<<<<<<< Updated upstream
             'pdf_file' => 'nullable',
             'video_file' => 'nullable',
             'scrom_file' => 'nullable'
@@ -103,6 +110,60 @@ class CourseChapterController extends Controller
             }
 
             $this->courseChapter->store($courseChapterData, $courseId);
+=======
+            'pdf_file' => 'nullable|mimes:pdf',
+            'video_file' => 'nullable|mimes:mp4',
+            'scrom_file' => 'nullable|mimes:zip',
+        ]);
+
+        try {
+            $courseChapter = new CourseChapter();
+            $courseChapter->course_id = $courseId;
+            $courseChapter->title = $request->input('title');
+            $courseChapter->description = $request->input('description');
+
+            //Opsi Execute Scrom File
+            if ($request->hasFile('scrom_file')) {
+                $scromFile = $request->file('scrom_file');
+                $folderName = Str::random(20);
+                $extractedPath = storage_path('app/public/course/chapter/scrom/scrom_extracted/') . $folderName;
+                Storage::makeDirectory('public/course/chapter/scrom/scrom_extracted/' . $folderName);
+
+                $zip = new ZipArchive();
+
+                if ($zip->open($scromFile) === true) {
+                    $zip->extractTo($extractedPath);
+                    $zip->close();
+                } else {
+                    return redirect()->back()->with('error', 'Gagal mengekstrak file SCROM');
+                }
+
+                $courseChapter->scrom_file = $folderName;
+            }
+
+            //Opsi Execute Pdf File
+            if ($request->hasFile('pdf_file')) {
+                $pdfFile = $request->file('pdf_file');
+                $pdfFileName = Str::random(20) . '.' . $pdfFile->getClientOriginalExtension();
+
+                Storage::putFileAs('public/course/chapter/pdf/', $pdfFile, $pdfFileName);
+
+                $courseChapter->pdf_file = $pdfFileName;
+            }
+
+            //Opsi Execute Video File
+            if ($request->hasFile('video_file')) {
+                $videoFile = $request->file('video_file');
+                $videoFileName = Str::random(20) . '.' . $videoFile->getClientOriginalExtension();
+
+                Storage::putFileAs('public/course/chapter/video/', $videoFile, $videoFileName);
+
+                $courseChapter->video_file = $videoFileName;
+            }
+
+            $courseChapter->save();
+
+>>>>>>> Stashed changes
             return redirect()->back()->with('success', 'Berhasil menambahkan chapter baru');
         } catch (\Throwable $th) {
             dd($th->getMessage());

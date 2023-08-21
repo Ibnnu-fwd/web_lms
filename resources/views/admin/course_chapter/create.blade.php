@@ -9,7 +9,11 @@
                 accept="application/pdf" />
             <x-input id="video_file" name="video_file" type="file" label="File Materi Praktikum (mp4, max. 1 MB)"
                 accept="video/*" />
+<<<<<<< Updated upstream
             <x-input id="scrom_file" name="scrom_file" type="file" label="File Latih (zip)" accept="application/zip" />
+=======
+            <x-input id="scrom_file" name="scrom_file" type="file" label="File Latih" accept="application/zip" /> 
+>>>>>>> Stashed changes
             <x-button title="Tambah Materi" />
         </form>
     </x-card-container>
@@ -38,7 +42,11 @@
                 </h2>
             </div>
             <iframe src="" frameborder="0" id="scrom_preview" class="w-full rounded-lg"></iframe>
+<<<<<<< Updated upstream
         </div> 
+=======
+        </div>
+>>>>>>> Stashed changes
     </div>
 
     @push('js-internal')

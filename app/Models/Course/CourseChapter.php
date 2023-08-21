@@ -18,7 +18,7 @@ class CourseChapter extends Model
         'pdf_file',
         'video_file',
         'scrom_file',
-        'is_active'
+        'is_active',
     ];
 
     public function course()
