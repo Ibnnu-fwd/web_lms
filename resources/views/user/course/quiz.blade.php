@@ -162,7 +162,7 @@
                                                             transition duration-200 ease-in-out transform rounded-lg
                                                             focus:shadow-outline hover:bg-gray-100 hover:scale-95
                                                             hover:text-primary
-                                                            {{ $loop->iteration == $page ? 'bg-gray-100 text-primary' : '' }}">
+                                                            {{ $loop->iteration == $page && $quizId == null ? 'bg-gray-100 text-primary' : '' }}">
                                                 <span class="text-xs 2xl:text-sm">{{ $data->title }}</span>
                                                 @if ($data->isLearned)
                                                     <ion-icon name="checkmark-done-outline"
@@ -171,24 +171,28 @@
                                                     <ion-icon name="play-outline" class="ml-auto"></ion-icon>
                                                 @endif
                                             </div>
-                                            @if ($data->quiz)
-                                                <div @if (isset($data->quiz->isLearned) && $data->quiz->isLearned == true) onclick="window.location.href='{{ route('user.quiz', [$data->quiz->id]) }}'" @endif
+                                        </li>
+                                        {{-- quiz --}}
+                                        @if ($data->quiz != null)
+                                            <li class="mb-4">
+                                                <div @if (isset($quiz->isLearned) && $quiz->isLearned == true) onclick="window.location.href='{{ route('user.quiz', [$id, $quiz->id]) }}'" @endif
                                                     class="focus:outline-none inline-flex
-                                                            items-center w-full px-4 py-2 text-base text-gray-500
-                                                            transition duration-200 ease-in-out transform rounded-lg
-                                                            focus:shadow-outline hover:bg-gray-100 hover:scale-95
-                                                            hover:text-primary
-                                                            {{ $data->quiz->isLearned ? 'bg-gray-100 text-primary' : '' }}">
+                                                        items-center w-full px-4 py-2 text-base text-gray-500
+                                                        transition duration-200 ease-in-out transform rounded-lg
+                                                        focus:shadow-outline hover:bg-gray-100 hover:scale-95 
+                                                        {{-- set active --}}
+                                                        {{ $loop->iteration == $page - 1 && $quizId != null ? 'bg-gray-100 text-primary' : '' }}
+                                                        hover:text-primary">
                                                     <span class="text-xs 2xl:text-sm">{{ $data->quiz->title }}</span>
-                                                    @if ($data->quiz->isLearned)
+                                                    @if ($quiz->isLearned != null)
                                                         <ion-icon name="checkmark-done-outline"
                                                             class="ml-auto text-primary"></ion-icon>
                                                     @else
                                                         <ion-icon name="play-outline" class="ml-auto"></ion-icon>
                                                     @endif
                                                 </div>
-                                            @endif
-                                        </li>
+                                            </li>
+                                        @endif
                                     @endforeach
                                 </ul>
                             </nav>
@@ -202,90 +206,85 @@
                     class="relative flex-1 focus:outline-none  lg:max-w-6xl md:w-full md:mt-8 justify-center mx-auto bg-white rounded-lg overflow-y-auto">
                     <div class="py-6">
                         <div class="px-4 mx-auto 2xl:max-w-7xl sm:px-6 md:px-8">
-                            <div>
-                                {{-- Video --}}
-                                @if ($chapter->video_file)
-                                    <div class="video-container" style="margin-bottom: 10px;">
-                                        <iframe src="{{ route('getFileView', ['filename' => $chapter->video_file]) }}"
-                                            allowfullscreen="true" data-gtm-yt-inspected-2340190_699="true"
-                                            id="video-viewer"></iframe>
+                            @foreach ($quiz->questions as $key => $question)
+                                <div class="mb-8 border-b border-gray-200 py-12 question-container question-{{ $key + 1 }}"
+                                    @if ($key !== 0) style="display: none;" @endif>
+                                    <div class="flex justify-between">
+                                        <h1 class="text-2xl font-semibold text-gray-900">
+                                            {{ $question->question }}
+                                        </h1>
+                                        <p class="text-gray-500">
+                                            {{ $key + 1 }}/{{ count($quiz->questions) }}
+                                        </p>
                                     </div>
-                                @endif
+                                    <br>
 
-                                {{-- Scrom Content --}}
-                                @if ($chapter->scrom_file)
-                                    <div class="scrom-container" style="margin-bottom: 10px;">
-                                        <iframe
-                                            src="{{ asset('storage/course/chapter/scrom/scrom_extracted/' . $chapter->scrom_file) }}/index.html"
-                                            width="1088" height="800" frameborder="0"
-                                            id="scrom-viewer"></iframe>
+                                    <div class="space-y-4 mb-6">
+                                        @if ($question->option_a)
+                                            <div class="flex items-center pl-4 border border-gray-200 rounded">
+                                                <input id="option_a_{{ $question->id }}" type="radio"
+                                                    name="option"
+                                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 ">
+                                                <label for="option_a_{{ $question->id }}"
+                                                    class="w-full py-4 ml-2 text-sm text-gray-900">
+                                                    {{ $question->option_a }}
+                                                </label>
+                                            </div>
+                                        @endif
+                                        @if ($question->option_b)
+                                            <div class="flex items-center pl-4 border border-gray-200 rounded">
+                                                <input id="option_b_{{ $question->id }}" type="radio"
+                                                    name="option"
+                                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 ">
+                                                <label for="option_b_{{ $question->id }}"
+                                                    class="w-full py-4 ml-2 text-sm text-gray-900">
+                                                    {{ $question->option_b }}
+                                                </label>
+                                            </div>
+                                        @endif
+                                        @if ($question->option_c)
+                                            <div class="flex items-center pl-4 border border-gray-200 rounded">
+                                                <input id="option_c_{{ $question->id }}" type="radio"
+                                                    name="option"
+                                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 ">
+                                                <label for="option_c_{{ $question->id }}"
+                                                    class="w-full py-4 ml-2 text-sm text-gray-900">
+                                                    {{ $question->option_c }}
+                                                </label>
+                                            </div>
+                                        @endif
+                                        @if ($question->option_d)
+                                            <div class="flex items-center pl-4 border border-gray-200 rounded">
+                                                <input id="option_d_{{ $question->id }}" type="radio"
+                                                    name="option"
+                                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 ">
+                                                <label for="option_d_{{ $question->id }}"
+                                                    class="w-full py-4 ml-2 text-sm text-gray-900">
+                                                    {{ $question->option_d }}
+                                                </label>
+                                            </div>
+                                        @endif
                                     </div>
-                                @endif
 
-                                {{-- PDF --}}
-                                @if ($chapter->pdf_file)
-                                    <div class="pdf-container" style="margin-bottom: 10px;">
-                                        <iframe src="{{ route('getFileView', ['filename' => $chapter->pdf_file]) }}"
-                                            width="100%" height="600px" frameborder="0" id="pdf-viewer"></iframe>
-                                    </div>
-                                @endif
-                                <!-- === End ===  -->
-
-                                <!-- Previous and Next Button -->
-                                <div class="flex justify-between mt-4">
-                                    @if ($previousChapter)
-                                        <a href="{{ route('user.course.detail', [$course->id, $previousChapter->id]) }}"
-                                            class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
-                                            <ion-icon name="arrow-back-outline" class="mr-2"></ion-icon>
-                                            <span>Sebelumnya</span>
-                                        </a>
-                                    @else
-                                        <button disabled
-                                            class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
-                                            <ion-icon name="arrow-back-outline" class="mr-2"></ion-icon>
-                                            <span>Sebelumnya</span>
+                                    <div class="flex justify-end">
+                                        <button
+                                            type="{{ $key === count($quiz->questions) - 1 ? 'submit' : 'button' }}"
+                                            class="next-question-button inline-flex items-center justify-center px-4 py-2 text-md font-semibold text-white bg-dark rounded-md group focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 hover:bg-slate-700 active:bg-slate-800 active:text-white focus-visible:outline-black">
+                                            @if ($key === count($quiz->questions) - 1)
+                                                Selesai
+                                            @else
+                                                Next
+                                            @endif
                                         </button>
-                                    @endif
-
-                                    @if ($nextChapter['isQuiz'])
-                                        <form action="{{ route('user.quiz', [$chapter->quiz->id]) }}" method="POST">
-                                            @csrf
-                                            <button type="submit"
-                                                class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-primary border border-transparent rounded-md shadow-sm hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
-                                                <span>Selanjutnya</span>
-                                                <ion-icon name="arrow-forward-outline" class="ml-2"></ion-icon>
-                                            </button>
-                                        </form>
-                                    @elseif ($nextChapter)
-                                        <form
-                                            action="{{ route('user.course.next-page', [$course->id, $chapter->id]) }}"
-                                            method="POST">
-                                            @csrf
-                                            <button type="submit"
-                                                class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-primary border border-transparent rounded-md shadow-sm hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
-                                                <span>Selanjutnya</span>
-                                                <ion-icon name="arrow-forward-outline" class="ml-2"></ion-icon>
-                                            </button>
-                                        </form>
-                                    @elseif ($isLastChapter)
-                                        <form
-                                            action="{{ route('user.course.next-page', [$course->id, $chapter->id]) }}"
-                                            method="POST">
-                                            @csrf
-                                            <button type="submit"
-                                                class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-primary border border-transparent rounded-md shadow-sm hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
-                                                <span>Selesai</span>
-                                                <ion-icon name="checkmark-done-outline" class="ml-2"></ion-icon>
-                                            </button>
-                                    @endif
-
+                                    </div>
                                 </div>
-
-                            </div>
                         </div>
-                </main>
+                        @endforeach
+                    </div>
             </div>
+            </main>
         </div>
+    </div>
 
     </div>
 
@@ -300,40 +299,13 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
-    <!-- Datatable -->
-    <script src="https://nightly.datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="https://nightly.datatables.net/responsive/js/dataTables.responsive.min.js"></script>
-
-    <!-- Select2 -->
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
     <!-- Alert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 
-    <!-- Ckeditor -->
-    <script src="//cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script></script>
 
-    <!-- jQuery Modal -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 
-    <!-- Datepicker -->
-    <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.7/pdfobject.min.js"
-        integrity="sha512-g16L6hyoieygYYZrtuzScNFXrrbJo/lj9+1AYsw+0CYYYZ6lx5J3x9Yyzsm+D37/7jMIGh0fDqdvyYkNWbuYuA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>
-        $('select').select2();
-
-        var options = {
-            // remove toolbar
-            toolbar: {
-                show: false
-            },
-        }
-
-        PDFObject.embed("{{ asset('assets/Profile.pdf') }}", "#pdf-viewer", options);
-    </script>
 
     <script>
         $(document).ready(function() {
@@ -360,16 +332,6 @@
                     }, 300);
                 }
             });
-
-            // set video full width
-            const videoContainer = $('.video-container');
-            const video = $('iframe');
-
-            videoContainer.css('width', '100%');
-            videoContainer.css('height', '100%');
-            video.css('width', '100%');
-            video.css('height', '500px');
-            video.css('object-fit', 'cover');
         });
     </script>
 

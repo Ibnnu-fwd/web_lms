@@ -30,7 +30,7 @@ class QuizRepository implements QuizInterface
 
     public function getById($id)
     {
-        return $this->quiz->with(['questions'])->find($id);
+        return $this->quiz->with(['questions', 'courseChapter'])->find($id);
     }
 
     public function store($courseChapterId, $data)

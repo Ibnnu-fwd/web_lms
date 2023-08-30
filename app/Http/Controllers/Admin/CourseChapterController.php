@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Course\CourseChapter;
+use Illuminate\Http\Exceptions\PostTooLargeException;
 use ZipArchive;
 
 class CourseChapterController extends Controller

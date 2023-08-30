@@ -37,8 +37,8 @@ Route::get('/dashboard', function () {
 
 Route::get('product', [ProductController::class, 'index'])->name('product');
 Route::get('product/{id}', [UserCourseController::class, 'show'])->name('product.show');
-Route::get('about', fn() => view('about'))->name('about');
-Route::get('order-flow', fn() => view('order-flow'))->name('order-flow');
+Route::get('about', fn () => view('about'))->name('about');
+Route::get('order-flow', fn () => view('order-flow'))->name('order-flow');
 
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser:1']], function () {
     Route::get('/', DashboardController::class)
@@ -137,15 +137,17 @@ Route::group(
     ['prefix' => 'user-dashboard', 'middleware' => ['auth', 'isActiveUser:1', 'checkRole:3']],
     function () {
         Route::get('/', UserDashboardController::class)->name('user.dashboard');
-        Route::get('checkout', fn() => view('checkout'))->name('user.checkout');
-        Route::get('cart', fn() => view('cart'))->name('user.cart');
+        Route::get('checkout', fn () => view('checkout'))->name('user.checkout');
+        Route::get('cart', fn () => view('cart'))->name('user.cart');
         Route::group(['prefix' => 'user-transaction'], function () {
             Route::get('/', [UserTransactionController::class, 'index'])->name('user.transaction');
             Route::get('detail/{id}', [UserTransactionController::class, 'detail'])->name('user.transaction.detail');
             Route::post('upload-payment/{id}', [UserTransactionController::class, 'uploadPayment'])->name('user.transaction.upload-payment');
             Route::post('cancel/{id}', [UserTransactionController::class, 'cancel'])->name('user.transaction.cancel');
         });
-        Route::post('quiz/{id}/{question_number}', [UserCourseController::class, 'quiz'])->name('user.quiz');
+        Route::post('quiz/{id}', [UserCourseController::class, 'quiz'])->name('user.quiz');
+        Route::post('quiz/answer', [UserCourseController::class, 'quizAnswer'])->name('user.quiz.answer');
+        Route::post('quiz/{id}/done', [UserCourseController::class, 'quizDone'])->name('user.quiz.done');
         Route::get('course/{id}/{page}', [UserCourseController::class, 'index'])->name('user.course.detail');
         Route::get('get-File-View/{filename}', [UserCourseController::class, 'getFileView'])->name('getFileView');
         Route::post('course/{id}/{page}/next', [UserCourseController::class, 'nextPage'])->name('user.course.next-page');
@@ -155,7 +157,7 @@ Route::group(
 
 // Verificator
 Route::group(['prefix' => 'verificator-dashboard', 'middleware' => ['isActiveUser:1', 'isVerificator'], 'as' => 'verificator.'], function () {
-    Route::get('/', fn() => view('verificator.dashboard'))->name('dashboard');
+    Route::get('/', fn () => view('verificator.dashboard'))->name('dashboard');
     Route::group(['prefix' => 'course-request'], function () {
         Route::get('/', [CourseRequestController::class, 'index'])->name('course-request.index');
         Route::post('approve/{id}', [CourseRequestController::class, 'approve'])->name('course-request.approve');
@@ -169,10 +171,10 @@ Route::group(
     ['prefix' => 'institution-dashboard', 'middleware' => ['auth', 'isActiveUser:1', 'checkRole:2']],
     function () {
         // dashboard
-        Route::get('/', fn() => view('institution.dashboard'))->name('institution.dashboard');
+        Route::get('/', fn () => view('institution.dashboard'))->name('institution.dashboard');
 
         //management-account
-        Route::get('management-account', fn() => view('institution.management-account'))->name('institution.management-account');
+        Route::get('management-account', fn () => view('institution.management-account'))->name('institution.management-account');
 
         // Course
         Route::group(['prefix' => 'institution-course', 'as' => 'institution.'], function () {

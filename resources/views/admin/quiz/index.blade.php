@@ -9,7 +9,6 @@
         <table id="quizTable">
             <thead>
                 <tr>
-                    <th>#</th>
                     <th>Judul</th>
                     <th>Deskripsi</th>
                     <th>Jumlah Soal</th>
@@ -114,12 +113,6 @@
                     autoWidth: false,
                     ajax: "{{ route('admin.quiz.index', $courseChapter->id) }}",
                     columns: [{
-                            data: 'DT_RowIndex',
-                            name: 'DT_RowIndex',
-                            orderable: false,
-                            searchable: false
-                        },
-                        {
                             data: 'title',
                             name: 'title'
                         },
