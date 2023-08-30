@@ -18,28 +18,51 @@ class CourseController extends Controller
 
     public function index($id, $page = 1)
     {
-        $course        = $this->course->getById($id);
+        $course = $this->course->getById($id);
         $learnProgress = $this->course->getLearnProgress($id, auth()->id());
 
         $courseChapters = $course->courseChapter;
-        $chapter        = $this->getChapterByPage($courseChapters, $page);
+        $chapter = $this->getChapterByPage($courseChapters, $page);
 
         $this->updateChapterInfo($courseChapters);
 
         $previousChapter = $this->getPreviousChapter($courseChapters, $chapter);
-        $nextChapter     = $this->getNextChapter($courseChapters, $chapter);
-        $isLastChapter   = $chapter->orderNumber == $courseChapters->count();
+        $nextChapter = $this->getNextChapter($courseChapters, $chapter);
+        $isLastChapter = $chapter->orderNumber == $courseChapters->count();
+        $nextIsQuiz = true;
 
-        return view('user.course.index', compact(
-            'course',
-            'learnProgress',
-            'chapter',
-            'page',
-            'previousChapter',
-            'nextChapter',
-            'isLastChapter'
-        ));
+        return view(
+            'user.course.index',
+            compact(
+                'course',
+                'learnProgress',
+                'chapter',
+                'page',
+                'previousChapter',
+                'nextChapter',
+                'isLastChapter',
+                'nextIsQuiz'
+            )
+        );
     }
+
+    public function getFileView($filename)
+    {
+        $videoPath = storage_path('app/public/course/chapter/video/') . $filename;
+        $pdfPath = storage_path('app/public/course/chapter/pdf/') . $filename;
+
+        if (file_exists($videoPath)) {
+            return response()->file($videoPath);
+        }
+
+        if (file_exists($pdfPath)) {
+            return response()->file($pdfPath);
+        }
+
+        abort(404);
+    }
+
+
 
     private function getChapterByPage($chapters, $page)
     {
@@ -50,7 +73,7 @@ class CourseController extends Controller
     {
         $chapters->each(function ($item, $key) use ($chapters) {
             $item->orderNumber = $chapters->search($item) + 1;
-            $item->isLearned   = $this->course->isLearned($item->id, auth()->id());
+            $item->isLearned = $this->course->isLearned($item->id, auth()->id());
 
             if ($key > 0) {
                 $item->isPreviousLearned = $this->course->isLearned($chapters[$key - 1]->id, auth()->id());
@@ -87,9 +110,9 @@ class CourseController extends Controller
         if ($isLastChapter) {
             if (!$userAccessLog) {
                 UserCourseAccessLog::create([
-                    'user_id'            => auth()->id(),
-                    'course_id'          => $id,
-                    'course_chapter_id'  => $chapter->id,
+                    'user_id' => auth()->id(),
+                    'course_id' => $id,
+                    'course_chapter_id' => $chapter->id,
                 ]);
             }
             return redirect()->route('user.dashboard')->with('finish', 'Selamat Anda telah menyelesaikan kursus ini');
@@ -102,9 +125,9 @@ class CourseController extends Controller
 
         if (!$userAccessLog) {
             UserCourseAccessLog::create([
-                'user_id'            => auth()->id(),
-                'course_id'          => $id,
-                'course_chapter_id'  => $chapter->id,
+                'user_id' => auth()->id(),
+                'course_id' => $id,
+                'course_chapter_id' => $chapter->id,
             ]);
         }
 
@@ -115,14 +138,14 @@ class CourseController extends Controller
     // show 
     public function show($id)
     {
-        $course           = $this->course->getById($id);
-        $techSpecs        = $course->courseTechSpec;
-        $benefits         = $course->courseBenefit;
+        $course = $this->course->getById($id);
+        $techSpecs = $course->courseTechSpec;
+        $benefits = $course->courseBenefit;
         $courseObjectives = $course->courseObjective;
-        $authors          = $course->author;
-        $isBought         = $course->isBought;
-        $carts            = session()->get('cart');
-        $discount         = $this->course->discount($id);
+        $authors = $course->author;
+        $isBought = $course->isBought;
+        $carts = session()->get('cart');
+        $discount = $this->course->discount($id);
         // get discount that is not expired yet
         $discount = $discount->filter(function ($discount) {
             return $discount->end_date > now() && $discount->start_date < now() && $discount->role == auth()->user()->role;

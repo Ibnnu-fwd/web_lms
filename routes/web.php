@@ -147,6 +147,7 @@ Route::group(
         });
         Route::post('quiz/{id}/{question_number}', [UserCourseController::class, 'quiz'])->name('user.quiz');
         Route::get('course/{id}/{page}', [UserCourseController::class, 'index'])->name('user.course.detail');
+        Route::get('get-File-View/{filename}', [UserCourseController::class, 'getFileView'])->name('getFileView');
         Route::post('course/{id}/{page}/next', [UserCourseController::class, 'nextPage'])->name('user.course.next-page');
         Route::post('course/{id}/finish', [UserCourseController::class, 'finish'])->name('user.course.finish');
     }

@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
+ 
     <!-- Fonts -->
     {{-- <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" /> --}}
@@ -23,7 +23,7 @@
     <!-- Alert -->
     <link rel="stylesheet" type="text/css"
         href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
-
+ 
     <!-- Jquery UI -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
@@ -63,8 +63,11 @@
                                             d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                                             clip-rule="evenodd"></path>
                                     </svg>
+
                                 </button>
                             </x-slot>
+ 
+    
 
                             <x-slot name="content">
                                 <x-dropdown-link
@@ -74,19 +77,19 @@
                                         <ion-icon class="text-gray-300" name="log-in-outline"></ion-icon>
                                         <span>Dashboard</span>
                                     </div>
-                                </x-dropdown-link>
+                                    </x-dropdown-link>
 
-                                <x-dropdown-link :href="route('user.cart')">
-                                    <div class="flex items-center gap-x-2">
+                                    <x-dropdown-link :href="route('user.cart')">
+                                        <div class="flex items-center gap-x-2"> 
                                         <ion-icon class="text-gray-300" name="cart-outline"></ion-icon>
                                         <span>Keranjang</span>
-                                    </div>
+                                     </div>
                                 </x-dropdown-link>
 
-                                <form method="POST" action="{{ route('logout') }}">
+                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                     <x-dropdown-link :href="route('logout')"
-                                        onclick="event.preventDefault();
+                                         onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                         <div class="flex items-center gap-x-2">
                                             <ion-icon class="text-gray-300" name="log-out-outline"></ion-icon>
@@ -95,12 +98,14 @@
                                     </x-dropdown-link>
                                 </form>
                             </x-slot>
-                        </x-dropdown>
+                       
+     
+ </x-dropdown>
                     </div>
                 @else
                     <div class="inline-flex items-center gap-2 list-none lg:ml-auto">
                         <button onclick="window.location.href='{{ route('login') }}'"
-                            class="block px-4 py-2 mt-2 text-md text-gray-500 md:mt-0 hover:text-red-600 focus:outline-none focus:shadow-outline">
+                            class="block px-4 py-2 mt-2 text-md text-gray-500 md:mt-0 hover:text-red-600 focus:outline-none focus:shadow-outline">              
                             Masuk
                         </button>
                         <button onclick="window.location.href='{{ route('register') }}'"
@@ -207,27 +212,33 @@
                     <div class="py-6">
                         <div class="px-4 mx-auto 2xl:max-w-7xl sm:px-6 md:px-8">
                             <div>
-                                @if ($chapter->video_file)
-                                    <div class="video-container">
-                                        <iframe
-                                            src="{{ asset('storage/course/chapter/video/' . $chapter->video_file) }}"
-                                            allowfullscreen="true" data-gtm-yt-inspected-2340190_699="true"
-                                            id="240632615"></iframe>
-                                    </div>
-                                @endif
-
-                                {{-- @if ($chapter->scrom_file) --}}
-                                <iframe src="{{ asset('unity/index.html') }}" width="1088" height="800"
-                                    frameborder="0"></iframe>
-                                {{-- @endif --}}
-
-                                @if ($chapter->pdf_file)
-                                    <div class="h-fit border border-gray-200 border-dashed rounded-lg">
-                                        <iframe src="{{ asset('storage/course/chapter/pdf/' . $chapter->pdf_file) }}"
-                                            width="100%" height="100%" frameborder="0" id="pdf-viewer"></iframe>
-                                    </div>
-                                @endif
+                            {{-- Video --}}
+                            @if ($chapter->video_file)
+                            <div class="video-container" style="margin-bottom: 10px;">
+                                <iframe src="{{ route('getFileView', ['filename' => $chapter->video_file]) }}"
+                                        allowfullscreen="true" data-gtm-yt-inspected-2340190_699="true"
+                                        id="video-viewer"></iframe>
                             </div>
+                            @endif
+
+                            {{-- Scrom Content --}}
+                            @if ($chapter->scrom_file)
+                            <div class="scrom-container" style="margin-bottom: 10px;">
+                                <iframe src="{{ asset('storage/course/chapter/scrom/scrom_extracted/' . $chapter->scrom_file) }}/index.html"
+                                    width="1088" height="800" frameborder="0" id="scrom-viewer"></iframe>
+                            </div>
+                            @endif
+
+                            {{-- PDF --}}
+                            @if ($chapter->pdf_file)
+                            <div class="pdf-container" style="margin-bottom: 10px;">
+                                <iframe src="{{ route('getFileView', ['filename' => $chapter->pdf_file]) }}"
+                                        width="100%" height="600px" frameborder="0" id="pdf-viewer"></iframe>
+                            </div>
+                            @endif
+
+
+                            </>
 
                             <!-- === End ===  -->
 
@@ -247,7 +258,7 @@
                                     </button>
                                 @endif
 
-                                @if ($nextIsQuiz)
+                                @if ($nextIsQuiz && $chapter->quiz->count() > 0)
                                     <form action="{{ route('user.quiz', [$chapter->quiz->first()->id, 1]) }}"
                                         method="POST">
                                         @csrf
@@ -281,6 +292,7 @@
                                             </button>
                                     @endif
                                 @endif
+
                             </div>
 
                         </div>

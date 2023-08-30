@@ -89,7 +89,6 @@
                     $(this).parents('form').find('button[type="submit"]').html(
                         'Menyimpan...');
 
-                    // show loading modal
                     Swal.fire({
                         title: 'Menyimpan...',
                         text: 'Mohon tunggu sebentar',

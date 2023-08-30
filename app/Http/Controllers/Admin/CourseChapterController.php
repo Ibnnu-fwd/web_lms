@@ -7,13 +7,8 @@ use App\Interfaces\CourseChapterInterface;
 use App\Interfaces\CourseInterface;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
-<<<<<<< Updated upstream
-use Illuminate\Support\Facades\Storage;
-use illuminate\Support\Str;
-=======
 use Illuminate\Support\Str;
 use App\Models\Course\CourseChapter;
->>>>>>> Stashed changes
 use ZipArchive;
 
 class CourseChapterController extends Controller
@@ -74,43 +69,6 @@ class CourseChapterController extends Controller
         $request->validate([
             'title' => ['required'],
             'description' => ['required'],
-<<<<<<< Updated upstream
-            'pdf_file' => 'nullable',
-            'video_file' => 'nullable',
-            'scrom_file' => 'nullable'
-        ]);
-
-        try {
-            $courseChapterData = [
-                'title' => $request->input('title'),
-                'description' => $request->input('description'),
-                'pdf_file' => $request->input('pdf_file'),
-                'video_file' => $request->input('video_file'),
-                'scrom_file' => ''
-            ];
-
-            if ($request->hasFile('scrom_file')) {
-                $scromFile = $request->file('scrom_file');
-                $scromExtractedFileName = Str::random(16);
-                $scromFileName = $scromExtractedFileName . '.zip';
-
-                $destinationPath = 'course/chapter/scrom/scrom';
-
-                $scromFile->storeAs($destinationPath, $scromFileName, 'public');
-
-                $extractedPath = storage_path('app/public/' . $destinationPath . '_extracted/' . $scromExtractedFileName);
-
-                $zip = new ZipArchive;
-                if ($zip->open(storage_path('app/public/' . $destinationPath . '/' . $scromFileName)) === TRUE) {
-                    $zip->extractTo($extractedPath);
-                    $zip->close();
-                }
-
-                $courseChapterData['scrom_file'] = $scromExtractedFileName;
-            }
-
-            $this->courseChapter->store($courseChapterData, $courseId);
-=======
             'pdf_file' => 'nullable|mimes:pdf',
             'video_file' => 'nullable|mimes:mp4',
             'scrom_file' => 'nullable|mimes:zip',
@@ -131,14 +89,18 @@ class CourseChapterController extends Controller
 
                 $zip = new ZipArchive();
 
-                if ($zip->open($scromFile) === true) {
-                    $zip->extractTo($extractedPath);
-                    $zip->close();
-                } else {
-                    return redirect()->back()->with('error', 'Gagal mengekstrak file SCROM');
-                }
+                try {
+                    if ($zip->open($scromFile) === true) {
+                        $zip->extractTo($extractedPath);
+                        $zip->close();
+                    } else {
+                        return redirect()->back()->with('error', 'Gagal mengekstrak file SCROM');
+                    }
 
-                $courseChapter->scrom_file = $folderName;
+                    $courseChapter->scrom_file = $folderName;
+                } catch (PostTooLargeException $e) {
+                    return response()->json(['message' => 'Ukuran file terlalu besar.'], 413);
+                }
             }
 
             //Opsi Execute Pdf File
@@ -146,7 +108,7 @@ class CourseChapterController extends Controller
                 $pdfFile = $request->file('pdf_file');
                 $pdfFileName = Str::random(20) . '.' . $pdfFile->getClientOriginalExtension();
 
-                Storage::putFileAs('public/course/chapter/pdf/', $pdfFile, $pdfFileName);
+                Storage::putFileAs('public/course/chapter/pdf', $pdfFile, $pdfFileName);
 
                 $courseChapter->pdf_file = $pdfFileName;
             }
@@ -163,7 +125,6 @@ class CourseChapterController extends Controller
 
             $courseChapter->save();
 
->>>>>>> Stashed changes
             return redirect()->back()->with('success', 'Berhasil menambahkan chapter baru');
         } catch (\Throwable $th) {
             dd($th->getMessage());
