@@ -29,7 +29,7 @@ class CourseController extends Controller
         $course->is_complete = $this->course->isCompleted($id);
 
         foreach ($course->courseChapter as $chapter) {
-            $chapter->is_complete       = $this->courseChapter->isCompleted($chapter->id);
+            $chapter->is_complete = $this->courseChapter->isCompleted($chapter->id);
             if ($chapter->quiz) {
                 $chapter->quiz->is_complete = $this->quiz->isCompleted($chapter->quiz->id);
             }
@@ -83,12 +83,12 @@ class CourseController extends Controller
 
     public function quiz($id)
     {
-        $quiz   = $this->quiz->getById($id);
-        $course = $this->course->getById($quiz->courseChapter->course->id);
+        $quiz                = $this->quiz->getById($id);
+        $course              = $this->course->getById($quiz->courseChapter->course->id);
         $course->is_complete = $this->course->isCompleted($course->id);
 
         foreach ($course->courseChapter as $chapter) {
-            $chapter->is_complete       = $this->courseChapter->isCompleted($chapter->id);
+            $chapter->is_complete = $this->courseChapter->isCompleted($chapter->id);
             if ($chapter->quiz) {
                 $chapter->quiz->is_complete = $this->quiz->isCompleted($chapter->quiz->id);
             }
@@ -107,9 +107,9 @@ class CourseController extends Controller
     */
     public function quizFinish($id, Request $request)
     {
-        $quiz = $this->quiz->getById($id);
+        $quiz                                 = $this->quiz->getById($id);
         $quiz->courseChapter->next_chapter_id = $this->courseChapter->getNextChapterId($quiz->courseChapter->id);
-        $is_correct = $this->quiz->checkAnswer($id, $request->answer);
+        $is_correct                           = $this->quiz->checkAnswer($id, $request->answer);
 
         if ($is_correct) {
             $userQuizAttempt = UserQuizAttempt::where([
@@ -146,5 +146,41 @@ class CourseController extends Controller
                 'message' => 'Jawaban salah. Silahkan coba lagi.'
             ]);
         }
+    }
+
+    public function show($id)
+    {
+        $course           = $this->course->getById($id);
+        $techSpecs        = $course->courseTechSpec;
+        $benefits         = $course->courseBenefit;
+        $courseObjectives = $course->courseObjective;
+        $authors          = $course->author;
+        $isBought         = $course->isBought;
+        $carts            = session()->get('cart');
+        $discount         = $this->course->discount($id);
+        // get discount that is not expired yet
+        $discount = $discount->filter(function ($discount) {
+            return $discount->end_date > now() && $discount->start_date < now() && $discount->role == auth()->user()->role;
+        })->first();
+
+        if ($carts != null) {
+            $carts = array_filter($carts, function ($cart) {
+                return $cart['user_id'] == auth()->user()->id;
+            });
+
+            // change to array
+            $carts = array_values($carts);
+
+            // check if course is in cart
+            $course->isInCart = false;
+            foreach ($carts as $cart) {
+                if ($cart['id'] == $id) {
+                    $course->isInCart = true;
+                    break;
+                }
+            }
+        }
+
+        return view('detail-product', compact('course', 'techSpecs', 'benefits', 'courseObjectives', 'authors', 'isBought', 'carts', 'discount'));
     }
 }
