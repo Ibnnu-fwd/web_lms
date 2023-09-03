@@ -63,4 +63,41 @@ class QuizRepository implements QuizInterface
             'is_active' => true,
         ]);
     }
+
+    public function isCompleted($id)
+    {
+        return UserQuizAttempt::where('quiz_id', $id)->where('user_id', auth()->id())->first() ? true : false;
+    }
+
+    public function checkAnswer($id, $answer)
+    {
+        $questions = $this->quiz->find($id)->questions;
+        $correct = 0;
+        foreach ($questions as $key => $value) {
+            if (strtolower($value->answer) == $answer[$key]['option']) {
+                $correct++;
+            }
+        }
+
+        return $correct == count($questions) ? true : false;
+    }
+
+    public function getUserQuizAttempt($id)
+    {
+        $userQuizAttempt = $this->userQuizAttempt->where('quiz_id', $id)->where('user_id', auth()->id())->first();
+        $questions = $this->quiz->find($id)->questions;
+
+        if (!$userQuizAttempt) {
+            $userQuizAttempt = $this->userQuizAttempt->create([
+                'user_id'         => auth()->id(),
+                'quiz_id'         => $id,
+                'count_correct'   => $questions->count(),
+                'count_incorrect' => 0,
+            ]);
+
+            return $userQuizAttempt;
+        }
+
+        return $userQuizAttempt;
+    }
 }

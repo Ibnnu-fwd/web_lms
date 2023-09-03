@@ -21,4 +21,5 @@ interface CourseInterface
 
     public function getLearnProgress($courseId, $userId);
     public function isLearned($chapterId, $userId);
+    public function isCompleted($id);
 }

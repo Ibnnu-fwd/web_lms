@@ -10,4 +10,8 @@ interface QuizInterface
     public function update($id, $data);
     public function destroy($id);
     public function restore($id);
+
+    public function isCompleted($id);
+    public function checkAnswer($id, $answer);
+    public function getUserQuizAttempt($id);
 }

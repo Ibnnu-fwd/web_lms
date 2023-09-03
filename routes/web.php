@@ -145,13 +145,14 @@ Route::group(
             Route::post('upload-payment/{id}', [UserTransactionController::class, 'uploadPayment'])->name('user.transaction.upload-payment');
             Route::post('cancel/{id}', [UserTransactionController::class, 'cancel'])->name('user.transaction.cancel');
         });
-        Route::post('quiz/{id}', [UserCourseController::class, 'quiz'])->name('user.quiz');
-        Route::post('quiz/answer', [UserCourseController::class, 'quizAnswer'])->name('user.quiz.answer');
-        Route::post('quiz/{id}/done', [UserCourseController::class, 'quizDone'])->name('user.quiz.done');
-        Route::get('course/{id}/{page}', [UserCourseController::class, 'index'])->name('user.course.detail');
-        Route::get('get-File-View/{filename}', [UserCourseController::class, 'getFileView'])->name('getFileView');
-        Route::post('course/{id}/{page}/next', [UserCourseController::class, 'nextPage'])->name('user.course.next-page');
-        Route::post('course/{id}/finish', [UserCourseController::class, 'finish'])->name('user.course.finish');
+
+        Route::get('course/{id}/{page}', [UserCourseController::class, 'detail'])->name('user.course.detail');
+        Route::get('course-chapter/{id}/complete', [UserCourseController::class, 'courseChapterComplete'])->name('user.course-chapter.complete');
+        Route::get('course/{id}/finish', [UserCourseController::class, 'finish'])->name('user.course.finish');
+
+        // Quiz
+        Route::get('quiz/{id}', [UserCourseController::class, 'quiz'])->name('user.course.quiz');
+        Route::post('quiz/{id}/finish', [UserCourseController::class, 'quizFinish'])->name('user.course.quiz.finish');
     }
 );
 

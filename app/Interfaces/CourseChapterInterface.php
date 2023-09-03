@@ -10,4 +10,8 @@ interface CourseChapterInterface
     public function update($data, $id);
     public function destroy($id);
     public function restore($id);
+
+    public function getPage($id, $page);
+    public function isCompleted($id);
+    public function getNextChapterId($id);
 }

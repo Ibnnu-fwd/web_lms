@@ -29,26 +29,22 @@
                 </div>
                 @if (!$data->isExpired)
                     <x-link-button title="Pelajari Sekarang" class="mt-6" color="dark"
-                        route="{{ route('user.course.detail', [$data->course->id, 1]) }}" />
+                        route="{{ route('user.course.detail', [$data->course->id, $data->course->courseChapter->first()->id]) }}" />
                 @else
                     <x-link-button title="Modul Kadaluarsa" class="mt-6 bg-gray-600" onclick="javascript:void(0)" />
-                    {{-- <p class="text-xs mt-2">
-                                *Silahkan hubungi admin untuk memperpanjang masa berlaku
-                            </p> --}}
                 @endif
             </x-card-container>
         @endforeach
     </div>
 
-    @push('js-internal')
-        <script>
-            @if (Session::has('finish'))
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Berhasil',
-                    text: '{{ Session::get('finish') }}',
-                })
-            @endif
-        </script>
-    @endpush
+    <script>
+        @if (Session::has('finish'))
+            Swal.fire({
+                icon: 'finish',
+                title: 'Berhasil',
+                text: '{{ Session::get('finish') }}',
+                showConfirmButton: false,
+            })
+        @endif
+    </script>
 </x-app-layout>

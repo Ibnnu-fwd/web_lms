@@ -44,10 +44,11 @@ class CourseRepository implements CourseInterface
 
     public function getById($id)
     {
-        $course = $this->course->with(['category', 'courseChapter', 'courseTechSpec', 'courseBenefit', 'courseObjective'])->find($id);
+        $course = $this->course->with(['category', 'courseChapter', 'courseTechSpec', 'courseBenefit', 'courseObjective', 'courseChapter.quiz'])->find($id);
         if (auth()->check()) {
             $course->isBought = $this->detailTransaction->where([['customer_id', auth()->user()->id], ['course_id', $id]])->count() > 0;
         }
+
         return $course;
     }
 
@@ -384,5 +385,19 @@ class CourseRepository implements CourseInterface
     public function discount($id)
     {
         return $this->discount->where('course_id', $id)->get();
+    }
+
+    public function isCompleted($id)
+    {
+        // get all course chapter in user course access log
+        $courseChapter = $this->userCourseAccessLog->where('course_id', $id)->get();
+        // get all course chapter in course chapter
+        $courseChapterAll = $this->course->find($id)->courseChapter->count();
+        // if course chapter in user course access log is equal to course chapter in course chapter
+        if ($courseChapter->count() == $courseChapterAll) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

@@ -3,257 +3,148 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Interfaces\CourseChapterInterface;
 use App\Interfaces\CourseInterface;
 use App\Interfaces\QuizInterface;
 use App\Models\Course\Quiz\UserQuizAttempt;
 use App\Models\Course\UserCourseAccessLog;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
     private $course;
+    private $courseChapter;
     private $quiz;
 
-    public function __construct(CourseInterface $course, QuizInterface $quiz)
+    public function __construct(CourseInterface $course, QuizInterface $quiz, CourseChapterInterface $courseChapter)
     {
-        $this->course = $course;
-        $this->quiz   = $quiz;
+        $this->course        = $course;
+        $this->quiz          = $quiz;
+        $this->courseChapter = $courseChapter;
     }
 
-    public function index($id, $page = 1)
+    public function detail($id, $page)
     {
-        $course        = $this->course->getById($id);
-        $learnProgress = $this->course->getLearnProgress($id, auth()->id());
+        $course              = $this->course->getById($id);
+        $course->is_complete = $this->course->isCompleted($id);
 
-        $courseChapters = $course->courseChapter;
-        $chapter        = $this->getChapterByPage($courseChapters, $page);
+        foreach ($course->courseChapter as $chapter) {
+            $chapter->is_complete       = $this->courseChapter->isCompleted($chapter->id);
+            if ($chapter->quiz) {
+                $chapter->quiz->is_complete = $this->quiz->isCompleted($chapter->quiz->id);
+            }
+        }
 
-        $this->updateChapterInfo($courseChapters);
+        return view('user.learning.index', [
+            'course'   => $course,
+            'learning' => $this->courseChapter->getById($page),
+        ]);
+    }
 
-        $previousChapter = $this->getPreviousChapter($courseChapters, $chapter);
-        $nextChapter     = $this->getNextChapter($courseChapters, $chapter);
-        $isLastChapter   = $chapter->orderNumber == $courseChapters->count();
+    /* 
+        Metode ini digunakan untuk menandai bahwa user telah menyelesaikan chapter dari course yang sedang diaksesnya.
+        Jika chapter yang diakses adalah chapter terakhir dari course, maka course akan ditandai sebagai selesai.
+        Jika chapter yang diakses bukan chapter terakhir dari course, maka user akan diarahkan ke chapter selanjutnya.
+    */
+    public function courseChapterComplete($id)
+    {
+        $chapter                  = $this->courseChapter->getById($id);
+        $chapter->next_chapter_id = $this->courseChapter->getNextChapterId($id);
 
-        $nextChapter['isQuiz'] = $chapter->quiz ? true : false;
+        // cek jika chapter sudah pernah diakses sebelumnya
+        $userAccessLog = UserCourseAccessLog::where([
+            'user_id'           => auth()->user()->id,
+            'course_id'         => $chapter->course_id,
+            'course_chapter_id' => $id,
+        ])->first();
 
-        return view(
-            'user.course.index',
-            compact(
-                'course',
-                'learnProgress',
-                'chapter',
-                'page',
-                'previousChapter',
-                'nextChapter',
-                'isLastChapter',
-            )
-        );
+        // jika belum pernah diakses, maka buat log akses baru
+        if (!$userAccessLog) {
+            UserCourseAccessLog::create([
+                'user_id'           => auth()->user()->id,
+                'course_id'         => $chapter->course_id,
+                'course_chapter_id' => $id,
+            ]);
+        }
+
+        // cek jika chapter selanjutnya adalah quiz
+        if ($chapter->quiz) {
+            return redirect()->route('user.course.quiz', $chapter->quiz->id);
+        }
+
+        // cek jika chapter adalah chapter terakhir dari course
+        if ($chapter->is_last) {
+            return redirect()->route('user.dashboard')->with('finish', 'Course telah selesai.');
+        }
+
+        // jika chapter selanjutnya bukan quiz, maka arahkan ke chapter selanjutnya
+        return redirect()->route('user.course.detail', [$chapter->course_id, $chapter->next_chapter_id]);
     }
 
     public function quiz($id)
     {
         $quiz   = $this->quiz->getById($id);
-        $course = $quiz->courseChapter->course;
+        $course = $this->course->getById($quiz->courseChapter->course->id);
+        $course->is_complete = $this->course->isCompleted($course->id);
 
-        $userAccessLog = UserCourseAccessLog::where('user_id', auth()->id())
-            ->where('course_id', $course->id)
-            ->where('course_chapter_id', $quiz->course_chapter_id)
-            ->first();
-
-        if (!$userAccessLog) {
-            UserCourseAccessLog::create([
-                'user_id'           => auth()->id(),
-                'course_id'         => $course->id,
-                'course_chapter_id' => $quiz->course_chapter_id,
-            ]);
+        foreach ($course->courseChapter as $chapter) {
+            $chapter->is_complete       = $this->courseChapter->isCompleted($chapter->id);
+            if ($chapter->quiz) {
+                $chapter->quiz->is_complete = $this->quiz->isCompleted($chapter->quiz->id);
+            }
         }
 
-        $learnProgress = $this->course->getLearnProgress($course->id, auth()->id());
-
-        $courseChapters = $course->courseChapter;
-        $lastPage       = $courseChapters->count();
-
-        $chapter = $this->getChapterByPageOnlyQuiz($courseChapters, $lastPage);
-
-        $this->updateChapterInfo($courseChapters);
-
-        $previousChapter = $this->getPreviousChapter($courseChapters, $chapter);
-        $nextChapter     = $this->getNextChapter($courseChapters, $chapter);
-        $isLastChapter   = $chapter->orderNumber == $courseChapters->count() && $chapter->quiz == null;
-
-        $nextChapter['isQuiz'] = $chapter->quiz ? true : false;
-
-        $quizId = $quiz->id;
-
-        $quiz['isLearned'] = UserQuizAttempt::where([
-            ['user_id', auth()->id()],
-            ['quiz_id', $quiz->id],
-        ])->exists();
-
-        return view('user.course.quiz', [
-            'course'          => $course,
-            'learnProgress'   => $learnProgress,
-            'chapter'         => $chapter,
-            'page'            => $lastPage,
-            'previousChapter' => $previousChapter,
-            'nextChapter'     => $nextChapter,
-            'isLastChapter'   => $isLastChapter,
-            'quizId'          => $quizId,
-            'quiz'            => $quiz,
+        return view('user.learning.quiz', [
+            'course' => $course,
+            'quiz'   => $quiz,
         ]);
     }
 
-    public function getFileView($filename)
+    /* 
+        Metode ini digunakan untuk menandai bahwa user telah menyelesaikan quiz dari course yang sedang diaksesnya.
+        Jika quiz yang diakses adalah quiz terakhir dari course, maka course akan ditandai sebagai selesai.
+        Jika quiz yang diakses bukan quiz terakhir dari course, maka user akan diarahkan ke chapter selanjutnya.
+    */
+    public function quizFinish($id, Request $request)
     {
-        $videoPath = storage_path('app/public/course/chapter/video/') . $filename;
-        $pdfPath   = storage_path('app/public/course/chapter/pdf/') . $filename;
+        $quiz = $this->quiz->getById($id);
+        $quiz->courseChapter->next_chapter_id = $this->courseChapter->getNextChapterId($quiz->courseChapter->id);
+        $is_correct = $this->quiz->checkAnswer($id, $request->answer);
 
-        if (file_exists($videoPath)) {
-            return response()->file($videoPath);
-        }
+        if ($is_correct) {
+            $userQuizAttempt = UserQuizAttempt::where([
+                'user_id' => auth()->user()->id,
+                'quiz_id' => $id,
+            ])->first();
 
-        if (file_exists($pdfPath)) {
-            return response()->file($pdfPath);
-        }
-
-        abort(404);
-    }
-
-    private function getChapterByPage($chapters, $page)
-    {
-        $chapter         = $chapters->skip($page - 1)->first();
-        $chapter['quiz'] = $chapter->quiz;
-        // get is learned quiz
-        $chapter['quiz']->isLearned = UserQuizAttempt::where([
-            ['user_id', auth()->id()],
-            ['quiz_id', $chapter['quiz']->id],
-        ])->exists();
-
-        return $chapter;
-    }
-
-    public function getChapterByPageOnlyQuiz($chapters, $page)
-    {
-        $chapter         = $chapters->skip($page - 1)->first();
-        $chapter['quiz'] = $chapter->quiz;
-
-        if ($chapter['quiz'] != null) {
-            // get is learned quiz
-            $chapter['quiz']->isLearned = UserQuizAttempt::where([
-                ['user_id', auth()->id()],
-                ['quiz_id', $chapter['quiz']->id],
-            ])->exists();
-        }
-
-        return $chapter;
-    }
-
-    private function updateChapterInfo($chapters)
-    {
-        $chapters->each(function ($item, $key) use ($chapters) {
-            $item->orderNumber = $chapters->search($item) + 1;
-            $item->isLearned   = $this->course->isLearned($item->id, auth()->id());
-
-            if ($key > 0) {
-                $item->isPreviousLearned = $this->course->isLearned($chapters[$key - 1]->id, auth()->id());
-            }
-        });
-    }
-
-    private function getPreviousChapter($chapters, $chapter)
-    {
-        return $chapter->orderNumber > 1 ? $chapters[$chapter->orderNumber - 2] : null;
-    }
-
-    private function getNextChapter($chapters, $chapter)
-    {
-        return $chapter->orderNumber < $chapters->count() ? $chapters[$chapter->orderNumber] : null;
-    }
-
-    public function nextPage($id, $page)
-    {
-        // Check if user has access to this course
-        $course  = $this->course->getById($id);
-        $chapter = $this->getChapterByPage($course->courseChapter, $page);
-
-        $this->updateChapterInfo($course->courseChapter);
-
-        $isLastChapter = $chapter->orderNumber == $course->courseChapter->count() && $chapter->quiz == null;
-
-        // Create user course access log, if not exists
-        $userAccessLog = UserCourseAccessLog::where('user_id', auth()->id())
-            ->where('course_id', $id)
-            ->where('course_chapter_id', $chapter->id)
-            ->first();
-
-        if ($isLastChapter) {
-            if (!$userAccessLog) {
-                UserCourseAccessLog::create([
-                    'user_id'           => auth()->id(),
-                    'course_id'         => $id,
-                    'course_chapter_id' => $chapter->id,
+            // jika belum pernah diakses, maka buat log akses baru
+            if (!$userQuizAttempt) {
+                UserQuizAttempt::create([
+                    'user_id' => auth()->user()->id,
+                    'quiz_id' => $id,
                 ]);
             }
-            return redirect()->route('user.dashboard')->with('finish', 'Selamat Anda telah menyelesaikan kursus ini');
-        }
 
-        // if chapter is quiz
-        if ($chapter->quiz) {
-            return redirect()->route('user.course.quiz', [$chapter->quiz->id]);
-        }
+            // cek jika masih ada chapter selanjutnya
+            if ($quiz->courseChapter->next_chapter_id) {
+                return response()->json([
+                    'status'  => true,
+                    'message' => 'Jawaban benar. Anda akan diarahkan ke chapter selanjutnya.',
+                    'next'    => route('user.course.detail', [$quiz->courseChapter->course_id, $quiz->courseChapter->next_chapter_id]),
+                ]);
+            }
 
-        // Check if chapter is already learned
-        if ($this->course->isLearned($chapter->id, auth()->id())) {
-            return redirect()->route('user.course.detail', [$id, $page + 1]);
-        }
-
-        if (!$userAccessLog) {
-            UserCourseAccessLog::create([
-                'user_id'           => auth()->id(),
-                'course_id'         => $id,
-                'course_chapter_id' => $chapter->id,
+            // jika tidak ada chapter selanjutnya, maka tandai course sebagai selesai
+            return response()->json([
+                'status'  => true,
+                'message' => 'Course telah selesai. Anda akan diarahkan ke halaman course.',
+                'next'    => route('user.dashboard'),
+            ]);
+        } else {
+            return response()->json([
+                'status'  => false,
+                'message' => 'Jawaban salah. Silahkan coba lagi.'
             ]);
         }
-
-        // If not the last chapter, proceed to the next chapter
-        return redirect()->route('user.course.detail', [$id, $page + 1]);
-    }
-
-    // show 
-    public function show($id)
-    {
-        $course           = $this->course->getById($id);
-        $techSpecs        = $course->courseTechSpec;
-        $benefits         = $course->courseBenefit;
-        $courseObjectives = $course->courseObjective;
-        $authors          = $course->author;
-        $isBought         = $course->isBought;
-        $carts            = session()->get('cart');
-        $discount         = $this->course->discount($id);
-        // get discount that is not expired yet
-        $discount = $discount->filter(function ($discount) {
-            return $discount->end_date > now() && $discount->start_date < now() && $discount->role == auth()->user()->role;
-        })->first();
-
-        if ($carts != null) {
-            $carts = array_filter($carts, function ($cart) {
-                return $cart['user_id'] == auth()->user()->id;
-            });
-
-            // change to array
-            $carts = array_values($carts);
-
-            // check if course is in cart
-            $course->isInCart = false;
-            foreach ($carts as $cart) {
-                if ($cart['id'] == $id) {
-                    $course->isInCart = true;
-                    break;
-                }
-            }
-        }
-
-        return view('detail-product', compact('course', 'techSpecs', 'benefits', 'courseObjectives', 'authors', 'isBought', 'carts', 'discount'));
     }
 }

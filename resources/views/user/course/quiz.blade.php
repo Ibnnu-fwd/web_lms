@@ -11,7 +11,9 @@
     <!-- Fonts -->
     {{-- <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" /> --}}
-    <link href="https://fonts.cdnfonts.com/css/rubik" rel="stylesheet">
+    {{-- <link href="https://fonts.cdnfonts.com/css/rubik" rel="stylesheet"> --}}
+    <link href="https://fonts.cdnfonts.com/css/lexend-deca" rel="stylesheet">
+
 
     <!-- Datatable -->
     <link rel="stylesheet" href="https://nightly.datatables.net/css/jquery.dataTables.min.css">
@@ -175,7 +177,7 @@
                                         {{-- quiz --}}
                                         @if ($data->quiz != null)
                                             <li class="mb-4">
-                                                <div @if (isset($quiz->isLearned) && $quiz->isLearned == true) onclick="window.location.href='{{ route('user.quiz', [$id, $quiz->id]) }}'" @endif
+                                                <div @if (isset($quiz->isLearned) && $quiz->isLearned == true) onclick="window.location.href='{{ route('user.quiz', [$quiz->id]) }}'" @endif
                                                     class="focus:outline-none inline-flex
                                                         items-center w-full px-4 py-2 text-base text-gray-500
                                                         transition duration-200 ease-in-out transform rounded-lg
@@ -207,85 +209,45 @@
                     <div class="py-6">
                         <div class="px-4 mx-auto 2xl:max-w-7xl sm:px-6 md:px-8">
                             @foreach ($quiz->questions as $key => $question)
-                                <div class="mb-8 border-b border-gray-200 py-12 question-container question-{{ $key + 1 }}"
-                                    @if ($key !== 0) style="display: none;" @endif>
+                                <div class="mb-8 question-container question-{{ $key + 1 }}">
                                     <div class="flex justify-between">
-                                        <h1 class="text-2xl font-semibold text-gray-900">
+                                        <h1 class="text-md font-medium text-gray-900">
                                             {{ $question->question }}
                                         </h1>
                                         <p class="text-gray-500">
-                                            {{ $key + 1 }}/{{ count($quiz->questions) }}
+                                            ({{ $key + 1 }})
                                         </p>
                                     </div>
                                     <br>
 
                                     <div class="space-y-4 mb-6">
-                                        @if ($question->option_a)
-                                            <div class="flex items-center pl-4 border border-gray-200 rounded">
-                                                <input id="option_a_{{ $question->id }}" type="radio"
-                                                    name="option"
-                                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 ">
-                                                <label for="option_a_{{ $question->id }}"
-                                                    class="w-full py-4 ml-2 text-sm text-gray-900">
-                                                    {{ $question->option_a }}
-                                                </label>
-                                            </div>
-                                        @endif
-                                        @if ($question->option_b)
-                                            <div class="flex items-center pl-4 border border-gray-200 rounded">
-                                                <input id="option_b_{{ $question->id }}" type="radio"
-                                                    name="option"
-                                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 ">
-                                                <label for="option_b_{{ $question->id }}"
-                                                    class="w-full py-4 ml-2 text-sm text-gray-900">
-                                                    {{ $question->option_b }}
-                                                </label>
-                                            </div>
-                                        @endif
-                                        @if ($question->option_c)
-                                            <div class="flex items-center pl-4 border border-gray-200 rounded">
-                                                <input id="option_c_{{ $question->id }}" type="radio"
-                                                    name="option"
-                                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 ">
-                                                <label for="option_c_{{ $question->id }}"
-                                                    class="w-full py-4 ml-2 text-sm text-gray-900">
-                                                    {{ $question->option_c }}
-                                                </label>
-                                            </div>
-                                        @endif
-                                        @if ($question->option_d)
-                                            <div class="flex items-center pl-4 border border-gray-200 rounded">
-                                                <input id="option_d_{{ $question->id }}" type="radio"
-                                                    name="option"
-                                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 ">
-                                                <label for="option_d_{{ $question->id }}"
-                                                    class="w-full py-4 ml-2 text-sm text-gray-900">
-                                                    {{ $question->option_d }}
-                                                </label>
-                                            </div>
-                                        @endif
-                                    </div>
-
-                                    <div class="flex justify-end">
-                                        <button
-                                            type="{{ $key === count($quiz->questions) - 1 ? 'submit' : 'button' }}"
-                                            class="next-question-button inline-flex items-center justify-center px-4 py-2 text-md font-semibold text-white bg-dark rounded-md group focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 hover:bg-slate-700 active:bg-slate-800 active:text-white focus-visible:outline-black">
-                                            @if ($key === count($quiz->questions) - 1)
-                                                Selesai
-                                            @else
-                                                Next
+                                        @foreach (['a', 'b', 'c', 'd'] as $option)
+                                            @if ($question->{"option_$option"})
+                                                <div class="flex items-center pl-4 border border-gray-200 rounded">
+                                                    <input id="option_{{ $option }}_{{ $question->id }}"
+                                                        type="radio" name="option_{{ $question->id }}"
+                                                        value="{{ $option }}"
+                                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
+                                                    <label for="option_{{ $option }}_{{ $question->id }}"
+                                                        class="w-full py-4 ml-2 text-sm text-gray-900">
+                                                        {{ $question->{"option_$option"} }}
+                                                    </label>
+                                                </div>
                                             @endif
-                                        </button>
+                                        @endforeach
                                     </div>
-                                </div>
-                        </div>
-                        @endforeach
-                    </div>
-            </div>
-            </main>
-        </div>
-    </div>
 
+
+
+                                </div>
+                            @endforeach
+
+                            <x-button type="button" id="sendQuiz" title="Kirim" />
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
     </div>
 
 
@@ -332,6 +294,101 @@
                     }, 300);
                 }
             });
+
+            $('#sendQuiz').click(function(e) {
+                e.preventDefault();
+                let results = [];
+                let errorMessages = [];
+
+                @foreach ($quiz->questions as $key => $question)
+                    let option_{{ $question->id }} = $('input[name="option_{{ $question->id }}"]:checked')
+                        .val();
+
+                    if (typeof option_{{ $question->id }} === 'undefined') {
+                        errorMessages.push("Pertanyaan {{ $question->id }} belum dipilih!");
+                    } else {
+                        // Ubah nilai "on" menjadi "a", "b", "c", atau "d"
+                        switch (option_{{ $question->id }}) {
+                            case 'a':
+                                option_{{ $question->id }} = 'a';
+                                break;
+                            case 'b':
+                                option_{{ $question->id }} = 'b';
+                                break;
+                            case 'c':
+                                option_{{ $question->id }} = 'c';
+                                break;
+                            case 'd':
+                                option_{{ $question->id }} = 'd';
+                                break;
+                            default:
+                                // Penanganan jika nilai tidak valid
+                                errorMessages.push(
+                                    "Pertanyaan {{ $question->id }} memiliki nilai tidak valid: " +
+                                    option_{{ $question->id }});
+                        }
+                    }
+
+                    results.push({
+                        question_id: {{ $question->id }},
+                        option: option_{{ $question->id }}
+                    });
+                @endforeach
+
+                if (errorMessages.length > 0) {
+                    // Tampilkan SweetAlert error dengan pesan-pesan kesalahan
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: errorMessages.join("\n"),
+                    });
+                } else {
+                    // Tidak ada kesalahan, tampilkan hasil di console
+                    console.log(results);
+
+                    Swal.fire({
+                        icon: 'question',
+                        title: 'Apakah Anda yakin?',
+                        text: 'Kita akan mengirim jawaban Anda!',
+                        showCancelButton: true,
+                        confirmButtonText: `Ya`,
+                        cancelButtonText: `Tidak`,
+                    }).then((result) => {
+                        $.ajax({
+                            url: "{{ route('user.quiz.done', ':id') }}".replace(':id',
+                                {{ $quiz->id }}),
+                            type: 'POST',
+                            data: {
+                                _token: "{{ csrf_token() }}",
+                                result: results
+                            },
+                            success: function(response) {
+                                if (response.status == true) {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Berhasil!',
+                                        text: 'Anda menjawab quiz dengan benar!',
+                                    });
+
+                                    setTimeout(function() {
+                                        window.location.href =
+                                            "{{ route('user.course.detail', [$course->id, $quiz->courseChapter->id]) }}";
+                                    }, 2000);
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Oops...',
+                                        text: 'Sepertinya ada yang salah!',
+                                    });
+                                }
+                            },
+                        });
+                    })
+                }
+            });
+
+
+
         });
     </script>
 

@@ -5,6 +5,8 @@ namespace App\Repositories;
 use App\Interfaces\CourseChapterInterface;
 use App\Models\Course\Course;
 use App\Models\Course\CourseChapter;
+use App\Models\Course\Quiz\UserQuizAttempt;
+use App\Models\Course\UserCourseAccessLog;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -26,7 +28,19 @@ class CourseChapterRepository implements CourseChapterInterface
 
     public function getById($id)
     {
-        return $this->courseChapter->with('course')->find($id);
+        $courseChapter = $this->courseChapter->with('course')->find($id);
+        $courseChapter->is_complete = $this->isCompleted($id);
+        $courseChapter->is_first    = $this->courseChapter->where('course_id', $courseChapter->course_id)->first()->id == $id ? true : false;
+        $courseChapter->is_last     = $this->courseChapter->where('course_id', $courseChapter->course_id)->latest()->first()->id == $id ? true : false;
+
+        return $courseChapter;
+    }
+
+    public function getNextChapterId($id)
+    {
+        $courseChapter = $this->courseChapter->find($id);
+        $nextChapterId = $this->courseChapter->where('course_id', $courseChapter->course_id)->where('id', '>', $id)->first()->id ?? null;
+        return $nextChapterId;
     }
 
     public function store($data, $courseId)
@@ -138,5 +152,20 @@ class CourseChapterRepository implements CourseChapterInterface
         return $this->courseChapter->find($id)->update([
             'is_active' => true
         ]);
+    }
+
+    public function getPage($id, $page)
+    {
+        return $this->courseChapter->with(['quiz'])->where('course_id', $id)->paginate($page);
+    }
+
+    public function isCompleted($id)
+    {
+        $courseChapter = $this->courseChapter->find($id);
+        $isComplete = UserCourseAccessLog::where('course_id', $courseChapter->course_id)
+            ->where('user_id', auth()->user()->id)
+            ->where('course_chapter_id', $id)
+            ->first() ? true : false;
+        return $isComplete;
     }
 }
