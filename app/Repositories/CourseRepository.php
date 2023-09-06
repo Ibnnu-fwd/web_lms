@@ -293,7 +293,7 @@ class CourseRepository implements CourseInterface
 
     public function restore($id)
     {
-        return $this->getById($id)->update([
+        return $this->course->find($id)->update([
             'activation_status' => Course::ACTIVATE_STATUS_ACTIVE,
         ]);
     }
