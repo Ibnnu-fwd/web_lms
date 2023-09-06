@@ -9,7 +9,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('images/Virtual Tvet logo.png') }}" type="image/x-icon">
 
     <!-- Fonts -->
     {{-- <link rel="preconnect" href="https://fonts.bunny.net">
@@ -39,7 +39,7 @@
             <div class="flex flex-row items-center justify-between lg:justify-start">
                 <a class="text-lg tracking-tight text-black uppercase focus:outline-none focus:ring lg:text-2xl"
                     href="/">
-                    <img class="h-8" src="{{ asset('images/logo.png') }}" alt="logo">
+                    <img class="h-8" src="{{ asset('images/Virtual Tvet logo.png') }}" alt="logo">
                 </a>
                 <button @click="open = !open"
                     class="inline-flex items-center justify-center p-2 text-gray-400 hover:text-black focus:outline-none focus:text-black md:hidden">
@@ -333,8 +333,7 @@
                 <span class="mt-2 text-sm font-light text-gray-500">
                     Copyright © {{ date('Y') }}
                     <a href="#" class="mx-2 text-wickedred hover:text-gray-500" rel="noopener noreferrer">
-                        | Interect merupakan merek dagang dari PT.
-                        Indonesia Virtual Education
+                        | Dibuat oleh Virtual TVET
                     </a>
                 </span>
             </div>

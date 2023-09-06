@@ -9,7 +9,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('images/Virtual Tvet logo.png') }}" type="image/x-icon">
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />

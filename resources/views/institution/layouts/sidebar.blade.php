@@ -4,7 +4,7 @@
             <div class="flex flex-col flex-shrink-0 px-4">
                 <a class="text-lg mx-3 font-semibold tracking-tighter text-black focus:outline-none focus:ring "
                     href="{{ route('/') }}">
-                    <img src="{{ asset('images/logo.png') }}" class="w-32 h-full" alt=""> </a>
+                    <img src="{{ asset('images/Virtual Tvet logo.png') }}" class="w-24 h-full" alt=""> </a>
                 <button class="hidden rounded-lg focus:outline-none focus:shadow-outline">
                     <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
                         <path fill-rule="evenodd"

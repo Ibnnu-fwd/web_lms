@@ -4,7 +4,7 @@
 
     <div class="flex min-h-full flex-col justify-center px-6 py-24 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm cursor-pointer" onclick="window.location.href='/'">
-            <img class="mx-auto h-10 w-auto" src="{{ asset('images/logo.png') }}" alt="Your Company">
+            <img class="mx-auto h-24 w-auto" src="{{ asset('images/Virtual Tvet logo.png') }}" alt="Your Company">
             {{-- <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                 Masuk ke akun anda
             </h2> --}}

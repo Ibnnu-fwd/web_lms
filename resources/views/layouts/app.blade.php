@@ -9,7 +9,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('images/Virtual Tvet logo.png') }}" type="image/x-icon">
 
     <!-- Fonts -->
     {{-- <link rel="preconnect" href="https://fonts.bunny.net">

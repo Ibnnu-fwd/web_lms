@@ -1,7 +1,7 @@
 <x-guest-layout>
     <div class="flex min-h-full flex-col justify-center px-6 py-10 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm cursor-pointer" onclick="window.location.href='/'">
-            <img class="mx-auto h-10 w-auto" src="{{ asset('images/logo.png') }}" alt="Your Company">
+            <img class="mx-auto h-24 w-auto" src="{{ asset('images/Virtual Tvet logo.png') }}" alt="Your Company">
             {{-- <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                 Buat Akun
             </h2> --}}
@@ -83,13 +83,16 @@
                                             <x-input id="institution" label="Institusi" name="institution"
                                                 type="text" required />
                                             <div>
-                                            <div class="file-upload-section">
-                                                <x-input id="file" name="file" label="Surat Pernyataan" type="file" required />
-                                                <div class="download-template">
-                                                    <a href="{{ route('download_template') }}" class="btn-download" target="_blank">Unduh Template Surat Pernyataan</a>
+                                                <div class="file-upload-section">
+                                                    <x-input id="file" name="file" label="Surat Pernyataan"
+                                                        type="file" required />
+                                                    <div class="download-template">
+                                                        <a href="{{ route('download_template') }}"
+                                                            class="btn-download" target="_blank">Unduh Template Surat
+                                                            Pernyataan</a>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <x-button id="daftarInstitution" title="Daftar" />
+                                                <x-button id="daftarInstitution" title="Daftar" />
                                         </form>
                                     </div>
                                 </main>
@@ -109,53 +112,54 @@
     </div>
 
     <style>
-    .file-upload-section {
-        display: flex;
-        flex-direction: column;
-    }
+        .file-upload-section {
+            display: flex;
+            flex-direction: column;
+        }
 
-    .file-input {
-        display: flex;
-        align-items: center;
-        margin-bottom: 0;
-    }
+        .file-input {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0;
+        }
 
-    .file-label {
-        font-weight: bold;
-        margin-right: 10px;
-    }
+        .file-label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
 
-    .file-input-field {
-        border: 1px solid #ccc;
-        padding: 5px 10px;
-        border-radius: 4px;
-    }
+        .file-input-field {
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
 
-    .download-template {
-        display: flex;
-        justify-content: center;
-        padding-bottom: 10px;
-    }
+        .download-template {
+            display: flex;
+            justify-content: center;
+            padding-bottom: 10px;
+        }
 
-    .btn-download {
-        color: #d21312;
-        font-size: 12px;
-        padding: 0 16px 8px 16px;
-        border-radius: 20px;
-        text-decoration: none;
-        transition: background-color 0.3s, color 0.3s ease-in-out;
-        border: 1px solid #d21312;
-        padding: 8px 16px;
-    }
+        .btn-download {
+            color: #d21312;
+            font-size: 12px;
+            padding: 0 16px 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s ease-in-out;
+            border: 1px solid #d21312;
+            padding: 8px 16px;
+        }
 
-    .btn-download:hover {
-        background-color: #d21312;
-        color: #fff;
-    }
-    #daftarInstitution {
-        margin-top: 10px;
-    }
-</style>
+        .btn-download:hover {
+            background-color: #d21312;
+            color: #fff;
+        }
+
+        #daftarInstitution {
+            margin-top: 10px;
+        }
+    </style>
 
 
 
