@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\MinCoursePurchaseAtRegController;
 use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\QuizController;
 use App\Http\Controllers\CKEditorController;
+use App\Http\Controllers\Institution\LearningController;
 use App\Http\Controllers\User\TransactionController as UserTransactionController;
 use App\Http\Controllers\Verificator\CourseRequestController;
 use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
@@ -37,8 +38,8 @@ Route::get('/dashboard', function () {
 
 Route::get('product', [ProductController::class, 'index'])->name('product');
 Route::get('product/{id}', [UserCourseController::class, 'show'])->name('product.show');
-Route::get('about', fn () => view('about'))->name('about');
-Route::get('order-flow', fn () => view('order-flow'))->name('order-flow');
+Route::get('about', fn() => view('about'))->name('about');
+Route::get('order-flow', fn() => view('order-flow'))->name('order-flow');
 
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'isActiveUser:1']], function () {
     Route::get('/', DashboardController::class)
@@ -137,8 +138,8 @@ Route::group(
     ['prefix' => 'user-dashboard', 'middleware' => ['auth', 'isActiveUser:1', 'checkRole:3']],
     function () {
         Route::get('/', UserDashboardController::class)->name('user.dashboard');
-        Route::get('checkout', fn () => view('checkout'))->name('user.checkout');
-        Route::get('cart', fn () => view('cart'))->name('user.cart');
+        Route::get('checkout', fn() => view('checkout'))->name('user.checkout');
+        Route::get('cart', fn() => view('cart'))->name('user.cart');
         Route::group(['prefix' => 'user-transaction'], function () {
             Route::get('/', [UserTransactionController::class, 'index'])->name('user.transaction');
             Route::get('detail/{id}', [UserTransactionController::class, 'detail'])->name('user.transaction.detail');
@@ -158,7 +159,7 @@ Route::group(
 
 // Verificator
 Route::group(['prefix' => 'verificator-dashboard', 'middleware' => ['isActiveUser:1', 'isVerificator'], 'as' => 'verificator.'], function () {
-    Route::get('/', fn () => view('verificator.dashboard'))->name('dashboard');
+    Route::get('/', fn() => view('verificator.dashboard'))->name('dashboard');
     Route::group(['prefix' => 'course-request'], function () {
         Route::get('/', [CourseRequestController::class, 'index'])->name('course-request.index');
         Route::post('approve/{id}', [CourseRequestController::class, 'approve'])->name('course-request.approve');
@@ -172,10 +173,10 @@ Route::group(
     ['prefix' => 'institution-dashboard', 'middleware' => ['auth', 'isActiveUser:1', 'checkRole:2']],
     function () {
         // dashboard
-        Route::get('/', fn () => view('institution.dashboard'))->name('institution.dashboard');
+        Route::get('/', \App\Http\Controllers\Institution\DashboardController::class)->name('institution.dashboard');
 
         //management-account
-        Route::get('management-account', fn () => view('institution.management-account'))->name('institution.management-account');
+        Route::get('management-account', fn() => view('institution.management-account'))->name('institution.management-account');
 
         // Course
         Route::group(['prefix' => 'institution-course', 'as' => 'institution.'], function () {
@@ -216,6 +217,16 @@ Route::group(
             Route::get('detail/{id}', [InstitutionTransactionController::class, 'detail'])->name('transaction.detail');
             Route::get('/', [InstitutionTransactionController::class, 'index'])->name('transaction.index');
         });
+
+        //course clone like user
+        Route::get('course/{id}/{page}', [LearningController::class, 'detail'])->name('institution.course.detail');
+        Route::get('course-chapter/{id}/complete', [LearningController::class, 'courseChapterComplete'])->name('institution.course-chapter.complete');
+        Route::get('course/{id}/finish', [LearningController::class, 'finish'])->name('institution.course.finish');
+
+        // Quiz
+        Route::get('quiz/{id}', [InstitutionCourseController::class, 'quiz'])->name('institution.course.quiz');
+        Route::post('quiz/{id}/finish', [InstitutionCourseController::class, 'quizFinish'])->name('institution.course.quiz.finish');
+
     }
 );
 

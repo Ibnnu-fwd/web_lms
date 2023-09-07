@@ -51,7 +51,7 @@
                 </li>
                 @foreach ($course->courseChapter as $chapter)
                     <li>
-                        <a href="{{ $chapter->is_complete ? route('user.course.detail', [$course->id, $chapter->id]) : '#' }}"
+                        <a href="{{ $chapter->is_complete ? route('institution.course.detail', [$course->id, $chapter->id]) : '#' }}"
                             class="flex items-center p-2 border text-gray-900 rounded-lg hover:bg-gray-100 group">
                             <ion-icon name="{{ $chapter->is_complete ? 'checkmark-outline' : 'play-circle-outline' }}"
                                 class="text-xl text-gray-500 group-hover:text-gray-900"></ion-icon>
@@ -63,7 +63,7 @@
 
                     @if ($chapter->quiz)
                         <li>
-                            <a href="{{ $chapter->quiz->is_complete ? route('user.course.quiz', $chapter->quiz->id) : '#' }}"
+                            <a href="{{ $chapter->quiz->is_complete ? route('institution.course.quiz', $chapter->quiz->id) : '#' }}"
                                 class="flex items-center p-2 border text-gray-900 rounded-lg hover:bg-gray-100 group">
                                 <ion-icon
                                     name="{{ $chapter->quiz->is_complete ? 'checkmark-outline' : 'play-circle-outline' }}"
@@ -76,7 +76,7 @@
                     @endif
                 @endforeach
                 <li>
-                    <a href="{{ route('user.dashboard') }}"
+                    <a href="{{ route('institution.dashboard') }}"
                         class="flex items-center p-2 border mt-4 text-gray-900 rounded-lg hover:bg-gray-100 group">
                         <ion-icon name="log-out-outline" class="text-xl text-gray-500 group-hover:text-gray-900">
                         </ion-icon>
@@ -94,7 +94,7 @@
             <section>
                 <div class="flex justify-end mb-6">
                     <x-link-button title="Selanjutnya" color="dark"
-                        route="{{ route('user.course-chapter.complete', $learning->id) }}" />
+                        route="{{ route('institution.course-chapter.complete', $learning->id) }}" />
                 </div>
                 <div class="items-center">
                     <div class="justify-center w-full">
@@ -180,8 +180,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
-
-    
 </body>
 
 </html>

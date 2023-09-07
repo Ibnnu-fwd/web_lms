@@ -91,79 +91,37 @@
 
     <div class="p-4 sm:ml-64">
         <div class="p-4 max-w-5xl mx-auto border border-dashed">
-            <section>
-                <div class="flex justify-end mb-6">
-                    <x-link-button title="Selanjutnya" color="dark"
-                        route="{{ route('user.course-chapter.complete', $learning->id) }}" />
-                </div>
-                <div class="items-center">
-                    <div class="justify-center w-full">
-                        <div x-data="{ tab: 'tab1' }">
-                            <ul
-                                class="flex justify-between mx-auto overflow-hidden text-sm text-center text-black border divide-x rounded-xl">
-                                <li class="w-full">
-                                    <!-- event handler set state to 'tab1' and add conditional :class for active state -->
-                                    <a @click.prevent="tab = 'tab1'" href="#"
-                                        class="inline-block w-full px-6 py-2 font-medium border-b-2 border-transparent bg-white text-blue-500 border-blue-500"
-                                        :class="{ ' bg-white text-blue-500  border-blue-500': tab === 'tab1' }">
-                                        Teori
-                                    </a>
-                                </li>
-                                <li class="w-full">
-                                    <a @click.prevent="tab = 'tab2'" href="#"
-                                        class="inline-block w-full px-6 py-2 font-medium border-b-2 border-transparent"
-                                        :class="{ ' bg-white text-blue-500  border-blue-500': tab === 'tab2' }">
-                                        Video
-                                    </a>
-                                </li>
-                                <li class="w-full">
-                                    <a @click.prevent="tab = 'tab3'" href="#"
-                                        class="inline-block w-full px-6 py-2 font-medium border-b-2 border-transparent"
-                                        :class="{ ' bg-white text-blue-500  border-blue-500': tab === 'tab3' }">
-                                        Praktikum
-                                    </a>
-                                </li>
-                            </ul>
-                            <div class="py-4 pt-4 text-left bg-white content">
-                                <!-- show tab1 only -->
-                                <div x-show="tab==='tab1'" class="text-gray-500">
-                                    <main>
-                                        @if ($learning->pdf_file != null)
-                                            <iframe class="h-screen rounded-2xl"
-                                                src="{{ asset('storage/course/chapter/pdf/' . $learning->pdf_file) }}"
-                                                width="100%"></iframe>
-                                        @else
-                                            <p> Tidak ada materi </p>
-                                        @endif
-                                    </main>
+            @foreach ($quiz->questions as $key => $question)
+                <div class="mb-8 question-container question-{{ $key + 1 }}">
+                    <div class="flex justify-between">
+                        <h1 class="text-md font-medium text-gray-900">
+                            {{ $question->question }}
+                        </h1>
+                        <p class="text-gray-500">
+                            ({{ $key + 1 }})
+                        </p>
+                    </div>
+                    <br>
+
+                    <div class="space-y-4 mb-6">
+                        @foreach (['a', 'b', 'c', 'd'] as $option)
+                            @if ($question->{"option_$option"})
+                                <div class="flex items-center pl-4 border border-gray-200 rounded">
+                                    <input id="option_{{ $option }}_{{ $question->id }}" type="radio"
+                                        name="option_{{ $question->id }}" value="{{ $option }}"
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
+                                    <label for="option_{{ $option }}_{{ $question->id }}"
+                                        class="w-full py-4 ml-2 text-sm text-gray-900">
+                                        {{ $question->{"option_$option"} }}
+                                    </label>
                                 </div>
-                                <div x-show="tab==='tab2'" class="text-gray-500" style="display: none;">
-                                    <main>
-                                        @if ($learning->video_file != null)
-                                            <iframe width="100%" height="500px" class="rounded-2xl"
-                                                src="{{ asset('storage/course/chapter/video/' . $learning->video_file) }}"
-                                                title="YouTube video player" frameborder="0"
-                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                allowfullscreen></iframe>
-                                        @else
-                                            <p> Tidak ada video </p>
-                                        @endif
-                                    </main>
-                                </div>
-                                <div x-show="tab==='tab3'" class="text-gray-500" style="display: none;">
-                                    <main>
-                                        @if ($learning->scrom_file != null)
-                                            <iframe
-                                                src="{{ asset('storage/course/chapter/scrom/scrom_extracted/' . $chapter->scrom_file . '/index.html') }}"
-                                                width="100%" height="500px"></iframe>
-                                        @endif
-                                    </main>
-                                </div>
-                            </div>
-                        </div>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
-            </section>
+            @endforeach
+
+            <x-button type="button" id="sendQuiz" title="Kirim" />
         </div>
     </div>
 
@@ -181,7 +139,98 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
 
-    
+    <script>
+        $('#sendQuiz').click(function(e) {
+            e.preventDefault();
+            let results = [];
+            let errorMessages = [];
+
+            @foreach ($quiz->questions as $key => $question)
+                let option_{{ $question->id }} = $('input[name="option_{{ $question->id }}"]:checked')
+                    .val();
+
+                if (typeof option_{{ $question->id }} === 'undefined') {
+                    errorMessages.push("Pertanyaan {{ $question->id }} belum dipilih!");
+                } else {
+                    // Ubah nilai "on" menjadi "a", "b", "c", atau "d"
+                    switch (option_{{ $question->id }}) {
+                        case 'a':
+                            option_{{ $question->id }} = 'a';
+                            break;
+                        case 'b':
+                            option_{{ $question->id }} = 'b';
+                            break;
+                        case 'c':
+                            option_{{ $question->id }} = 'c';
+                            break;
+                        case 'd':
+                            option_{{ $question->id }} = 'd';
+                            break;
+                        default:
+                            // Penanganan jika nilai tidak valid
+                            errorMessages.push(
+                                "Pertanyaan {{ $question->id }} memiliki nilai tidak valid: " +
+                                option_{{ $question->id }});
+                    }
+                }
+
+                results.push({
+                    question_id: {{ $question->id }},
+                    option: option_{{ $question->id }}
+                });
+            @endforeach
+
+            if (errorMessages.length > 0) {
+                // Tampilkan SweetAlert error dengan pesan-pesan kesalahan
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: errorMessages.join("\n"),
+                });
+            } else {
+                // Tidak ada kesalahan, tampilkan hasil di console
+                console.log(results);
+
+                Swal.fire({
+                    icon: 'question',
+                    title: 'Apakah Anda yakin?',
+                    text: 'Kita akan mengirim jawaban Anda!',
+                    showCancelButton: true,
+                    confirmButtonText: `Ya`,
+                    cancelButtonText: `Tidak`,
+                }).then((result) => {
+                    $.ajax({
+                        url: "{{ route('user.course.quiz.finish', ':id') }}".replace(':id',
+                            {{ $quiz->id }}),
+                        type: 'POST',
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            answer: results
+                        },
+                        success: function(response) {
+                            if (response.status == true) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Berhasil!',
+                                    text: response.message,
+                                });
+
+                                setTimeout(function() {
+                                    window.location.href = `${response.next}`;
+                                }, 2000);
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: response.message,
+                                });
+                            }
+                        },
+                    });
+                })
+            }
+        });
+    </script>
 </body>
 
 </html>
