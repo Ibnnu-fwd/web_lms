@@ -162,12 +162,142 @@ class CourseChapterController extends Controller
         $request->validate([
             'title' => ['required'],
             'description' => ['required'],
-            'pdf_file' => 'nullable',
-            'video_file' => 'nullable',
+            'pdf_file' => 'nullable|mimes:pdf',
+            'video_file' => 'nullable|mimes:mp4',
+            'scrom_file' => 'nullable|mimes:zip',
         ]);
 
         try {
-            $this->courseChapter->update($request->all(), $id);
+            $courseChapter = new CourseChapter();
+            $courseChapter->course_id = $courseId;
+            $courseChapter->title = $request->input('title');
+            $courseChapter->description = $request->input('description');
+
+            //Opsi Execute Scrom File
+            if ($request->hasFile('scrom_file')) {
+                $scromFile = $request->file('scrom_file');
+                $folderName = Str::random(20);
+                $extractedPath = public_path('storage/course/chapter/scrom/scrom_extracted/') . $folderName;
+                if (!file_exists($extractedPath)) {
+                    mkdir($extractedPath, 0777, true);
+                }
+
+                $zip = new ZipArchive();
+
+                try {
+                    if ($zip->open($scromFile) === true) {
+                        $zip->extractTo($extractedPath);
+                        $zip->close();
+                    } else {
+                        return redirect()->back()->with('error', 'Gagal mengekstrak file SCROM');
+                    }
+
+                    $courseChapter->scrom_file = $folderName;
+                } catch (PostTooLargeException $e) {
+                    return response()->json(['message' => 'Ukuran file terlalu besar.'], 413);
+                }
+            }
+
+            //Opsi Execute Pdf File
+            if ($request->hasFile('pdf_file')) {
+                $pdfFile = $request->file('pdf_file');
+                $pdfFileName = Str::random(20) . '.' . $pdfFile->getClientOriginalExtension();
+
+                Storage::putFileAs('public/course/chapter/pdf', $pdfFile, $pdfFileName);
+
+                $courseChapter->pdf_file = $pdfFileName;
+            }
+
+            //Opsi Execute Video File
+            if ($request->hasFile('video_file')) {
+                $videoFile = $request->file('video_file');
+                $videoFileName = Str::random(20) . '.' . $videoFile->getClientOriginalExtension();
+
+                Storage::putFileAs('public/course/chapter/video/', $videoFile, $videoFileName);
+
+                $courseChapter->video_file = $videoFileName;
+            }
+
+            $courseChapter->save();
+
+            return redirect()->back()->with('success', 'Berhasil menambahkan chapter baru');
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
+            return redirect()->back()->with('error', 'Gagal menambahkan chapter baru');
+        }
+        ;
+
+        try {
+            // Mengambil data dari kolom database
+            $courseChapter = CourseChapter::find($id);
+
+            if (!$courseChapter) {
+                return redirect()->back()->with('error', 'Chapter tidak ditemukan');
+            }
+
+            $courseChapter->title = $request->input('title');
+            $courseChapter->description = $request->input('description');
+
+            // Opsi Execute Scrom File
+            if ($request->hasFile('scrom_file')) {
+                $scromFile = $request->file('scrom_file');
+                $folderName = Str::random(20);
+                $extractedPath = public_path('storage/course/chapter/scrom/scrom_extracted/') . $folderName;
+                if (!file_exists($extractedPath)) {
+                    mkdir($extractedPath, 0777, true);
+                }
+
+                $zip = new ZipArchive();
+
+                try {
+                    if ($zip->open($scromFile) === true) {
+                        $zip->extractTo($extractedPath);
+                        $zip->close();
+                    } else {
+                        return redirect()->back()->with('error', 'Gagal mengekstrak file SCROM');
+                    }
+
+                    // Hapus folder atau video lokal sebelum menyimpan yang baru
+                    $this->deleteLocalFiles($courseChapter);
+
+                    $courseChapter->scrom_file = $folderName;
+                } catch (PostTooLargeException $e) {
+                    return response()->json(['message' => 'Ukuran file terlalu besar.'], 413);
+                }
+            }
+
+            // Opsi Execute Pdf File
+            if ($request->hasFile('pdf_file')) {
+                $pdfFile = $request->file('pdf_file');
+                $pdfFileName = Str::random(20) . '.' . $pdfFile->getClientOriginalExtension();
+
+                Storage::putFileAs('public/course/chapter/pdf', $pdfFile, $pdfFileName);
+
+                // Hapus file PDF lokal sebelum menyimpan yang baru
+                if (!empty($courseChapter->pdf_file)) {
+                    $this->deleteLocalFile('public/course/chapter/pdf/', $courseChapter->pdf_file);
+                }
+
+                $courseChapter->pdf_file = $pdfFileName;
+            }
+
+            // Opsi Execute Video File
+            if ($request->hasFile('video_file')) {
+                $videoFile = $request->file('video_file');
+                $videoFileName = Str::random(20) . '.' . $videoFile->getClientOriginalExtension();
+
+                Storage::putFileAs('public/course/chapter/video/', $videoFile, $videoFileName);
+
+                // Hapus file video lokal sebelum menyimpan yang baru
+                if (!empty($courseChapter->video_file)) {
+                    $this->deleteLocalFile('public/course/chapter/video/', $courseChapter->video_file);
+                }
+
+                $courseChapter->video_file = $videoFileName;
+            }
+
+            $courseChapter->save();
+
             return redirect()->back()->with('success', 'Berhasil mengubah chapter');
         } catch (\Throwable $th) {
             dd($th->getMessage());
