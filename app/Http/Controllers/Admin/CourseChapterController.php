@@ -85,8 +85,10 @@ class CourseChapterController extends Controller
             if ($request->hasFile('scrom_file')) {
                 $scromFile = $request->file('scrom_file');
                 $folderName = Str::random(20);
-                $extractedPath = storage_path('app/public/course/chapter/scrom/scrom_extracted/') . $folderName;
-                Storage::makeDirectory('public/course/chapter/scrom/scrom_extracted/' . $folderName);
+                $extractedPath = public_path('storage/course/chapter/scrom/scrom_extracted/') . $folderName;
+                if (!file_exists($extractedPath)) {
+                    mkdir($extractedPath, 0777, true);
+                }
 
                 $zip = new ZipArchive();
 
